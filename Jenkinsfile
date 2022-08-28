@@ -26,6 +26,7 @@ pipeline{
 					sshagent(credentials: ['droplet_1_private_key']) {
 						sh '''
 							ssh -o StrictHostKeyChecking=no -l root $REMOTE_SERVER_DOMAIN uname -a &&
+							cd /home/jenkins/workspace/pbl6-mobile &&
 							flutter build apk --flavor production --target lib/main_production.dart --target-platform android-arm64
 						'''
 					}
