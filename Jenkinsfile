@@ -16,7 +16,7 @@ pipeline{
 	stages {
 		stage('Git clone') {
 			steps {
-				git branch: 'main', url: 'https://github.com/hovanvydut/pbl6-mobile.git'
+				git branch: 'main', url: 'git@github.com:hovanvydut/pbl6-mobile.git/', 
 			}
 		}
 
