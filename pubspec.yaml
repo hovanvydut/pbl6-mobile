@@ -8,14 +8,24 @@ environment:
   flutter: 3.0.5
 
 dependencies:
-  bloc: ^8.1.0
+  connectivity_plus: ^2.3.6+1
+  dartx: ^1.1.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_localizations:
     sdk: flutter
+  flutter_native_splash: ^2.2.8
   flutter_svg: ^1.1.4
+  fluttertoast: ^8.0.9
+  formz: ^0.4.1
+  get_it: ^7.2.0
+  http: ^0.13.5
   intl: ^0.17.0
+  path: ^1.8.1
+  shimmer: ^2.0.0
+  widgets:
+    path: packages/widgets
 
 dev_dependencies:
   bloc_test: ^9.1.0

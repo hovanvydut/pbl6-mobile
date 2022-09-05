@@ -1,0 +1,7 @@
+{
+  "@@locale": "vi",
+  "counterAppBarTitle": "Đếm",
+  "@counterAppBarTitle": {
+    "description": "The title of the counter app"
+  }
+}

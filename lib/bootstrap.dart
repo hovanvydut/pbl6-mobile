@@ -8,8 +8,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -27,23 +27,23 @@ class AppBlocObserver extends BlocObserver {
     );
   }
 
-  @override
-  void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
-    log(
-      'onStateChange -- ${bloc.runtimeType}, $change',
-      name: '${bloc.runtimeType}',
-    );
-  }
+  // @override
+  // void onChange(BlocBase bloc, Change change) {
+  //   super.onChange(bloc, change);
+  //   log(
+  //     'onStateChange -- ${bloc.runtimeType}, $change',
+  //     name: '${bloc.runtimeType}',
+  //   );
+  // }
 
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    log(
-      'onStateTransition -- ${bloc.runtimeType}, $transition',
-      name: '${bloc.runtimeType}',
-    );
-  }
+  // @override
+  // void onTransition(Bloc bloc, Transition transition) {
+  //   super.onTransition(bloc, transition);
+  //   log(
+  //     'onStateTransition -- ${bloc.runtimeType}, $transition',
+  //     name: '${bloc.runtimeType}',
+  //   );
+  // }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
