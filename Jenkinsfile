@@ -1,9 +1,5 @@
 pipeline{
-	agent {
-		node {
-			label 'jenkins_slave_1'
-		}
-	}
+	agent any
 	
 	triggers {
 		githubPush()
