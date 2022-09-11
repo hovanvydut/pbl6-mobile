@@ -12,7 +12,7 @@ pipeline{
 	stages {
 		stage('Git clone') {
 			steps {
-				git branch: 'master', url: 'git@github.com:hovanvydut/pbl6-mobile.git/', credentialsId: 'win_10_personal_key'
+				git branch: 'master', url: 'git@github.com:hovanvydut/pbl6-mobile.git/', credentialsId: 'HOME_SERVER_SSH_PRIVATE_KEY'
 			}
 		}
 
