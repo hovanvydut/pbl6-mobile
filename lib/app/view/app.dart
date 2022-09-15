@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pbl6_mobile/l10n/l10n.dart';
+import 'package:pbl6_mobile/login/login.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -28,7 +29,7 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const Scaffold(),
+      home: const LoginPage(),
     );
   }
 }
