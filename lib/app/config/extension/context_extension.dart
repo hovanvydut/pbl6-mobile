@@ -11,3 +11,7 @@ extension SizeExtension on BuildContext {
 extension EdgeInsetsExtension on BuildContext {
   EdgeInsets get padding => MediaQuery.of(this).padding;
 }
+
+extension ThemeExtension on BuildContext {
+  ThemeData get theme => Theme.of(this);
+}

@@ -16,10 +16,41 @@ class $AssetsFontsGen {
 
   /// File path: assets/fonts/.gitkeep
   String get gitkeep => 'assets/fonts/.gitkeep';
+
+  /// File path: assets/fonts/Nunito-Black.ttf
+  String get nunitoBlack => 'assets/fonts/Nunito-Black.ttf';
+
+  /// File path: assets/fonts/Nunito-Bold.ttf
+  String get nunitoBold => 'assets/fonts/Nunito-Bold.ttf';
+
+  /// File path: assets/fonts/Nunito-ExtraBold.ttf
+  String get nunitoExtraBold => 'assets/fonts/Nunito-ExtraBold.ttf';
+
+  /// File path: assets/fonts/Nunito-ExtraLight.ttf
+  String get nunitoExtraLight => 'assets/fonts/Nunito-ExtraLight.ttf';
+
+  /// File path: assets/fonts/Nunito-Italic.ttf
+  String get nunitoItalic => 'assets/fonts/Nunito-Italic.ttf';
+
+  /// File path: assets/fonts/Nunito-Light.ttf
+  String get nunitoLight => 'assets/fonts/Nunito-Light.ttf';
+
+  /// File path: assets/fonts/Nunito-Medium.ttf
+  String get nunitoMedium => 'assets/fonts/Nunito-Medium.ttf';
+
+  /// File path: assets/fonts/Nunito-Regular.ttf
+  String get nunitoRegular => 'assets/fonts/Nunito-Regular.ttf';
+
+  /// File path: assets/fonts/Nunito-SemiBold.ttf
+  String get nunitoSemiBold => 'assets/fonts/Nunito-SemiBold.ttf';
 }
 
 class $AssetsIconsGen {
   const $AssetsIconsGen();
+
+  /// File path: assets/icons/arror_right.svg
+  SvgGenImage get arrorRight =>
+      const SvgGenImage('assets/icons/arror_right.svg');
 
   /// File path: assets/icons/chevron_left.svg
   SvgGenImage get chevronLeft =>
@@ -34,6 +65,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/eye_open.svg
   SvgGenImage get eyeOpen => const SvgGenImage('assets/icons/eye_open.svg');
 
+  /// File path: assets/icons/facebook.svg
+  SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
+
+  /// File path: assets/icons/google.svg
+  SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
+
   /// File path: assets/icons/lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/icons/lock.svg');
 
@@ -46,6 +83,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/.gitkeep
   String get gitkeep => 'assets/images/.gitkeep';
+
+  /// File path: assets/images/komkat.jpeg
+  AssetGenImage get komkat => const AssetGenImage('assets/images/komkat.jpeg');
 }
 
 class Assets {

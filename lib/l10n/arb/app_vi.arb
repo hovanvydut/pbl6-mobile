@@ -1,7 +1,11 @@
 {
   "@@locale": "vi",
-  "counterAppBarTitle": "Đếm",
-  "@counterAppBarTitle": {
-    "description": "The title of the counter app"
-  }
+  "login": "Đăng nhập",
+  "email": "Email",
+  "password": "Mật khẩu",
+  "forgotPassword": "Quên mật khẩu?",
+  "loginWithSocial": "Hoặc đăng nhập với mạng xã hội",
+  "register":"Đăng ký",
+  "haveAnAccount":"Bạn đã có tài khoản?",
+  "confirmationPassword":"Xác nhận mật khẩu"
 }
