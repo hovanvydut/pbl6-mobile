@@ -27,14 +27,14 @@ class AppBlocObserver extends BlocObserver {
     );
   }
 
-  // @override
-  // void onChange(BlocBase bloc, Change change) {
-  //   super.onChange(bloc, change);
-  //   log(
-  //     'onStateChange -- ${bloc.runtimeType}, $change',
-  //     name: '${bloc.runtimeType}',
-  //   );
-  // }
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    log(
+      'onStateChange -- ${bloc.runtimeType}, $change',
+      name: '${bloc.runtimeType}',
+    );
+  }
 
   // @override
   // void onTransition(Bloc bloc, Transition transition) {

@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/login/login.dart';
@@ -64,48 +66,11 @@ class LoginView extends StatelessWidget {
             const SizedBox(
               height: 64,
             ),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: theme.colorScheme.outline),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: theme.colorScheme.outline),
-                ),
-                labelText: 'Email',
-                hintText: 'Email của bạn',
-                hintStyle: theme.textTheme.bodyLarge,
-                // prefixIcon: Padding(
-                //   padding: const EdgeInsets.all(8),
-                //   child: Assets.icons.emailOutline.svg(),
-                // ),
-              ),
-            ),
+            const LoginEmailField(),
             const SizedBox(
               height: 24,
             ),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: theme.colorScheme.outline),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: theme.colorScheme.outline),
-                ),
-                labelText: 'Mật khẩu',
-                // labelStyle: theme.textTheme.labelSmall,
-                hintText: 'Mật khẩu của bạn',
-                hintStyle: theme.textTheme.bodyLarge,
-                // prefixIcon: Padding(
-                //   padding: const EdgeInsets.all(8),
-                //   child: Assets.icons.passwordOutline.svg(),
-                // ),
-                suffixIcon: IconButton(
-                  icon: Assets.icons.eyeShow.svg(),
-                  onPressed: () {},
-                ),
-              ),
-            ),
+            const LoginPasswordField(),
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerRight,
@@ -120,16 +85,11 @@ class LoginView extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            Center(
-              child: FilledButton(
-                child: const Text(
-                  'Đăng nhập',
-                ),
-                onPressed: () {},
-              ),
+            const Center(
+              child: LoginButton(),
             ),
             const SizedBox(
-              height: 128,
+              height: 112,
             ),
             Column(
               children: [
@@ -155,6 +115,38 @@ class LoginView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class LoginButton extends StatelessWidget {
+  const LoginButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<LoginBloc, LoginState>(
+      buildWhen: (previous, current) =>
+          previous.formStatus != current.formStatus,
+      builder: (context, state) {
+        return state.formStatus.isSubmissionInProgress
+            ? const SizedBox.square(
+                dimension: 48,
+                child: Padding(
+                  padding: EdgeInsets.all(4),
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : FilledButton(
+                onPressed: state.formStatus.isValidated
+                    ? () => context.read<LoginBloc>().add(LoginSubmitted())
+                    : null,
+                child: const Text(
+                  'Đăng nhập',
+                ),
+              );
+      },
     );
   }
 }

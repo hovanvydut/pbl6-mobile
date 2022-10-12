@@ -5,7 +5,10 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-/// A shared widget packages
-library widgets;
+/// a model package
+library models;
 
-export 'src/src.dart';
+export 'src/validation/confirmation_password.dart';
+export 'src/validation/email.dart';
+export 'src/validation/password.dart';
+export 'src/validation/phone_number.dart';
