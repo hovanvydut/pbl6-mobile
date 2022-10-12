@@ -1,55 +1,143 @@
 import 'package:flutter/material.dart';
-import 'package:pbl6_mobile/app/app.dart';
 
-abstract class AppTextTheme {
-  static const headline4 = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 34,
-    color: AppPalette.textPrimaryColor,
-  );
-
-  /// Default
-  static const headline5 = TextStyle(
-    fontWeight: FontWeight.w600,
-    fontSize: 24,
-    color: AppPalette.textPrimaryColor,
-  );
-  static const headline6 = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 20,
-    color: AppPalette.textPrimaryColor,
-  );
-
-  /// Sub head using `copyWith(fontWeight: FontWeight.w600)`
-  static const body1 = TextStyle(
-    fontWeight: FontWeight.w400,
-    fontSize: 16,
-    color: AppPalette.textPrimaryColor,
-  );
-  static const body2 = TextStyle(
-    fontWeight: FontWeight.w400,
-    fontSize: 14,
-    color: AppPalette.textPrimaryColor,
-  );
-  static const subtitle1 = TextStyle(
-    fontWeight: FontWeight.w400,
-    fontSize: 14,
-    color: AppPalette.textPrimaryColor,
-  );
-  static const subtitle2 = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-    color: AppPalette.textPrimaryColor,
-  );
-  static const caption = TextStyle(
-    fontSize: 11,
-    color: AppPalette.grayColor,
-    fontWeight: FontWeight.w400,
-  );
-  static const button = TextStyle(
-    color: AppPalette.whiteBackgroundColor,
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 1.25,
-  );
+class AppTextTheme {
+  TextTheme get textTheme {
+    return const TextTheme(
+      labelSmall: TextStyle(
+        fontSize: 11,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 16 / 11,
+        letterSpacing: 0.5,
+        // color: Color(0xFF000000),
+      ),
+      labelMedium: TextStyle(
+        fontSize: 12,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 16 / 12,
+        // color: Color(0xFF000000),
+        letterSpacing: 0.5,
+      ),
+      labelLarge: TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 20 / 14,
+        // color: Color(0xFF000000),
+        letterSpacing: 0.1,
+      ),
+      bodySmall: TextStyle(
+        fontSize: 12,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 16 / 12,
+        letterSpacing: 0.4,
+        // color: Color(0xFF000000),
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 20 / 14,
+        letterSpacing: 0.25,
+        // color: Color(0xFF000000),
+      ),
+      bodyLarge: TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 24 / 16,
+        letterSpacing: 0.5,
+        // color: Color(0xFF000000),
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 24,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 32 / 24,
+        letterSpacing: 0,
+        // color: Color(0xFF000000),
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 28,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 36 / 28,
+        letterSpacing: 0,
+        // color: Color(0xFF000000),
+      ),
+      headlineLarge: TextStyle(
+        fontSize: 32,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 40 / 32,
+        letterSpacing: 0,
+        // color: Color(0xFF000000),
+      ),
+      displaySmall: TextStyle(
+        fontSize: 36,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 44 / 36,
+        letterSpacing: 0,
+        // color: Color(0xFF000000),
+      ),
+      displayMedium: TextStyle(
+        fontSize: 45,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 52 / 45,
+        letterSpacing: 0,
+        // color: Color(0xFF000000),
+      ),
+      displayLarge: TextStyle(
+        fontSize: 57,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 64 / 57,
+        letterSpacing: -0.25,
+        // color: Color(0xFF000000),
+      ),
+      titleSmall: TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 20 / 14,
+        letterSpacing: 0.1,
+        // color: Color(0xFF000000),
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 24 / 16,
+        letterSpacing: 0.15,
+        // color: Color(0xFF000000),
+      ),
+      titleLarge: TextStyle(
+        fontSize: 22,
+        decoration: TextDecoration.none,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 28 / 22,
+        letterSpacing: 0,
+        // color: Color(0xFF000000),
+      ),
+    );
+  }
 }

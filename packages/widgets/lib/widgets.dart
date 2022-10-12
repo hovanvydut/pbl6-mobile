@@ -9,3 +9,4 @@
 library widgets;
 
 export 'src/dissmiss_keyboard.dart';
+export 'src/filled_button.dart';

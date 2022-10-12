@@ -18,23 +18,18 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       theme: ThemeData(
         useMaterial3: true,
-        textTheme: const TextTheme(
-          headline4: AppTextTheme.headline4,
-          headline5: AppTextTheme.headline5,
-          headline6: AppTextTheme.headline6,
-          bodyText1: AppTextTheme.body1,
-          bodyText2: AppTextTheme.body2,
-          subtitle1: AppTextTheme.subtitle1,
-          subtitle2: AppTextTheme.subtitle2,
-          caption: AppTextTheme.caption,
-          button: AppTextTheme.button,
-        ),
+        colorScheme: lightColorScheme,
         fontFamily: FontFamily.nunito,
-        scaffoldBackgroundColor: AppPalette.backgroundColor,
-        primaryColor: AppPalette.primaryColor,
-        errorColor: AppPalette.errorColor,
+        textTheme: AppTextTheme().textTheme,
+        
       ),
-      title: 'Shopee Fake',
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: darkColorScheme,
+        fontFamily: FontFamily.nunito,
+        textTheme: AppTextTheme().textTheme,
+      ),
+      title: 'Tìm phòng trọ hehe',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         AppLocalizations.delegate,

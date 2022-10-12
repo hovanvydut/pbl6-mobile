@@ -1,8 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/l10n/l10n.dart';
 import 'package:pbl6_mobile/login/login.dart';
 import 'package:widgets/widgets.dart';
 
@@ -25,166 +25,131 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final theme = context.theme;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(
-          // top: context.padding.top + 32,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          top: context.padding.top + 40,
           left: 16,
           right: 16,
-          bottom: 24,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Spacer(
-              flex: 2,
-            ),
             Text(
-              l10n.login,
-              style: theme.textTheme.headline4,
-            ),
-            const Spacer(
-              flex: 2,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 4),
-              decoration: BoxDecoration(
-                color: AppPalette.whiteBackgroundColor,
-                borderRadius: BorderRadius.circular(4),
+              'Đăng nhập',
+              style: theme.textTheme.displayMedium!.copyWith(
+                color: theme.colorScheme.onBackground,
               ),
-              height: 64,
-              child: TextField(
-                decoration: InputDecoration(
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppPalette.primaryColor,
-                      width: 2,
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            Text.rich(
+              TextSpan(
+                text: 'Nếu bạn chưa có tài khoản\nHãy',
+                style: theme.textTheme.bodyLarge,
+                children: [
+                  TextSpan(
+                    text: ' Đăng ký ở đây',
+                    style: theme.textTheme.bodyLarge!.copyWith(
+                      color: theme.colorScheme.primary,
                     ),
-                  ),
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-                  floatingLabelStyle: const TextStyle(
-                    color: AppPalette.primaryColor,
-                    fontSize: 16,
-                  ),
-                  labelText: l10n.email,
-                ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => context.push(AppRouter.register),
+                  )
+                ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 4),
-              decoration: BoxDecoration(
-                color: AppPalette.whiteBackgroundColor,
-                borderRadius: BorderRadius.circular(4),
-              ),
+            const SizedBox(
               height: 64,
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppPalette.primaryColor,
-                      width: 2,
-                    ),
-                  ),
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-                  floatingLabelStyle: const TextStyle(
-                    color: AppPalette.primaryColor,
-                    fontSize: 16,
-                  ),
-                  labelText: l10n.password,
-                ),
-              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  l10n.forgotPassword,
-                  style: theme.textTheme.bodyText2,
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: theme.colorScheme.outline),
                 ),
-                const SizedBox(
-                  width: 8,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: theme.colorScheme.outline),
                 ),
-                Assets.icons.arrorRight.svg()
-              ],
+                labelText: 'Email',
+                hintText: 'Email của bạn',
+                hintStyle: theme.textTheme.bodyLarge,
+                // prefixIcon: Padding(
+                //   padding: const EdgeInsets.all(8),
+                //   child: Assets.icons.emailOutline.svg(),
+                // ),
+              ),
             ),
             const SizedBox(
               height: 24,
             ),
-            MaterialButton(
-              color: theme.primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25),
-              ),
-              height: 48,
-              onPressed: () {},
-              child: Text(
-                l10n.login.toUpperCase(),
-                style: theme.textTheme.button,
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: theme.colorScheme.outline),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: theme.colorScheme.outline),
+                ),
+                labelText: 'Mật khẩu',
+                // labelStyle: theme.textTheme.labelSmall,
+                hintText: 'Mật khẩu của bạn',
+                hintStyle: theme.textTheme.bodyLarge,
+                // prefixIcon: Padding(
+                //   padding: const EdgeInsets.all(8),
+                //   child: Assets.icons.passwordOutline.svg(),
+                // ),
+                suffixIcon: IconButton(
+                  icon: Assets.icons.eyeShow.svg(),
+                  onPressed: () {},
+                ),
               ),
             ),
-            const Spacer(
-              flex: 5,
-            ),
-            Center(
-              child: Text(
-                l10n.loginWithSocial,
-                style: theme.textTheme.bodyText2,
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                child: Text(
+                  'Quên mật khẩu?',
+                  style: theme.textTheme.bodyMedium,
+                ),
+                onPressed: () {},
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 24,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Center(
+              child: FilledButton(
+                child: const Text(
+                  'Đăng nhập',
+                ),
+                onPressed: () {},
+              ),
+            ),
+            const SizedBox(
+              height: 128,
+            ),
+            Column(
               children: [
-                GestureDetector(
-                  onTap: () => context.push(AppRouter.register),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 16,
-                      horizontal: 32,
-                    ),
-                    height: 64,
-                    width: 92,
-                    decoration: BoxDecoration(
-                      color: AppPalette.whiteBackgroundColor,
-                      borderRadius: BorderRadius.circular(24),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 8,
-                          offset: const Offset(0, 1),
-                          color: AppPalette.shadowColor,
-                        )
-                      ],
-                    ),
-                    child: Assets.icons.google.svg(),
-                  ),
+                Text(
+                  'Hoặc đăng nhập với',
+                  style: theme.textTheme.bodyMedium,
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                  height: 64,
-                  width: 92,
-                  decoration: BoxDecoration(
-                    color: AppPalette.whiteBackgroundColor,
-                    borderRadius: BorderRadius.circular(24),
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 8,
-                        offset: const Offset(0, 1),
-                        color: AppPalette.shadowColor,
-                      )
-                    ],
-                  ),
-                  child: Assets.icons.facebook.svg(),
-                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Assets.images.social.google.svg(),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Assets.images.social.facebook.svg(height: 40),
+                      onPressed: () {},
+                    )
+                  ],
+                )
               ],
             )
           ],

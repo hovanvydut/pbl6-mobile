@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,49 +43,150 @@ class $AssetsFontsGen {
 
   /// File path: assets/fonts/Nunito-SemiBold.ttf
   String get nunitoSemiBold => 'assets/fonts/Nunito-SemiBold.ttf';
+
+  /// List of all assets
+  List<String> get values => [
+        gitkeep,
+        nunitoBlack,
+        nunitoBold,
+        nunitoExtraBold,
+        nunitoExtraLight,
+        nunitoItalic,
+        nunitoLight,
+        nunitoMedium,
+        nunitoRegular,
+        nunitoSemiBold
+      ];
 }
 
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/arror_right.svg
-  SvgGenImage get arrorRight =>
-      const SvgGenImage('assets/icons/arror_right.svg');
+  /// File path: assets/icons/add.svg
+  SvgGenImage get add => const SvgGenImage('assets/icons/add.svg');
 
-  /// File path: assets/icons/chevron_left.svg
-  SvgGenImage get chevronLeft =>
-      const SvgGenImage('assets/icons/chevron_left.svg');
+  /// File path: assets/icons/arror_left.svg
+  SvgGenImage get arrorLeft => const SvgGenImage('assets/icons/arror_left.svg');
 
-  /// File path: assets/icons/close.svg
-  SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
+  /// File path: assets/icons/bookmark_bold.svg
+  SvgGenImage get bookmarkBold =>
+      const SvgGenImage('assets/icons/bookmark_bold.svg');
 
-  /// File path: assets/icons/eye_close.svg
-  SvgGenImage get eyeClose => const SvgGenImage('assets/icons/eye_close.svg');
+  /// File path: assets/icons/bookmark_outline.svg
+  SvgGenImage get bookmarkOutline =>
+      const SvgGenImage('assets/icons/bookmark_outline.svg');
 
-  /// File path: assets/icons/eye_open.svg
-  SvgGenImage get eyeOpen => const SvgGenImage('assets/icons/eye_open.svg');
+  /// File path: assets/icons/email_outline.svg
+  SvgGenImage get emailOutline =>
+      const SvgGenImage('assets/icons/email_outline.svg');
 
-  /// File path: assets/icons/facebook.svg
-  SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
+  /// File path: assets/icons/eye_hide.svg
+  SvgGenImage get eyeHide => const SvgGenImage('assets/icons/eye_hide.svg');
 
-  /// File path: assets/icons/google.svg
-  SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
+  /// File path: assets/icons/eye_show.svg
+  SvgGenImage get eyeShow => const SvgGenImage('assets/icons/eye_show.svg');
 
-  /// File path: assets/icons/lock.svg
-  SvgGenImage get lock => const SvgGenImage('assets/icons/lock.svg');
+  /// File path: assets/icons/filter_bold.svg
+  SvgGenImage get filterBold =>
+      const SvgGenImage('assets/icons/filter_bold.svg');
 
-  /// File path: assets/icons/mail.svg
-  SvgGenImage get mail => const SvgGenImage('assets/icons/mail.svg');
+  /// File path: assets/icons/filter_outline.svg
+  SvgGenImage get filterOutline =>
+      const SvgGenImage('assets/icons/filter_outline.svg');
+
+  /// File path: assets/icons/home_bold.svg
+  SvgGenImage get homeBold => const SvgGenImage('assets/icons/home_bold.svg');
+
+  /// File path: assets/icons/home_outline.svg
+  SvgGenImage get homeOutline =>
+      const SvgGenImage('assets/icons/home_outline.svg');
+
+  /// File path: assets/icons/message_bold.svg
+  SvgGenImage get messageBold =>
+      const SvgGenImage('assets/icons/message_bold.svg');
+
+  /// File path: assets/icons/message_outline.svg
+  SvgGenImage get messageOutline =>
+      const SvgGenImage('assets/icons/message_outline.svg');
+
+  /// File path: assets/icons/notification_bold.svg
+  SvgGenImage get notificationBold =>
+      const SvgGenImage('assets/icons/notification_bold.svg');
+
+  /// File path: assets/icons/notification_outline.svg
+  SvgGenImage get notificationOutline =>
+      const SvgGenImage('assets/icons/notification_outline.svg');
+
+  /// File path: assets/icons/password_outline.svg
+  SvgGenImage get passwordOutline =>
+      const SvgGenImage('assets/icons/password_outline.svg');
+
+  /// File path: assets/icons/profile_bold.svg
+  SvgGenImage get profileBold =>
+      const SvgGenImage('assets/icons/profile_bold.svg');
+
+  /// File path: assets/icons/profile_outline.svg
+  SvgGenImage get profileOutline =>
+      const SvgGenImage('assets/icons/profile_outline.svg');
+
+  /// File path: assets/icons/search_bold.svg
+  SvgGenImage get searchBold =>
+      const SvgGenImage('assets/icons/search_bold.svg');
+
+  /// File path: assets/icons/search_outline.svg
+  SvgGenImage get searchOutline =>
+      const SvgGenImage('assets/icons/search_outline.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+        add,
+        arrorLeft,
+        bookmarkBold,
+        bookmarkOutline,
+        emailOutline,
+        eyeHide,
+        eyeShow,
+        filterBold,
+        filterOutline,
+        homeBold,
+        homeOutline,
+        messageBold,
+        messageOutline,
+        notificationBold,
+        notificationOutline,
+        passwordOutline,
+        profileBold,
+        profileOutline,
+        searchBold,
+        searchOutline
+      ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/.gitkeep
-  String get gitkeep => 'assets/images/.gitkeep';
-
   /// File path: assets/images/komkat.jpeg
   AssetGenImage get komkat => const AssetGenImage('assets/images/komkat.jpeg');
+
+  $AssetsImagesSocialGen get social => const $AssetsImagesSocialGen();
+
+  /// List of all assets
+  List<AssetGenImage> get values => [komkat];
+}
+
+class $AssetsImagesSocialGen {
+  const $AssetsImagesSocialGen();
+
+  /// File path: assets/images/social/facebook.svg
+  SvgGenImage get facebook =>
+      const SvgGenImage('assets/images/social/facebook.svg');
+
+  /// File path: assets/images/social/google.svg
+  SvgGenImage get google =>
+      const SvgGenImage('assets/images/social/google.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [facebook, google];
 }
 
 class Assets {
@@ -153,6 +254,8 @@ class AssetGenImage {
       cacheHeight: cacheHeight,
     );
   }
+
+  ImageProvider provider() => AssetImage(_assetName);
 
   String get path => _assetName;
 
