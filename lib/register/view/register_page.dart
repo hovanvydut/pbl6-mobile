@@ -1,7 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/l10n/l10n.dart';
 import 'package:pbl6_mobile/register/register.dart';
 import 'package:widgets/widgets.dart';
 
@@ -10,11 +11,9 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DissmissKeyboard(
-      child: BlocProvider(
-        create: (context) => RegisterBloc(),
-        child: const RegisterView(),
-      ),
+    return BlocProvider(
+      create: (context) => RegisterBloc(),
+      child: const RegisterView(),
     );
   }
 }
@@ -24,194 +23,79 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final theme = context.theme;
-    return const Scaffold(
-      
+    return DissmissKeyboard(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            top: context.padding.top + 40,
+            right: 16,
+            left: 16,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Đăng ký',
+                style: theme.textTheme.displayMedium!.copyWith(
+                  color: theme.colorScheme.onBackground,
+                ),
+              ),
+              const SizedBox(height: 32),
+              Text.rich(
+                TextSpan(
+                  text: 'Nếu bạn đã có tài khoản\nHãy',
+                  style: theme.textTheme.bodyLarge,
+                  children: [
+                    TextSpan(
+                      text: ' Đăng nhập ở đây',
+                      style: theme.textTheme.bodyLarge!.copyWith(
+                        color: theme.colorScheme.primary,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => context.pop(),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 64),
+              const RegisterEmailField(),
+              const SizedBox(height: 24),
+              const RegisterPasswordField(),
+              const SizedBox(height: 24),
+              const RegisterConfirmationPasswordField(),
+              const SizedBox(height: 48),
+              const Center(
+                child: RegisterButton(),
+              ),
+              const SizedBox(
+                height: 80,
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Hoặc đăng nhập với',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: Assets.images.social.google.svg(),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Assets.images.social.facebook.svg(height: 40),
+                        onPressed: () {},
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
-    // return Scaffold(
-    //   body: Padding(
-    //     padding: const EdgeInsets.only(
-    //       // top: context.padding.top + 32,
-    //       left: 16,
-    //       right: 16,
-    //       bottom: 24,
-    //     ),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.stretch,
-    //       children: [
-    //         const Spacer(
-    //           flex: 2,
-    //         ),
-    //         Text(
-    //           l10n.register,
-    //           style: theme.textTheme.headline4,
-    //         ),
-    //         const Spacer(
-    //           flex: 2,
-    //         ),
-    //         Container(
-    //           margin: const EdgeInsets.symmetric(vertical: 4),
-    //           decoration: BoxDecoration(
-    //             color: AppPalette.whiteBackgroundColor,
-    //             borderRadius: BorderRadius.circular(4),
-    //           ),
-    //           height: 64,
-    //           child: TextField(
-    //             decoration: InputDecoration(
-    //               focusedBorder: const OutlineInputBorder(
-    //                 borderSide: BorderSide(
-    //                   color: AppPalette.primaryColor,
-    //                   width: 2,
-    //                 ),
-    //               ),
-    //               contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-    //               border: InputBorder.none,
-    //               floatingLabelStyle:
-    //                   const TextStyle(color: AppPalette.primaryColor),
-    //               labelText: l10n.email,
-    //             ),
-    //           ),
-    //         ),
-    //         Container(
-    //           margin: const EdgeInsets.symmetric(vertical: 4),
-    //           decoration: BoxDecoration(
-    //             color: AppPalette.whiteBackgroundColor,
-    //             borderRadius: BorderRadius.circular(4),
-    //           ),
-    //           height: 64,
-    //           child: TextField(
-    //             obscureText: true,
-    //             decoration: InputDecoration(
-    //               focusedBorder: const OutlineInputBorder(
-    //                 borderSide: BorderSide(
-    //                   color: AppPalette.primaryColor,
-    //                   width: 2,
-    //                 ),
-    //               ),
-    //               contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-    //               border: InputBorder.none,
-    //               floatingLabelStyle:
-    //                   const TextStyle(color: AppPalette.primaryColor),
-    //               labelText: l10n.password,
-    //             ),
-    //           ),
-    //         ),
-    //         Container(
-    //           margin: const EdgeInsets.symmetric(vertical: 4),
-    //           decoration: BoxDecoration(
-    //             color: AppPalette.whiteBackgroundColor,
-    //             borderRadius: BorderRadius.circular(4),
-    //           ),
-    //           height: 64,
-    //           child: TextField(
-    //             obscureText: true,
-    //             decoration: InputDecoration(
-    //               focusedBorder: const OutlineInputBorder(
-    //                 borderSide: BorderSide(
-    //                   color: AppPalette.primaryColor,
-    //                   width: 2,
-    //                 ),
-    //               ),
-    //               border: InputBorder.none,
-    //               contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-    //               floatingLabelStyle:
-    //                   const TextStyle(color: AppPalette.primaryColor),
-    //               labelText: l10n.confirmationPassword,
-    //             ),
-    //           ),
-    //         ),
-    //         Row(
-    //           mainAxisAlignment: MainAxisAlignment.end,
-    //           children: [
-    //             Text(
-    //               l10n.haveAnAccount,
-    //               style: theme.textTheme.bodyText2,
-    //             ),
-    //             const SizedBox(
-    //               width: 8,
-    //             ),
-    //             Assets.icons.arrorRight.svg()
-    //           ],
-    //         ),
-    //         const SizedBox(
-    //           height: 24,
-    //         ),
-    //         MaterialButton(
-    //           color: theme.primaryColor,
-    //           shape: RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.circular(25),
-    //           ),
-    //           height: 48,
-    //           onPressed: () {},
-    //           child: Text(
-    //             l10n.register.toUpperCase(),
-    //             style: theme.textTheme.button,
-    //           ),
-    //         ),
-    //         const Spacer(
-    //           flex: 4,
-    //         ),
-    //         Center(
-    //           child: Text(
-    //             l10n.loginWithSocial,
-    //             style: theme.textTheme.bodyText2,
-    //           ),
-    //         ),
-    //         const SizedBox(
-    //           height: 8,
-    //         ),
-    //         Row(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           children: [
-    //             GestureDetector(
-    //               onTap: () => context.pop(),
-    //               child: Container(
-    //                 margin: const EdgeInsets.symmetric(horizontal: 8),
-    //                 padding: const EdgeInsets.symmetric(
-    //                   vertical: 16,
-    //                   horizontal: 32,
-    //                 ),
-    //                 height: 64,
-    //                 width: 92,
-    //                 decoration: BoxDecoration(
-    //                   color: AppPalette.whiteBackgroundColor,
-    //                   borderRadius: BorderRadius.circular(24),
-    //                   boxShadow: [
-    //                     BoxShadow(
-    //                       blurRadius: 8,
-    //                       offset: const Offset(0, 1),
-    //                       color: AppPalette.shadowColor,
-    //                     )
-    //                   ],
-    //                 ),
-    //                 child: Assets.icons.google.svg(),
-    //               ),
-    //             ),
-    //             Container(
-    //               margin: const EdgeInsets.symmetric(horizontal: 8),
-    //               padding:
-    //                   const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-    //               height: 64,
-    //               width: 92,
-    //               decoration: BoxDecoration(
-    //                 color: AppPalette.whiteBackgroundColor,
-    //                 borderRadius: BorderRadius.circular(24),
-    //                 boxShadow: [
-    //                   BoxShadow(
-    //                     blurRadius: 8,
-    //                     offset: const Offset(0, 1),
-    //                     color: AppPalette.shadowColor,
-    //                   )
-    //                 ],
-    //               ),
-    //               child: Assets.icons.facebook.svg(),
-    //             ),
-    //           ],
-    //         )
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }
