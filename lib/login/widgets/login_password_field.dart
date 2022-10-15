@@ -32,6 +32,7 @@ class LoginPasswordField extends StatelessWidget {
             onPressed: () =>
                 context.read<LoginBloc>().add(ShowHidePasswordPressed()),
           ),
+          textInputAction: TextInputAction.go,
         );
       },
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/login/login.dart';
+import 'package:pbl6_mobile/register/bloc/register_bloc.dart';
 import 'package:widgets/widgets.dart';
 
 class RegisterPasswordField extends StatelessWidget {
@@ -14,24 +14,26 @@ class RegisterPasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        // final password =
-        //     context.select((LoginBloc bloc) => bloc.state.password);
-        // final isHidePassword =
-        //     context.select((LoginBloc bloc) => bloc.state.isHidePassword);
+        final password =
+            context.select((RegisterBloc bloc) => bloc.state.password);
+        final isHidePassword =
+            context.select((RegisterBloc bloc) => bloc.state.isHidePassword);
         return AppTextField(
-          obscureText: true,
+          obscureText: isHidePassword,
           hintText: 'Mật khẩu của bạn',
           labelText: 'Mật khẩu',
-          // errorText: password.invalid ? getErrorText(password.error!) : null,
-          onChanged: (value) =>
-              context.read<LoginBloc>().add(PasswordChanged(password: value)),
+          errorText: password.invalid ? getErrorText(password.error!) : null,
+          onChanged: (value) => context
+              .read<RegisterBloc>()
+              .add(PasswordChanged(password: value)),
           suffixIcon: IconButton(
-            icon: true
+            icon: isHidePassword
                 ? Assets.icons.eyeShow.svg()
                 : Assets.icons.eyeHide.svg(),
             onPressed: () =>
-                context.read<LoginBloc>().add(ShowHidePasswordPressed()),
+                context.read<RegisterBloc>().add(ShowHidePasswordPressed()),
           ),
+          textInputAction: TextInputAction.next,
         );
       },
     );

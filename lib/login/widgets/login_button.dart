@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:pbl6_mobile/register/register.dart';
+import 'package:pbl6_mobile/login/login.dart';
 import 'package:widgets/widgets.dart';
 
-class RegisterButton extends StatelessWidget {
-  const RegisterButton({
+class LoginButton extends StatelessWidget {
+  const LoginButton({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterBloc, RegisterState>(
+    return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) =>
           previous.formStatus != current.formStatus,
       builder: (context, state) {
@@ -25,11 +25,10 @@ class RegisterButton extends StatelessWidget {
               )
             : FilledButton(
                 onPressed: state.formStatus.isValidated
-                    ? () =>
-                        context.read<RegisterBloc>().add(RegisterSubmitted())
+                    ? () => context.read<LoginBloc>().add(LoginSubmitted())
                     : null,
                 child: const Text(
-                  'Đăng ký',
+                  'Đăng nhập',
                 ),
               );
       },
