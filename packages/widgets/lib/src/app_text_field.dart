@@ -9,6 +9,7 @@ class AppTextField extends StatelessWidget {
     this.suffixIcon,
     this.onChanged,
     this.obscureText = false,
+    this.textInputAction,
   });
 
   final String? labelText;
@@ -17,6 +18,7 @@ class AppTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final ValueChanged<String>? onChanged;
   final bool obscureText;
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class AppTextField extends StatelessWidget {
         //   child: Assets.icons.emailOutline.svg(),
         // ),
       ),
+      textInputAction: textInputAction,
       onChanged: onChanged,
     );
   }

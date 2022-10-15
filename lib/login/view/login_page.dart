@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/login/login.dart';
@@ -114,38 +113,6 @@ class LoginView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class LoginButton extends StatelessWidget {
-  const LoginButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) =>
-          previous.formStatus != current.formStatus,
-      builder: (context, state) {
-        return state.formStatus.isSubmissionInProgress
-            ? const SizedBox.square(
-                dimension: 48,
-                child: Padding(
-                  padding: EdgeInsets.all(4),
-                  child: CircularProgressIndicator(),
-                ),
-              )
-            : FilledButton(
-                onPressed: state.formStatus.isValidated
-                    ? () => context.read<LoginBloc>().add(LoginSubmitted())
-                    : null,
-                child: const Text(
-                  'Đăng nhập',
-                ),
-              );
-      },
     );
   }
 }

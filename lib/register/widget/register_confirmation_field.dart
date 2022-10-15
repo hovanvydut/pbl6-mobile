@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/login/login.dart';
+import 'package:pbl6_mobile/register/register.dart';
 import 'package:widgets/widgets.dart';
 
 class RegisterConfirmationPasswordField extends StatelessWidget {
@@ -12,36 +11,34 @@ class RegisterConfirmationPasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        // final password =
-        //     context.select((LoginBloc bloc) => bloc.state.password);
-        // final isHidePassword =
-        //     context.select((LoginBloc bloc) => bloc.state.isHidePassword);
+    return BlocBuilder<RegisterBloc, RegisterState>(
+      buildWhen: (previous, current) =>
+          previous.password != current.password ||
+          previous.confirmationPassword != current.confirmationPassword ||
+          previous.isHideConfirmationPassword !=
+              current.isHideConfirmationPassword,
+      builder: (context, state) {
         return AppTextField(
-          obscureText: true,
+          obscureText: state.isHideConfirmationPassword,
           hintText: 'Nhập lại mật khẩu của bạn',
           labelText: 'Xác nhận mật khẩu',
-          // errorText: password.invalid ? getErrorText(password.error!) : null,
-          onChanged: (value) =>
-              context.read<LoginBloc>().add(PasswordChanged(password: value)),
+          errorText: state.confirmationPassword.invalid
+              ? 'Mật khẩu không trùng'
+              : null,
+          onChanged: (value) => context
+              .read<RegisterBloc>()
+              .add(ConfirmationPasswordChanged(confirmationPassword: value)),
           suffixIcon: IconButton(
-            icon:
-                true ? Assets.icons.eyeShow.svg() : Assets.icons.eyeHide.svg(),
-            onPressed: () =>
-                context.read<LoginBloc>().add(ShowHidePasswordPressed()),
+            icon: state.isHideConfirmationPassword
+                ? Assets.icons.eyeShow.svg()
+                : Assets.icons.eyeHide.svg(),
+            onPressed: () => context
+                .read<RegisterBloc>()
+                .add(ShowHideConfirmationPasswordPressed()),
           ),
+          textInputAction: TextInputAction.go,
         );
       },
     );
-  }
-
-  String getErrorText(PasswordValidationError error) {
-    switch (error) {
-      case PasswordValidationError.empty:
-        return 'Mật khẩu không được để trống';
-      case PasswordValidationError.tooShort:
-        return 'Mật khẩu phải từ 8 ký tự trở lên';
-    }
   }
 }
