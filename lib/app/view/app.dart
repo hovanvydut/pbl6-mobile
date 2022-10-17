@@ -21,7 +21,6 @@ class App extends StatelessWidget {
         colorScheme: lightColorScheme,
         fontFamily: FontFamily.nunito,
         textTheme: AppTextTheme().textTheme,
-        
       ),
       darkTheme: ThemeData(
         useMaterial3: true,

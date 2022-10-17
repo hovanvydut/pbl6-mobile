@@ -20,7 +20,7 @@ class LoginEmailField extends StatelessWidget {
           errorText: email.invalid ? getErrorText(email.error!) : null,
           onChanged: (value) =>
               context.read<LoginBloc>().add(EmailChanged(email: value)),
-              textInputAction: TextInputAction.next,
+          textInputAction: TextInputAction.next,
         );
       },
     );

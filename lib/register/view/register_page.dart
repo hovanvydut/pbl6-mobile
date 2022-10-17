@@ -75,30 +75,6 @@ class RegisterView extends StatelessWidget {
                 const Center(
                   child: RegisterButton(),
                 ),
-                const SizedBox(
-                  height: 80,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'Hoặc đăng nhập với',
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          icon: Assets.images.social.google.svg(),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: Assets.images.social.facebook.svg(height: 40),
-                          onPressed: () {},
-                        )
-                      ],
-                    )
-                  ],
-                ),
               ],
             ),
           ),
