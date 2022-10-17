@@ -168,25 +168,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/komkat.jpeg
   AssetGenImage get komkat => const AssetGenImage('assets/images/komkat.jpeg');
 
-  $AssetsImagesSocialGen get social => const $AssetsImagesSocialGen();
+  /// File path: assets/images/upload_cloud.svg
+  SvgGenImage get uploadCloud =>
+      const SvgGenImage('assets/images/upload_cloud.svg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [komkat];
-}
-
-class $AssetsImagesSocialGen {
-  const $AssetsImagesSocialGen();
-
-  /// File path: assets/images/social/facebook.svg
-  SvgGenImage get facebook =>
-      const SvgGenImage('assets/images/social/facebook.svg');
-
-  /// File path: assets/images/social/google.svg
-  SvgGenImage get google =>
-      const SvgGenImage('assets/images/social/google.svg');
-
-  /// List of all assets
-  List<SvgGenImage> get values => [facebook, google];
+  List<dynamic> get values => [komkat, uploadCloud];
 }
 
 class Assets {

@@ -65,12 +65,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-      try {
-        emit(state.copyWith(formStatus: FormzStatus.submissionInProgress));
-        await Future.delayed(const Duration(seconds: 3));
-        emit(state.copyWith(formStatus: FormzStatus.submissionSuccess));
-      } catch (e) {
-        emit(state.copyWith(formStatus: FormzStatus.submissionFailure));
-      }
+    try {
+      emit(state.copyWith(formStatus: FormzStatus.submissionInProgress));
+      await Future.delayed(const Duration(seconds: 3));
+      emit(state.copyWith(formStatus: FormzStatus.submissionSuccess));
+    } catch (e) {
+      emit(state.copyWith(formStatus: FormzStatus.submissionFailure));
     }
+  }
 }
