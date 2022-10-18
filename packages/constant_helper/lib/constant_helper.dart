@@ -5,7 +5,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-/// a model package
-library models;
+/// A very good dart package
+library constant_helper;
 
 export 'src/src.dart';

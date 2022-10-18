@@ -5,7 +5,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-/// a model package
-library models;
+/// A very good flutter package
+library address;
 
-export 'src/src.dart';
+export 'data/address_datasource.dart';
+export 'data/remote/remote_address_datasource.dart';
+export 'repositories/address_repository.dart';

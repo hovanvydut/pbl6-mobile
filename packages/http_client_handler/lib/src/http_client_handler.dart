@@ -146,7 +146,7 @@ class HttpClientHandler {
     return Uri(
       scheme: schema,
       host: host,
-      path: 'api/v1$path',
+      path: path,
       port: port,
       queryParameters: queryParameter,
     );

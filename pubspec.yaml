@@ -8,6 +8,8 @@ environment:
   flutter: 3.3.4
 
 dependencies:
+  category:
+    path: packages/category
   connectivity_plus: ^2.3.6+1
   dartx: ^1.1.0
   dotted_border: ^2.0.0+2
@@ -34,10 +36,11 @@ dependencies:
   shimmer: ^2.0.0
   widgets:
     path: packages/widgets
-  flutter_chips_input: ^2.0.0
   multiselect:
     path: packages/multiselect
   dropdown_button2: ^1.8.5
+  address:
+    path: packages/address
 
 dev_dependencies:
   bloc_test: ^9.1.0

@@ -4,6 +4,7 @@ class AppDropDownField<T> extends StatelessWidget {
   const AppDropDownField({
     super.key,
     this.labelText,
+    this.value,
     this.hintText,
     this.errorText,
     this.suffixIcon,
@@ -12,6 +13,7 @@ class AppDropDownField<T> extends StatelessWidget {
   });
 
   final String? labelText;
+  final T? value;
   final String? hintText;
   final String? errorText;
   final Widget? suffixIcon;
@@ -22,6 +24,7 @@ class AppDropDownField<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return DropdownButtonFormField<T>(
+      value: value,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderSide: BorderSide(color: theme.colorScheme.outline),

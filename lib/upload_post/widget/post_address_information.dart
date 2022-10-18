@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pbl6_mobile/upload_post/upload_post.dart';
 import 'package:widgets/widgets.dart';
 
 class PostAddressInformation extends StatelessWidget {
@@ -22,24 +24,53 @@ class PostAddressInformation extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         box16,
-        const AppDropDownField<String>(
-          labelText: 'Tỉnh/Thành phố',
-          items: [
-            DropdownMenuItem(
-              child: Text('Đà Nẵng'),
-            )
-          ],
-          onChanged: null,
+        BlocBuilder<UploadPostBloc, UploadPostState>(
+          builder: (context, state) {
+            return AppDropDownField<String>(
+              labelText: 'Tỉnh/Thành phố',
+              items: state.provincesData
+                  .map<DropdownMenuItem<String>>(
+                    (province) => DropdownMenuItem(
+                      value: province.id.toString(),
+                      child: Text(province.name),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (province) {
+                if (province != null) {
+                  context
+                      .read<UploadPostBloc>()
+                      .add(ProvinceSelected(province));
+                }
+              },
+            );
+          },
         ),
         box24,
-        AppDropDownField<String>(
-          labelText: 'Quận/Huyện',
-          items: const [
-            DropdownMenuItem(
-              child: Text('Đà Nẵng'),
-            )
-          ],
-          onChanged: (Object? value) {},
+        BlocBuilder<UploadPostBloc, UploadPostState>(
+          builder: (context, state) {
+            return AppDropDownField<String>(
+              labelText: 'Quận/Huyện',
+              value: state.selectedDistrict == 0
+                  ? null
+                  : state.selectedDistrict.toString(),
+              items: state.districtsData
+                  .map<DropdownMenuItem<String>>(
+                    (district) => DropdownMenuItem(
+                      value: district.id.toString(),
+                      child: Text(district.name),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (district) {
+                if (district != null) {
+                  context
+                      .read<UploadPostBloc>()
+                      .add(DistrictSelected(district));
+                }
+              },
+            );
+          },
         ),
         box24,
         AppDropDownField<String>(

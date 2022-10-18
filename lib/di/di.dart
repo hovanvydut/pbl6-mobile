@@ -1,3 +1,5 @@
+import 'package:address/address.dart';
+import 'package:category/category.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_client_handler/http_client_handler.dart';
@@ -13,5 +15,12 @@ void initDependences() {
         client: injector<http.Client>(),
         baseUrl: FlavorConfig.instance.values.baseUrl,
       ),
+    )
+    ..registerLazySingleton<AddressDatasource>(
+      () => RemoteAddressDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<CategoryDatasource>(
+      () =>
+          RemoteCategoryDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }
