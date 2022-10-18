@@ -32,16 +32,51 @@ class PostMoreInformation extends StatelessWidget {
           keyboardType: TextInputType.number,
         ),
         box24,
-        const AppTextField(labelText: 'Tiện ích khác'),
+        AppDropDownMuliSelectField(
+          labelText: 'Tiện ích khác',
+          options: const ['Wifi', 'Bla Bla', 'Nhà tắm xịn'],
+          selectedItems: const [
+            'Wifi',
+            'Bla Bla',
+            'Nhà tắm xịn',
+            'Vip pro',
+            'dadad',
+            'dqqwd'
+          ],
+          onChanged: (values) {},
+        ),
         box24,
-        const AppTextField(
+        AppDropDownMuliSelectField(
           labelText: 'Đối tượng cho thuê',
+          options: const [
+            'Sinh viên',
+            'Công nhân',
+            'Hehe',
+          ],
+          selectedItems: const [
+            'Sinh viên',
+            'Công nhân',
+            'Hehe',
+          ],
+          onChanged: (values) {},
         ),
         box24,
-        const AppTextField(
+        AppDropDownMuliSelectField(
           labelText: 'Địa điểm gần đó',
-          isFinalFieldInForm: true,
-        ),
+          options: const [
+            'Trường học',
+            'Bệnh viện',
+            'Chợ',
+            'Công viên',
+          ],
+          selectedItems: const [
+            'Trường học',
+            'Bệnh viện',
+            'Chợ',
+            'Công viên',
+          ],
+          onChanged: (values) {},
+        )
       ],
     );
   }

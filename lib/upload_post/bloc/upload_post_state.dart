@@ -1,10 +1,9 @@
 part of 'upload_post_bloc.dart';
 
-abstract class UploadPostState extends Equatable {
-  const UploadPostState();
+class UploadPostState extends Equatable{
+
 
   @override
   List<Object?> get props => [];
-}
 
-class UploadPostInitial extends UploadPostState {}
+}

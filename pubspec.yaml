@@ -24,9 +24,9 @@ dependencies:
   formz: ^0.4.1
   get_it: ^7.2.0
   go_router: ^4.5.0
+  http: ^0.13.5
   http_client_handler:
     path: packages/http_client_handler
-  http: ^0.13.5
   intl: ^0.17.0
   models:
     path: packages/models
@@ -34,6 +34,10 @@ dependencies:
   shimmer: ^2.0.0
   widgets:
     path: packages/widgets
+  flutter_chips_input: ^2.0.0
+  multiselect:
+    path: packages/multiselect
+  dropdown_button2: ^1.8.5
 
 dev_dependencies:
   bloc_test: ^9.1.0

@@ -5,7 +5,7 @@ part 'upload_post_event.dart';
 part 'upload_post_state.dart';
 
 class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
-  UploadPostBloc() : super(UploadPostInitial()) {
+  UploadPostBloc() : super(UploadPostState()) {
     on<UploadPostEvent>((event, emit) {
       // TODO: implement event handler
     });
