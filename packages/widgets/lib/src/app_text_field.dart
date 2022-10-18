@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({
@@ -10,6 +11,9 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.obscureText = false,
     this.textInputAction,
+    this.keyboardType,
+    this.inputFormatters,
+    this.isFinalFieldInForm = false,
   });
 
   final String? labelText;
@@ -19,12 +23,19 @@ class AppTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final bool obscureText;
   final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool isFinalFieldInForm;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final inputAction = textInputAction ??
+        (isFinalFieldInForm ? TextInputAction.go : TextInputAction.next);
     return TextField(
       obscureText: obscureText,
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderSide: BorderSide(color: theme.colorScheme.outline),
@@ -42,7 +53,7 @@ class AppTextField extends StatelessWidget {
         //   child: Assets.icons.emailOutline.svg(),
         // ),
       ),
-      textInputAction: textInputAction,
+      textInputAction: inputAction,
       onChanged: onChanged,
     );
   }

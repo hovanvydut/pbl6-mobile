@@ -24,10 +24,12 @@ class PostMoreInformation extends StatelessWidget {
         box16,
         const AppTextField(
           labelText: 'Số người tối đã',
+          keyboardType: TextInputType.number,
         ),
         box24,
         const AppTextField(
           labelText: 'Tiền cọc',
+          keyboardType: TextInputType.number,
         ),
         box24,
         const AppTextField(labelText: 'Tiện ích khác'),
@@ -37,7 +39,8 @@ class PostMoreInformation extends StatelessWidget {
         ),
         box24,
         const AppTextField(
-          labelText: 'Địa điểm cho thuê',
+          labelText: 'Địa điểm gần đó',
+          isFinalFieldInForm: true,
         ),
       ],
     );

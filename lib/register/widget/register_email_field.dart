@@ -21,7 +21,6 @@ class RegisterEmailField extends StatelessWidget {
           onChanged: (value) {
             context.read<RegisterBloc>().add(EmailChanged(email: value));
           },
-          textInputAction: TextInputAction.next,
         );
       },
     );

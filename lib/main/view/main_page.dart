@@ -33,6 +33,7 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: const Center(
@@ -51,13 +52,21 @@ class _MainViewState extends State<MainView> {
             onDestinationSelected: _changeCurrentIndex,
             destinations: [
               NavigationDestination(
-                selectedIcon: Assets.icons.homeBold.svg(),
-                icon: Assets.icons.homeOutline.svg(),
+                selectedIcon: Assets.icons.homeBold.svg(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                icon: Assets.icons.homeOutline.svg(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
                 label: 'Trang chủ',
               ),
               NavigationDestination(
-                selectedIcon: Assets.icons.notificationBold.svg(),
-                icon: Assets.icons.notificationOutline.svg(),
+                selectedIcon: Assets.icons.notificationBold.svg(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                icon: Assets.icons.notificationOutline.svg(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
                 label: 'Thông báo',
               ),
               const Visibility(
@@ -65,13 +74,21 @@ class _MainViewState extends State<MainView> {
                 child: SizedBox(),
               ),
               NavigationDestination(
-                selectedIcon: Assets.icons.messageBold.svg(),
-                icon: Assets.icons.messageOutline.svg(),
+                selectedIcon: Assets.icons.messageBold.svg(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                icon: Assets.icons.messageOutline.svg(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
                 label: 'Tin nhắn',
               ),
               NavigationDestination(
-                selectedIcon: Assets.icons.profileBold.svg(),
-                icon: Assets.icons.profileOutline.svg(),
+                selectedIcon: Assets.icons.profileBold.svg(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                icon: Assets.icons.profileOutline.svg(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
                 label: 'Cá nhân',
               ),
             ],

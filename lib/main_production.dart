@@ -9,5 +9,9 @@ import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bootstrap.dart';
 
 void main() {
+  FlavorConfig(
+    flavor: Flavor.production,
+    values: FlavorValues(baseUrl: 'http://node-1.silk-cat.software:7133'),
+  );
   bootstrap(() => const App());
 }
