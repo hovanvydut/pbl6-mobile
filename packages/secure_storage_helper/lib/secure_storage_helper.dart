@@ -5,9 +5,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-/// A property layer
-library property;
+/// A secures storage helper for storing some data need to protect
+library secure_storage_helper;
 
-export 'data/iproperty_datasource.dart';
-export 'data/remote/remote_property_datasource.dart';
-export 'repositories/property_repository.dart';
+export 'src/secure_storage_helper.dart';

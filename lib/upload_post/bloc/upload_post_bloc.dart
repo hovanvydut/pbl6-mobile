@@ -7,7 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:property/repositories/property_repository.dart';
+import 'package:property/property.dart';
 
 part 'upload_post_event.dart';
 part 'upload_post_state.dart';

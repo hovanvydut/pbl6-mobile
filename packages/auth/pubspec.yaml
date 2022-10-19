@@ -1,5 +1,5 @@
-name: address
-description: A very good flutter package
+name: auth
+description: An Authentication Module
 version: 0.1.0+1
 publish_to: none
 
@@ -16,9 +16,6 @@ dependencies:
     path: ../http_client_handler
   models:
     path: ../models
-  secure_storage_helper:
-    path: ../secure_storage_helper
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

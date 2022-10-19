@@ -5,9 +5,10 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-/// A property layer
-library property;
-
-export 'data/iproperty_datasource.dart';
-export 'data/remote/remote_property_datasource.dart';
-export 'repositories/property_repository.dart';
+/// {@template auth}
+/// An Authentication Module
+/// {@endtemplate}
+class Auth {
+  /// {@macro auth}
+  const Auth();
+}

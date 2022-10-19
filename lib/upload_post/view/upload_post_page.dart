@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
-import 'package:property/repositories/property_repository.dart';
+import 'package:property/property.dart';
 import 'package:widgets/widgets.dart';
 
 class UploadPostPage extends StatelessWidget {
