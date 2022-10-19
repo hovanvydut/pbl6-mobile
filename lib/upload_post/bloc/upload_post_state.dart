@@ -4,10 +4,16 @@ class UploadPostState extends Equatable {
   const UploadPostState({
     this.title = '',
     this.description = '',
-    this.provincesData = const [],
-    this.districtsData = const [],
-    this.wardsData = const [],
-    this.houseTypesData = const [],
+    this.provincesData = const <Province>[],
+    this.districtsData = const <District>[],
+    this.wardsData = const <Ward>[],
+    this.houseTypesData = const <HouseType>[],
+    this.otherUtilsData = const <Property>[],
+    this.rentalObjectsData = const <Property>[],
+    this.nearbyPlacesData = const <Property>[],
+    this.selectedOtherUtils = const <String>[],
+    this.selectedRentailObjects = const <String>[],
+    this.selectedNearbyPlaces = const <String>[],
     this.selectedProvince = 0,
     this.selectedDistrict = 0,
     this.selectedWard = 0,
@@ -26,6 +32,9 @@ class UploadPostState extends Equatable {
   final List<District> districtsData;
   final List<Ward> wardsData;
   final List<HouseType> houseTypesData;
+  final List<Property> otherUtilsData;
+  final List<Property> rentalObjectsData;
+  final List<Property> nearbyPlacesData;
   final int selectedProvince;
   final int selectedDistrict;
   final int selectedWard;
@@ -35,10 +44,13 @@ class UploadPostState extends Equatable {
   final double area;
   final int maxOfPerson;
   final int diposit;
+  final List<String> selectedOtherUtils;
+  final List<String> selectedRentailObjects;
+  final List<String> selectedNearbyPlaces;
   final LoadingStatus loadingStatus;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       title,
       description,
@@ -46,6 +58,9 @@ class UploadPostState extends Equatable {
       districtsData,
       wardsData,
       houseTypesData,
+      otherUtilsData,
+      rentalObjectsData,
+      nearbyPlacesData,
       selectedProvince,
       selectedDistrict,
       selectedWard,
@@ -55,6 +70,9 @@ class UploadPostState extends Equatable {
       area,
       maxOfPerson,
       diposit,
+      selectedOtherUtils,
+      selectedRentailObjects,
+      selectedNearbyPlaces,
       loadingStatus,
     ];
   }
@@ -66,6 +84,9 @@ class UploadPostState extends Equatable {
     List<District>? districtsData,
     List<Ward>? wardsData,
     List<HouseType>? houseTypesData,
+    List<Property>? otherUtilsData,
+    List<Property>? rentalObjectsData,
+    List<Property>? nearbyPlacesData,
     int? selectedProvince,
     int? selectedDistrict,
     int? selectedWard,
@@ -75,6 +96,9 @@ class UploadPostState extends Equatable {
     double? area,
     int? maxOfPerson,
     int? diposit,
+    List<String>? selectedOtherUtils,
+    List<String>? selectedRentailObjects,
+    List<String>? selectedNearbyPlaces,
     LoadingStatus? loadingStatus,
   }) {
     return UploadPostState(
@@ -84,6 +108,9 @@ class UploadPostState extends Equatable {
       districtsData: districtsData ?? this.districtsData,
       wardsData: wardsData ?? this.wardsData,
       houseTypesData: houseTypesData ?? this.houseTypesData,
+      otherUtilsData: otherUtilsData ?? this.otherUtilsData,
+      rentalObjectsData: rentalObjectsData ?? this.rentalObjectsData,
+      nearbyPlacesData: nearbyPlacesData ?? this.nearbyPlacesData,
       selectedProvince: selectedProvince ?? this.selectedProvince,
       selectedDistrict: selectedDistrict ?? this.selectedDistrict,
       selectedWard: selectedWard ?? this.selectedWard,
@@ -93,6 +120,10 @@ class UploadPostState extends Equatable {
       area: area ?? this.area,
       maxOfPerson: maxOfPerson ?? this.maxOfPerson,
       diposit: diposit ?? this.diposit,
+      selectedOtherUtils: selectedOtherUtils ?? this.selectedOtherUtils,
+      selectedRentailObjects:
+          selectedRentailObjects ?? this.selectedRentailObjects,
+      selectedNearbyPlaces: selectedNearbyPlaces ?? this.selectedNearbyPlaces,
       loadingStatus: loadingStatus ?? this.loadingStatus,
     );
   }

@@ -63,19 +63,19 @@ class DetailAddressChanged extends UploadPostEvent {
   List<Object?> get props => [address];
 }
 
-class RoomTypeSelected extends UploadPostEvent {
-  const RoomTypeSelected(this.roomType);
+class HouseTypeSelected extends UploadPostEvent {
+  const HouseTypeSelected(this.houseType);
 
-  final String roomType;
+  final String houseType;
 
   @override
-  List<Object?> get props => [roomType];
+  List<Object?> get props => [houseType];
 }
 
 class RoomPriceChanged extends UploadPostEvent {
   const RoomPriceChanged(this.price);
 
-  final String price;
+  final num price;
 
   @override
   List<Object?> get props => [price];
@@ -102,7 +102,7 @@ class MaxOfPersonChanged extends UploadPostEvent {
 class DipositChanged extends UploadPostEvent {
   const DipositChanged(this.diposit);
 
-  final String diposit;
+  final num diposit;
 
   @override
   List<Object?> get props => [diposit];
@@ -137,6 +137,4 @@ class NearbyPlacesSelected extends UploadPostEvent {
 
 class MediaSelected extends UploadPostEvent {}
 
-class UploadPostSubmiited extends UploadPostEvent {
-  
-}
+class UploadPostSubmiited extends UploadPostEvent {}

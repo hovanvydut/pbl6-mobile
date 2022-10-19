@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:address/address.dart';
 import 'package:category/category.dart';
+import 'package:constant_helper/constant_helper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:property/repositories/property_repository.dart';
 
 part 'upload_post_event.dart';
 part 'upload_post_state.dart';
@@ -14,8 +16,10 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
   UploadPostBloc({
     required AddressRepository addressRepository,
     required CategoryRepository categoryRepository,
+    required PropertyRepository propertyRepository,
   })  : _addressRepository = addressRepository,
         _categoryRepository = categoryRepository,
+        _propertyRepository = propertyRepository,
         super(const UploadPostState()) {
     on<PageStarted>(_onPageStart);
     on<TitleChanged>(_onTitleChanged);
@@ -24,7 +28,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     on<DistrictSelected>(_onDistrictSelected);
     on<WardSelected>(_onWardSelected);
     on<DetailAddressChanged>(_onDetailAddressChanged);
-    on<RoomTypeSelected>(_onRoomTypeSelected);
+    on<HouseTypeSelected>(_onHouseTypeSelected);
     on<RoomPriceChanged>(_onRoomPriceChanged);
     on<RoomAreaChanged>(_onRoomAreaChanged);
     on<MaxOfPersonChanged>(_onMaxOfPersonChanged);
@@ -39,6 +43,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
 
   final AddressRepository _addressRepository;
   final CategoryRepository _categoryRepository;
+  final PropertyRepository _propertyRepository;
 
   Future<void> _onPageStart(
     PageStarted event,
@@ -47,11 +52,15 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     try {
       emit(state.copyWith(loadingStatus: LoadingStatus.loading));
       final fetchedProvinces = await _addressRepository.getProvinces();
-      final fetchedHouseTypes = await _categoryRepository.getHouseType();
+      final fetchedHouseTypes = await _categoryRepository.getHouseTypes();
+      final fetchedProperties = await _propertyRepository.getGroupProperties();
       emit(
         state.copyWith(
           provincesData: fetchedProvinces,
           houseTypesData: fetchedHouseTypes,
+          otherUtilsData: fetchedProperties[PropertyType.util]!.properties,
+          rentalObjectsData: fetchedProperties[PropertyType.rental]!.properties,
+          nearbyPlacesData: fetchedProperties[PropertyType.nearby]!.properties,
           loadingStatus: LoadingStatus.done,
         ),
       );
@@ -98,60 +107,121 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     // } catch (e) {}
   }
 
-  FutureOr<void> _onDistrictSelected(
+  Future<FutureOr<void>> _onDistrictSelected(
     DistrictSelected event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) async {
+    // try {
+    final districtId = int.parse(event.district);
+    emit(state.copyWith(selectedDistrict: districtId));
+    final fetchedWards =
+        await _addressRepository.getWardsByDistrictId(districtId);
+    emit(
+      state.copyWith(
+        selectedWard: fetchedWards.first.id,
+        wardsData: fetchedWards,
+      ),
+    );
+  }
 
   FutureOr<void> _onWardSelected(
     WardSelected event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    final wardId = int.parse(event.ward);
+    emit(state.copyWith(selectedWard: wardId));
+  }
 
   FutureOr<void> _onDetailAddressChanged(
     DetailAddressChanged event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    emit(state.copyWith(detailAddress: event.address));
+  }
 
-  FutureOr<void> _onRoomTypeSelected(
-    RoomTypeSelected event,
+  void _onHouseTypeSelected(
+    HouseTypeSelected event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    final houseTypeId = int.parse(event.houseType);
+    emit(
+      state.copyWith(
+        selectedHouseType: houseTypeId,
+      ),
+    );
+  }
 
-  FutureOr<void> _onRoomPriceChanged(
+  void _onRoomPriceChanged(
     RoomPriceChanged event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    final price = event.price.toInt();
+    emit(state.copyWith(price: price));
+  }
 
   FutureOr<void> _onRoomAreaChanged(
     RoomAreaChanged event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    final area = double.parse(event.area);
+    emit(state.copyWith(area: area));
+  }
 
   FutureOr<void> _onMaxOfPersonChanged(
     MaxOfPersonChanged event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    final maxOfPerson = int.parse(event.maxOfPerson);
+    emit(state.copyWith(maxOfPerson: maxOfPerson));
+  }
 
   FutureOr<void> _onDipositChanged(
     DipositChanged event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    final diposit = event.diposit.toInt();
+    emit(state.copyWith(diposit: diposit));
+  }
 
-  FutureOr<void> _onOtherUtilitiesSelected(
+  void _onOtherUtilitiesSelected(
     OtherUtilitiesSelected event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    /// TODO(dungngminh): fix bug
+    if (event.utilities.isEmpty) {
+      emit(state.copyWith(selectedOtherUtils: []));
+      return;
+    }
+    emit(
+      state.copyWith(
+        selectedOtherUtils: [...event.utilities],
+      ),
+    );
+  }
 
-  FutureOr<void> _onRentalObjectsSelected(
+  void _onRentalObjectsSelected(
     RentalObjectsSelected event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    // if (event.rentailObjects.isEmpty) {
+    //   emit(state.copyWith(selectedRentailObjects: []));
+    //   return;
+    // }
+    // emit(state.copyWith(selectedRentailObjects: []));
+    emit(state.copyWith(selectedRentailObjects: event.rentailObjects));
+  }
 
-  FutureOr<void> _onNearbyPlacesSelected(
+  void _onNearbyPlacesSelected(
     NearbyPlacesSelected event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) {
+    // if (event.nearbyPlaces.isEmpty) {
+    //   emit(state.copyWith(selectedNearbyPlaces: <String>[]));
+    //   return;
+    // }
+    // emit(state.copyWith(selectedNearbyPlaces: []));
+    emit(state.copyWith(selectedNearbyPlaces: event.nearbyPlaces));
+  }
 
   FutureOr<void> _onMediaSelected(
     MediaSelected event,

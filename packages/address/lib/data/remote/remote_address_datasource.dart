@@ -1,9 +1,9 @@
-import 'package:address/data/address_datasource.dart';
+import 'package:address/data/iaddress_datasource.dart';
 import 'package:constant_helper/constant_helper.dart';
 import 'package:http_client_handler/http_client_handler.dart';
 import 'package:models/models.dart';
 
-class RemoteAddressDatasource implements AddressDatasource {
+class RemoteAddressDatasource implements IAddressDatasource {
   RemoteAddressDatasource({
     required HttpClientHandler httpHandler,
   }) : _httpHandler = httpHandler;

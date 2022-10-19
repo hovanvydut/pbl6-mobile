@@ -16,6 +16,7 @@ class PostAddressInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
+    final uploadPostBlog = context.read<UploadPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -38,9 +39,7 @@ class PostAddressInformation extends StatelessWidget {
                   .toList(),
               onChanged: (province) {
                 if (province != null) {
-                  context
-                      .read<UploadPostBloc>()
-                      .add(ProvinceSelected(province));
+                  uploadPostBlog.add(ProvinceSelected(province));
                 }
               },
             );
@@ -64,28 +63,41 @@ class PostAddressInformation extends StatelessWidget {
                   .toList(),
               onChanged: (district) {
                 if (district != null) {
-                  context
-                      .read<UploadPostBloc>()
-                      .add(DistrictSelected(district));
+                  uploadPostBlog.add(DistrictSelected(district));
                 }
               },
             );
           },
         ),
         box24,
-        AppDropDownField<String>(
-          labelText: 'Phường/Xã',
-          items: const [
-            DropdownMenuItem(
-              child: Text('Đà Nẵng'),
-            )
-          ],
-          onChanged: (Object? value) {},
+        BlocBuilder<UploadPostBloc, UploadPostState>(
+          builder: (context, state) {
+            return AppDropDownField<String>(
+              labelText: 'Phường/Xã',
+              value: state.selectedWard == 0
+                  ? null
+                  : state.selectedWard.toString(),
+              items: state.wardsData
+                  .map<DropdownMenuItem<String>>(
+                    (ward) => DropdownMenuItem(
+                      value: ward.id.toString(),
+                      child: Text(ward.name),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (ward) {
+                if (ward != null) {
+                  context.read<UploadPostBloc>().add(WardSelected(ward));
+                }
+              },
+            );
+          },
         ),
         box24,
         AppTextField(
           labelText: 'Địa chỉ cụ thể',
-          onChanged: (Object? value) {},
+          onChanged: (address) =>
+              uploadPostBlog.add(DetailAddressChanged(address)),
         ),
       ],
     );

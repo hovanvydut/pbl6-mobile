@@ -6,6 +6,9 @@ abstract class ApiPath {
 
   /// Category
   static const categoryHouseType = '/api/category/house-type';
+
+  /// Property
+  static const property = '/api/property';
   // static const addressDistrict = '/api/address/district';
   // static const addressDistrict = '/api/address/district';
   // static const addressDistrict = '/api/address/district';

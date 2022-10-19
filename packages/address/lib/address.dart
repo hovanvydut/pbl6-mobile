@@ -8,6 +8,6 @@
 /// A very good flutter package
 library address;
 
-export 'data/address_datasource.dart';
+export 'data/iaddress_datasource.dart';
 export 'data/remote/remote_address_datasource.dart';
 export 'repositories/address_repository.dart';

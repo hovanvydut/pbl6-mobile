@@ -13,7 +13,7 @@ class AppTextField extends StatelessWidget {
     this.textInputAction,
     this.keyboardType,
     this.inputFormatters,
-    this.isFinalFieldInForm = false,
+    this.lastField = false,
   });
 
   final String? labelText;
@@ -25,13 +25,13 @@ class AppTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
-  final bool isFinalFieldInForm;
+  final bool lastField;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final inputAction = textInputAction ??
-        (isFinalFieldInForm ? TextInputAction.go : TextInputAction.next);
+        (lastField ? TextInputAction.go : TextInputAction.next);
     return TextField(
       obscureText: obscureText,
       keyboardType: keyboardType,

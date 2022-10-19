@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pbl6_mobile/upload_post/upload_post.dart';
 import 'package:widgets/widgets.dart';
 
 class PostGeneralInformation extends StatelessWidget {
@@ -14,6 +16,7 @@ class PostGeneralInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
+    final uploadPostBlog = context.read<UploadPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -22,14 +25,17 @@ class PostGeneralInformation extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         box16,
-        const AppTextField(
+        AppTextField(
           labelText: 'Tiêu đề ',
           hintText: 'Tiêu đề cho bài viết',
+          onChanged: (title) => uploadPostBlog.add(TitleChanged(title)),
         ),
         box24,
-        const AppTextField(
+        AppTextField(
           labelText: 'Mô tả chung',
           hintText: 'Mô tả chung của bài viết',
+          onChanged: (description) =>
+              uploadPostBlog.add(SummaryDescriptionChanged(description)),
         ),
       ],
     );

@@ -1,11 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:models/models.dart';
 
 part 'province.g.dart';
 
-@JsonSerializable()
-class Province {
-  Province({
+@JsonSerializable(createToJson: false)
+class Province extends Equatable {
+  const Province({
     required this.id,
     required this.name,
     this.districts = const <District>[],
@@ -19,5 +20,7 @@ class Province {
   @JsonKey(name: 'addressDistricts')
   final List<District> districts;
 
-  Map<String, dynamic> toJson() => _$ProvinceToJson(this);
+
+  @override
+  List<Object?> get props => [id, name, districts];
 }

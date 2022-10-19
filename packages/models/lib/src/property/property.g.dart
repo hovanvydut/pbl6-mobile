@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'house_type.dart';
+part of 'property.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HouseType _$HouseTypeFromJson(Map<String, dynamic> json) => HouseType(
+Property _$PropertyFromJson(Map<String, dynamic> json) => Property(
       id: json['id'] as int,
-      name: json['name'] as String,
-      slug: json['slug'] as String,
+      displayName: json['displayName'] as String,
     );

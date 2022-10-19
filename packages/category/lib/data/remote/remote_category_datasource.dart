@@ -1,9 +1,9 @@
-import 'package:category/data/category_datasource.dart';
+import 'package:category/data/icategory_datasource.dart';
 import 'package:constant_helper/constant_helper.dart';
 import 'package:http_client_handler/http_client_handler.dart';
 import 'package:models/models.dart';
 
-class RemoteCategoryDatasource implements CategoryDatasource {
+class RemoteCategoryDatasource implements ICategoryDatasource {
   RemoteCategoryDatasource({required HttpClientHandler httpHandler})
       : _httpHandler = httpHandler;
 

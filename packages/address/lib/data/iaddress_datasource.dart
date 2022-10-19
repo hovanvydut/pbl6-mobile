@@ -1,6 +1,6 @@
 import 'package:models/models.dart';
 
-abstract class AddressDatasource {
+abstract class IAddressDatasource {
   Future<List<Province>> getProvinces();
 
   Future<List<District>> getDistrictsByProvinceId(int provinceId);

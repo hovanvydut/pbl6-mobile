@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
+import 'package:property/repositories/property_repository.dart';
 import 'package:widgets/widgets.dart';
 
 class UploadPostPage extends StatelessWidget {
@@ -16,6 +17,7 @@ class UploadPostPage extends StatelessWidget {
       create: (context) => UploadPostBloc(
         addressRepository: context.read<AddressRepository>(),
         categoryRepository: context.read<CategoryRepository>(),
+        propertyRepository: context.read<PropertyRepository>(),
       ),
       child: const UploadPostView(),
     );

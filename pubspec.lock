@@ -135,7 +135,7 @@ packages:
     source: hosted
     version: "1.2.2"
   constant_helper:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "packages/constant_helper"
       relative: true
@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.2"
+  currency_text_input_formatter:
+    dependency: "direct main"
+    description:
+      name: currency_text_input_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.7"
   dartx:
     dependency: "direct main"
     description:
@@ -581,6 +588,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.1"
+  property:
+    dependency: "direct main"
+    description:
+      path: "/media/dungngminh/Data/project/pbl6/mobile/packages/property"
+      relative: false
+    source: path
+    version: "0.1.0+1"
   provider:
     dependency: transitive
     description:

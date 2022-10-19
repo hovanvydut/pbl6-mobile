@@ -1,4 +1,7 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pbl6_mobile/upload_post/upload_post.dart';
 import 'package:widgets/widgets.dart';
 
 class PostMoreInformation extends StatelessWidget {
@@ -14,6 +17,7 @@ class PostMoreInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
+    final uploadPostBlog = context.read<UploadPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -22,61 +26,77 @@ class PostMoreInformation extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         box16,
-        const AppTextField(
+        AppTextField(
           labelText: 'Số người tối đã',
           keyboardType: TextInputType.number,
+          onChanged: (maxOfPerson) =>
+              uploadPostBlog.add(MaxOfPersonChanged(maxOfPerson)),
         ),
         box24,
-        const AppTextField(
-          labelText: 'Tiền cọc',
-          keyboardType: TextInputType.number,
+        Builder(
+          builder: (context) {
+            final formatter = CurrencyTextInputFormatter(
+              locale: 'vi',
+              symbol: 'VND',
+              decimalDigits: 0,
+            );
+            return AppTextField(
+              labelText: 'Tiền cọc',
+              keyboardType: TextInputType.number,
+              inputFormatters: [formatter],
+              onChanged: (_) => uploadPostBlog.add(
+                DipositChanged(formatter.getUnformattedValue()),
+              ),
+              lastField: true,
+            );
+          },
         ),
         box24,
-        AppDropDownMuliSelectField(
-          labelText: 'Tiện ích khác',
-          options: const ['Wifi', 'Bla Bla', 'Nhà tắm xịn'],
-          selectedItems: const [
-            'Wifi',
-            'Bla Bla',
-            'Nhà tắm xịn',
-            'Vip pro',
-            'dadad',
-            'dqqwd'
-          ],
-          onChanged: (values) {},
+        BlocBuilder<UploadPostBloc, UploadPostState>(
+          builder: (context, state) {
+            return AppDropDownMuliSelectField(
+              labelText: 'Tiện ích khác',
+              options: state.otherUtilsData
+                  .map<String>((util) => util.displayName)
+                  .toList(),
+              selectedItems: state.selectedOtherUtils,
+              onChanged: (utils) =>
+                  uploadPostBlog.add(OtherUtilitiesSelected(utils)),
+            );
+          },
         ),
         box24,
-        AppDropDownMuliSelectField(
-          labelText: 'Đối tượng cho thuê',
-          options: const [
-            'Sinh viên',
-            'Công nhân',
-            'Hehe',
-          ],
-          selectedItems: const [
-            'Sinh viên',
-            'Công nhân',
-            'Hehe',
-          ],
-          onChanged: (values) {},
+        BlocBuilder<UploadPostBloc, UploadPostState>(
+          // buildWhen: (previous, current) =>
+          //     previous.nearbyPlacesData != current.nearbyPlacesData,
+          builder: (context, state) {
+            return AppDropDownMuliSelectField(
+              labelText: 'Đối tượng cho thuê',
+              options: state.rentalObjectsData
+                  .map<String>((objects) => objects.displayName)
+                  .toList(),
+              selectedItems: state.selectedRentailObjects,
+              onChanged: (objects) =>
+                  uploadPostBlog.add(RentalObjectsSelected(objects)),
+            );
+          },
         ),
         box24,
-        AppDropDownMuliSelectField(
-          labelText: 'Địa điểm gần đó',
-          options: const [
-            'Trường học',
-            'Bệnh viện',
-            'Chợ',
-            'Công viên',
-          ],
-          selectedItems: const [
-            'Trường học',
-            'Bệnh viện',
-            'Chợ',
-            'Công viên',
-          ],
-          onChanged: (values) {},
-        )
+        BlocBuilder<UploadPostBloc, UploadPostState>(
+          buildWhen: (previous, current) =>
+              previous.selectedNearbyPlaces != current.selectedNearbyPlaces,
+          builder: (context, state) {
+            return AppDropDownMuliSelectField(
+              labelText: 'Địa điểm gần đó',
+              options: state.nearbyPlacesData
+                  .map<String>((places) => places.displayName)
+                  .toList(),
+              selectedItems: state.selectedNearbyPlaces,
+              onChanged: (places) =>
+                  uploadPostBlog.add(NearbyPlacesSelected(places)),
+            );
+          },
+        ),
       ],
     );
   }

@@ -3,10 +3,10 @@ import 'package:models/models.dart';
 
 class CategoryRepository {
   CategoryRepository({
-    required CategoryDatasource categoryDatasource,
+    required ICategoryDatasource categoryDatasource,
   }) : _categoryDatasource = categoryDatasource;
 
-  final CategoryDatasource _categoryDatasource;
+  final ICategoryDatasource _categoryDatasource;
 
-  Future<List<HouseType>> getHouseType() => _categoryDatasource.getHouseType();
+  Future<List<HouseType>> getHouseTypes() => _categoryDatasource.getHouseType();
 }

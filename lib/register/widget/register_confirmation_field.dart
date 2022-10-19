@@ -39,7 +39,7 @@ class RegisterConfirmationPasswordField extends StatelessWidget {
                 .read<RegisterBloc>()
                 .add(ShowHideConfirmationPasswordPressed()),
           ),
-          isFinalFieldInForm: true,
+          lastField: true,
         );
       },
     );

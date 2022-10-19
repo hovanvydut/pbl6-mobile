@@ -5,9 +5,6 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-/// A very good flutter package
-library category;
+/// A property layer
+library property;
 
-export 'data/icategory_datasource.dart';
-export 'data/remote/remote_category_datasource.dart';
-export 'repositories/category_repository.dart';

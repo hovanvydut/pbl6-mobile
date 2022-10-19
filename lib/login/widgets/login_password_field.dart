@@ -35,7 +35,7 @@ class LoginPasswordField extends StatelessWidget {
             onPressed: () =>
                 context.read<LoginBloc>().add(ShowHidePasswordPressed()),
           ),
-          isFinalFieldInForm: true,
+          lastField: true,
         );
       },
     );

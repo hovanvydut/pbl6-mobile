@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'house_type.g.dart';
 
-@JsonSerializable()
-class HouseType {
+@JsonSerializable(createToJson: false)
+class HouseType extends Equatable{
   const HouseType({required this.id, required this.name, required this.slug});
   factory HouseType.fromJson(Map<String, dynamic> json) =>
       _$HouseTypeFromJson(json);
@@ -12,5 +13,7 @@ class HouseType {
   final String name;
   final String slug;
 
-  Map<String, dynamic> toJson() => _$HouseTypeToJson(this);
+  
+  @override
+  List<Object?> get props => [id, name, slug];
 }

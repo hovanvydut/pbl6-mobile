@@ -14,9 +14,3 @@ District _$DistrictFromJson(Map<String, dynamic> json) => District(
               .toList() ??
           const <Ward>[],
     );
-
-Map<String, dynamic> _$DistrictToJson(District instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'addressDistricts': instance.wards,
-    };

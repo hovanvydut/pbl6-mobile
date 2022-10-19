@@ -1,12 +1,12 @@
-import 'package:address/data/address_datasource.dart';
+import 'package:address/data/iaddress_datasource.dart';
 import 'package:models/models.dart';
 
 class AddressRepository {
   AddressRepository({
-    required AddressDatasource addressDatasource,
+    required IAddressDatasource addressDatasource,
   }) : _addressDatasource = addressDatasource;
 
-  final AddressDatasource _addressDatasource;
+  final IAddressDatasource _addressDatasource;
 
   Future<List<Province>> getProvinces() => _addressDatasource.getProvinces();
 
