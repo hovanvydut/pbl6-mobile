@@ -12,6 +12,7 @@ class RegisterPasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Builder(
       builder: (context) {
         final password =
@@ -28,12 +29,13 @@ class RegisterPasswordField extends StatelessWidget {
               .add(PasswordChanged(password: value)),
           suffixIcon: IconButton(
             icon: isHidePassword
-                ? Assets.icons.eyeShow.svg()
-                : Assets.icons.eyeHide.svg(),
+                ? Assets.icons.eyeShow
+                    .svg(color: theme.colorScheme.onSurfaceVariant)
+                : Assets.icons.eyeHide
+                    .svg(color: theme.colorScheme.onSurfaceVariant),
             onPressed: () =>
                 context.read<RegisterBloc>().add(ShowHidePasswordPressed()),
           ),
-          textInputAction: TextInputAction.next,
         );
       },
     );

@@ -8,7 +8,4 @@
 /// a model package
 library models;
 
-export 'src/validation/confirmation_password.dart';
-export 'src/validation/email.dart';
-export 'src/validation/password.dart';
-export 'src/validation/phone_number.dart';
+export 'src/src.dart';

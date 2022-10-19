@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  multiselect:
+    path: ../multiselect
 
 dev_dependencies:
   flutter_test:

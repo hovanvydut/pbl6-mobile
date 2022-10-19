@@ -11,6 +11,7 @@ class RegisterConfirmationPasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BlocBuilder<RegisterBloc, RegisterState>(
       buildWhen: (previous, current) =>
           previous.password != current.password ||
@@ -30,13 +31,15 @@ class RegisterConfirmationPasswordField extends StatelessWidget {
               .add(ConfirmationPasswordChanged(confirmationPassword: value)),
           suffixIcon: IconButton(
             icon: state.isHideConfirmationPassword
-                ? Assets.icons.eyeShow.svg()
-                : Assets.icons.eyeHide.svg(),
+                ? Assets.icons.eyeShow
+                    .svg(color: theme.colorScheme.onSurfaceVariant)
+                : Assets.icons.eyeHide
+                    .svg(color: theme.colorScheme.onSurfaceVariant),
             onPressed: () => context
                 .read<RegisterBloc>()
                 .add(ShowHideConfirmationPasswordPressed()),
           ),
-          textInputAction: TextInputAction.go,
+          lastField: true,
         );
       },
     );
