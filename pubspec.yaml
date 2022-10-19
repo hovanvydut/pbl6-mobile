@@ -41,6 +41,8 @@ dependencies:
   dropdown_button2: ^1.8.5
   address:
     path: packages/address
+  platform_helper:
+    path: packages/platform_helper
 
 dev_dependencies:
   bloc_test: ^9.1.0
