@@ -8,12 +8,18 @@ environment:
   flutter: 3.3.4
 
 dependencies:
+  category:
+    path: packages/category
+  constant_helper:
+    path: packages/constant_helper
   connectivity_plus: ^2.3.6+1
   dartx: ^1.1.0
+  dotted_border: ^2.0.0+2
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  flutter_lazy_indexed_stack: ^0.0.3
   flutter_localizations:
     sdk: flutter
   flutter_native_splash: ^2.2.8
@@ -23,6 +29,8 @@ dependencies:
   get_it: ^7.2.0
   go_router: ^4.5.0
   http: ^0.13.5
+  http_client_handler:
+    path: packages/http_client_handler
   intl: ^0.17.0
   models:
     path: packages/models
@@ -30,6 +38,16 @@ dependencies:
   shimmer: ^2.0.0
   widgets:
     path: packages/widgets
+  multiselect:
+    path: packages/multiselect
+  dropdown_button2: ^1.8.5
+  address:
+    path: packages/address
+  platform_helper:
+    path: packages/platform_helper
+  property:
+    path: packages/property
+  currency_text_input_formatter: ^2.1.7
 
 dev_dependencies:
   bloc_test: ^9.1.0
@@ -46,7 +64,6 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/images/
-    - assets/images/social/
 
   fonts:
     - family: Nunito
