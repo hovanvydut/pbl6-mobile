@@ -1,18 +1,20 @@
 pipeline{
-	agent any
+	agent {
+  		label 'agentflutter'
+	}
+
+	environment {
+		SHARE_FOLDER = "/home/jenkins/flutter-build"
+	}
 	
 	triggers {
 		githubPush()
-	}
-	
-	environment {
-		REMOTE_SERVER_DOMAIN = 'jenkins-slave-1.silk-cat.software'
 	}
 
 	stages {
 		stage('Git clone') {
 			steps {
-				git branch: 'master', url: 'git@github.com:hovanvydut/pbl6-mobile.git/', credentialsId: 'HOME_SERVER_SSH_PRIVATE_KEY'
+				git branch: 'main', url: 'git@github.com:hovanvydut/pbl6-mobile.git/', credentialsId: 'HOME_SERVER_SSH_PRIVATE_KEY'
 			}
 		}
 
@@ -20,6 +22,8 @@ pipeline{
 			steps {
 				sh '''
 					flutter build apk --flavor production --target lib/main_production.dart --target-platform android-arm64
+					mkdir -p ${SHARE_FOLDER}
+					cp -r ./build/app/outputs/flutter-apk/ ${SHARE_FOLDER}
 				'''
 			}
 		}
