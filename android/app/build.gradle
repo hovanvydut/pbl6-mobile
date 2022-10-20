@@ -81,11 +81,6 @@ android {
             applicationIdSuffix ""
             manifestPlaceholders = [appName: "Pbl6 Mobile"]
         }
-        staging {
-            dimension "default"
-            applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "[STG] Pbl6 Mobile"]
-        }
         development {
             dimension "default"
             applicationIdSuffix ".dev"
@@ -99,11 +94,10 @@ android {
         //     minifyEnabled true
         //     proguardFiles getDefaultProguardFile('proguard-android.txt')
         // }
-
         release {
             signingConfig signingConfigs.debug
         }
-        
+
         debug {
             signingConfig signingConfigs.debug
         }

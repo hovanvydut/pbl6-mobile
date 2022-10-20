@@ -10,6 +10,7 @@ linter:
   rules:
     public_member_api_docs: false
     avoid_print: true
+    sort_pub_dependencies: false
     require_trailing_commas: true
     prefer_single_quotes: true
     cascade_invocations: true
@@ -19,3 +20,4 @@ linter:
     sort_unnamed_constructors_first: true
     unnecessary_string_interpolations: true
     omit_local_variable_types: true
+    use_setters_to_change_properties: false

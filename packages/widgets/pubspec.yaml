@@ -1,0 +1,20 @@
+name: widgets
+description: A shared widget packages
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: 3.0.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  multiselect:
+    path: ../multiselect
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.3.0
+  very_good_analysis: ^3.0.1

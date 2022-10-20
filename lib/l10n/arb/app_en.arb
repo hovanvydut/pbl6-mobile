@@ -1,7 +1,11 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+  "@@locale": "en",
+  "login": "Login",
+  "email": "Email",
+  "password": "Password",
+  "forgotPassword": "Forgot your password?",
+  "loginWithSocial": "Or login with social account",
+  "register": "Register",
+  "haveAnAccount": "Already have an account?",
+  "confirmationPassword": "Confirmation Password"
 }
