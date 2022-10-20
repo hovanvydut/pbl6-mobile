@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auth/auth.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -9,12 +10,16 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(const LoginState()) {
+  LoginBloc({required AuthRepository authRepository})
+      : _authRepository = authRepository,
+        super(const LoginState()) {
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
     on<ShowHidePasswordPressed>(_onShowHidePasswordPressed);
     on<LoginSubmitted>(_onLoginSubmitted);
   }
+
+  final AuthRepository _authRepository;
 
   void _onEmailChanged(
     EmailChanged event,
@@ -67,9 +72,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     try {
       emit(state.copyWith(formStatus: FormzStatus.submissionInProgress));
-      await Future.delayed(const Duration(seconds: 3));
+      await _authRepository.login(
+        email: state.email.value,
+        password: state.password.value,
+      );
       emit(state.copyWith(formStatus: FormzStatus.submissionSuccess));
     } catch (e) {
+      addError(e);
       emit(state.copyWith(formStatus: FormzStatus.submissionFailure));
     }
   }

@@ -5,10 +5,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-/// {@template auth}
-/// An Authentication Module
-/// {@endtemplate}
-class Auth {
-  /// {@macro auth}
-  const Auth();
-}
+/// A user module
+library user;
+
+export 'data/iuser_datasource.dart';
+export 'data/remote/remote_user_datasource.dart';
+export 'repositories/user_repository.dart';

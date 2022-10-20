@@ -67,8 +67,10 @@ class PostMoreInformation extends StatelessWidget {
         ),
         box24,
         BlocBuilder<UploadPostBloc, UploadPostState>(
-          // buildWhen: (previous, current) =>
-          //     previous.nearbyPlacesData != current.nearbyPlacesData,
+          buildWhen: (previous, current) =>
+              previous.selectedRentailObjects !=
+                  current.selectedRentailObjects ||
+              previous.rentalObjectsData != current.rentalObjectsData,
           builder: (context, state) {
             return AppDropDownMuliSelectField(
               labelText: 'Đối tượng cho thuê',
@@ -83,8 +85,8 @@ class PostMoreInformation extends StatelessWidget {
         ),
         box24,
         BlocBuilder<UploadPostBloc, UploadPostState>(
-          buildWhen: (previous, current) =>
-              previous.selectedNearbyPlaces != current.selectedNearbyPlaces,
+          // buildWhen: (previous, current) =>
+          //     previous.selectedNearbyPlaces != current.selectedNearbyPlaces,
           builder: (context, state) {
             return AppDropDownMuliSelectField(
               labelText: 'Địa điểm gần đó',

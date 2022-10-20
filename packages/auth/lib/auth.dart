@@ -8,4 +8,6 @@
 /// An Authentication Module
 library auth;
 
-export 'src/auth.dart';
+export 'data/iauth_datasource.dart';
+export 'data/remote/remote_auth_datasource.dart';
+export 'repositories/auth_repository.dart';

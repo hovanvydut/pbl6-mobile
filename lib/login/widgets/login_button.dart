@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:go_router/go_router.dart';
-import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/login/login.dart';
 import 'package:widgets/widgets.dart';
 
@@ -26,10 +24,10 @@ class LoginButton extends StatelessWidget {
                 ),
               )
             : FilledButton(
-                // onPressed: state.formStatus.isValidated
-                //     ? () => context.read<LoginBloc>().add(LoginSubmitted())
-                //     : null,
-                onPressed: () => context.go(AppRouter.main),
+                onPressed: state.formStatus.isValidated
+                    ? () => context.read<LoginBloc>().add(LoginSubmitted())
+                    : null,
+                // onPressed: () => context.go(AppRouter.main),
                 child: const Text(
                   'Đăng nhập',
                 ),
