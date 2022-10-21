@@ -1,5 +1,5 @@
 import 'package:models/models.dart';
-import 'package:user/data/iuser_datasource.dart';
+import 'package:user/user.dart';
 
 class UserRepository {
   const UserRepository({

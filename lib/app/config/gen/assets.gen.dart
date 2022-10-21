@@ -76,6 +76,39 @@ class $AssetsIconsGen {
   SvgGenImage get bookmarkOutline =>
       const SvgGenImage('assets/icons/bookmark_outline.svg');
 
+  /// File path: assets/icons/calendar.svg
+  SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
+
+  /// File path: assets/icons/calendar_bold.svg
+  SvgGenImage get calendarBold =>
+      const SvgGenImage('assets/icons/calendar_bold.svg');
+
+  /// File path: assets/icons/camera.svg
+  SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
+
+  /// File path: assets/icons/chevron_right.svg
+  SvgGenImage get chevronRight =>
+      const SvgGenImage('assets/icons/chevron_right.svg');
+
+  /// File path: assets/icons/close.svg
+  SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
+
+  /// File path: assets/icons/delete.svg
+  SvgGenImage get delete => const SvgGenImage('assets/icons/delete.svg');
+
+  /// File path: assets/icons/document.svg
+  SvgGenImage get document => const SvgGenImage('assets/icons/document.svg');
+
+  /// File path: assets/icons/document_bold.svg
+  SvgGenImage get documentBold =>
+      const SvgGenImage('assets/icons/document_bold.svg');
+
+  /// File path: assets/icons/edit.svg
+  SvgGenImage get edit => const SvgGenImage('assets/icons/edit.svg');
+
+  /// File path: assets/icons/edit_bold.svg
+  SvgGenImage get editBold => const SvgGenImage('assets/icons/edit_bold.svg');
+
   /// File path: assets/icons/email_outline.svg
   SvgGenImage get emailOutline =>
       const SvgGenImage('assets/icons/email_outline.svg');
@@ -93,6 +126,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filter_outline.svg
   SvgGenImage get filterOutline =>
       const SvgGenImage('assets/icons/filter_outline.svg');
+
+  /// File path: assets/icons/gallery.svg
+  SvgGenImage get gallery => const SvgGenImage('assets/icons/gallery.svg');
 
   /// File path: assets/icons/home_bold.svg
   SvgGenImage get homeBold => const SvgGenImage('assets/icons/home_bold.svg');
@@ -129,6 +165,9 @@ class $AssetsIconsGen {
   SvgGenImage get profileOutline =>
       const SvgGenImage('assets/icons/profile_outline.svg');
 
+  /// File path: assets/icons/save.svg
+  SvgGenImage get save => const SvgGenImage('assets/icons/save.svg');
+
   /// File path: assets/icons/search_bold.svg
   SvgGenImage get searchBold =>
       const SvgGenImage('assets/icons/search_bold.svg');
@@ -137,17 +176,41 @@ class $AssetsIconsGen {
   SvgGenImage get searchOutline =>
       const SvgGenImage('assets/icons/search_outline.svg');
 
+  /// File path: assets/icons/setting.svg
+  SvgGenImage get setting => const SvgGenImage('assets/icons/setting.svg');
+
+  /// File path: assets/icons/setting_bold.svg
+  SvgGenImage get settingBold =>
+      const SvgGenImage('assets/icons/setting_bold.svg');
+
+  /// File path: assets/icons/user.svg
+  SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
+
+  /// File path: assets/icons/wallet.svg
+  SvgGenImage get wallet => const SvgGenImage('assets/icons/wallet.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         add,
         arrorLeft,
         bookmarkBold,
         bookmarkOutline,
+        calendar,
+        calendarBold,
+        camera,
+        chevronRight,
+        close,
+        delete,
+        document,
+        documentBold,
+        edit,
+        editBold,
         emailOutline,
         eyeHide,
         eyeShow,
         filterBold,
         filterOutline,
+        gallery,
         homeBold,
         homeOutline,
         messageBold,
@@ -157,8 +220,13 @@ class $AssetsIconsGen {
         passwordOutline,
         profileBold,
         profileOutline,
+        save,
         searchBold,
-        searchOutline
+        searchOutline,
+        setting,
+        settingBold,
+        user,
+        wallet
       ];
 }
 
@@ -168,12 +236,15 @@ class $AssetsImagesGen {
   /// File path: assets/images/komkat.jpeg
   AssetGenImage get komkat => const AssetGenImage('assets/images/komkat.jpeg');
 
+  /// File path: assets/images/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
+
   /// File path: assets/images/upload_cloud.svg
   SvgGenImage get uploadCloud =>
       const SvgGenImage('assets/images/upload_cloud.svg');
 
   /// List of all assets
-  List<dynamic> get values => [komkat, uploadCloud];
+  List<dynamic> get values => [komkat, logo, uploadCloud];
 }
 
 class Assets {

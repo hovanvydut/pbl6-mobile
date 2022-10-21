@@ -52,6 +52,12 @@ dependencies:
   currency_text_input_formatter: ^2.1.7
   user:
     path: packages/user
+  post:
+    path: packages/post
+  media:
+    path: packages/media
+  cached_network_image: ^3.2.2
+  faker: ^2.0.0
 
 dev_dependencies:
   bloc_test: ^9.1.0

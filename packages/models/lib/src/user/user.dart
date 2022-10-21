@@ -11,7 +11,7 @@ class User extends Equatable {
     this.phoneNumber,
     this.identityNumber,
     this.currentCredit,
-    required this.avatar,
+    this.avatar,
     required this.address,
     required this.addressWardId,
     required this.addressWard,
@@ -27,7 +27,7 @@ class User extends Equatable {
   final String? phoneNumber;
   final String? identityNumber;
   final int? currentCredit;
-  final String avatar;
+  final String? avatar;
   final String address;
   final int addressWardId;
   final String addressWard;
@@ -41,7 +41,7 @@ class User extends Equatable {
         'phoneNumber': phoneNumber,
         'avatar': avatar,
         'address': address,
-        'addressWardId': addressWardId
+        'addressWardId': addressWardId,
       };
 
   @override
@@ -60,5 +60,37 @@ class User extends Equatable {
       userAccountId,
       userAccountEmail,
     ];
+  }
+
+  User copyWith({
+    int? id,
+    String? displayName,
+    String? phoneNumber,
+    String? identityNumber,
+    int? currentCredit,
+    String? avatar,
+    String? address,
+    int? addressWardId,
+    String? addressWard,
+    String? addressDistrict,
+    String? addressProvince,
+    int? userAccountId,
+    String? userAccountEmail,
+  }) {
+    return User(
+      id: id ?? this.id,
+      displayName: displayName ?? this.displayName,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      identityNumber: identityNumber ?? this.identityNumber,
+      currentCredit: currentCredit ?? this.currentCredit,
+      avatar: avatar ?? this.avatar,
+      address: address ?? this.address,
+      addressWardId: addressWardId ?? this.addressWardId,
+      addressWard: addressWard ?? this.addressWard,
+      addressDistrict: addressDistrict ?? this.addressDistrict,
+      addressProvince: addressProvince ?? this.addressProvince,
+      userAccountId: userAccountId ?? this.userAccountId,
+      userAccountEmail: userAccountEmail ?? this.userAccountEmail,
+    );
   }
 }

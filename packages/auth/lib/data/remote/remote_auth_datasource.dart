@@ -17,7 +17,7 @@ class RemoteAuthDatasource implements IAuthDatasource {
     required String password,
   }) async {
     try {
-      final jsonResponse = await _httpHandler.post(
+      final httpResponse = await _httpHandler.post(
         ApiPath.authLogin,
         body: {
           'email': email,
@@ -26,10 +26,10 @@ class RemoteAuthDatasource implements IAuthDatasource {
         headers: {
           HttpHeaders.contentTypeHeader: ContentType.json.value,
         },
-      ) as Map<String, dynamic>;
-      final loginResponse = jsonResponse['data'] as Map<String, dynamic>;
-      final jwt = loginResponse['accessToken'] as String;
-      final userId = loginResponse['id'] as int;
+      );
+      final loginData = httpResponse.data as Map<String, dynamic>;
+      final jwt = loginData['accessToken'] as String;
+      final userId = loginData['id'] as int;
       await SecureStorageHelper.writeValueToKey(
         key: SecureStorageKey.jwt,
         value: jwt,
@@ -41,5 +41,45 @@ class RemoteAuthDatasource implements IAuthDatasource {
     } on ServerErrorException {
       throw Exception();
     }
+  }
+
+  @override
+  Future<void> register({
+    required String email,
+    required String password,
+    required String displayName,
+    required String phoneNumber,
+    required String identityNumber,
+    required String avatar,
+    required String address,
+    required int wardId,
+    required int roleId,
+  }) async {
+    try {
+      await _httpHandler.post(
+        ApiPath.authRegister,
+        body: {
+          'email': email,
+          'password': password,
+          'displayName': displayName,
+          'phoneNumber': phoneNumber,
+          'identityNumber': identityNumber,
+          'avatar': avatar,
+          'address': address,
+          'addressWardId': wardId,
+          'roleId': roleId,
+        },
+        headers: {
+          HttpHeaders.contentTypeHeader: ContentType.json.value,
+        },
+      );
+    } on ServerErrorException {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> removeToken() async {
+    await SecureStorageHelper.deleteAllKeys();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 extension SizeExtension on BuildContext {
   double get height => MediaQuery.of(this).size.height;
@@ -14,4 +15,8 @@ extension EdgeInsetsExtension on BuildContext {
 
 extension ThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
+}
+
+extension MoreGoRouterExtenstion on BuildContext {
+  String get currentLocation => GoRouter.of(this).location;
 }

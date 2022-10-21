@@ -8,6 +8,7 @@ class Property extends Equatable {
   const Property({
     required this.id,
     required this.displayName,
+    required this.groupPropertyId,
   });
 
   factory Property.fromJson(Map<String, dynamic> json) =>
@@ -15,6 +16,8 @@ class Property extends Equatable {
 
   final int id;
   final String displayName;
+  @JsonKey(name: 'propertyGroupId')
+  final int groupPropertyId;
 
   @override
   List<Object> get props => [id, displayName];

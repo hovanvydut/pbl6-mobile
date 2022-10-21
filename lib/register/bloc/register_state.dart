@@ -4,6 +4,7 @@ class RegisterState extends Equatable {
   const RegisterState({
     this.email = const Email.pure(),
     this.password = const Password.pure(),
+    this.displayName = const DisplayName.pure(),
     this.confirmationPassword = const ConfirmationPassword.pure(),
     this.isHidePassword = true,
     this.isHideConfirmationPassword = true,
@@ -12,6 +13,7 @@ class RegisterState extends Equatable {
 
   final Email email;
   final Password password;
+  final DisplayName displayName;
   final ConfirmationPassword confirmationPassword;
   final bool isHidePassword;
   final bool isHideConfirmationPassword;
@@ -21,6 +23,7 @@ class RegisterState extends Equatable {
   List<Object?> get props => [
         email,
         password,
+        displayName,
         confirmationPassword,
         isHidePassword,
         isHideConfirmationPassword,
@@ -30,6 +33,7 @@ class RegisterState extends Equatable {
   RegisterState copyWith({
     Email? email,
     Password? password,
+    DisplayName? displayName,
     ConfirmationPassword? confirmationPassword,
     bool? isHidePassword,
     bool? isHideConfirmationPassword,
@@ -38,6 +42,7 @@ class RegisterState extends Equatable {
     return RegisterState(
       email: email ?? this.email,
       password: password ?? this.password,
+      displayName: displayName ?? this.displayName,
       confirmationPassword: confirmationPassword ?? this.confirmationPassword,
       isHidePassword: isHidePassword ?? this.isHidePassword,
       isHideConfirmationPassword:

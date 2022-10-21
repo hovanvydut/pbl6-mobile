@@ -17,6 +17,16 @@ class EmailChanged extends RegisterEvent {
   List<Object?> get props => [email];
 }
 
+class DisplayNameChanged extends RegisterEvent {
+  const DisplayNameChanged({
+    required this.displayName,
+  });
+  final String displayName;
+
+  @override
+  List<Object?> get props => [displayName];
+}
+
 class PasswordChanged extends RegisterEvent {
   const PasswordChanged({required this.password});
 

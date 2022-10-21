@@ -24,6 +24,8 @@ class UploadPostState {
     this.maxOfPerson = 0,
     this.diposit = 0,
     this.loadingStatus = LoadingStatus.initial,
+    this.uploadPostStatus = LoadingStatus.initial,
+    this.medias = const <String>[],
   });
 
   final String title;
@@ -40,14 +42,16 @@ class UploadPostState {
   final int selectedWard;
   final String detailAddress;
   final int selectedHouseType;
-  final int price;
+  final double price;
   final double area;
   final int maxOfPerson;
-  final int diposit;
+  final double diposit;
   final List<String> selectedOtherUtils;
   final List<String> selectedRentailObjects;
   final List<String> selectedNearbyPlaces;
   final LoadingStatus loadingStatus;
+  final LoadingStatus uploadPostStatus;
+  final List<String> medias;
 
   // @override
   // List<Object?> get props {
@@ -92,14 +96,16 @@ class UploadPostState {
     int? selectedWard,
     String? detailAddress,
     int? selectedHouseType,
-    int? price,
+    double? price,
     double? area,
     int? maxOfPerson,
-    int? diposit,
+    double? diposit,
     List<String>? selectedOtherUtils,
     List<String>? selectedRentailObjects,
     List<String>? selectedNearbyPlaces,
+    List<String>? medias,
     LoadingStatus? loadingStatus,
+    LoadingStatus? uploadPostStatus,
   }) {
     return UploadPostState(
       title: title ?? this.title,
@@ -124,7 +130,8 @@ class UploadPostState {
       selectedRentailObjects:
           selectedRentailObjects ?? this.selectedRentailObjects,
       selectedNearbyPlaces: selectedNearbyPlaces ?? this.selectedNearbyPlaces,
-      loadingStatus: loadingStatus ?? this.loadingStatus,
+      uploadPostStatus: uploadPostStatus ?? this.uploadPostStatus,
+      medias: medias ?? this.medias,
     );
   }
 }

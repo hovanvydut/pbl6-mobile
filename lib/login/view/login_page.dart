@@ -3,20 +3,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/login/login.dart';
+import 'package:platform_helper/platform_helper.dart';
 import 'package:widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({
     super.key,
-    required this.onToRegisterPressed,
-    required this.onAfterLoginChanged,
   });
-
-  final void Function() onToRegisterPressed;
-  final void Function() onAfterLoginChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +21,7 @@ class LoginPage extends StatelessWidget {
       create: (context) => LoginBloc(
         authRepository: context.read<AuthRepository>(),
       ),
-      child: LoginView(
-        onToRegisterPressed: onToRegisterPressed,
-        onAfterLoginChanged: onAfterLoginChanged,
-      ),
+      child: const LoginView(),
     );
   }
 }
@@ -35,12 +29,7 @@ class LoginPage extends StatelessWidget {
 class LoginView extends StatelessWidget {
   const LoginView({
     super.key,
-    required this.onToRegisterPressed,
-    required this.onAfterLoginChanged,
   });
-
-  final void Function() onToRegisterPressed;
-  final void Function() onAfterLoginChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +38,17 @@ class LoginView extends StatelessWidget {
       listener: (context, state) {
         if (state.formStatus == FormzStatus.submissionSuccess) {
           context.read<AuthenticationBloc>().add(GetUserInformation());
-          onAfterLoginChanged.call();
+          ToastHelper.showToast('Đăng nhập thành công');
+          context.go(AppRouter.main);
+        }
+        if (state.formStatus == FormzStatus.submissionFailure) {
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage),
+              duration: const Duration(seconds: 2),
+            ),
+          );
         }
       },
       child: DissmissKeyboard(
@@ -83,7 +82,7 @@ class LoginView extends StatelessWidget {
                           color: theme.colorScheme.primary,
                         ),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = onToRegisterPressed.call,
+                          ..onTap = () => context.push(AppRouter.register),
                       )
                     ],
                   ),

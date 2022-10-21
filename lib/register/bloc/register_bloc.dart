@@ -1,4 +1,9 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:auth/auth.dart';
 import 'package:equatable/equatable.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:models/models.dart';
@@ -7,9 +12,13 @@ part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  RegisterBloc() : super(const RegisterState()) {
+  RegisterBloc({required AuthRepository authRepository})
+      : _authRepository = authRepository,
+        super(const RegisterState()) {
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
+    on<DisplayNameChanged>(_onDisplayNameChanged);
+
     on<ConfirmationPasswordChanged>(_onConfirmationPasswordChanged);
     on<ShowHidePasswordPressed>(_onShowHidePasswordPressed);
     on<ShowHideConfirmationPasswordPressed>(
@@ -17,6 +26,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     );
     on<RegisterSubmitted>(_onRegisterSubmitted);
   }
+
+  final AuthRepository _authRepository;
 
   void _onEmailChanged(
     EmailChanged event,
@@ -29,6 +40,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         formStatus: Formz.validate(
           [
             email,
+            state.displayName,
             state.password,
             state.confirmationPassword,
           ],
@@ -49,6 +61,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           formStatus: Formz.validate([
             state.email,
             password,
+            state.displayName,
             state.confirmationPassword,
           ]),
         ),
@@ -66,6 +79,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         formStatus: Formz.validate([
           state.email,
           password,
+          state.displayName,
           confirmationPassword,
         ]),
       ),
@@ -87,6 +101,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           [
             confirmationPassword,
             state.email,
+            state.displayName,
             state.password,
           ],
         ),
@@ -100,10 +115,24 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ) async {
     try {
       emit(state.copyWith(formStatus: FormzStatus.submissionInProgress));
-      await Future.delayed(const Duration(seconds: 3));
+      final phoneNumber = Faker().phoneNumber.us();
+      final indentityNumber = Faker().phoneNumber.us();
+      await _authRepository.register(
+        address: 'Hà Nội',
+        avatar: 'https://avatars.githubusercontent.com/u/63831488?v=4',
+        displayName: state.displayName.value,
+        email: state.email.value,
+        identityNumber: indentityNumber,
+        phoneNumber: phoneNumber,
+        roleId: 1,
+        wardId: 53,
+        password: state.password.value,
+      );
       emit(state.copyWith(formStatus: FormzStatus.submissionSuccess));
     } catch (e) {
+      addError(e);
       emit(state.copyWith(formStatus: FormzStatus.submissionFailure));
+      rethrow;
     }
   }
 
@@ -125,6 +154,26 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(
       state.copyWith(
         isHideConfirmationPassword: !state.isHideConfirmationPassword,
+      ),
+    );
+  }
+
+  void _onDisplayNameChanged(
+    DisplayNameChanged event,
+    Emitter<RegisterState> emit,
+  ) {
+    final displayName = DisplayName.dirty(event.displayName);
+    emit(
+      state.copyWith(
+        displayName: displayName,
+        formStatus: Formz.validate(
+          [
+            state.confirmationPassword,
+            state.email,
+            displayName,
+            state.password,
+          ],
+        ),
       ),
     );
   }
