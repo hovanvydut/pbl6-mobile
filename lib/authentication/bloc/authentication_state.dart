@@ -20,3 +20,7 @@ class Authenticated extends AuthenticationState {
 class Unauthenticated extends AuthenticationState {
   const Unauthenticated() : super(user: null);
 }
+
+class EndSession extends AuthenticationState {
+  const EndSession() : super(user: null);
+}

@@ -50,20 +50,22 @@ class PostDetailInformation extends StatelessWidget {
           },
         ),
         box24,
-        Builder(builder: (context) {
-          final formatter = CurrencyTextInputFormatter(
-            locale: 'vi',
-            symbol: 'VND',
-            decimalDigits: 0,
-          );
-          return AppTextField(
-            labelText: 'Giá',
-            inputFormatters: [formatter],
-            onChanged: (_) => uploadPostBlog
-                .add(RoomPriceChanged(formatter.getUnformattedValue())),
-            keyboardType: TextInputType.number,
-          );
-        },),
+        Builder(
+          builder: (context) {
+            final formatter = CurrencyTextInputFormatter(
+              locale: 'vi',
+              symbol: 'VND',
+              decimalDigits: 0,
+            );
+            return AppTextField(
+              labelText: 'Giá',
+              inputFormatters: [formatter],
+              onChanged: (_) => uploadPostBlog
+                  .add(RoomPriceChanged(formatter.getUnformattedValue())),
+              keyboardType: TextInputType.number,
+            );
+          },
+        ),
         box24,
         AppTextField(
           labelText: 'Diện tích',

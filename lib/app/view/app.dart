@@ -5,6 +5,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthenticationBloc(
         userRepository: context.read<UserRepository>(),
+        authRepository: context.read<AuthRepository>(),
       ),
       child: const _AppView(),
     );

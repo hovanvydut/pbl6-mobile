@@ -5,10 +5,9 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_client_handler/http_client_handler.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:property/data/iproperty_datasource.dart';
-import 'package:property/data/remote/remote_property_datasource.dart';
-import 'package:user/data/iuser_datasource.dart';
-import 'package:user/data/remote/remote_user_datasource.dart';
+import 'package:post/post.dart';
+import 'package:property/property.dart';
+import 'package:user/user.dart';
 
 final injector = GetIt.instance;
 
@@ -37,5 +36,8 @@ void initDependences() {
     )
     ..registerLazySingleton<IUserDatasource>(
       () => RemoteUserDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IPostDatasource>(
+      () => RemotePostDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }

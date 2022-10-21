@@ -17,7 +17,7 @@ class RemoteAuthDatasource implements IAuthDatasource {
     required String password,
   }) async {
     try {
-      final jsonResponse = await _httpHandler.post(
+      final httpResponse = await _httpHandler.post(
         ApiPath.authLogin,
         body: {
           'email': email,
@@ -26,10 +26,10 @@ class RemoteAuthDatasource implements IAuthDatasource {
         headers: {
           HttpHeaders.contentTypeHeader: ContentType.json.value,
         },
-      ) as Map<String, dynamic>;
-      final loginResponse = jsonResponse['data'] as Map<String, dynamic>;
-      final jwt = loginResponse['accessToken'] as String;
-      final userId = loginResponse['id'] as int;
+      );
+      final loginData = httpResponse.data as Map<String, dynamic>;
+      final jwt = loginData['accessToken'] as String;
+      final userId = loginData['id'] as int;
       await SecureStorageHelper.writeValueToKey(
         key: SecureStorageKey.jwt,
         value: jwt,
@@ -41,5 +41,10 @@ class RemoteAuthDatasource implements IAuthDatasource {
     } on ServerErrorException {
       throw Exception();
     }
+  }
+
+  @override
+  Future<void> removeToken() async {
+    await SecureStorageHelper.deleteAllKeys();
   }
 }

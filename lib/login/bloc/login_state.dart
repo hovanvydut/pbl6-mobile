@@ -6,12 +6,14 @@ class LoginState extends Equatable {
     this.password = const Password.pure(),
     this.isHidePassword = true,
     this.formStatus = FormzStatus.pure,
+    this.errorMessage = '',
   });
 
   final Email email;
   final Password password;
   final bool isHidePassword;
   final FormzStatus formStatus;
+  final String errorMessage;
 
   @override
   List<Object?> get props => [
@@ -19,6 +21,7 @@ class LoginState extends Equatable {
         password,
         isHidePassword,
         formStatus,
+        errorMessage,
       ];
 
   LoginState copyWith({
@@ -26,12 +29,14 @@ class LoginState extends Equatable {
     Password? password,
     bool? isHidePassword,
     FormzStatus? formStatus,
+    String? errorMessage,
   }) {
     return LoginState(
       email: email ?? this.email,
       password: password ?? this.password,
       isHidePassword: isHidePassword ?? this.isHidePassword,
       formStatus: formStatus ?? this.formStatus,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

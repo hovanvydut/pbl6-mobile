@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:address/address.dart';
 import 'package:category/category.dart';
@@ -7,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:post/post.dart';
 import 'package:property/property.dart';
 
 part 'upload_post_event.dart';
@@ -17,9 +19,11 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     required AddressRepository addressRepository,
     required CategoryRepository categoryRepository,
     required PropertyRepository propertyRepository,
+    required PostRepository postRepository,
   })  : _addressRepository = addressRepository,
         _categoryRepository = categoryRepository,
         _propertyRepository = propertyRepository,
+        _postRepository = postRepository,
         super(const UploadPostState()) {
     on<PageStarted>(_onPageStart);
     on<TitleChanged>(_onTitleChanged);
@@ -44,6 +48,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
   final AddressRepository _addressRepository;
   final CategoryRepository _categoryRepository;
   final PropertyRepository _propertyRepository;
+  final PostRepository _postRepository;
 
   Future<void> _onPageStart(
     PageStarted event,
@@ -155,7 +160,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     RoomPriceChanged event,
     Emitter<UploadPostState> emit,
   ) {
-    final price = event.price.toInt();
+    final price = event.price.toDouble();
     emit(state.copyWith(price: price));
   }
 
@@ -179,7 +184,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     DipositChanged event,
     Emitter<UploadPostState> emit,
   ) {
-    final diposit = event.diposit.toInt();
+    final diposit = event.diposit.toDouble();
     emit(state.copyWith(diposit: diposit));
   }
 
@@ -221,8 +226,55 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     Emitter<UploadPostState> emit,
   ) {}
 
-  FutureOr<void> _onUploadPostSubmiited(
+  Future<FutureOr<void>> _onUploadPostSubmiited(
     UploadPostSubmiited event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) async {
+    try {
+      emit(state.copyWith(uploadPostStatus: LoadingStatus.loading));
+      final title = state.title;
+      final description = state.description;
+      final address = state.detailAddress;
+      final wardId = state.selectedWard;
+      final limitedTenant = state.maxOfPerson;
+      final houseTypeId = state.selectedHouseType;
+      final price = state.price;
+      final prePaid = state.diposit;
+      final area = state.area;
+      final propertiesId = <int>[];
+      for (final object in state.selectedRentailObjects) {
+        final rentalObject = state.rentalObjectsData.firstWhere(
+          (element) => element.displayName.compareTo(object) == 0,
+        );
+        propertiesId.add(rentalObject.id);
+      }
+      for (final place in state.selectedNearbyPlaces) {
+        final nearbyPlace = state.nearbyPlacesData
+            .firstWhere((element) => element.displayName.compareTo(place) == 0);
+        propertiesId.add(nearbyPlace.id);
+      }
+      for (final util in state.selectedOtherUtils) {
+        final otherUtil = state.otherUtilsData
+            .firstWhere((element) => element.displayName == util);
+        propertiesId.add(otherUtil.id);
+      }
+      await _postRepository.createPost(
+        address: address,
+        area: area,
+        description: description,
+        houseTypeId: houseTypeId,
+        limitTenant: limitedTenant,
+        prePaidPrice: prePaid,
+        price: price,
+        properties: propertiesId,
+        title: title,
+        wardId: wardId,
+        medias: [],
+      );
+      emit(state.copyWith(uploadPostStatus: LoadingStatus.done));
+    } catch (e) {
+      log(e.toString());
+      emit(state.copyWith(uploadPostStatus: LoadingStatus.error));
+    }
+  }
 }
