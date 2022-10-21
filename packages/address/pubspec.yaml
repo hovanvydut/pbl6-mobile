@@ -16,6 +16,8 @@ dependencies:
     path: ../http_client_handler
   models:
     path: ../models
+  secure_storage_helper:
+    path: ../secure_storage_helper
 
 dev_dependencies:
   flutter_test:

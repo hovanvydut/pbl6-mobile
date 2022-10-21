@@ -1,6 +1,6 @@
 part of 'upload_post_bloc.dart';
 
-class UploadPostState extends Equatable {
+class UploadPostState {
   const UploadPostState({
     this.title = '',
     this.description = '',
@@ -49,33 +49,33 @@ class UploadPostState extends Equatable {
   final List<String> selectedNearbyPlaces;
   final LoadingStatus loadingStatus;
 
-  @override
-  List<Object?> get props {
-    return [
-      title,
-      description,
-      provincesData,
-      districtsData,
-      wardsData,
-      houseTypesData,
-      otherUtilsData,
-      rentalObjectsData,
-      nearbyPlacesData,
-      selectedProvince,
-      selectedDistrict,
-      selectedWard,
-      detailAddress,
-      selectedHouseType,
-      price,
-      area,
-      maxOfPerson,
-      diposit,
-      selectedOtherUtils,
-      selectedRentailObjects,
-      selectedNearbyPlaces,
-      loadingStatus,
-    ];
-  }
+  // @override
+  // List<Object?> get props {
+  //   return [
+  //     title,
+  //     description,
+  //     provincesData,
+  //     districtsData,
+  //     wardsData,
+  //     houseTypesData,
+  //     otherUtilsData,
+  //     rentalObjectsData,
+  //     nearbyPlacesData,
+  //     selectedProvince,
+  //     selectedDistrict,
+  //     selectedWard,
+  //     detailAddress,
+  //     selectedHouseType,
+  //     price,
+  //     area,
+  //     maxOfPerson,
+  //     diposit,
+  //     selectedOtherUtils,
+  //     selectedRentailObjects,
+  //     selectedNearbyPlaces,
+  //     loadingStatus,
+  //   ];
+  // }
 
   UploadPostState copyWith({
     String? title,

@@ -7,7 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:property/repositories/property_repository.dart';
+import 'package:property/property.dart';
 
 part 'upload_post_event.dart';
 part 'upload_post_state.dart';
@@ -187,14 +187,9 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     OtherUtilitiesSelected event,
     Emitter<UploadPostState> emit,
   ) {
-    /// TODO(dungngminh): fix bug
-    if (event.utilities.isEmpty) {
-      emit(state.copyWith(selectedOtherUtils: []));
-      return;
-    }
     emit(
       state.copyWith(
-        selectedOtherUtils: [...event.utilities],
+        selectedOtherUtils: List.from(event.utilities),
       ),
     );
   }
@@ -203,24 +198,22 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     RentalObjectsSelected event,
     Emitter<UploadPostState> emit,
   ) {
-    // if (event.rentailObjects.isEmpty) {
-    //   emit(state.copyWith(selectedRentailObjects: []));
-    //   return;
-    // }
-    // emit(state.copyWith(selectedRentailObjects: []));
-    emit(state.copyWith(selectedRentailObjects: event.rentailObjects));
+    emit(
+      state.copyWith(
+        selectedRentailObjects: List.from(event.rentailObjects),
+      ),
+    );
   }
 
   void _onNearbyPlacesSelected(
     NearbyPlacesSelected event,
     Emitter<UploadPostState> emit,
   ) {
-    // if (event.nearbyPlaces.isEmpty) {
-    //   emit(state.copyWith(selectedNearbyPlaces: <String>[]));
-    //   return;
-    // }
-    // emit(state.copyWith(selectedNearbyPlaces: []));
-    emit(state.copyWith(selectedNearbyPlaces: event.nearbyPlaces));
+    emit(
+      state.copyWith(
+        selectedNearbyPlaces: List.from(event.nearbyPlaces),
+      ),
+    );
   }
 
   FutureOr<void> _onMediaSelected(

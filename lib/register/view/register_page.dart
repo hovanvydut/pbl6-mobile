@@ -8,19 +8,25 @@ import 'package:pbl6_mobile/register/register.dart';
 import 'package:widgets/widgets.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  const RegisterPage({super.key, required this.onToLogicPressed});
+
+  final void Function() onToLogicPressed;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => RegisterBloc(),
-      child: const RegisterView(),
+      child: RegisterView(
+        onToLogicPressed: onToLogicPressed,
+      ),
     );
   }
 }
 
 class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+  const RegisterView({super.key, required this.onToLogicPressed});
+
+  final void Function() onToLogicPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +66,7 @@ class RegisterView extends StatelessWidget {
                           color: theme.colorScheme.primary,
                         ),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => context.pop(),
+                          ..onTap = onToLogicPressed.call,
                       )
                     ],
                   ),

@@ -8,3 +8,6 @@
 /// A property layer
 library property;
 
+export 'data/iproperty_datasource.dart';
+export 'data/remote/remote_property_datasource.dart';
+export 'repositories/property_repository.dart';
