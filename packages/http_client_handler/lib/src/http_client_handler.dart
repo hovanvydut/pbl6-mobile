@@ -27,7 +27,7 @@ class HttpClientHandler {
 
   final String _baseUrl;
 
-  Future get(
+  Future<CommonResponse> get(
     String path, {
     Map<String, String>? headers,
     Map<String, dynamic>? queryParameter,
@@ -49,7 +49,7 @@ class HttpClientHandler {
     }
   }
 
-  Future post(
+  Future<CommonResponse> post(
     String path, {
     Object? body,
     Map<String, String>? headers,
@@ -69,7 +69,7 @@ class HttpClientHandler {
     }
   }
 
-  Future put(
+  Future<CommonResponse> put(
     String path, {
     Object? body,
     Map<String, String>? headers,
@@ -89,7 +89,7 @@ class HttpClientHandler {
     }
   }
 
-  Future delete(
+  Future<CommonResponse> delete(
     String path, {
     Object? body,
     Map<String, String>? headers,
@@ -109,28 +109,33 @@ class HttpClientHandler {
     }
   }
 
-  dynamic _handleResponse(http.Response response) {
+  CommonResponse _handleResponse(http.Response response) {
     log(response.body);
     final statusCode = response.statusCode;
+
     if (HttpStatus.ok <= statusCode &&
         statusCode <= HttpStatus.multipleChoices) {
-      return jsonDecode(utf8.decode(response.bodyBytes));
+      final body =
+          jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
+      final commonResponse = CommonResponse.fromJson(body);
+      switch (commonResponse.statusCode) {
+        case 200:
+          return commonResponse;
+        case 400:
+          throw BadRequestException(message: commonResponse.message);
+        case 401:
+          throw UnauthorizedException(message: commonResponse.message);
+        case 404:
+          throw NotFoundException(message: commonResponse.message);
+
+        default:
+          throw Exception(
+            'Error occured while Communication'
+            ' with Server with StatusCode : ${response.statusCode}',
+          );
+      }
     }
-    switch (statusCode) {
-      case 400:
-        throw BadRequestException();
-      case 401:
-        throw UnauthorizedException();
-      case 404:
-        throw NotFoundException();
-      case 500:
-        throw ServerErrorException();
-      default:
-        throw Exception(
-          'Error occured while Communication'
-          ' with Server with StatusCode : ${response.statusCode}',
-        );
-    }
+    throw ServerErrorException();
   }
 
   Uri _getUri({

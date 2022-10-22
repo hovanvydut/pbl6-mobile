@@ -14,6 +14,8 @@ class AppTextField extends StatelessWidget {
     this.keyboardType,
     this.inputFormatters,
     this.lastField = false,
+    this.initialValue,
+    this.readOnly = false,
   });
 
   final String? labelText;
@@ -26,16 +28,20 @@ class AppTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final bool lastField;
+  final String? initialValue;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final inputAction = textInputAction ??
         (lastField ? TextInputAction.go : TextInputAction.next);
-    return TextField(
+    return TextFormField(
+      initialValue: initialValue,
       obscureText: obscureText,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
+      readOnly: readOnly,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderSide: BorderSide(color: theme.colorScheme.outline),

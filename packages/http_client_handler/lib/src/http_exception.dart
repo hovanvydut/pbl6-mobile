@@ -4,7 +4,7 @@ class HttpException implements Exception {
     this.message = '',
   });
 
-  final String message;
+  final String? message;
   final int statusCode;
 
   @override

@@ -12,9 +12,10 @@ class RemoteCategoryDatasource implements ICategoryDatasource {
   @override
   Future<List<HouseType>> getHouseType() async {
     try {
-      final houseTypeData = await _httpHandler.get(
+      final httpResponse = await _httpHandler.get(
         ApiPath.categoryHouseType,
-      ) as List;
+      );
+      final houseTypeData = httpResponse.data as List;
       return houseTypeData
           .map((e) => HouseType.fromJson(e as Map<String, dynamic>))
           .toList();

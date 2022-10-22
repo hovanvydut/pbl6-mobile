@@ -16,11 +16,11 @@ class RemoteUserDatasource implements IUserDatasource {
   @override
   Future<User> getUserByUserId(int userId) async {
     try {
-      final jsonData = await _httpHandler.get(
+      final httpResponse = await _httpHandler.get(
         ApiPath.userAnonymous,
         queryParameter: {'userId': '$userId'},
-      ) as Map<String, dynamic>;
-      final userJsonData = jsonData['data'] as Map<String, dynamic>;
+      );
+      final userJsonData = httpResponse.data as Map<String, dynamic>;
       return User.fromJson(userJsonData);
     } on ServerErrorException {
       throw Exception();
@@ -35,18 +35,19 @@ class RemoteUserDatasource implements IUserDatasource {
       if (jwt == null) {
         return null;
       }
-      final jsonData = await _httpHandler.get(
+      final httpResponse = await _httpHandler.get(
         ApiPath.userPersonal,
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },
-      ) as Map<String, dynamic>;
-      final userJsonData = jsonData['data'] as Map<String, dynamic>;
+      );
+      final userJsonData = httpResponse.data as Map<String, dynamic>;
       return User.fromJson(userJsonData);
-    } on ServerErrorException {
-      throw Exception();
     } on UnauthorizedException {
-      throw Exception();
+      await SecureStorageHelper.deleteAllKeys();
+      rethrow;
+    } on ServerErrorException {
+      rethrow;
     }
   }
 
@@ -62,9 +63,9 @@ class RemoteUserDatasource implements IUserDatasource {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
           HttpHeaders.contentTypeHeader: ContentType.json.value,
         },
-      ) as Map<String, dynamic>;
-    } on ServerErrorException catch (e) {
-      throw Exception('Update user information has a error: $e');
+      );
+    } on ServerErrorException {
+      throw Exception('Update user information has a error:');
     }
   }
 }

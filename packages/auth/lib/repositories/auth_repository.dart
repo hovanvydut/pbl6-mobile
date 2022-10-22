@@ -8,4 +8,6 @@ class AuthRepository {
 
   Future<void> login({required String email, required String password}) =>
       _authDatasource.login(email: email, password: password);
+
+  Future<void> removeToken() => _authDatasource.removeToken();
 }
