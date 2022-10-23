@@ -8,7 +8,6 @@ class Property extends Equatable {
   const Property({
     required this.id,
     required this.displayName,
-    required this.groupPropertyId, 
     required this.groupPropertyId,
   });
 

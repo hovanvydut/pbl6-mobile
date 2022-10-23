@@ -10,13 +10,6 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       id: json['id'] as int,
       title: json['title'] as String,
       description: json['description'] as String,
-      area: json['area'] as int,
-      price: json['price'] as int,
-      prePaidPrice: json['prePaidPrice'] as int,
-      slug: json['slug'] as String,
-      limitTenant: json['limitTenant'] as int,
-      numView: json['numView'] as int,
-      address: Address.fromJson(json['address'] as Map<String, dynamic>),
       area: (json['area'] as num).toDouble(),
       price: (json['price'] as num).toDouble(),
       prePaidPrice: (json['prePaidPrice'] as num).toDouble(),
@@ -30,8 +23,6 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       properties: (json['properties'] as List<dynamic>)
           .map((e) => Property.fromJson(e as Map<String, dynamic>))
           .toList(),
-      groupProperties: (json['groupProperties'] as List<dynamic>)
-          .map((e) => GroupProperty.fromJson(e as Map<String, dynamic>))
       groupProperties: (json['groupProperties'] as List<dynamic>?)
           ?.map((e) => GroupProperty.fromJson(e as Map<String, dynamic>))
           .toList(),

@@ -5,6 +5,7 @@ import 'package:pbl6_mobile/main/view/lessor_main_view.dart';
 import 'package:pbl6_mobile/main/view/unauth_main_view.dart';
 import 'package:pbl6_mobile/post/bloc/post_bloc.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
+import 'package:platform_helper/platform_helper.dart';
 import 'package:post/post.dart';
 
 class MainPage extends StatelessWidget {
@@ -26,20 +27,10 @@ class MainPage extends StatelessWidget {
       child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
           if (state is EndSession) {
-            ScaffoldMessenger.of(context).removeCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Đã hết phiên đăng nhập'),
-              ),
-            );
+            ToastHelper.showToast('Đã hết phiên đăng nhập');
           }
           if (state is Unauthenticated) {
-            ScaffoldMessenger.of(context).removeCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Đã đăng xuất'),
-              ),
-            );
+            ToastHelper.showToast('Đã đăng xuất');
           }
         },
         builder: (context, state) {
