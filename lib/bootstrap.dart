@@ -13,6 +13,7 @@ import 'package:auth/auth.dart';
 import 'package:category/category.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media/media.dart';
 import 'package:pbl6_mobile/di/di.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
@@ -87,8 +88,11 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           RepositoryProvider(
             create: (_) => UserRepository(userDatasource: injector()),
           ),
-           RepositoryProvider(
+          RepositoryProvider(
             create: (_) => PostRepository(postDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) => MediaRepository(mediaDatasource: injector()),
           ),
         ],
         child: await builder(),

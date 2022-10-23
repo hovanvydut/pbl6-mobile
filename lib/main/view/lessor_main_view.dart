@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
 class LessorMainView extends StatefulWidget {
@@ -40,7 +42,7 @@ class _LessorMainViewState extends State<LessorMainView> {
           return IndexedStack(
             index: currentIndex,
             children: const [
-              Center(child: Text('Trang chủ')),
+              PostPage(),
               Center(child: Text('Thông báo')),
               SizedBox(),
               Center(child: Text('Tin nhắn')),
@@ -50,7 +52,10 @@ class _LessorMainViewState extends State<LessorMainView> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push(AppRouter.uploadBlog),
+        onPressed: () => context.push(
+          AppRouter.uploadPost,
+          extra: context.read<PostBloc>(),
+        ),
         child: Assets.icons.add.svg(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -62,13 +67,13 @@ class _LessorMainViewState extends State<LessorMainView> {
             onDestinationSelected: _changeCurrentIndex,
             destinations: [
               NavigationDestination(
-                selectedIcon: Assets.icons.homeBold.svg(
+                selectedIcon: Assets.icons.documentBold.svg(
                   color: theme.colorScheme.onSecondaryContainer,
                 ),
-                icon: Assets.icons.homeOutline.svg(
+                icon: Assets.icons.document.svg(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
-                label: 'Trang chủ',
+                label: 'Bài viết',
               ),
               NavigationDestination(
                 selectedIcon: Assets.icons.notificationBold.svg(

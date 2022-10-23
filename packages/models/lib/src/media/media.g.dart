@@ -8,7 +8,7 @@ part of 'media.dart';
 
 Media _$MediaFromJson(Map<String, dynamic> json) => Media(
       url: json['url'] as String,
-      contentType: json['contentType'] as String,
+      contentType: json['contentType'] as String?,
     );
 
 Map<String, dynamic> _$MediaToJson(Media instance) => <String, dynamic>{

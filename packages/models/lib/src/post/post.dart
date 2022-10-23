@@ -13,13 +13,14 @@ class Post extends Equatable {
     required this.area,
     required this.price,
     required this.prePaidPrice,
-    required this.slug,
+    this.slug,
     required this.limitTenant,
     required this.numView,
     required this.address,
+    required this.fullAddress,
     required this.category,
     required this.properties,
-    required this.groupProperties,
+    this.groupProperties,
     required this.medias,
   });
 
@@ -28,16 +29,17 @@ class Post extends Equatable {
   final int id;
   final String title;
   final String description;
-  final int area;
-  final int price;
-  final int prePaidPrice;
-  final String slug;
+  final double area;
+  final double price;
+  final double prePaidPrice;
+  final String? slug;
   final int limitTenant;
   final int numView;
-  final Address address;
+  final String address;
+  final Address fullAddress;
   final HouseType category;
   final List<Property> properties;
-  final List<GroupProperty> groupProperties;
+  final List<GroupProperty>? groupProperties;
   final List<Media> medias;
 
   @override
@@ -53,10 +55,47 @@ class Post extends Equatable {
       limitTenant,
       numView,
       address,
+      fullAddress,
       category,
       properties,
       groupProperties,
       medias,
     ];
+  }
+
+  Post copyWith({
+    int? id,
+    String? title,
+    String? description,
+    double? area,
+    double? price,
+    double? prePaidPrice,
+    String? slug,
+    int? limitTenant,
+    int? numView,
+    String? address,
+    Address? fullAddress,
+    HouseType? category,
+    List<Property>? properties,
+    List<GroupProperty>? groupProperties,
+    List<Media>? medias,
+  }) {
+    return Post(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      area: area ?? this.area,
+      price: price ?? this.price,
+      prePaidPrice: prePaidPrice ?? this.prePaidPrice,
+      slug: slug ?? this.slug,
+      limitTenant: limitTenant ?? this.limitTenant,
+      numView: numView ?? this.numView,
+      address: address ?? this.address,
+      fullAddress: fullAddress ?? this.fullAddress,
+      category: category ?? this.category,
+      properties: properties ?? this.properties,
+      groupProperties: groupProperties ?? this.groupProperties,
+      medias: medias ?? this.medias,
+    );
   }
 }

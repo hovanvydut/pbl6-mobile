@@ -90,6 +90,12 @@ class $AssetsIconsGen {
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
 
+  /// File path: assets/icons/close.svg
+  SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
+
+  /// File path: assets/icons/delete.svg
+  SvgGenImage get delete => const SvgGenImage('assets/icons/delete.svg');
+
   /// File path: assets/icons/document.svg
   SvgGenImage get document => const SvgGenImage('assets/icons/document.svg');
 
@@ -193,6 +199,8 @@ class $AssetsIconsGen {
         calendarBold,
         camera,
         chevronRight,
+        close,
+        delete,
         document,
         documentBold,
         edit,
@@ -228,12 +236,15 @@ class $AssetsImagesGen {
   /// File path: assets/images/komkat.jpeg
   AssetGenImage get komkat => const AssetGenImage('assets/images/komkat.jpeg');
 
+  /// File path: assets/images/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
+
   /// File path: assets/images/upload_cloud.svg
   SvgGenImage get uploadCloud =>
       const SvgGenImage('assets/images/upload_cloud.svg');
 
   /// List of all assets
-  List<dynamic> get values => [komkat, uploadCloud];
+  List<dynamic> get values => [komkat, logo, uploadCloud];
 }
 
 class Assets {

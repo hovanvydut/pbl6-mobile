@@ -44,6 +44,41 @@ class RemoteAuthDatasource implements IAuthDatasource {
   }
 
   @override
+  Future<void> register({
+    required String email,
+    required String password,
+    required String displayName,
+    required String phoneNumber,
+    required String identityNumber,
+    required String avatar,
+    required String address,
+    required int wardId,
+    required int roleId,
+  }) async {
+    try {
+      await _httpHandler.post(
+        ApiPath.authRegister,
+        body: {
+          'email': email,
+          'password': password,
+          'displayName': displayName,
+          'phoneNumber': phoneNumber,
+          'identityNumber': identityNumber,
+          'avatar': avatar,
+          'address': address,
+          'addressWardId': wardId,
+          'roleId': roleId,
+        },
+        headers: {
+          HttpHeaders.contentTypeHeader: ContentType.json.value,
+        },
+      );
+    } on ServerErrorException {
+      throw Exception();
+    }
+  }
+
+  @override
   Future<void> removeToken() async {
     await SecureStorageHelper.deleteAllKeys();
   }

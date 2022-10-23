@@ -17,12 +17,23 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       limitTenant: json['limitTenant'] as int,
       numView: json['numView'] as int,
       address: Address.fromJson(json['address'] as Map<String, dynamic>),
+      area: (json['area'] as num).toDouble(),
+      price: (json['price'] as num).toDouble(),
+      prePaidPrice: (json['prePaidPrice'] as num).toDouble(),
+      slug: json['slug'] as String?,
+      limitTenant: json['limitTenant'] as int,
+      numView: json['numView'] as int,
+      address: json['address'] as String,
+      fullAddress:
+          Address.fromJson(json['fullAddress'] as Map<String, dynamic>),
       category: HouseType.fromJson(json['category'] as Map<String, dynamic>),
       properties: (json['properties'] as List<dynamic>)
           .map((e) => Property.fromJson(e as Map<String, dynamic>))
           .toList(),
       groupProperties: (json['groupProperties'] as List<dynamic>)
           .map((e) => GroupProperty.fromJson(e as Map<String, dynamic>))
+      groupProperties: (json['groupProperties'] as List<dynamic>?)
+          ?.map((e) => GroupProperty.fromJson(e as Map<String, dynamic>))
           .toList(),
       medias: (json['medias'] as List<dynamic>)
           .map((e) => Media.fromJson(e as Map<String, dynamic>))

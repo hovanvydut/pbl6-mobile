@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/main/view/lessor_main_view.dart';
 import 'package:pbl6_mobile/main/view/unauth_main_view.dart';
+import 'package:pbl6_mobile/post/bloc/post_bloc.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
+import 'package:post/post.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -14,6 +16,11 @@ class MainPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => UserProfileBloc(),
+        ),
+        BlocProvider(
+          create: (context) => PostBloc(
+            postRepository: context.read<PostRepository>(),
+          ),
         ),
       ],
       child: BlocConsumer<AuthenticationBloc, AuthenticationState>(

@@ -9,6 +9,7 @@ class Property extends Equatable {
     required this.id,
     required this.displayName,
     required this.groupPropertyId, 
+    required this.groupPropertyId,
   });
 
   factory Property.fromJson(Map<String, dynamic> json) =>

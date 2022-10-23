@@ -25,6 +25,7 @@ class UploadPostState {
     this.diposit = 0,
     this.loadingStatus = LoadingStatus.initial,
     this.uploadPostStatus = LoadingStatus.initial,
+    this.medias = const <String>[],
   });
 
   final String title;
@@ -50,6 +51,7 @@ class UploadPostState {
   final List<String> selectedNearbyPlaces;
   final LoadingStatus loadingStatus;
   final LoadingStatus uploadPostStatus;
+  final List<String> medias;
 
   // @override
   // List<Object?> get props {
@@ -101,6 +103,7 @@ class UploadPostState {
     List<String>? selectedOtherUtils,
     List<String>? selectedRentailObjects,
     List<String>? selectedNearbyPlaces,
+    List<String>? medias,
     LoadingStatus? loadingStatus,
     LoadingStatus? uploadPostStatus,
   }) {
@@ -128,6 +131,7 @@ class UploadPostState {
           selectedRentailObjects ?? this.selectedRentailObjects,
       selectedNearbyPlaces: selectedNearbyPlaces ?? this.selectedNearbyPlaces,
       uploadPostStatus: uploadPostStatus ?? this.uploadPostStatus,
+      medias: medias ?? this.medias,
     );
   }
 }

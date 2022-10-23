@@ -3,22 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
-import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserProfileBloc(),
-      child: const UserProfileView(),
-    );
-  }
-}
-
-class UserProfileView extends StatelessWidget {
-  const UserProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +44,8 @@ class UserProfileView extends StatelessWidget {
                             CircleAvatar(
                               radius: 40,
                               backgroundImage: Image.network(
-                                'https://avatars.githubusercontent.com/u/63831488?v=4',
+                                user?.avatar ??
+                                    'https://avatars.githubusercontent.com/u/63831488?v=4',
                               ).image,
                             ),
                             const SizedBox(

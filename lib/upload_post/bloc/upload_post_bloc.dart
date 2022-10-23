@@ -5,9 +5,12 @@ import 'package:address/address.dart';
 import 'package:category/category.dart';
 import 'package:constant_helper/constant_helper.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media/repositories/media_repository.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:platform_helper/platform_helper.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
 
@@ -20,10 +23,12 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     required CategoryRepository categoryRepository,
     required PropertyRepository propertyRepository,
     required PostRepository postRepository,
+    required MediaRepository mediaRepository,
   })  : _addressRepository = addressRepository,
         _categoryRepository = categoryRepository,
         _propertyRepository = propertyRepository,
         _postRepository = postRepository,
+        _mediaRepository = mediaRepository,
         super(const UploadPostState()) {
     on<PageStarted>(_onPageStart);
     on<TitleChanged>(_onTitleChanged);
@@ -42,6 +47,8 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     on<NearbyPlacesSelected>(_onNearbyPlacesSelected);
     on<MediaSelected>(_onMediaSelected);
     on<UploadPostSubmiited>(_onUploadPostSubmiited);
+    on<MediaRemovePressed>(_onMediaRemovePressed);
+
     add(PageStarted());
   }
 
@@ -49,6 +56,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
   final CategoryRepository _categoryRepository;
   final PropertyRepository _propertyRepository;
   final PostRepository _postRepository;
+  final MediaRepository _mediaRepository;
 
   Future<void> _onPageStart(
     PageStarted event,
@@ -88,7 +96,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     emit(state.copyWith(description: event.description));
   }
 
-  Future<FutureOr<void>> _onProvinceSelected(
+  Future<void> _onProvinceSelected(
     ProvinceSelected event,
     Emitter<UploadPostState> emit,
   ) async {
@@ -112,7 +120,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     // } catch (e) {}
   }
 
-  Future<FutureOr<void>> _onDistrictSelected(
+  Future<void> _onDistrictSelected(
     DistrictSelected event,
     Emitter<UploadPostState> emit,
   ) async {
@@ -221,10 +229,16 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     );
   }
 
-  FutureOr<void> _onMediaSelected(
+  Future<void> _onMediaSelected(
     MediaSelected event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) async {
+    final imagePath =
+        await ImagePickerHelper.pickImageFromSource(ImageSource.gallery);
+    if (imagePath != null) {
+      emit(state.copyWith(medias: [...state.medias, imagePath]));
+    }
+  }
 
   Future<FutureOr<void>> _onUploadPostSubmiited(
     UploadPostSubmiited event,
@@ -242,6 +256,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
       final prePaid = state.diposit;
       final area = state.area;
       final propertiesId = <int>[];
+      final mediaUrls = <String>[];
       for (final object in state.selectedRentailObjects) {
         final rentalObject = state.rentalObjectsData.firstWhere(
           (element) => element.displayName.compareTo(object) == 0,
@@ -258,6 +273,10 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
             .firstWhere((element) => element.displayName == util);
         propertiesId.add(otherUtil.id);
       }
+      for (final mediaPath in state.medias) {
+        final url = await compute(_mediaRepository.uploadImage, mediaPath);
+        mediaUrls.add(url);
+      }
       await _postRepository.createPost(
         address: address,
         area: area,
@@ -269,12 +288,26 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
         properties: propertiesId,
         title: title,
         wardId: wardId,
-        medias: [],
+        medias: mediaUrls
+            .map((e) => Media(contentType: 'image/png', url: e))
+            .toList(),
       );
       emit(state.copyWith(uploadPostStatus: LoadingStatus.done));
     } catch (e) {
       log(e.toString());
       emit(state.copyWith(uploadPostStatus: LoadingStatus.error));
     }
+  }
+
+  void _onMediaRemovePressed(
+    MediaRemovePressed event,
+    Emitter<UploadPostState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        medias:
+            state.medias.where((media) => media != event.imagePath).toList(),
+      ),
+    );
   }
 }

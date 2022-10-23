@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/home/view/home_page.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
 class TenantMainView extends StatefulWidget {
@@ -39,7 +40,7 @@ class _TenantMainViewState extends State<TenantMainView> {
           return IndexedStack(
             index: currentIndex,
             children: const [
-              Center(child: Text('Trang chủ')),
+              HomePage(),
               Center(child: Text('Thông báo')),
               Center(child: Text('Tin nhắn')),
               UserProfilePage()

@@ -20,10 +20,11 @@ class _UnAuthMainViewState extends State<UnAuthMainView> {
   }
 
   void _changeCurrentIndex(BuildContext context, {required int currentIndex}) {
-    _currentIndexNotifier.value = currentIndex;
-    if (_currentIndexNotifier.value != 0) {
+    if (currentIndex != 0) {
       context.push(AppRouter.login);
+      return;
     }
+    _currentIndexNotifier.value = currentIndex;
   }
 
   @override

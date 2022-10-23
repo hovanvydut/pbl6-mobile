@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/login/login.dart';
+import 'package:platform_helper/platform_helper.dart';
 import 'package:widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
@@ -37,16 +38,17 @@ class LoginView extends StatelessWidget {
       listener: (context, state) {
         if (state.formStatus == FormzStatus.submissionSuccess) {
           context.read<AuthenticationBloc>().add(GetUserInformation());
+          ToastHelper.showToast('Đăng nhập thành công');
           context.go(AppRouter.main);
         }
-        if(state.formStatus == FormzStatus.submissionFailure){
-        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+        if (state.formStatus == FormzStatus.submissionFailure) {
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
-               SnackBar(
-                content: Text(state.errorMessage),
-                 duration: const Duration(seconds: 2),
-              ),
-            );
+            SnackBar(
+              content: Text(state.errorMessage),
+              duration: const Duration(seconds: 2),
+            ),
+          );
         }
       },
       child: DissmissKeyboard(

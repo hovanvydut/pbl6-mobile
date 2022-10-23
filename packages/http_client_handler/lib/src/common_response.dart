@@ -7,7 +7,7 @@ class CommonResponse {
   });
 
   factory CommonResponse.fromJson(Map<String, dynamic> json) => CommonResponse(
-        data: json['data'],
+        data: json['data'] as dynamic,
         success: json['success'] as bool,
         statusCode: json['statusCode'] as int,
         message: json['message'] as String,

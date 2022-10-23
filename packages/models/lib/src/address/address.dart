@@ -20,4 +20,9 @@ class Address extends Equatable {
 
   @override
   List<Object?> get props => [province, district, ward];
+
+  @override
+  String toString() {
+    return '${ward.name}, ${district.name}, ${province.name}';
+  }
 }

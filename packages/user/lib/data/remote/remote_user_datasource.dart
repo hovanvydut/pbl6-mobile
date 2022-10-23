@@ -1,10 +1,11 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:constant_helper/constant_helper.dart';
 import 'package:http_client_handler/http_client_handler.dart';
 import 'package:models/models.dart';
 import 'package:secure_storage_helper/secure_storage_helper.dart';
-import 'package:user/data/iuser_datasource.dart';
+import 'package:user/user.dart';
 
 class RemoteUserDatasource implements IUserDatasource {
   const RemoteUserDatasource({
@@ -17,8 +18,7 @@ class RemoteUserDatasource implements IUserDatasource {
   Future<User> getUserByUserId(int userId) async {
     try {
       final httpResponse = await _httpHandler.get(
-        ApiPath.userAnonymous,
-        queryParameter: {'userId': '$userId'},
+        '${ApiPath.userAnonymous}/$userId',
       );
       final userJsonData = httpResponse.data as Map<String, dynamic>;
       return User.fromJson(userJsonData);
@@ -56,8 +56,8 @@ class RemoteUserDatasource implements IUserDatasource {
     try {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
-      await _httpHandler.post(
-        ApiPath.userAnonymous,
+      await _httpHandler.put(
+        ApiPath.userPersonal,
         body: user.toJson(),
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
@@ -66,6 +66,8 @@ class RemoteUserDatasource implements IUserDatasource {
       );
     } on ServerErrorException {
       throw Exception('Update user information has a error:');
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

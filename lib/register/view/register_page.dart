@@ -1,3 +1,4 @@
+import 'package:auth/auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,9 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterBloc(),
+      create: (context) => RegisterBloc(
+        authRepository: context.read<AuthRepository>(),
+      ),
       child: const RegisterView(),
     );
   }
@@ -30,7 +33,24 @@ class RegisterView extends StatelessWidget {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state.formStatus.isSubmissionSuccess) {
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content:
+                  Text('Đăng ký thành công, vui lòng xác thực email của bạn'),
+              duration: Duration(milliseconds: 1500),
+            ),
+          );
           context.pop();
+        }
+        if (state.formStatus.isSubmissionFailure) {
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Đăng ký thất bại, vui lòng thử lại'),
+              duration: Duration(milliseconds: 1500),
+            ),
+          );
         }
       },
       child: DissmissKeyboard(
@@ -69,6 +89,8 @@ class RegisterView extends StatelessWidget {
                 ),
                 const SizedBox(height: 64),
                 const RegisterEmailField(),
+                const SizedBox(height: 24),
+                const RegisterDisplayNameField(),
                 const SizedBox(height: 24),
                 const RegisterPasswordField(),
                 const SizedBox(height: 24),

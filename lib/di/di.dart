@@ -4,6 +4,7 @@ import 'package:category/category.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_client_handler/http_client_handler.dart';
+import 'package:media/media.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
@@ -39,5 +40,8 @@ void initDependences() {
     )
     ..registerLazySingleton<IPostDatasource>(
       () => RemotePostDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IMediaDatasource>(
+      () => RemoteMediaDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }

@@ -5,15 +5,13 @@ part 'media.g.dart';
 
 @JsonSerializable()
 class Media extends Equatable {
-  final String url;
-  final String contentType;
-
-  Media({required this.url, required this.contentType});
-
+  const Media({required this.url, this.contentType});
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
+  final String url;
+  final String? contentType;
 
   Map<String, dynamic> toJson() => _$MediaToJson(this);
 
   @override
-  List<Object> get props => [url, contentType];
+  List<Object?> get props => [url, contentType];
 }

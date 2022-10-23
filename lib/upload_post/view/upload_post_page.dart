@@ -3,7 +3,9 @@ import 'package:category/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:media/media.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
@@ -20,6 +22,7 @@ class UploadPostPage extends StatelessWidget {
         categoryRepository: context.read<CategoryRepository>(),
         propertyRepository: context.read<PropertyRepository>(),
         postRepository: context.read<PostRepository>(),
+        mediaRepository: context.read<MediaRepository>(),
       ),
       child: const UploadPostView(),
     );
@@ -35,13 +38,34 @@ class UploadPostView extends StatelessWidget {
     const box24 = SizedBox(height: 24);
     return BlocListener<UploadPostBloc, UploadPostState>(
       listenWhen: (previous, current) =>
-          previous.loadingStatus != current.loadingStatus,
+          previous.loadingStatus != current.loadingStatus ||
+          previous.uploadPostStatus != current.uploadPostStatus,
       listener: (context, state) {
         if (state.loadingStatus == LoadingStatus.error) {
           ScaffoldMessenger.of(context).removeCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Không thể lấy dữ liệu, vui lòng thử lại'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+        if (state.uploadPostStatus == LoadingStatus.done) {
+          context.read<PostBloc>().add(GetUserPosts());
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Đăng bài viết thành công'),
+              duration: Duration(milliseconds: 1500),
+            ),
+          );
+          context.pop();
+        }
+        if (state.uploadPostStatus == LoadingStatus.error) {
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Đăng bài viết thất bại, vui lòng thử lại'),
               duration: Duration(seconds: 2),
             ),
           );
