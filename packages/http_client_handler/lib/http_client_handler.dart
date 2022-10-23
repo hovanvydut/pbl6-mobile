@@ -9,5 +9,7 @@
 library http_client_handler;
 
 export 'package:http/http.dart';
+
+export 'src/common_response.dart';
 export 'src/http_client_handler.dart';
 export 'src/http_exception.dart';

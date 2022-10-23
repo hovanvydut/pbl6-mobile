@@ -9,6 +9,27 @@ abstract class ApiPath {
 
   /// Property
   static const property = '/api/property';
+
+  /// Auth
+  static const authLogin = '/api/auth/login';
+  static const authRegister = '/api/auth/register';
+
+  /// User
+  static const userPersonal = '/api/user/personal';
+  static const userAnonymous = '/api/user/anonymous';
+
+  /// Post
+  /// Create new post: POST /api/post
+  /// Get post by id: GET /api/post/{id}
+  /// Edit post by id: PUT /api/post/{id}
+  /// Delete post by id: DELETE /api/post/{id}
+  static const post = '/api/post';
+
+  /// Get all posts: GET /api/post
+  static const postAll = '/api/post/all';
+
+  /// File Media
+  static const mediaUpload = '/api/filecontroler/upload';
   // static const addressDistrict = '/api/address/district';
   // static const addressDistrict = '/api/address/district';
   // static const addressDistrict = '/api/address/district';

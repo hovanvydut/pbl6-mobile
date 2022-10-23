@@ -11,7 +11,7 @@ class ConfirmationPassword
   }) : super.dirty(value);
 
   final String password;
-  
+
   @override
   ConfirmationPasswordValidationError? validator(String? value) {
     return password == value

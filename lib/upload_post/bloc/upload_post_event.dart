@@ -138,3 +138,12 @@ class NearbyPlacesSelected extends UploadPostEvent {
 class MediaSelected extends UploadPostEvent {}
 
 class UploadPostSubmiited extends UploadPostEvent {}
+
+class MediaRemovePressed extends UploadPostEvent {
+  const MediaRemovePressed(this.imagePath);
+
+  final String imagePath;
+
+  @override
+  List<Object?> get props => [imagePath];
+}

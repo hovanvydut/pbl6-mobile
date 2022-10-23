@@ -1,13 +1,18 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:address/address.dart';
 import 'package:category/category.dart';
 import 'package:constant_helper/constant_helper.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media/repositories/media_repository.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:property/repositories/property_repository.dart';
+import 'package:platform_helper/platform_helper.dart';
+import 'package:post/post.dart';
+import 'package:property/property.dart';
 
 part 'upload_post_event.dart';
 part 'upload_post_state.dart';
@@ -17,9 +22,13 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     required AddressRepository addressRepository,
     required CategoryRepository categoryRepository,
     required PropertyRepository propertyRepository,
+    required PostRepository postRepository,
+    required MediaRepository mediaRepository,
   })  : _addressRepository = addressRepository,
         _categoryRepository = categoryRepository,
         _propertyRepository = propertyRepository,
+        _postRepository = postRepository,
+        _mediaRepository = mediaRepository,
         super(const UploadPostState()) {
     on<PageStarted>(_onPageStart);
     on<TitleChanged>(_onTitleChanged);
@@ -38,12 +47,16 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     on<NearbyPlacesSelected>(_onNearbyPlacesSelected);
     on<MediaSelected>(_onMediaSelected);
     on<UploadPostSubmiited>(_onUploadPostSubmiited);
+    on<MediaRemovePressed>(_onMediaRemovePressed);
+
     add(PageStarted());
   }
 
   final AddressRepository _addressRepository;
   final CategoryRepository _categoryRepository;
   final PropertyRepository _propertyRepository;
+  final PostRepository _postRepository;
+  final MediaRepository _mediaRepository;
 
   Future<void> _onPageStart(
     PageStarted event,
@@ -83,7 +96,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     emit(state.copyWith(description: event.description));
   }
 
-  Future<FutureOr<void>> _onProvinceSelected(
+  Future<void> _onProvinceSelected(
     ProvinceSelected event,
     Emitter<UploadPostState> emit,
   ) async {
@@ -107,7 +120,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     // } catch (e) {}
   }
 
-  Future<FutureOr<void>> _onDistrictSelected(
+  Future<void> _onDistrictSelected(
     DistrictSelected event,
     Emitter<UploadPostState> emit,
   ) async {
@@ -155,7 +168,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     RoomPriceChanged event,
     Emitter<UploadPostState> emit,
   ) {
-    final price = event.price.toInt();
+    final price = event.price.toDouble();
     emit(state.copyWith(price: price));
   }
 
@@ -179,7 +192,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     DipositChanged event,
     Emitter<UploadPostState> emit,
   ) {
-    final diposit = event.diposit.toInt();
+    final diposit = event.diposit.toDouble();
     emit(state.copyWith(diposit: diposit));
   }
 
@@ -187,14 +200,9 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     OtherUtilitiesSelected event,
     Emitter<UploadPostState> emit,
   ) {
-    /// TODO(dungngminh): fix bug
-    if (event.utilities.isEmpty) {
-      emit(state.copyWith(selectedOtherUtils: []));
-      return;
-    }
     emit(
       state.copyWith(
-        selectedOtherUtils: [...event.utilities],
+        selectedOtherUtils: List.from(event.utilities),
       ),
     );
   }
@@ -203,33 +211,103 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     RentalObjectsSelected event,
     Emitter<UploadPostState> emit,
   ) {
-    // if (event.rentailObjects.isEmpty) {
-    //   emit(state.copyWith(selectedRentailObjects: []));
-    //   return;
-    // }
-    // emit(state.copyWith(selectedRentailObjects: []));
-    emit(state.copyWith(selectedRentailObjects: event.rentailObjects));
+    emit(
+      state.copyWith(
+        selectedRentailObjects: List.from(event.rentailObjects),
+      ),
+    );
   }
 
   void _onNearbyPlacesSelected(
     NearbyPlacesSelected event,
     Emitter<UploadPostState> emit,
   ) {
-    // if (event.nearbyPlaces.isEmpty) {
-    //   emit(state.copyWith(selectedNearbyPlaces: <String>[]));
-    //   return;
-    // }
-    // emit(state.copyWith(selectedNearbyPlaces: []));
-    emit(state.copyWith(selectedNearbyPlaces: event.nearbyPlaces));
+    emit(
+      state.copyWith(
+        selectedNearbyPlaces: List.from(event.nearbyPlaces),
+      ),
+    );
   }
 
-  FutureOr<void> _onMediaSelected(
+  Future<void> _onMediaSelected(
     MediaSelected event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) async {
+    final imagePath =
+        await ImagePickerHelper.pickImageFromSource(ImageSource.gallery);
+    if (imagePath != null) {
+      emit(state.copyWith(medias: [...state.medias, imagePath]));
+    }
+  }
 
-  FutureOr<void> _onUploadPostSubmiited(
+  Future<FutureOr<void>> _onUploadPostSubmiited(
     UploadPostSubmiited event,
     Emitter<UploadPostState> emit,
-  ) {}
+  ) async {
+    try {
+      emit(state.copyWith(uploadPostStatus: LoadingStatus.loading));
+      final title = state.title;
+      final description = state.description;
+      final address = state.detailAddress;
+      final wardId = state.selectedWard;
+      final limitedTenant = state.maxOfPerson;
+      final houseTypeId = state.selectedHouseType;
+      final price = state.price;
+      final prePaid = state.diposit;
+      final area = state.area;
+      final propertiesId = <int>[];
+      final mediaUrls = <String>[];
+      for (final object in state.selectedRentailObjects) {
+        final rentalObject = state.rentalObjectsData.firstWhere(
+          (element) => element.displayName.compareTo(object) == 0,
+        );
+        propertiesId.add(rentalObject.id);
+      }
+      for (final place in state.selectedNearbyPlaces) {
+        final nearbyPlace = state.nearbyPlacesData
+            .firstWhere((element) => element.displayName.compareTo(place) == 0);
+        propertiesId.add(nearbyPlace.id);
+      }
+      for (final util in state.selectedOtherUtils) {
+        final otherUtil = state.otherUtilsData
+            .firstWhere((element) => element.displayName == util);
+        propertiesId.add(otherUtil.id);
+      }
+      for (final mediaPath in state.medias) {
+        final url = await compute(_mediaRepository.uploadImage, mediaPath);
+        mediaUrls.add(url);
+      }
+      await _postRepository.createPost(
+        address: address,
+        area: area,
+        description: description,
+        houseTypeId: houseTypeId,
+        limitTenant: limitedTenant,
+        prePaidPrice: prePaid,
+        price: price,
+        properties: propertiesId,
+        title: title,
+        wardId: wardId,
+        medias: mediaUrls
+            .map((e) => Media(contentType: 'image/png', url: e))
+            .toList(),
+      );
+      emit(state.copyWith(uploadPostStatus: LoadingStatus.done));
+    } catch (e) {
+      log(e.toString());
+      emit(state.copyWith(uploadPostStatus: LoadingStatus.error));
+    }
+  }
+
+  void _onMediaRemovePressed(
+    MediaRemovePressed event,
+    Emitter<UploadPostState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        medias:
+            state.medias.where((media) => media != event.imagePath).toList(),
+      ),
+    );
+  }
 }

@@ -12,15 +12,15 @@ class RemotePropertyDatasource implements IPropertyDatasource {
   @override
   Future<List<GroupProperty>> getGroupProperties() async {
     try {
-      final rawData = await _httpHandler.get(
+      final httpResponse = await _httpHandler.get(
         ApiPath.property,
-      ) as List;
-      final groupProperties = rawData
+      );
+      final groupPropertiesData = httpResponse.data as List;
+      return groupPropertiesData
           .map(
             (group) => GroupProperty.fromJson(group as Map<String, dynamic>),
           )
           .toList();
-      return groupProperties;
     } on ServerErrorException {
       throw Exception();
     }

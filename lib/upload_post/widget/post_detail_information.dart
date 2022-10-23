@@ -59,14 +59,12 @@ class PostDetailInformation extends StatelessWidget {
             );
             return AppTextField(
               labelText: 'Giá',
-              inputFormatters: [
-                formatter
-              ],
-              onChanged: (_) => uploadPostBlog.add(RoomPriceChanged(                formatter
-.getUnformattedValue())),
+              inputFormatters: [formatter],
+              onChanged: (_) => uploadPostBlog
+                  .add(RoomPriceChanged(formatter.getUnformattedValue())),
               keyboardType: TextInputType.number,
             );
-          }
+          },
         ),
         box24,
         AppTextField(

@@ -8,4 +8,6 @@
 /// A set of helper for app like image picker
 library platform_helper;
 
+export 'package:image_picker/image_picker.dart';
+
 export 'src/src.dart';

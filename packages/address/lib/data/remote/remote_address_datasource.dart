@@ -13,9 +13,10 @@ class RemoteAddressDatasource implements IAddressDatasource {
   @override
   Future<List<Province>> getProvinces() async {
     try {
-      final provinceData = await _httpHandler.get(
+      final httpResponse = await _httpHandler.get(
         ApiPath.addressProvince,
-      ) as List;
+      );
+      final provinceData = httpResponse.data as List;
       return provinceData
           .map((e) => Province.fromJson(e as Map<String, dynamic>))
           .toList();
@@ -27,13 +28,14 @@ class RemoteAddressDatasource implements IAddressDatasource {
   @override
   Future<List<District>> getDistrictsByProvinceId(int provinceId) async {
     try {
-      final jsonResponse = await _httpHandler.get(
+      final httpResponse = await _httpHandler.get(
         ApiPath.addressDistrict,
         queryParameter: {
           'provinceId': '$provinceId',
         },
-      ) as Map<String, dynamic>;
-      final districtData = jsonResponse['addressDistricts'] as List;
+      );
+      final data = httpResponse.data as Map<String, dynamic>;
+      final districtData = data['addressDistricts'] as List;
       return districtData
           .map((e) => District.fromJson(e as Map<String, dynamic>))
           .toList();
@@ -45,13 +47,14 @@ class RemoteAddressDatasource implements IAddressDatasource {
   @override
   Future<List<Ward>> getWardsByDistrictId(int districtId) async {
     try {
-      final jsonResponse = await _httpHandler.get(
+      final httpResponse = await _httpHandler.get(
         ApiPath.addressWard,
         queryParameter: {
           'districtId': '$districtId',
         },
-      ) as Map<String, dynamic>;
-      final wardData = jsonResponse['addressWards'] as List;
+      );
+      final data = httpResponse.data as Map<String, dynamic>;
+      final wardData = data['addressWards'] as List;
       return wardData
           .map((e) => Ward.fromJson(e as Map<String, dynamic>))
           .toList();

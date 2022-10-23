@@ -20,7 +20,6 @@ class Province extends Equatable {
   @JsonKey(name: 'addressDistricts')
   final List<District> districts;
 
-
   @override
   List<Object?> get props => [id, name, districts];
 }

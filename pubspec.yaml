@@ -5,9 +5,11 @@ publish_to: none
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
-  flutter: 3.3.4
+  flutter: 3.3.5
 
 dependencies:
+  auth:
+    path: packages/auth
   category:
     path: packages/category
   constant_helper:
@@ -48,6 +50,14 @@ dependencies:
   property:
     path: packages/property
   currency_text_input_formatter: ^2.1.7
+  user:
+    path: packages/user
+  post:
+    path: packages/post
+  media:
+    path: packages/media
+  cached_network_image: ^3.2.2
+  faker: ^2.0.0
 
 dev_dependencies:
   bloc_test: ^9.1.0
