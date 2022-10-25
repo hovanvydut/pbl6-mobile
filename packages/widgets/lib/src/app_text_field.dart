@@ -9,6 +9,7 @@ class AppTextField extends StatelessWidget {
     this.errorText,
     this.suffixIcon,
     this.onChanged,
+    this.maxLines = 1,
     this.obscureText = false,
     this.textInputAction,
     this.keyboardType,
@@ -22,6 +23,7 @@ class AppTextField extends StatelessWidget {
   final String? hintText;
   final String? errorText;
   final Widget? suffixIcon;
+  final int? maxLines;
   final ValueChanged<String>? onChanged;
   final bool obscureText;
   final TextInputAction? textInputAction;
@@ -42,6 +44,7 @@ class AppTextField extends StatelessWidget {
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
       readOnly: readOnly,
+      maxLines: maxLines,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderSide: BorderSide(color: theme.colorScheme.outline),
