@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/home/home.dart';
 import 'package:pbl6_mobile/main/view/lessor_main_view.dart';
 import 'package:pbl6_mobile/main/view/unauth_main_view.dart';
 import 'package:pbl6_mobile/post/bloc/post_bloc.dart';
@@ -22,6 +23,9 @@ class MainPage extends StatelessWidget {
           create: (context) => PostBloc(
             postRepository: context.read<PostRepository>(),
           ),
+        ),
+        BlocProvider(
+          create: (context) => HomeBloc(),
         ),
       ],
       child: BlocConsumer<AuthenticationBloc, AuthenticationState>(

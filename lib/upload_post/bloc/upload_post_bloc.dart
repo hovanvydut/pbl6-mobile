@@ -82,14 +82,14 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     }
   }
 
-  FutureOr<void> _onTitleChanged(
+  void _onTitleChanged(
     TitleChanged event,
     Emitter<UploadPostState> emit,
   ) {
     emit(state.copyWith(title: event.title));
   }
 
-  FutureOr<void> _onDescriptionChanged(
+  void _onDescriptionChanged(
     SummaryDescriptionChanged event,
     Emitter<UploadPostState> emit,
   ) {
@@ -137,7 +137,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     );
   }
 
-  FutureOr<void> _onWardSelected(
+  void _onWardSelected(
     WardSelected event,
     Emitter<UploadPostState> emit,
   ) {
@@ -145,7 +145,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     emit(state.copyWith(selectedWard: wardId));
   }
 
-  FutureOr<void> _onDetailAddressChanged(
+  void _onDetailAddressChanged(
     DetailAddressChanged event,
     Emitter<UploadPostState> emit,
   ) {
@@ -172,7 +172,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     emit(state.copyWith(price: price));
   }
 
-  FutureOr<void> _onRoomAreaChanged(
+  void _onRoomAreaChanged(
     RoomAreaChanged event,
     Emitter<UploadPostState> emit,
   ) {
@@ -180,15 +180,15 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     emit(state.copyWith(area: area));
   }
 
-  FutureOr<void> _onMaxOfPersonChanged(
+  void _onMaxOfPersonChanged(
     MaxOfPersonChanged event,
     Emitter<UploadPostState> emit,
   ) {
-    final maxOfPerson = int.parse(event.maxOfPerson);
+    final maxOfPerson = int.tryParse(event.maxOfPerson);
     emit(state.copyWith(maxOfPerson: maxOfPerson));
   }
 
-  FutureOr<void> _onDipositChanged(
+  void _onDipositChanged(
     DipositChanged event,
     Emitter<UploadPostState> emit,
   ) {
@@ -240,7 +240,7 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
     }
   }
 
-  Future<FutureOr<void>> _onUploadPostSubmiited(
+  Future<void> _onUploadPostSubmiited(
     UploadPostSubmiited event,
     Emitter<UploadPostState> emit,
   ) async {

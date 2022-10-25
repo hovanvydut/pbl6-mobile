@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -78,13 +79,33 @@ class DetailPostPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 250,
-              child: Image.network(
-                post.medias.first.url,
+            if (post.medias.isNotEmpty)
+              CachedNetworkImage(
+                cacheManager: AppCacheManager.appConfig,
+                imageUrl: post.medias.first.url,
+                imageBuilder: (context, imageProvider) => Container(
+                  height: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) =>
+                    Assets.images.notImage.image(
+                  fit: BoxFit.cover,
+                  height: 250,
+                ),
+              )
+            else
+              Assets.images.notImage.image(
                 fit: BoxFit.cover,
+                height: 250,
               ),
-            ),
             const SizedBox(
               height: 16,
             ),

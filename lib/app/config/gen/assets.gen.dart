@@ -93,6 +93,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/close.svg
   SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
 
+  /// File path: assets/icons/danger.svg
+  SvgGenImage get danger => const SvgGenImage('assets/icons/danger.svg');
+
   /// File path: assets/icons/delete.svg
   SvgGenImage get delete => const SvgGenImage('assets/icons/delete.svg');
 
@@ -165,6 +168,9 @@ class $AssetsIconsGen {
   SvgGenImage get profileOutline =>
       const SvgGenImage('assets/icons/profile_outline.svg');
 
+  /// File path: assets/icons/refresh.svg
+  SvgGenImage get refresh => const SvgGenImage('assets/icons/refresh.svg');
+
   /// File path: assets/icons/save.svg
   SvgGenImage get save => const SvgGenImage('assets/icons/save.svg');
 
@@ -200,6 +206,7 @@ class $AssetsIconsGen {
         camera,
         chevronRight,
         close,
+        danger,
         delete,
         document,
         documentBold,
@@ -220,6 +227,7 @@ class $AssetsIconsGen {
         passwordOutline,
         profileBold,
         profileOutline,
+        refresh,
         save,
         searchBold,
         searchOutline,
@@ -239,12 +247,16 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
 
+  /// File path: assets/images/not_image.png
+  AssetGenImage get notImage =>
+      const AssetGenImage('assets/images/not_image.png');
+
   /// File path: assets/images/upload_cloud.svg
   SvgGenImage get uploadCloud =>
       const SvgGenImage('assets/images/upload_cloud.svg');
 
   /// List of all assets
-  List<dynamic> get values => [komkat, logo, uploadCloud];
+  List<dynamic> get values => [komkat, logo, notImage, uploadCloud];
 }
 
 class Assets {

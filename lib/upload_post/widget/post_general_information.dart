@@ -34,6 +34,7 @@ class PostGeneralInformation extends StatelessWidget {
         AppTextField(
           labelText: 'Mô tả chung',
           hintText: 'Mô tả chung của bài viết',
+          maxLines: null,
           onChanged: (description) =>
               uploadPostBlog.add(SummaryDescriptionChanged(description)),
         ),

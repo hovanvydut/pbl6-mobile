@@ -11,7 +11,7 @@ import 'package:pbl6_mobile/bootstrap.dart';
 void main() {
   FlavorConfig(
     flavor: Flavor.development,
-    values: FlavorValues(baseUrl: 'http://node-1.silk-cat.software:7133'),
+    values: FlavorValues(baseUrl: 'https://node-1.silk-cat.software'),
   );
-  bootstrap(() => const App());
+  bootstrap(() =>  App());
 }
