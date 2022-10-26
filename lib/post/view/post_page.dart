@@ -15,7 +15,7 @@ class PostPage extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Assets.images.logo.svg(),
         ),
-        actions: [
+        actions: [  
           IconButton(
             icon: Assets.icons.refresh
                 .svg(color: theme.colorScheme.onSurfaceVariant),

@@ -79,9 +79,16 @@ class $AssetsIconsGen {
   /// File path: assets/icons/calendar.svg
   SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
 
+  /// File path: assets/icons/calendar2.svg
+  SvgGenImage get calendar2 => const SvgGenImage('assets/icons/calendar2.svg');
+
   /// File path: assets/icons/calendar_bold.svg
   SvgGenImage get calendarBold =>
       const SvgGenImage('assets/icons/calendar_bold.svg');
+
+  /// File path: assets/icons/call_outline.svg
+  SvgGenImage get callOutline =>
+      const SvgGenImage('assets/icons/call_outline.svg');
 
   /// File path: assets/icons/camera.svg
   SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
@@ -140,6 +147,9 @@ class $AssetsIconsGen {
   SvgGenImage get homeOutline =>
       const SvgGenImage('assets/icons/home_outline.svg');
 
+  /// File path: assets/icons/light_bulb.svg
+  SvgGenImage get lightBulb => const SvgGenImage('assets/icons/light_bulb.svg');
+
   /// File path: assets/icons/message_bold.svg
   SvgGenImage get messageBold =>
       const SvgGenImage('assets/icons/message_bold.svg');
@@ -159,6 +169,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/password_outline.svg
   SvgGenImage get passwordOutline =>
       const SvgGenImage('assets/icons/password_outline.svg');
+
+  /// File path: assets/icons/position.svg
+  SvgGenImage get position => const SvgGenImage('assets/icons/position.svg');
 
   /// File path: assets/icons/profile_bold.svg
   SvgGenImage get profileBold =>
@@ -195,6 +208,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/wallet.svg
   SvgGenImage get wallet => const SvgGenImage('assets/icons/wallet.svg');
 
+  /// File path: assets/icons/water_drop.svg
+  SvgGenImage get waterDrop => const SvgGenImage('assets/icons/water_drop.svg');
+
+  /// File path: assets/icons/wifi.svg
+  SvgGenImage get wifi => const SvgGenImage('assets/icons/wifi.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         add,
@@ -202,7 +221,9 @@ class $AssetsIconsGen {
         bookmarkBold,
         bookmarkOutline,
         calendar,
+        calendar2,
         calendarBold,
+        callOutline,
         camera,
         chevronRight,
         close,
@@ -220,11 +241,13 @@ class $AssetsIconsGen {
         gallery,
         homeBold,
         homeOutline,
+        lightBulb,
         messageBold,
         messageOutline,
         notificationBold,
         notificationOutline,
         passwordOutline,
+        position,
         profileBold,
         profileOutline,
         refresh,
@@ -234,7 +257,9 @@ class $AssetsIconsGen {
         setting,
         settingBold,
         user,
-        wallet
+        wallet,
+        waterDrop,
+        wifi
       ];
 }
 
