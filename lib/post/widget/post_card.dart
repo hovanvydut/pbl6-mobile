@@ -90,7 +90,7 @@ class PostCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          '${post.price} VND/tháng',
+                          '${post.price.inCompactCurrency}/tháng',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium
