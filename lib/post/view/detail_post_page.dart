@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:widgets/widgets.dart';
 
@@ -26,51 +27,64 @@ class DetailPostPage extends StatelessWidget {
         ),
         title: const Text('Chi tiết phòng'),
         actions: <Widget>[
-          IconButton(
-            icon: Assets.icons.edit
-                .svg(color: theme.colorScheme.onSurfaceVariant),
-            onPressed: () {
-              context.push(
-                AppRouter.editPost,
-                extra: ExtraParams2<PostBloc, Post>(
-                  param1: context.read<PostBloc>(),
-                  param2: post,
-                ),
-              );
-            },
-          ),
-          IconButton(
-            icon: Assets.icons.delete
-                .svg(color: theme.colorScheme.onSurfaceVariant),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (_) {
-                  return AlertDialog(
-                    title: const Text('Xóa bài viết'),
-                    content: const Text(
-                      'Bạn có muốn xóa bài viết',
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          context.read<PostBloc>().add(DeleteUserPost(post));
-                          context.pop();
-                        },
-                        child: const Text('Đồng ý'),
+          if (context.watch<AuthenticationBloc>().state.user != null) ...[
+            IconButton(
+              icon: Assets.icons.edit
+                  .svg(color: theme.colorScheme.onSurfaceVariant),
+              onPressed: () {
+                context.push(
+                  AppRouter.editPost,
+                  extra: ExtraParams2<PostBloc, Post>(
+                    param1: context.read<PostBloc>(),
+                    param2: post,
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: Assets.icons.delete
+                  .svg(color: theme.colorScheme.onSurfaceVariant),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) {
+                    return AlertDialog(
+                      title: const Text('Xóa bài viết'),
+                      content: const Text(
+                        'Bạn có muốn xóa bài viết',
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Hủy'),
-                      )
-                    ],
-                  );
-                },
-              );
-            },
-          ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            context.read<PostBloc>().add(DeleteUserPost(post));
+                            context.pop();
+                          },
+                          child: const Text('Đồng ý'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Hủy'),
+                        )
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          ] else ...[
+            IconButton(
+              icon: Assets.icons.bookmarkOutline
+                  .svg(color: theme.colorScheme.onSurfaceVariant),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Assets.icons.share
+                  .svg(color: theme.colorScheme.onSurfaceVariant),
+              onPressed: () {},
+            ),
+          ]
         ],
       ),
       body: Column(
@@ -85,18 +99,24 @@ class DetailPostPage extends StatelessWidget {
                     CachedNetworkImage(
                       cacheManager: AppCacheManager.appConfig,
                       imageUrl: post.medias.first.url,
-                      imageBuilder: (context, imageProvider) => Container(
-                        height: 250,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
+                      imageBuilder: (context, imageProvider) {
+                        return Hero(
+                          tag: post.medias.first.url,
+                          child: Container(
+                            height: 250,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
+                        );
+                      },
+                      placeholder: (context, url) {
+                        return const Center(child: CircularProgressIndicator());
+                      },
                       errorWidget: (context, url, error) =>
                           Assets.images.notImage.image(
                         fit: BoxFit.cover,
@@ -369,46 +389,62 @@ class DetailPostPage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: context.height * 0.12,
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: theme.colorScheme.outline.withOpacity(0.3),
-                ),
-              ),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FilledButtonWithIcon(
-                  onPressed: () {},
-                  icon: Assets.icons.messageOutline.svg(
-                    color: theme.colorScheme.onPrimary,
-                  ),
-                  label: const Text(
-                    'Chat ngay',
-                  ),
-                ),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Đặt lịch xem trọ',
-                  ),
-                ),
-                OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: Assets.icons.callOutline.svg(height: 20),
-                  label: const Text(
-                    'Gọi',
-                  ),
-                )
-              ],
-            ),
-          )
+          const ConnectionPanel()
         ],
       ),
+    );
+  }
+}
+
+class ConnectionPanel extends StatelessWidget {
+  const ConnectionPanel({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (context, state) {
+        return Container(
+          height: context.height * 0.12,
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: theme.colorScheme.outline.withOpacity(0.3),
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FilledButtonWithIcon(
+                onPressed: () {},
+                icon: Assets.icons.messageOutline.svg(
+                  color: theme.colorScheme.onPrimary,
+                ),
+                label: const Text(
+                  'Chat ngay',
+                ),
+              ),
+              OutlinedButton(
+                onPressed: () {},
+                child: const Text(
+                  'Đặt lịch xem trọ',
+                ),
+              ),
+              OutlinedButton.icon(
+                onPressed: () {},
+                icon: Assets.icons.callOutline.svg(height: 20),
+                label: const Text(
+                  'Gọi',
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
