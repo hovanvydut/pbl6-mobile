@@ -150,6 +150,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/light_bulb.svg
   SvgGenImage get lightBulb => const SvgGenImage('assets/icons/light_bulb.svg');
 
+  /// File path: assets/icons/love.svg
+  SvgGenImage get love => const SvgGenImage('assets/icons/love.svg');
+
   /// File path: assets/icons/message_bold.svg
   SvgGenImage get messageBold =>
       const SvgGenImage('assets/icons/message_bold.svg');
@@ -202,6 +205,9 @@ class $AssetsIconsGen {
   SvgGenImage get settingBold =>
       const SvgGenImage('assets/icons/setting_bold.svg');
 
+  /// File path: assets/icons/share.svg
+  SvgGenImage get share => const SvgGenImage('assets/icons/share.svg');
+
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
@@ -242,6 +248,7 @@ class $AssetsIconsGen {
         homeBold,
         homeOutline,
         lightBulb,
+        love,
         messageBold,
         messageOutline,
         notificationBold,
@@ -256,6 +263,7 @@ class $AssetsIconsGen {
         searchOutline,
         setting,
         settingBold,
+        share,
         user,
         wallet,
         waterDrop,
@@ -265,6 +273,13 @@ class $AssetsIconsGen {
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/empty.svg
+  SvgGenImage get empty => const SvgGenImage('assets/images/empty.svg');
+
+  /// File path: assets/images/error_not_found.svg
+  SvgGenImage get errorNotFound =>
+      const SvgGenImage('assets/images/error_not_found.svg');
 
   /// File path: assets/images/komkat.jpeg
   AssetGenImage get komkat => const AssetGenImage('assets/images/komkat.jpeg');
@@ -276,12 +291,24 @@ class $AssetsImagesGen {
   AssetGenImage get notImage =>
       const AssetGenImage('assets/images/not_image.png');
 
+  /// File path: assets/images/search_initial.svg
+  SvgGenImage get searchInitial =>
+      const SvgGenImage('assets/images/search_initial.svg');
+
   /// File path: assets/images/upload_cloud.svg
   SvgGenImage get uploadCloud =>
       const SvgGenImage('assets/images/upload_cloud.svg');
 
   /// List of all assets
-  List<dynamic> get values => [komkat, logo, notImage, uploadCloud];
+  List<dynamic> get values => [
+        empty,
+        errorNotFound,
+        komkat,
+        logo,
+        notImage,
+        searchInitial,
+        uploadCloud
+      ];
 }
 
 class Assets {
