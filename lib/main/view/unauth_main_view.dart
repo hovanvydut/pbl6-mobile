@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/home/home.dart';
 
 class UnAuthMainView extends StatefulWidget {
   const UnAuthMainView({super.key});
@@ -44,7 +45,7 @@ class _UnAuthMainViewState extends State<UnAuthMainView> {
           return LazyIndexedStack(
             index: currentIndex,
             children: const [
-              Center(child: Text('Trang chủ')),
+              HomePage(),
               Center(child: Text('Thông báo')),
               Center(child: Text('Tin nhắn')),
               Center(child: Text('Trang cá nhân')),

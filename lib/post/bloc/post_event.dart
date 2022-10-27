@@ -13,7 +13,7 @@ class DeleteUserPost extends PostEvent {
   const DeleteUserPost(this.post);
   final Post post;
 
-   @override
+  @override
   List<Object?> get props => [post];
 }
 

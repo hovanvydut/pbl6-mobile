@@ -13,5 +13,5 @@ void main() {
     flavor: Flavor.development,
     values: FlavorValues(baseUrl: 'https://node-1.silk-cat.software'),
   );
-  bootstrap(() =>  App());
+  bootstrap(App.new);
 }

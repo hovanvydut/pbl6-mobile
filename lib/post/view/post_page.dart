@@ -15,7 +15,7 @@ class PostPage extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Assets.images.logo.svg(),
         ),
-        actions: [  
+        actions: [
           IconButton(
             icon: Assets.icons.refresh
                 .svg(color: theme.colorScheme.onSurfaceVariant),
@@ -58,7 +58,7 @@ class PostPage extends StatelessWidget {
                           itemCount: state.userPostsData.length,
                           itemBuilder: (context, index) {
                             final post = state.userPostsData[index];
-                            return PostCard(post: post);
+                            return PostListTileCard(post: post);
                           },
                           separatorBuilder: (context, index) {
                             return const SizedBox(

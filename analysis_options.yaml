@@ -21,3 +21,5 @@ linter:
     unnecessary_string_interpolations: true
     omit_local_variable_types: true
     use_setters_to_change_properties: false
+    use_decorated_box: false
+    use_colored_box: false
