@@ -86,6 +86,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           errorMessage: e.toString(),
         ),
       );
+      rethrow;
     }
   }
 }

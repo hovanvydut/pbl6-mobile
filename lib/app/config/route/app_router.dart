@@ -7,6 +7,7 @@ import 'package:pbl6_mobile/login/login.dart';
 import 'package:pbl6_mobile/main/main.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/register/register.dart';
+import 'package:pbl6_mobile/search_filter/search_filter.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 
 abstract class AppRouter {
@@ -17,6 +18,7 @@ abstract class AppRouter {
   static const editUserProfile = 'edit-profile';
   static const detailPost = '/detail';
   static const editPost = '/edit-post';
+  static const searchFilter = '/search-filter';
 
   static final router = GoRouter(
     routes: [
@@ -34,6 +36,12 @@ abstract class AppRouter {
             },
           ),
         ],
+      ),
+      GoRoute(
+        path: searchFilter,
+        builder: (context, state) {
+          return const SearchFilterPage();
+        },
       ),
       GoRoute(
         path: uploadPost,

@@ -38,6 +38,8 @@ class EditingGeneralInformation extends StatelessWidget {
         box24,
         AppTextField(
           labelText: 'Mô tả chung',
+          maxLines: null,
+          textInputAction: TextInputAction.newline,
           hintText: 'Mô tả chung của bài viết',
           initialValue: post.description,
           onChanged: (description) => context

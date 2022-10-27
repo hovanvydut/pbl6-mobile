@@ -155,7 +155,6 @@ class HttpClientHandler {
           );
       }
     }
-    throw ServerErrorException();
   }
 
   Future<Uint8List> _toBytes(
@@ -201,7 +200,7 @@ class HttpClientHandler {
     final schema = splited.first;
     final hostPort = splited[1].split(':');
     final host = hostPort.first;
-    final port = hostPort[1].isEmpty ? null : int.parse(hostPort[1]);
+    final port = hostPort.length == 1 ? null : int.parse(hostPort[1]);
     return Uri(
       scheme: schema,
       host: host,

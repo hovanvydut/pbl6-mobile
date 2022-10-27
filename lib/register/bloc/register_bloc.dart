@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:auth/auth.dart';
 import 'package:equatable/equatable.dart';

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -227,15 +228,32 @@ class UserAvatar extends StatelessWidget {
         children: [
           BlocBuilder<EditUserProfileBloc, EditUserProfileState>(
             builder: (context, state) {
-              return CircleAvatar(
-                radius: 70,
-                backgroundImage: state.imagePath.isNotNullOrBlank
-                    ? Image.file(File(state.imagePath)).image
-                    : Image.network(
-                        user.avatar ??
-                            'https://media.istockphoto.com/vectors/avatar-5-vector-id1131164548?k=20&m=1131164548&s=612x612&w=0&h=ODVFrdVqpWMNA1_uAHX_WJu2Xj3HLikEnbof6M_lccA=',
-                      ).image,
-              );
+              return state.imagePath.isNotNullOrBlank
+                  ? CircleAvatar(
+                      radius: 70,
+                      backgroundImage: Image.file(File(state.imagePath)).image,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: user.avatar ??
+                          'https://avatars.githubusercontent.com/u/63831488?v=4',
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        radius: 70,
+                        backgroundImage: imageProvider,
+                      ),
+                      placeholder: (context, url) => CircleAvatar(
+                        radius: 40,
+                        backgroundColor: theme.colorScheme.surface,
+                        child: const CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => CircleAvatar(
+                        radius: 40,
+                        backgroundColor: theme.colorScheme.surface,
+                        child: Assets.icons.danger
+                            .svg(color: theme.colorScheme.onSurface),
+                      ),
+                    );
             },
           ),
           Builder(

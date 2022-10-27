@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -41,12 +42,28 @@ class UserProfilePage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Row(
                           children: [
-                            CircleAvatar(
-                              radius: 40,
-                              backgroundImage: Image.network(
-                                user?.avatar ??
-                                    'https://avatars.githubusercontent.com/u/63831488?v=4',
-                              ).image,
+                            CachedNetworkImage(
+                              imageUrl: user?.avatar ??
+                                  'https://avatars.githubusercontent.com/u/63831488?v=4',
+                              imageBuilder: (context, imageProvider) =>
+                                  CircleAvatar(
+                                radius: 40,
+                                backgroundImage: imageProvider,
+                              ),
+                              placeholder: (context, url) => CircleAvatar(
+                                radius: 40,
+                                backgroundColor: theme.colorScheme.surface,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 2.5,
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  CircleAvatar(
+                                radius: 40,
+                                backgroundColor: theme.colorScheme.surface,
+                                child: Assets.icons.danger
+                                    .svg(color: theme.colorScheme.onSurface),
+                              ),
                             ),
                             const SizedBox(
                               width: 16,
