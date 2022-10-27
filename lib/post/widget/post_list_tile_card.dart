@@ -49,7 +49,7 @@ class PostListTileCard extends StatelessWidget {
                         ),
                       ),
                       placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
+                          const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>
                           Assets.images.notImage.image(
                         fit: BoxFit.cover,
