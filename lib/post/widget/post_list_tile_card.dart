@@ -6,8 +6,8 @@ import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/post/post.dart';
 
-class PostCard extends StatelessWidget {
-  const PostCard({
+class PostListTileCard extends StatelessWidget {
+  const PostListTileCard({
     super.key,
     required this.post,
   });

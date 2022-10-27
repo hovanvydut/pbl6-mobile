@@ -69,7 +69,6 @@ class EditingMoreInformation extends StatelessWidget {
           },
         ),
         box24,
-        
         BlocBuilder<EditPostBloc, EditPostState>(
           buildWhen: (previous, current) =>
               previous.selectedRentailObjects !=
