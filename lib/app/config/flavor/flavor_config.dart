@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 enum Flavor { development, production }
 
 class FlavorConfig {
@@ -22,6 +23,24 @@ class FlavorConfig {
 }
 
 class FlavorValues {
-  FlavorValues({required this.baseUrl});
+  FlavorValues({
+    required this.baseUrl,
+    this.version = '',
+    this.buildNumber = '',
+  });
   final String baseUrl;
+  final String version;
+  final String buildNumber;
+
+  FlavorValues copyWith({
+    String? baseUrl,
+    String? version,
+    String? buildNumber,
+  }) {
+    return FlavorValues(
+      baseUrl: baseUrl ?? this.baseUrl,
+      version: version ?? this.version,
+      buildNumber: buildNumber ?? this.buildNumber,
+    );
+  }
 }

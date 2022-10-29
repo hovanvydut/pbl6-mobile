@@ -5,13 +5,19 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bootstrap.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(
     flavor: Flavor.development,
-    values: FlavorValues(baseUrl: 'https://node-1.silk-cat.software'),
+    values: FlavorValues(
+      baseUrl: 'https://node-1.silk-cat.software',
+     
+    ),
   );
-  bootstrap(App.new);
+  await bootstrap(App.new);
 }

@@ -26,12 +26,8 @@ class _PostPageState extends State<PostPage> {
           alignment: Alignment.centerLeft,
           child: Assets.images.logo.svg(),
         ),
-        actions: [
-          IconButton(
-            icon: Assets.icons.refresh
-                .svg(color: theme.colorScheme.onSurfaceVariant),
-            onPressed: () => context.read<PostBloc>().add(GetUserPosts()),
-          ),
+        actions: const [
+          RefreshActionButton(),
         ],
       ),
       body: Padding(
@@ -54,21 +50,27 @@ class _PostPageState extends State<PostPage> {
               );
             } else if (loadingStatus == LoadingStatus.error) {
               return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Assets.images.errorNotFound.svg(
-                      height: 200,
-                      width: 300,
+                child: RefreshIndicator(
+                  onRefresh: () async =>
+                      context.read<PostBloc>().add(GetUserPosts()),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Assets.images.errorNotFound.svg(
+                          height: 200,
+                          width: 300,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Đã có lỗi xảy ra, vui lòng thử lại',
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.colorScheme.onSurface,
+                          ),
+                        )
+                      ],
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Đã có lỗi xảy ra, vui lòng thử lại',
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onSurface,
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               );
             }
@@ -105,17 +107,21 @@ class _PostPageState extends State<PostPage> {
                   height: 8,
                 ),
                 Expanded(
-                  child: ListView.separated(
-                    itemCount: state.userPostsData.length,
-                    itemBuilder: (context, index) {
-                      final post = state.userPostsData[index];
-                      return PostListTileCard(post: post);
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        height: 8,
-                      );
-                    },
+                  child: RefreshIndicator(
+                    onRefresh: () async =>
+                        context.read<PostBloc>().add(GetUserPosts()),
+                    child: ListView.separated(
+                      itemCount: state.userPostsData.length,
+                      itemBuilder: (context, index) {
+                        final post = state.userPostsData[index];
+                        return PostListTileCard(post: post);
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 8,
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -123,6 +129,45 @@ class _PostPageState extends State<PostPage> {
           },
         ),
       ),
+    );
+  }
+}
+
+class RefreshActionButton extends StatelessWidget {
+  const RefreshActionButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Builder(
+      builder: (context) {
+        final userPostsStatus = context
+            .select((PostBloc bloc) => bloc.state.userPostsLoadingStatus);
+        final userPostsData =
+            context.select((PostBloc bloc) => bloc.state.userPostsData);
+        switch (userPostsStatus) {
+          case LoadingStatus.initial:
+          case LoadingStatus.error:
+            return IconButton(
+              icon: Assets.icons.refresh
+                  .svg(color: theme.colorScheme.onSurfaceVariant),
+              onPressed: () => context.read<PostBloc>().add(GetUserPosts()),
+            );
+          case LoadingStatus.loading:
+            return const SizedBox();
+          case LoadingStatus.done:
+            if (userPostsData.isEmpty) {
+              return IconButton(
+                icon: Assets.icons.refresh
+                    .svg(color: theme.colorScheme.onSurfaceVariant),
+                onPressed: () => context.read<PostBloc>().add(GetUserPosts()),
+              );
+            }
+            return const SizedBox();
+        }
+      },
     );
   }
 }
