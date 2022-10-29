@@ -78,7 +78,7 @@ class RemotePostDatasource implements IPostDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       final responseData = await _httpHandler.get(
-        ApiPath.postHostPersonal,
+        ApiPath.hostPostPersonal,
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },

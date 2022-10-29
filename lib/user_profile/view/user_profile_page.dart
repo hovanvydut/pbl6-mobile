@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/user_profile/bloc/user_profile_bloc.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
@@ -22,18 +23,53 @@ class UserProfilePage extends StatelessWidget {
                 EdgeInsets.only(top: context.padding.top + 8),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon: Assets.icons.setting.svg(
-                      color: theme.colorScheme.onSecondaryContainer,
-                      height: 28,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BlocBuilder<UserProfileBloc, UserProfileState>(
+                      builder: (context, state) {
+                        if (!state.isInHostPanel) {
+                          return IconButton(
+                            tooltip: 'Truy cập giao diện trang chủ',
+                            icon: Assets.icons.homeOutline.svg(
+                              color: theme.colorScheme.onSecondaryContainer,
+                              height: 28,
+                            ),
+                            onPressed: () {
+                              context
+                                  .read<UserProfileBloc>()
+                                  .add(SwitchToHomePressed());
+                              context.push(AppRouter.guest);
+                            },
+                          );
+                        }
+                        return IconButton(
+                          tooltip: 'Truy cập giao diện chủ trọ',
+                          icon: Assets.icons.document.svg(
+                            color: theme.colorScheme.onSecondaryContainer,
+                            height: 28,
+                          ),
+                          onPressed: () {
+                            context
+                                .read<UserProfileBloc>()
+                                .add(SwitchToHomePressed());
+                            context.go(AppRouter.host);
+                          },
+                        );
+                      },
                     ),
-                    onPressed: () => context
-                        .read<AuthenticationBloc>()
-                        .add(LogoutRequested()),
-                  ),
+                    IconButton(
+                      icon: Assets.icons.setting.svg(
+                        color: theme.colorScheme.onSecondaryContainer,
+                        height: 28,
+                      ),
+                      onPressed: () => context
+                          .read<AuthenticationBloc>()
+                          .add(LogoutRequested()),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 8),
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     final user = state.user;

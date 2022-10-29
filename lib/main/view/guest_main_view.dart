@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/home/view/home_page.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
-class LessorMainView extends StatefulWidget {
-  const LessorMainView({super.key});
+class GuestMainView extends StatefulWidget {
+  const GuestMainView({super.key});
 
   @override
-  State<LessorMainView> createState() => _LessorMainViewState();
+  State<GuestMainView> createState() => _GuestMainViewState();
 }
 
-class _LessorMainViewState extends State<LessorMainView> {
+class _GuestMainViewState extends State<GuestMainView> {
   late ValueNotifier<int> _currentIndexNotifier;
 
   @override
@@ -42,23 +40,14 @@ class _LessorMainViewState extends State<LessorMainView> {
           return IndexedStack(
             index: currentIndex,
             children: const [
-              PostPage(),
+              HomePage(),
               Center(child: Text('Thông báo')),
-              SizedBox(),
               Center(child: Text('Tin nhắn')),
               UserProfilePage()
             ],
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push(
-          AppRouter.uploadPost,
-          extra: context.read<PostBloc>(),
-        ),
-        child: Assets.icons.add.svg(),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: ValueListenableBuilder<int>(
         valueListenable: _currentIndexNotifier,
         builder: (context, currentIndex, child) {
@@ -67,13 +56,13 @@ class _LessorMainViewState extends State<LessorMainView> {
             onDestinationSelected: _changeCurrentIndex,
             destinations: [
               NavigationDestination(
-                selectedIcon: Assets.icons.documentBold.svg(
+                selectedIcon: Assets.icons.homeBold.svg(
                   color: theme.colorScheme.onSecondaryContainer,
                 ),
-                icon: Assets.icons.document.svg(
+                icon: Assets.icons.homeOutline.svg(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
-                label: 'Bài viết',
+                label: 'Trang chủ',
               ),
               NavigationDestination(
                 selectedIcon: Assets.icons.notificationBold.svg(
@@ -83,10 +72,6 @@ class _LessorMainViewState extends State<LessorMainView> {
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
                 label: 'Thông báo',
-              ),
-              const Visibility(
-                visible: false,
-                child: SizedBox(),
               ),
               NavigationDestination(
                 selectedIcon: Assets.icons.messageBold.svg(

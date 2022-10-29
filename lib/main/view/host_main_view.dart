@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/home/view/home_page.dart';
+import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
-class TenantMainView extends StatefulWidget {
-  const TenantMainView({super.key});
+class HostMainView extends StatefulWidget {
+  const HostMainView({super.key});
 
   @override
-  State<TenantMainView> createState() => _TenantMainViewState();
+  State<HostMainView> createState() => _HostMainViewState();
 }
 
-class _TenantMainViewState extends State<TenantMainView> {
+class _HostMainViewState extends State<HostMainView> {
   late ValueNotifier<int> _currentIndexNotifier;
 
   @override
@@ -40,14 +42,23 @@ class _TenantMainViewState extends State<TenantMainView> {
           return IndexedStack(
             index: currentIndex,
             children: const [
-              HomePage(),
+              PostPage(),
               Center(child: Text('Thông báo')),
+              SizedBox(),
               Center(child: Text('Tin nhắn')),
               UserProfilePage()
             ],
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.push(
+          AppRouter.uploadPost,
+          extra: context.read<PostBloc>(),
+        ),
+        child: Assets.icons.add.svg(),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: ValueListenableBuilder<int>(
         valueListenable: _currentIndexNotifier,
         builder: (context, currentIndex, child) {
@@ -56,13 +67,13 @@ class _TenantMainViewState extends State<TenantMainView> {
             onDestinationSelected: _changeCurrentIndex,
             destinations: [
               NavigationDestination(
-                selectedIcon: Assets.icons.homeBold.svg(
+                selectedIcon: Assets.icons.documentBold.svg(
                   color: theme.colorScheme.onSecondaryContainer,
                 ),
-                icon: Assets.icons.homeOutline.svg(
+                icon: Assets.icons.document.svg(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
-                label: 'Trang chủ',
+                label: 'Bài viết',
               ),
               NavigationDestination(
                 selectedIcon: Assets.icons.notificationBold.svg(
@@ -72,6 +83,10 @@ class _TenantMainViewState extends State<TenantMainView> {
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
                 label: 'Thông báo',
+              ),
+              const Visibility(
+                visible: false,
+                child: SizedBox(),
               ),
               NavigationDestination(
                 selectedIcon: Assets.icons.messageBold.svg(

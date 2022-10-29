@@ -5,6 +5,8 @@ import 'package:pbl6_mobile/edit_post/edit_post.dart';
 import 'package:pbl6_mobile/edit_user_profile/edit_user_profile.dart';
 import 'package:pbl6_mobile/login/login.dart';
 import 'package:pbl6_mobile/main/main.dart';
+import 'package:pbl6_mobile/main/view/guest_main_view.dart';
+import 'package:pbl6_mobile/main/view/host_main_view.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/register/register.dart';
 import 'package:pbl6_mobile/search_filter/search_filter.dart';
@@ -14,6 +16,8 @@ abstract class AppRouter {
   static const login = '/login';
   static const register = '/register';
   static const main = '/';
+  static const guest = '/guest';
+  static const host = '/host';
   static const uploadPost = '/upload';
   static const editUserProfile = 'edit-profile';
   static const detailPost = '/detail';
@@ -41,6 +45,18 @@ abstract class AppRouter {
         path: searchFilter,
         builder: (context, state) {
           return const SearchFilterPage();
+        },
+      ),
+      GoRoute(
+        path: guest,
+        builder: (context, state) {
+          return const GuestMainView();
+        },
+      ),
+      GoRoute(
+        path: host,
+        builder: (context, state) {
+          return const HostMainView();
         },
       ),
       GoRoute(

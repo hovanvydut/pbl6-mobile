@@ -1,6 +1,6 @@
 name: pbl6_mobile
 description: A PBL6 Mobile App End-user
-version: 1.0.0+1
+version: 0.10.0+1
 publish_to: none
 
 environment:
@@ -60,6 +60,7 @@ dependencies:
   faker: ^2.0.0
   flutter_cache_manager: ^3.3.0
   timeago: ^3.3.0
+  package_info_plus: ^3.0.1
 
 dev_dependencies:
   bloc_test: ^9.1.0
