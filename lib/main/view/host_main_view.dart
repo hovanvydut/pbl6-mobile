@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/home/home.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
@@ -42,7 +43,7 @@ class _HostMainViewState extends State<HostMainView> {
           return IndexedStack(
             index: currentIndex,
             children: const [
-              PostPage(),
+              HomePage(),
               Center(child: Text('Thông báo')),
               SizedBox(),
               Center(child: Text('Tin nhắn')),

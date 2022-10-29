@@ -39,7 +39,7 @@ class PostGridCard extends StatelessWidget {
                       cacheManager: AppCacheManager.appConfig,
                       imageUrl: post.medias.first.url,
                       imageBuilder: (context, imageProvider) => Hero(
-                        tag: post.medias.first.url,
+                        tag: post.toString(),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.vertical(

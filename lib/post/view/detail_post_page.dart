@@ -101,7 +101,7 @@ class DetailPostPage extends StatelessWidget {
                       imageUrl: post.medias.first.url,
                       imageBuilder: (context, imageProvider) {
                         return Hero(
-                          tag: post.medias.first.url,
+                          tag: post.toString(),
                           child: Container(
                             height: 250,
                             decoration: BoxDecoration(
