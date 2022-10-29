@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
 import 'package:pbl6_mobile/edit_user_profile/edit_user_profile.dart';
 import 'package:pbl6_mobile/login/login.dart';
@@ -23,6 +24,7 @@ abstract class AppRouter {
   static const detailPost = '/detail';
   static const editPost = '/edit-post';
   static const searchFilter = '/search-filter';
+  static const bookmark = '/bookmark';
 
   static final router = GoRouter(
     routes: [
@@ -93,6 +95,16 @@ abstract class AppRouter {
         path: login,
         builder: (context, state) {
           return const LoginPage();
+        },
+      ),
+      GoRoute(
+        path: bookmark,
+        builder: (context, state) {
+          final bookmarkBloc = state.extra! as BookmarkBloc;
+          return BlocProvider.value(
+            value: bookmarkBloc,
+            child: const BookmarkPage(),
+          );
         },
       ),
       GoRoute(

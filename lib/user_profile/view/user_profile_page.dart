@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/user_profile/bloc/user_profile_bloc.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -176,7 +177,10 @@ class UserProfilePage extends StatelessWidget {
                         subtitle: const Text('Chưa lưu bài viết nào'),
                         trailing: Assets.icons.chevronRight
                             .svg(color: theme.colorScheme.onSurface),
-                        onTap: () {},
+                        onTap: () => context.push(
+                          AppRouter.bookmark,
+                          extra: context.read<BookmarkBloc>(),
+                        ),
                       ),
                       ListTile(
                         leading: Assets.icons.calendar.svg(

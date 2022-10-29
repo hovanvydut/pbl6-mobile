@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/main/view/host_main_view.dart';
 import 'package:pbl6_mobile/main/view/unauth_main_view.dart';
-import 'package:pbl6_mobile/post/bloc/post_bloc.dart';
+import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 import 'package:platform_helper/platform_helper.dart';
 import 'package:post/post.dart';
@@ -22,6 +23,9 @@ class MainPage extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => UserProfileBloc(),
+        ),
+        BlocProvider(
+          create: (_) => BookmarkBloc(),
         ),
       ],
       child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
