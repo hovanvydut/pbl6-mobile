@@ -170,11 +170,10 @@ class UserProfilePage extends StatelessWidget {
                         },
                       ),
                       ListTile(
-                        leading: Assets.icons.document.svg(
+                        leading: Assets.icons.bookmarkOutline.svg(
                           color: theme.colorScheme.onSurface,
                         ),
                         title: const Text('Bài đăng đã lưu'),
-                        subtitle: const Text('Chưa lưu bài viết nào'),
                         trailing: Assets.icons.chevronRight
                             .svg(color: theme.colorScheme.onSurface),
                         onTap: () => context.push(

@@ -1,5 +1,6 @@
 import 'package:address/address.dart';
 import 'package:auth/auth.dart';
+import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -43,5 +44,9 @@ void initDependences() {
     )
     ..registerLazySingleton<IMediaDatasource>(
       () => RemoteMediaDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IBookmarkDatasource>(
+      () =>
+          RemoteBookmarkDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }

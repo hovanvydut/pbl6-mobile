@@ -36,4 +36,7 @@ abstract class ApiPath {
   // static const addressDistrict = '/api/address/district';
   // static const addressDistrict = '/api/address/district';
   // static const addressDistrict = '/api/address/district';
+
+  /// Bookmark
+  static const bookmark = '/api/bookmark';
 }

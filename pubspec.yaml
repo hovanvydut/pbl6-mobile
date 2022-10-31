@@ -56,11 +56,16 @@ dependencies:
     path: packages/post
   media:
     path: packages/media
+  bookmark:
+    path: packages/bookmark
   cached_network_image: ^3.2.2
   faker: ^2.0.0
   flutter_cache_manager: ^3.3.0
   timeago: ^3.3.0
   package_info_plus: ^3.0.1
+  flutter_slidable: ^2.0.0
+  easy_debounce: ^2.0.2+1
+  very_good_infinite_list: ^0.6.0+1
 
 dev_dependencies:
   bloc_test: ^9.1.0

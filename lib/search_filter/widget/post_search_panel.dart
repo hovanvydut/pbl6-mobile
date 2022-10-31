@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SearchPanel extends StatelessWidget {
-  const SearchPanel({
+class PostSearchPanel extends StatelessWidget {
+  const PostSearchPanel({
     super.key,
   });
 

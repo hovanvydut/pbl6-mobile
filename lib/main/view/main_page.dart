@@ -1,3 +1,4 @@
+import 'package:bookmark/bookmark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
@@ -25,7 +26,9 @@ class MainPage extends StatelessWidget {
           create: (_) => UserProfileBloc(),
         ),
         BlocProvider(
-          create: (_) => BookmarkBloc(),
+          create: (context) => BookmarkBloc(
+            bookmarkRepository: context.read<BookmarkRepository>(),
+          ),
         ),
       ],
       child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
