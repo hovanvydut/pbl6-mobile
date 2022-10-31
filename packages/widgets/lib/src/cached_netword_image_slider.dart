@@ -94,8 +94,8 @@ class _CachedNetworkImageSliderState extends State<CachedNetworkImageSlider> {
                     builder: (context, index, child) {
                       return AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
-                        height: 12,
-                        width: entry.key == index ? 36 : 12,
+                        height: 8,
+                        width: entry.key == index ? 24 : 8,
                         margin: const EdgeInsets.symmetric(horizontal: 3),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),

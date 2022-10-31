@@ -40,6 +40,7 @@ class HttpClientHandler {
         path: path,
         queryParameter: queryParameter,
       );
+      log(uri.toString(), name: 'GET');
       return _client
           .get(
             uri,

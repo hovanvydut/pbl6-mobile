@@ -23,7 +23,7 @@ abstract class ApiPath {
   /// Get post by id: GET /api/post/{id}
   /// Edit post by id: PUT /api/post/{id}
   /// Delete post by id: DELETE /api/post/{id}
-  static const post = '/api/post';
+  static const postFilter = '/api/post';
 
   /// Get all posts: GET /api/post
   static const postAll = '/api/post/all';

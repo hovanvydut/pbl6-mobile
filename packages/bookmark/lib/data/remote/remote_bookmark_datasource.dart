@@ -48,11 +48,14 @@ class RemoteBookmarkDatasource implements IBookmarkDatasource {
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },
-        queryParameter: {
-          'PageNumber': '$pageNumber',
-          'PageSize': '$pageSize',
-          'SearchValue': searchValue,
-        },
+        queryParameter: Map.fromEntries(
+          {
+            'PageNumber': '$pageNumber',
+            'PageSize': '$pageSize',
+            'SearchValue': searchValue,
+          }.entries.toList()
+            ..removeWhere((entry) => entry.value == null),
+        ),
       );
       final data = responseData.data as Map<String, dynamic>;
       final postsData = data['records'] as List;

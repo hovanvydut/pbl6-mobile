@@ -22,22 +22,25 @@ class PostListTileCard extends StatelessWidget {
     return SizedBox(
       height: 130,
       child: GestureDetector(
-        onTap: () => context.push(
-          AppRouter.detailPost,
-          extra: ExtraParams2<PostBloc, Post>(
-            param1: context.read<PostBloc>(),
-            param2: post,
-          ),
-        ),
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+          context.push(
+            AppRouter.detailPost,
+            extra: ExtraParams2<PostBloc, Post>(
+              param1: context.read<PostBloc>(),
+              param2: post,
+            ),
+          );
+        },
         child: Card(
           color: Theme.of(context).colorScheme.surface,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 4, 8),
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child: Row(
               children: [
                 if (post.medias.isNotEmpty)
                   Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: CachedNetworkImage(
                       cacheManager: AppCacheManager.appConfig,
                       imageUrl: post.medias.first.url,
@@ -62,7 +65,7 @@ class PostListTileCard extends StatelessWidget {
                   )
                 else
                   Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Assets.images.notImage.image(
@@ -75,22 +78,31 @@ class PostListTileCard extends StatelessWidget {
                   width: 16,
                 ),
                 Expanded(
-                  flex: 4,
+                  flex: 6,
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          post.title,
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurfaceVariant,
-                                  ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                post.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                    ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
                         ),
                         Text(
                           '${post.price.inCompactCurrency}/tháng',
@@ -118,22 +130,27 @@ class PostListTileCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (isBookmarked)
-                  IconButton(
-                    icon: Assets.icons.bookmarkBold.svg(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                    onPressed: () =>
-                        context.read<BookmarkBloc>().add(DeleteBookmark(post)),
-                  )
-                else
-                  IconButton(
-                    icon: Assets.icons.bookmarkOutline.svg(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                    onPressed: () =>
-                        context.read<BookmarkBloc>().add(AddBookmark(post)),
-                  ),
+                Column(
+                  children: [
+                    if (isBookmarked)
+                      IconButton(
+                        icon: Assets.icons.bookmarkBold.svg(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        onPressed: () => context
+                            .read<BookmarkBloc>()
+                            .add(DeleteBookmark(post)),
+                      )
+                    else
+                      IconButton(
+                        icon: Assets.icons.bookmarkOutline.svg(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        onPressed: () =>
+                            context.read<BookmarkBloc>().add(AddBookmark(post)),
+                      ),
+                  ],
+                )
               ],
             ),
           ),
