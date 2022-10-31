@@ -5,16 +5,18 @@ import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/post/post.dart';
-import 'package:platform_helper/platform_helper.dart';
 
 class PostGridCard extends StatelessWidget {
   const PostGridCard({
     super.key,
     required this.post,
+    this.isBookmarked = false,
   });
 
   final Post post;
+  final bool isBookmarked;
 
   @override
   Widget build(BuildContext context) {
@@ -69,33 +71,13 @@ class PostGridCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: 4,
-                      right: 4,
-                      child: CircleAvatar(
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .surface
-                            .withOpacity(0.6),
-                        child: IconButton(
-                          icon: Assets.icons.bookmarkOutline.svg(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer,
-                          ),
-                          onPressed: () {
-                            if (context.read<AuthenticationBloc>().state.user !=
-                                null) {
-                              // Save to Bookmark
-
-                              return;
-                            }
-                            ToastHelper.showToast(
-                              'Đăng nhập để thực hiện thao tác',
-                            );
-                          },
-                        ),
-                      ),
+                    BookmarkIconButton(
+                      isBookmarked: isBookmarked,
+                      onBookmarkedPressed: () => context
+                          .read<BookmarkBloc>()
+                          .add(DeleteBookmark(post)),
+                      onUnBookmarkedPressed: () =>
+                          context.read<BookmarkBloc>().add(AddBookmark(post)),
                     )
                   ],
                 ),
@@ -120,7 +102,7 @@ class PostGridCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${0000000.inCompactLongCurrency}/tháng',
+                        '${post.price.inCompactLongCurrency}/tháng',
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
@@ -147,5 +129,56 @@ class PostGridCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class BookmarkIconButton extends StatelessWidget {
+  const BookmarkIconButton({
+    super.key,
+    this.isBookmarked = false,
+    required this.onBookmarkedPressed,
+    required this.onUnBookmarkedPressed,
+  });
+
+  final bool isBookmarked;
+  final VoidCallback onBookmarkedPressed;
+  final VoidCallback onUnBookmarkedPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    if (context.watch<AuthenticationBloc>().state.user == null) {
+      return const SizedBox();
+    }
+    if (isBookmarked) {
+      return Positioned(
+        top: 4,
+        right: 4,
+        child: CircleAvatar(
+          backgroundColor:
+              Theme.of(context).colorScheme.surface.withOpacity(0.6),
+          child: IconButton(
+            icon: Assets.icons.bookmarkBold.svg(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            onPressed: onBookmarkedPressed.call,
+          ),
+        ),
+      );
+    } else {
+      return Positioned(
+        top: 4,
+        right: 4,
+        child: CircleAvatar(
+          backgroundColor:
+              Theme.of(context).colorScheme.surface.withOpacity(0.6),
+          child: IconButton(
+            icon: Assets.icons.bookmarkOutline.svg(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            onPressed: onUnBookmarkedPressed.call,
+          ),
+        ),
+      );
+    }
   }
 }

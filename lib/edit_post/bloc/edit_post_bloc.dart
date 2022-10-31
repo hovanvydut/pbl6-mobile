@@ -81,26 +81,26 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
       add(WardSelected(post.fullAddress.ward.id.toString()));
       add(HouseTypeSelected(post.category.id.toString()));
       final nearbyPlaces = post.properties
-          .where((property) => property.groupPropertyId == 1)
+          ?.where((property) => property.groupPropertyId == 1)
           .map((property) => property.displayName)
           .toList();
       final otherUtils = post.properties
-          .where((property) => property.groupPropertyId == 2)
+          ?.where((property) => property.groupPropertyId == 2)
           .map((property) => property.displayName)
           .toList();
       final rentalObjects = post.properties
-          .where((property) => property.groupPropertyId == 3)
+          ?.where((property) => property.groupPropertyId == 3)
           .map((property) => property.displayName)
           .toList();
 
-      add(RentalObjectsSelected(rentalObjects));
-      add(OtherUtilitiesSelected(otherUtils));
-      add(NearbyPlacesSelected(nearbyPlaces));
+      add(RentalObjectsSelected(rentalObjects ?? []));
+      add(OtherUtilitiesSelected(otherUtils ?? []));
+      add(NearbyPlacesSelected(nearbyPlaces ?? []));
       add(TitleChanged(post.title));
       add(SummaryDescriptionChanged(post.description!));
       add(RoomAreaChanged(post.area.toString()));
       add(RoomPriceChanged(post.price));
-      add(DipositChanged(post.prePaidPrice));
+      add(DipositChanged(post.prePaidPrice ?? 0));
       add(MaxOfPersonChanged(post.limitTenant.toString()));
       add(DetailAddressChanged(post.address));
       add(HouseTypeSelected(post.category.id.toString()));

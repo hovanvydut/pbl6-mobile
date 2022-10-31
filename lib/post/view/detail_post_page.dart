@@ -217,7 +217,9 @@ class DetailPostPage extends StatelessWidget {
                                   height: 4,
                                 ),
                                 Text(
-                                  post.prePaidPrice.inCompactCurrencyNotSymbol,
+                                  post.prePaidPrice
+                                          ?.inCompactCurrencyNotSymbol ??
+                                      '',
                                   style: theme.textTheme.bodyLarge,
                                 ),
                               ],

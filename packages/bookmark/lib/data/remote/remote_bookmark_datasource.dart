@@ -24,6 +24,7 @@ class RemoteBookmarkDatasource implements IBookmarkDatasource {
           'postId': postId,
         },
         headers: {
+          HttpHeaders.contentTypeHeader: ContentType.json.value,
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },
       );

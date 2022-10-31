@@ -7,15 +7,13 @@ import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/post/post.dart';
 
-class PostListTileCard extends StatelessWidget {
-  const PostListTileCard({
+class BookmarklListTileCard extends StatelessWidget {
+  const BookmarklListTileCard({
     super.key,
-    required this.post,
-    this.isBookmarked = false,
+    required this.bookmark,
   });
 
-  final Post post;
-  final bool isBookmarked;
+  final Post bookmark;
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +24,21 @@ class PostListTileCard extends StatelessWidget {
           AppRouter.detailPost,
           extra: ExtraParams2<PostBloc, Post>(
             param1: context.read<PostBloc>(),
-            param2: post,
+            param2: bookmark,
           ),
         ),
         child: Card(
           color: Theme.of(context).colorScheme.surface,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 4, 8),
+            padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
             child: Row(
               children: [
-                if (post.medias.isNotEmpty)
+                if (bookmark.medias.isNotEmpty)
                   Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: CachedNetworkImage(
                       cacheManager: AppCacheManager.appConfig,
-                      imageUrl: post.medias.first.url,
+                      imageUrl: bookmark.medias.first.url,
                       imageBuilder: (context, imageProvider) => Container(
                         height: 120,
                         decoration: BoxDecoration(
@@ -75,14 +73,14 @@ class PostListTileCard extends StatelessWidget {
                   width: 16,
                 ),
                 Expanded(
-                  flex: 4,
+                  flex: 6,
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          post.title,
+                          bookmark.title,
                           style:
                               Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: Theme.of(context)
@@ -93,7 +91,7 @@ class PostListTileCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          '${post.price.inCompactCurrency}/tháng',
+                          '${bookmark.price.inCompactCurrency}/tháng',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium
@@ -104,7 +102,7 @@ class PostListTileCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          '${post.address}, ${post.fullAddress}',
+                          '${bookmark.address}, ${bookmark.fullAddress}',
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: Theme.of(context)
@@ -118,22 +116,19 @@ class PostListTileCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (isBookmarked)
-                  IconButton(
-                    icon: Assets.icons.bookmarkBold.svg(
-                      color: Theme.of(context).colorScheme.onSurface,
+                Column(
+                  children: [
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: Assets.icons.close.svg(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                      onPressed: () => context
+                          .read<BookmarkBloc>()
+                          .add(DeleteBookmark(bookmark)),
                     ),
-                    onPressed: () =>
-                        context.read<BookmarkBloc>().add(DeleteBookmark(post)),
-                  )
-                else
-                  IconButton(
-                    icon: Assets.icons.bookmarkOutline.svg(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                    onPressed: () =>
-                        context.read<BookmarkBloc>().add(AddBookmark(post)),
-                  ),
+                  ],
+                ),
               ],
             ),
           ),

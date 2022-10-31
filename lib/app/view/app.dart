@@ -9,7 +9,6 @@ import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/l10n/l10n.dart';
@@ -46,7 +45,6 @@ class _AppViewState extends State<_AppView> {
 
   Future<void> _initPackageInfo() async {
     // final info = await PackageInfo.fromPlatform();
-
   }
 
   @override

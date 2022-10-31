@@ -7,6 +7,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -132,6 +133,7 @@ class HttpClientHandler {
   }
 
   CommonResponse _handleResponse(http.Response response) {
+    log(response.body);
     final body =
         jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     final commonResponse = CommonResponse.fromJson(body);

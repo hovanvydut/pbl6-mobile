@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-extension CurrencyExtension on num {
+extension CurrencyExtension on num? {
   String get inCompactCurrency {
     final format = NumberFormat.compactCurrency(locale: 'vi');
     return format.format(this);

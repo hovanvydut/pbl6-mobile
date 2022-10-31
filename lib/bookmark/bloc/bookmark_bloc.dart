@@ -48,17 +48,28 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     Emitter<BookmarkState> emit,
   ) async {
     try {
-      emit(state.copyWith(bookmarks: [...state.bookmarks, event.post]));
+      emit(
+        state.copyWith(
+          addBookmarkStatus: LoadingStatus.loading,
+        ),
+      );
       await _bookmarkRepository.addBookmark(event.post.id);
+      emit(
+        state.copyWith(
+          bookmarks: [...state.bookmarks, event.post],
+          addBookmarkStatus: LoadingStatus.done,
+        ),
+      );
     } catch (e) {
       addError(e);
       emit(
         state.copyWith(
-          bookmarkActionStatus: LoadingStatus.error,
+          addBookmarkStatus: LoadingStatus.error,
           bookmarks:
               state.bookmarks.where((post) => post != event.post).toList(),
         ),
       );
+      rethrow;
     }
   }
 
@@ -69,13 +80,13 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     try {
       emit(
         state.copyWith(
-          bookmarkActionStatus: LoadingStatus.loading,
+          deleteBookmarkStatus: LoadingStatus.loading,
         ),
       );
       await _bookmarkRepository.deleteBookmake(event.post.id);
       emit(
         state.copyWith(
-          bookmarkActionStatus: LoadingStatus.done,
+          deleteBookmarkStatus: LoadingStatus.done,
           bookmarks:
               state.bookmarks.where((post) => post != event.post).toList(),
         ),
@@ -84,7 +95,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       addError(e);
       emit(
         state.copyWith(
-          bookmarkActionStatus: LoadingStatus.error,
+          deleteBookmarkStatus: LoadingStatus.error,
           bookmarks: [...state.bookmarks, event.post],
         ),
       );

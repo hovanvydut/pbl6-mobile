@@ -63,6 +63,7 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   timeago: ^3.3.0
   package_info_plus: ^3.0.1
+  flutter_slidable: ^2.0.0
 
 dev_dependencies:
   bloc_test: ^9.1.0

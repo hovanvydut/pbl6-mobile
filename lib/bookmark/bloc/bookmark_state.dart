@@ -9,7 +9,8 @@ class BookmarkState extends Equatable {
     this.filterMode = FilterMode.all,
     this.getBookmarksStatus = LoadingStatus.initial,
     this.getBookmarkMoreStatus = LoadingStatus.initial,
-    this.bookmarkActionStatus = LoadingStatus.initial,
+    this.deleteBookmarkStatus = LoadingStatus.initial,
+    this.addBookmarkStatus = LoadingStatus.initial,
     this.currentSearchValue = '',
     this.currentPageAll = 1,
     this.currentPageSearching = 1,
@@ -19,7 +20,8 @@ class BookmarkState extends Equatable {
   final FilterMode filterMode;
   final LoadingStatus getBookmarksStatus;
   final LoadingStatus getBookmarkMoreStatus;
-  final LoadingStatus bookmarkActionStatus;
+  final LoadingStatus deleteBookmarkStatus;
+  final LoadingStatus addBookmarkStatus;
   final String currentSearchValue;
   final int currentPageAll;
   final int currentPageSearching;
@@ -32,7 +34,8 @@ class BookmarkState extends Equatable {
       filterMode,
       getBookmarksStatus,
       getBookmarkMoreStatus,
-      bookmarkActionStatus,
+      deleteBookmarkStatus,
+      addBookmarkStatus,
       currentSearchValue,
       currentPageAll,
       currentPageSearching,
@@ -45,7 +48,8 @@ class BookmarkState extends Equatable {
     FilterMode? filterMode,
     LoadingStatus? getBookmarksStatus,
     LoadingStatus? getBookmarkMoreStatus,
-    LoadingStatus? bookmarkActionStatus,
+    LoadingStatus? deleteBookmarkStatus,
+    LoadingStatus? addBookmarkStatus,
     String? currentSearchValue,
     int? currentPageAll,
     int? currentPageSearching,
@@ -57,7 +61,8 @@ class BookmarkState extends Equatable {
       getBookmarksStatus: getBookmarksStatus ?? this.getBookmarksStatus,
       getBookmarkMoreStatus:
           getBookmarkMoreStatus ?? this.getBookmarkMoreStatus,
-      bookmarkActionStatus: bookmarkActionStatus ?? this.bookmarkActionStatus,
+      deleteBookmarkStatus: deleteBookmarkStatus ?? this.deleteBookmarkStatus,
+      addBookmarkStatus: addBookmarkStatus ?? this.addBookmarkStatus,
       currentSearchValue: currentSearchValue ?? this.currentSearchValue,
       currentPageAll: currentPageAll ?? this.currentPageAll,
       currentPageSearching: currentPageSearching ?? this.currentPageSearching,
