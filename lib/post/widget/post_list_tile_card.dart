@@ -90,7 +90,7 @@ class PostListTileCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          '${post.price.inCompactCurrency}/tháng',
+                          '${0000000.inCompactCurrency}/tháng',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium

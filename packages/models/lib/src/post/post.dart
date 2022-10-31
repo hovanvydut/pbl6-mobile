@@ -9,7 +9,7 @@ class Post extends Equatable {
   const Post({
     required this.id,
     required this.title,
-    required this.description,
+    this.description,
     required this.area,
     required this.price,
     required this.prePaidPrice,
@@ -28,7 +28,7 @@ class Post extends Equatable {
 
   final int id;
   final String title;
-  final String description;
+  final String? description;
   final double area;
   final double price;
   final double prePaidPrice;

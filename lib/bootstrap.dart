@@ -10,6 +10,7 @@ import 'dart:developer';
 
 import 'package:address/address.dart';
 import 'package:auth/auth.dart';
+import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,6 +94,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           ),
           RepositoryProvider(
             create: (_) => MediaRepository(mediaDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) => BookmarkRepository(bookmarkDatasource: injector()),
           ),
         ],
         child: await builder(),

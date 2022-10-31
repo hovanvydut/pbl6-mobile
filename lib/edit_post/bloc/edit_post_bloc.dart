@@ -97,7 +97,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
       add(OtherUtilitiesSelected(otherUtils));
       add(NearbyPlacesSelected(nearbyPlaces));
       add(TitleChanged(post.title));
-      add(SummaryDescriptionChanged(post.description));
+      add(SummaryDescriptionChanged(post.description!));
       add(RoomAreaChanged(post.area.toString()));
       add(RoomPriceChanged(post.price));
       add(DipositChanged(post.prePaidPrice));

@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/post/post.dart';
+import 'package:platform_helper/platform_helper.dart';
 
 class PostGridCard extends StatelessWidget {
   const PostGridCard({
@@ -81,7 +83,17 @@ class PostGridCard extends StatelessWidget {
                                 .colorScheme
                                 .onPrimaryContainer,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            if (context.read<AuthenticationBloc>().state.user !=
+                                null) {
+                              // Save to Bookmark
+
+                              return;
+                            }
+                            ToastHelper.showToast(
+                              'Đăng nhập để thực hiện thao tác',
+                            );
+                          },
                         ),
                       ),
                     )
@@ -108,7 +120,7 @@ class PostGridCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${post.price.inCompactLongCurrency}/tháng',
+                        '${0000000.inCompactLongCurrency}/tháng',
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: Theme.of(context).colorScheme.primary,

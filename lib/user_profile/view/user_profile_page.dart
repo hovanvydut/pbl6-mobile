@@ -174,7 +174,26 @@ class UserProfilePage extends StatelessWidget {
                           color: theme.colorScheme.onSurface,
                         ),
                         title: const Text('Bài đăng đã lưu'),
-                        subtitle: const Text('Chưa lưu bài viết nào'),
+                        subtitle: BlocBuilder<BookmarkBloc, BookmarkState>(
+                          builder: (context, state) {
+                            if (state.getBookmarksStatus ==
+                                LoadingStatus.loading) {
+                              return const Text('Đang lấy dữ liệu');
+                            }
+                            if (state.getBookmarksStatus ==
+                                LoadingStatus.error) {
+                              return const Text(
+                                'Đã có lỗi xảy ra, vui lòng thử lại',
+                              );
+                            }
+                            if (state.bookmarks.isEmpty) {
+                              return const Text('Chưa lưu bài viết nào');
+                            }
+                            return Text(
+                              'Đã lưu ${state.bookmarks.length} bài viết',
+                            );
+                          },
+                        ),
                         trailing: Assets.icons.chevronRight
                             .svg(color: theme.colorScheme.onSurface),
                         onTap: () => context.push(

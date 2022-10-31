@@ -157,9 +157,15 @@ class DetailPostPage extends StatelessWidget {
                             text: 'Giá phòng: ',
                             style: theme.textTheme.titleMedium,
                             children: [
+                              // TextSpan(
+                              //   text:
+                              //       '${post.price.inCompactLongCurrency} / tháng',
+                              //   style: theme.textTheme.titleMedium?.copyWith(
+                              //     color: theme.colorScheme.primary,
+                              //   ),
+                              // )
                               TextSpan(
-                                text:
-                                    '${post.price.inCompactLongCurrency} / tháng',
+                                text: '${0} / tháng',
                                 style: theme.textTheme.titleMedium?.copyWith(
                                   color: theme.colorScheme.primary,
                                 ),
@@ -285,7 +291,7 @@ class DetailPostPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          post.description,
+                          post.description ?? '',
                           style: theme.textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 24),

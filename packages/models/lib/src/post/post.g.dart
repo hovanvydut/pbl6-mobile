@@ -9,7 +9,7 @@ part of 'post.dart';
 Post _$PostFromJson(Map<String, dynamic> json) => Post(
       id: json['id'] as int,
       title: json['title'] as String,
-      description: json['description'] as String,
+      description: json['description'] as String?,
       area: (json['area'] as num).toDouble(),
       price: (json['price'] as num).toDouble(),
       prePaidPrice: (json['prePaidPrice'] as num).toDouble(),
