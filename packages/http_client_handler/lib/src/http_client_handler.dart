@@ -133,7 +133,7 @@ class HttpClientHandler {
   }
 
   CommonResponse _handleResponse(http.Response response) {
-    log(response.body);
+    log(response.body, name: 'HTTP_CLIENT_HANDLER');
     final body =
         jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     final commonResponse = CommonResponse.fromJson(body);

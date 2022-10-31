@@ -14,6 +14,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       : _bookmarkRepository = bookmarkRepository,
         super(const BookmarkState()) {
     on<GetBookmarks>(_onGetBookmarks);
+    on<SearchButtonPressed>(_onSearchButtonPressed);
     on<AddBookmark>(_onAddBookmark);
     on<DeleteBookmark>(_onDeleteBookmark);
     on<SearchBookmark>(_onSearchBookmark);
@@ -34,6 +35,8 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
         state.copyWith(
           getBookmarksStatus: LoadingStatus.done,
           bookmarks: bookmarks,
+          searchedBookmarks: bookmarks,
+          currentPageAll: 2,
         ),
       );
     } catch (e) {
@@ -56,7 +59,8 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       await _bookmarkRepository.addBookmark(event.post.id);
       emit(
         state.copyWith(
-          bookmarks: [...state.bookmarks, event.post],
+          bookmarks: [...state.bookmarks, event.post]..toSet().toList(),
+          searchedBookmarks: [...state.bookmarks, event.post]..toSet().toList(),
           addBookmarkStatus: LoadingStatus.done,
         ),
       );
@@ -65,8 +69,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       emit(
         state.copyWith(
           addBookmarkStatus: LoadingStatus.error,
-          bookmarks:
-              state.bookmarks.where((post) => post != event.post).toList(),
         ),
       );
       rethrow;
@@ -89,6 +91,8 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
           deleteBookmarkStatus: LoadingStatus.done,
           bookmarks:
               state.bookmarks.where((post) => post != event.post).toList(),
+          searchedBookmarks:
+              state.bookmarks.where((post) => post != event.post).toList(),
         ),
       );
     } catch (e) {
@@ -96,7 +100,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       emit(
         state.copyWith(
           deleteBookmarkStatus: LoadingStatus.error,
-          bookmarks: [...state.bookmarks, event.post],
         ),
       );
     }
@@ -106,24 +109,28 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     SearchBookmark event,
     Emitter<BookmarkState> emit,
   ) async {
-    try {
-      emit(
-        state.copyWith(
-          getBookmarksStatus: LoadingStatus.loading,
-          filterMode: FilterMode.searching,
-        ),
-      );
-      final searchedBookmarks =
-          await _bookmarkRepository.getBookmarks(searchValue: event.value);
-      emit(
-        state.copyWith(
-          getBookmarksStatus: LoadingStatus.done,
-          searchedBookmarks: searchedBookmarks,
-        ),
-      );
-    } catch (e) {
-      addError(e);
-      emit(state.copyWith(getBookmarksStatus: LoadingStatus.error));
+    if (event.value.isNotEmpty) {
+      try {
+        emit(
+          state.copyWith(
+            getBookmarksStatus: LoadingStatus.loading,
+            filterMode: FilterMode.searching,
+          ),
+        );
+        final searchedBookmarks =
+            await _bookmarkRepository.getBookmarks(searchValue: event.value);
+        emit(
+          state.copyWith(
+            getBookmarksStatus: LoadingStatus.done,
+            searchedBookmarks: searchedBookmarks,
+          ),
+        );
+      } catch (e) {
+        addError(e);
+        emit(state.copyWith(getBookmarksStatus: LoadingStatus.error));
+      }
+    } else {
+      emit(state.copyWith(searchedBookmarks: List.from(state.bookmarks)));
     }
   }
 
@@ -133,16 +140,48 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   ) async {
     try {
       emit(state.copyWith(getBookmarkMoreStatus: LoadingStatus.loading));
-      final moreBookmarks = await _bookmarkRepository.getBookmarks();
-      emit(
-        state.copyWith(
-          getBookmarkMoreStatus: LoadingStatus.done,
-          bookmarks: [...state.bookmarks, ...moreBookmarks],
-        ),
+      final moreBookmarks = await _bookmarkRepository.getBookmarks(
+        pageNumber: state.currentPageAll,
       );
+      if (moreBookmarks.isEmpty) {
+        emit(
+          state.copyWith(
+            getBookmarkMoreStatus: LoadingStatus.done,
+            bookmarks: [...state.bookmarks, ...moreBookmarks]
+              ..toSet()
+              ..toList(),
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            getBookmarkMoreStatus: LoadingStatus.done,
+            bookmarks: [...state.bookmarks, ...moreBookmarks]
+              ..toSet()
+              ..toList(),
+            currentPageAll: state.currentPageAll + 1,
+          ),
+        );
+      }
+
+      emit(state.copyWith(searchedBookmarks: List.from(state.bookmarks)));
     } catch (e) {
       addError(e);
       emit(state.copyWith(getBookmarkMoreStatus: LoadingStatus.error));
     }
+  }
+
+  void _onSearchButtonPressed(
+    SearchButtonPressed event,
+    Emitter<BookmarkState> emit,
+  ) {
+    if (state.isSearching) {
+      emit(
+        state.copyWith(
+          searchedBookmarks: List.from(state.bookmarks),
+        ),
+      );
+    }
+    emit(state.copyWith(isSearching: !state.isSearching));
   }
 }

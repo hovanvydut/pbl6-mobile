@@ -35,7 +35,7 @@ class SearchFilterView extends StatelessWidget {
             ),
             onPressed: () => context.pop(),
           ),
-          title: const SearchPanel(),
+          title: const PostSearchPanel(),
           centerTitle: true,
           actions: [
             IconButton(

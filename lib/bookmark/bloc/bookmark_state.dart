@@ -7,6 +7,7 @@ class BookmarkState extends Equatable {
     this.bookmarks = const [],
     this.searchedBookmarks = const [],
     this.filterMode = FilterMode.all,
+    this.isSearching = false,
     this.getBookmarksStatus = LoadingStatus.initial,
     this.getBookmarkMoreStatus = LoadingStatus.initial,
     this.deleteBookmarkStatus = LoadingStatus.initial,
@@ -18,6 +19,7 @@ class BookmarkState extends Equatable {
   final List<Post> bookmarks;
   final List<Post> searchedBookmarks;
   final FilterMode filterMode;
+  final bool isSearching;
   final LoadingStatus getBookmarksStatus;
   final LoadingStatus getBookmarkMoreStatus;
   final LoadingStatus deleteBookmarkStatus;
@@ -27,11 +29,12 @@ class BookmarkState extends Equatable {
   final int currentPageSearching;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       bookmarks,
       searchedBookmarks,
       filterMode,
+      isSearching,
       getBookmarksStatus,
       getBookmarkMoreStatus,
       deleteBookmarkStatus,
@@ -46,6 +49,7 @@ class BookmarkState extends Equatable {
     List<Post>? bookmarks,
     List<Post>? searchedBookmarks,
     FilterMode? filterMode,
+    bool? isSearching,
     LoadingStatus? getBookmarksStatus,
     LoadingStatus? getBookmarkMoreStatus,
     LoadingStatus? deleteBookmarkStatus,
@@ -58,6 +62,7 @@ class BookmarkState extends Equatable {
       bookmarks: bookmarks ?? this.bookmarks,
       searchedBookmarks: searchedBookmarks ?? this.searchedBookmarks,
       filterMode: filterMode ?? this.filterMode,
+      isSearching: isSearching ?? this.isSearching,
       getBookmarksStatus: getBookmarksStatus ?? this.getBookmarksStatus,
       getBookmarkMoreStatus:
           getBookmarkMoreStatus ?? this.getBookmarkMoreStatus,
