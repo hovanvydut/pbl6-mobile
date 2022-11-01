@@ -77,7 +77,7 @@ class EditPostView extends StatelessWidget {
           );
         }
       },
-      child: DissmissKeyboard(
+      child: DissmissFocus(
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(

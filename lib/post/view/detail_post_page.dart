@@ -157,15 +157,9 @@ class DetailPostPage extends StatelessWidget {
                             text: 'Giá phòng: ',
                             style: theme.textTheme.titleMedium,
                             children: [
-                              // TextSpan(
-                              //   text:
-                              //       '${post.price.inCompactLongCurrency} / tháng',
-                              //   style: theme.textTheme.titleMedium?.copyWith(
-                              //     color: theme.colorScheme.primary,
-                              //   ),
-                              // )
                               TextSpan(
-                                text: '${0} / tháng',
+                                text:
+                                    '${post.price.inCompactLongCurrency} / tháng',
                                 style: theme.textTheme.titleMedium?.copyWith(
                                   color: theme.colorScheme.primary,
                                 ),

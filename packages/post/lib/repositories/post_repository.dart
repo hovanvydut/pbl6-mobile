@@ -68,4 +68,29 @@ class PostRepository {
   Future<void> deletePost(int postId) => _postDatasource.deletePost(postId);
 
   Future<List<Post>> getUserPosts() => _postDatasource.getUserPosts();
+
+  Future<List<Post>> filterPosts({
+    List<int>? properties,
+    double? minPrice,
+    double? maxPrice,
+    double? minArea,
+    double? maxArea,
+    int? addressWardId,
+    int? categoryId,
+    int pageNumber = 1,
+    int pageSize = 10,
+    String? searchValue,
+  }) =>
+      _postDatasource.filterPosts(
+        properties: properties,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        minArea: minArea,
+        maxArea: maxArea,
+        addressWardId: addressWardId,
+        categoryId: categoryId,
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        searchValue: searchValue,
+      );
 }
