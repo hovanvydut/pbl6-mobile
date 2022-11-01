@@ -6,7 +6,6 @@
 // https://opensource.org/licenses/MIT.
 
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bootstrap.dart';
 
@@ -16,7 +15,6 @@ Future<void> main() async {
     flavor: Flavor.development,
     values: FlavorValues(
       baseUrl: 'https://node-1.silk-cat.software',
-     
     ),
   );
   await bootstrap(App.new);
