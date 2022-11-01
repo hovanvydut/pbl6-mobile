@@ -6,3 +6,8 @@ abstract class PaymentEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class PaymentPageStarted extends PaymentEvent {}
+
+class GetPaymentHistory extends PaymentEvent {}
+

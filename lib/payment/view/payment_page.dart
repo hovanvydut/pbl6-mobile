@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/payment/payment.dart';
+import 'package:widgets/widgets.dart';
 
 class PaymentPage extends StatelessWidget {
   const PaymentPage({super.key});
@@ -22,8 +23,11 @@ class PaymentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(
-        child: Text('PaymentView is working'),
+      body: Center(
+        child: FilledButton(
+          child: const Text('Tạo giao dịch mới'),
+          onPressed: () => context.pushToChild(AppRouter.createPayment),
+        ),
       ),
     );
   }

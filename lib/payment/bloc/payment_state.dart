@@ -1,10 +1,17 @@
 part of 'payment_bloc.dart';
 
-abstract class PaymentState extends Equatable {
-  const PaymentState();
+class PaymentState extends Equatable {
+  const PaymentState({this.bankCodes = const []});
 
+  final List<BankCode> bankCodes;
   @override
-  List<Object?> get props => [];
-}
+  List<Object?> get props => [bankCodes];
 
-class PaymentInitial extends PaymentState {}
+  PaymentState copyWith({
+    List<BankCode>? bankCodes,
+  }) {
+    return PaymentState(
+      bankCodes: bankCodes ?? this.bankCodes,
+    );
+  }
+}

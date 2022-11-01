@@ -39,4 +39,9 @@ abstract class ApiPath {
 
   /// Bookmark
   static const bookmark = '/api/bookmark';
+
+  /// Payment
+  static const paymentBankCode = '/api/payment/bank-code';
+  static const payment = '/api/payment';
+  static const paymentHistoryPersonal = '/api/payment/history';
 }

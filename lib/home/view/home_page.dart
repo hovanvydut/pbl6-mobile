@@ -48,7 +48,10 @@ class HomeView extends StatelessWidget {
             icon: Assets.icons.searchBold.svg(
               color: theme.colorScheme.onSurface,
             ),
-            onPressed: () => context.push(AppRouter.searchFilter),
+            onPressed: () => context.push(
+              AppRouter.searchFilter,
+              extra: context.read<PostBloc>(),
+            ),
           ),
         ],
       ),
