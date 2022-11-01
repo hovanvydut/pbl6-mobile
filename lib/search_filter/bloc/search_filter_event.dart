@@ -9,10 +9,21 @@ abstract class SearchFilterEvent extends Equatable {
 
 class SearchPageStarted extends SearchFilterEvent {}
 
-class HouseTypeSeleted extends SearchFilterEvent {}
+class GetPosts extends SearchFilterEvent {}
 
-class PriceChanged extends SearchFilterEvent {
-  const PriceChanged(this.priceRange);
+class ScrollMoreReached extends SearchFilterEvent {}
+
+class HouseTypeSelected extends SearchFilterEvent {
+  const HouseTypeSelected(this.categoryId);
+
+  final int categoryId;
+
+  @override
+  List<Object?> get props => [categoryId];
+}
+
+class PriceRangeChanged extends SearchFilterEvent {
+  const PriceRangeChanged(this.priceRange);
 
   final RangeValues priceRange;
 
@@ -47,31 +58,31 @@ class WardSelected extends SearchFilterEvent {
   List<Object?> get props => [ward];
 }
 
-class OtherUtilitiesSelected extends SearchFilterEvent {
-  const OtherUtilitiesSelected(this.utilities);
+class OtherUtilSelected extends SearchFilterEvent {
+  const OtherUtilSelected(this.utilId);
 
-  final List<String> utilities;
+  final int utilId;
 
   @override
-  List<Object?> get props => [utilities];
+  List<Object?> get props => [utilId];
 }
 
-class RentalObjectsSelected extends SearchFilterEvent {
-  const RentalObjectsSelected(this.rentailObjects);
+class RentalObjectSelected extends SearchFilterEvent {
+  const RentalObjectSelected(this.obj);
 
-  final List<String> rentailObjects;
+  final int obj;
 
   @override
-  List<Object?> get props => [rentailObjects];
+  List<Object?> get props => [obj];
 }
 
-class NearbyPlacesSelected extends SearchFilterEvent {
-  const NearbyPlacesSelected(this.nearbyPlaces);
+class NearbyPlaceSelected extends SearchFilterEvent {
+  const NearbyPlaceSelected(this.place);
 
-  final List<String> nearbyPlaces;
+  final int place;
 
   @override
-  List<Object?> get props => [nearbyPlaces];
+  List<Object?> get props => [place];
 }
 
 class SearchChanged extends SearchFilterEvent {

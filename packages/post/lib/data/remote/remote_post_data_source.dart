@@ -175,8 +175,7 @@ class RemotePostDatasource implements IPostDatasource {
         ApiPath.postFilter,
         queryParameter: Map.fromEntries(
           {
-            'Properties':
-                properties?.map((property) => property.toString()).toList(),
+            'Properties': properties?.join(','),
             'MinPrice': maxPrice == null ? null : '$minPrice',
             'MaxPrice': maxPrice == null ? null : '$maxPrice',
             'MinArea': minArea == null ? null : '$minArea',

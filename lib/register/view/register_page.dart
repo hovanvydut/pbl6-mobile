@@ -53,7 +53,7 @@ class RegisterView extends StatelessWidget {
           );
         }
       },
-      child: DissmissKeyboard(
+      child: DissmissFocus(
         child: Scaffold(
           body: SingleChildScrollView(
             padding: EdgeInsets.only(

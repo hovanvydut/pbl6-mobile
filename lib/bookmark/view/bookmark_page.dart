@@ -27,7 +27,7 @@ class BookmarkPage extends StatelessWidget {
         //   ToastHelper.showToast('Thực hiện không thành công, xin thử lại');
         // }
       },
-      child: DissmissKeyboard(
+      child: DissmissFocus(
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
