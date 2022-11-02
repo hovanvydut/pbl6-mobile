@@ -713,25 +713,28 @@ class _SearchFilterListViewState extends State<SearchFilterListView> {
             context.select((SearchFilterBloc bloc) => bloc.state.posts);
         final loadingMoreStatus = context
             .select((SearchFilterBloc bloc) => bloc.state.loadingMoreStatus);
-        return ListView.separated(
-          controller: _searchFilterScrollController,
-          padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
-          itemCount: posts.length + 1,
-          itemBuilder: (context, index) {
-            if (index == posts.length) {
-              if (loadingMoreStatus == LoadingStatus.loading) {
-                return const Center(child: CircularProgressIndicator());
+        return RefreshIndicator(
+          onRefresh: ()async => context.read<SearchFilterBloc>().add(GetPosts()),
+          child: ListView.separated(
+            controller: _searchFilterScrollController,
+            padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
+            itemCount: posts.length + 1,
+            itemBuilder: (context, index) {
+              if (index == posts.length) {
+                if (loadingMoreStatus == LoadingStatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return const SizedBox();
               }
-              return const SizedBox();
-            }
-            final post = posts[index];
-            return PostListTileCard(post: post);
-          },
-          separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: 8,
-            );
-          },
+              final post = posts[index];
+              return PostListTileCard(post: post);
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                height: 8,
+              );
+            },
+          ),
         );
       },
     );

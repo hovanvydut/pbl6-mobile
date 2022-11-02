@@ -6,82 +6,77 @@ import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:widgets/widgets.dart';
 
-class BookmarkPage extends StatelessWidget {
+class BookmarkPage extends StatefulWidget {
   const BookmarkPage({super.key});
+
+  @override
+  State<BookmarkPage> createState() => _BookmarkPageState();
+}
+
+class _BookmarkPageState extends State<BookmarkPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<BookmarkBloc>().add(GetBookmarks());
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    return BlocListener<BookmarkBloc, BookmarkState>(
-      listener: (context, state) {
-        // if (state.deleteBookmarkStatus == LoadingStatus.done) {
-        //   ScaffoldMessenger.of(context).removeCurrentSnackBar();
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //     const SnackBar(
-        //       content: Text('Đã xóa bài viết khỏi danh sách đã lưu'),
-        //       duration: Duration(seconds: 1),
-        //     ),
-        //   );
-        // }
-        // if (state.deleteBookmarkStatus == LoadingStatus.error) {
-        //   ToastHelper.showToast('Thực hiện không thành công, xin thử lại');
-        // }
-      },
-      child: DissmissFocus(
-        child: Scaffold(
-          resizeToAvoidBottomInset: true,
-          appBar: AppBar(
-            titleSpacing: 0,
-            leading: IconButton(
-              icon: Assets.icons.arrorLeft.svg(
-                color: theme.colorScheme.onSurface,
-                height: 32,
-              ),
-              onPressed: () => context.pop(),
+    return DissmissFocus(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          titleSpacing: 0,
+          leading: IconButton(
+            icon: Assets.icons.arrorLeft.svg(
+              color: theme.colorScheme.onSurface,
+              height: 32,
             ),
-            title: const BookmarkSearchPanel(),
-            centerTitle: true,
-            actions: const [BookmarkActionIcon()],
+            onPressed: () => context.pop(),
           ),
-          body: BlocBuilder<BookmarkBloc, BookmarkState>(
-            builder: (context, state) {
-              final getBookmarksStatus = state.getBookmarksStatus;
-              if (getBookmarksStatus == LoadingStatus.loading) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (getBookmarksStatus == LoadingStatus.error) {
-                return const Center(
-                  child: Text('Lỗi vui lòng thử lại'),
-                );
-              }
-              if (state.bookmarks.isEmpty) {
-                return const Center(
-                  child: Text('Bạn không có bài viết nào đã lưu'),
-                );
-              }
-              if (state.searchedBookmarks.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Assets.images.empty.svg(
-                        height: 200,
-                        width: 300,
+          title: const BookmarkSearchPanel(),
+          centerTitle: true,
+          actions: const [BookmarkActionIcon()],
+        ),
+        body: BlocBuilder<BookmarkBloc, BookmarkState>(
+          builder: (context, state) {
+            final getBookmarksStatus = state.getBookmarksStatus;
+            if (getBookmarksStatus == LoadingStatus.loading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (getBookmarksStatus == LoadingStatus.error) {
+              return const Center(
+                child: Text('Lỗi vui lòng thử lại'),
+              );
+            }
+            if (state.bookmarks.isEmpty) {
+              return const Center(
+                child: Text('Bạn không có bài viết nào đã lưu'),
+              );
+            }
+            if (state.searchedBookmarks.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Assets.images.empty.svg(
+                      height: 200,
+                      width: 300,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Không tìm thấy bài viết nào',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: theme.colorScheme.onSurface,
                       ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Không tìm thấy bài viết nào',
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: theme.colorScheme.onSurface,
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              }
-              return const BookmarkList();
-            },
-          ),
+                    )
+                  ],
+                ),
+              );
+            }
+            return const BookmarkList();
+          },
         ),
       ),
     );

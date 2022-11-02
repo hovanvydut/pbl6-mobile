@@ -88,7 +88,30 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
   ) async {
     try {
       emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-      final fetchedPosts = await _postRepository.filterPosts();
+      final properties = [
+        ...state.selectedRentailObjects,
+        ...state.selectedNearbyPlaces,
+        ...state.selectedOtherUtils
+      ];
+      final fetchedPosts = await _postRepository.filterPosts(
+        addressWardId: state.selectedWard == 0 ? null : state.selectedWard,
+        categoryId:
+            state.houseTypeSelected == 0 ? null : state.houseTypeSelected,
+        maxArea: state.areaRange == const RangeValues(0, 30)
+            ? null
+            : state.areaRange.end,
+        minArea: state.areaRange == const RangeValues(0, 30)
+            ? null
+            : state.areaRange.start,
+        maxPrice: state.priceRange == const RangeValues(500000, 15000000)
+            ? null
+            : state.priceRange.end,
+        minPrice: state.priceRange == const RangeValues(500000, 15000000)
+            ? null
+            : state.priceRange.start,
+        properties: properties.isEmpty ? null : properties,
+        searchValue: state.searchValue.isNullOrBlank ? null : state.searchValue,
+      );
       emit(
         state.copyWith(
           loadingStatus: LoadingStatus.done,
@@ -264,6 +287,7 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
     Emitter<SearchFilterState> emit,
   ) async {
     try {
+      emit(state.copyWith(searchValue: event.value));
       emit(state.copyWith(loadingStatus: LoadingStatus.loading));
       final properties = [
         ...state.selectedRentailObjects,
