@@ -10,4 +10,3 @@ abstract class PaymentEvent extends Equatable {
 class PaymentPageStarted extends PaymentEvent {}
 
 class GetPaymentHistory extends PaymentEvent {}
-

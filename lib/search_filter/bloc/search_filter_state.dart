@@ -1,3 +1,4 @@
+
 part of 'search_filter_bloc.dart';
 
 class SearchFilterState extends Equatable {
@@ -21,6 +22,7 @@ class SearchFilterState extends Equatable {
     this.loadingStatus = LoadingStatus.initial,
     this.loadingMoreStatus = LoadingStatus.initial,
     this.isInitialFilter = true,
+    this.searchValue = '',
   });
 
   final List<Post> posts;
@@ -42,9 +44,10 @@ class SearchFilterState extends Equatable {
   final LoadingStatus loadingStatus;
   final bool isInitialFilter;
   final LoadingStatus loadingMoreStatus;
+  final String searchValue;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       posts,
       provincesData,
@@ -65,6 +68,7 @@ class SearchFilterState extends Equatable {
       loadingStatus,
       isInitialFilter,
       loadingMoreStatus,
+      searchValue,
     ];
   }
 
@@ -88,6 +92,7 @@ class SearchFilterState extends Equatable {
     LoadingStatus? loadingStatus,
     bool? isInitialFilter,
     LoadingStatus? loadingMoreStatus,
+    String? searchValue,
   }) {
     return SearchFilterState(
       posts: posts ?? this.posts,
@@ -104,12 +109,12 @@ class SearchFilterState extends Equatable {
       selectedOtherUtils: selectedOtherUtils ?? this.selectedOtherUtils,
       priceRange: priceRange ?? this.priceRange,
       areaRange: areaRange ?? this.areaRange,
-      selectedRentailObjects:
-          selectedRentailObjects ?? this.selectedRentailObjects,
+      selectedRentailObjects: selectedRentailObjects ?? this.selectedRentailObjects,
       selectedNearbyPlaces: selectedNearbyPlaces ?? this.selectedNearbyPlaces,
       loadingStatus: loadingStatus ?? this.loadingStatus,
       isInitialFilter: isInitialFilter ?? this.isInitialFilter,
       loadingMoreStatus: loadingMoreStatus ?? this.loadingMoreStatus,
+      searchValue: searchValue ?? this.searchValue,
     );
   }
 }

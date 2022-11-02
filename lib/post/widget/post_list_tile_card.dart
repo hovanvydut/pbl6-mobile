@@ -35,7 +35,7 @@ class PostListTileCard extends StatelessWidget {
         child: Card(
           color: Theme.of(context).colorScheme.surface,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+            padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
             child: Row(
               children: [
                 if (post.medias.isNotEmpty)
@@ -132,23 +132,14 @@ class PostListTileCard extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    if (isBookmarked)
-                      IconButton(
-                        icon: Assets.icons.bookmarkBold.svg(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        onPressed: () => context
-                            .read<BookmarkBloc>()
-                            .add(DeleteBookmark(post)),
-                      )
-                    else
-                      IconButton(
-                        icon: Assets.icons.bookmarkOutline.svg(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        onPressed: () =>
-                            context.read<BookmarkBloc>().add(AddBookmark(post)),
-                      ),
+                    BookmarkIconButton(
+                      isBookmarked: isBookmarked,
+                      onBookmarkedPressed: () => context
+                          .read<BookmarkBloc>()
+                          .add(DeleteBookmark(post)),
+                      onUnBookmarkedPressed: () =>
+                          context.read<BookmarkBloc>().add(AddBookmark(post)),
+                    )
                   ],
                 )
               ],

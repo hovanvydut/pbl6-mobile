@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -96,32 +95,10 @@ class DetailPostPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   if (post.medias.isNotEmpty)
-                    CachedNetworkImage(
-                      cacheManager: AppCacheManager.appConfig,
-                      imageUrl: post.medias.first.url,
-                      imageBuilder: (context, imageProvider) {
-                        return Hero(
-                          tag: post.toString(),
-                          child: Container(
-                            height: 250,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      placeholder: (context, url) {
-                        return const Center(child: CircularProgressIndicator());
-                      },
-                      errorWidget: (context, url, error) =>
-                          Assets.images.notImage.image(
-                        fit: BoxFit.cover,
-                        height: 250,
-                      ),
+                    CachedNetworkImageSlider(
+                      height: 250,
+                      images: post.medias.map((media) => media.url).toList(),
+                      imageError: Assets.images.notImage.image().image,
                     )
                   else
                     Assets.images.notImage.image(
@@ -129,7 +106,7 @@ class DetailPostPage extends StatelessWidget {
                       height: 250,
                     ),
                   const SizedBox(
-                    height: 16,
+                    height: 8,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),

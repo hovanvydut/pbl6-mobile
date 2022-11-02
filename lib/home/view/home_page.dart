@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/home/home.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:widgets/widgets.dart';
@@ -50,7 +51,10 @@ class HomeView extends StatelessWidget {
             ),
             onPressed: () => context.push(
               AppRouter.searchFilter,
-              extra: context.read<PostBloc>(),
+              extra: ExtraParams2<PostBloc, BookmarkBloc>(
+                param1: context.read<PostBloc>(),
+                param2: context.read<BookmarkBloc>(),
+              ),
             ),
           ),
         ],
@@ -62,6 +66,8 @@ class HomeView extends StatelessWidget {
           children: [
             CachedNetworkImageSlider(
               images: images,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              borderRadius: BorderRadius.circular(20),
               height: context.height * 0.28,
               imageError: Assets.images.notImage.image().image,
             ),
