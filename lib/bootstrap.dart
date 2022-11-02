@@ -10,10 +10,12 @@ import 'dart:developer';
 
 import 'package:address/address.dart';
 import 'package:auth/auth.dart';
+import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media/media.dart';
+import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/di/di.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
@@ -93,6 +95,12 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           ),
           RepositoryProvider(
             create: (_) => MediaRepository(mediaDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) => BookmarkRepository(bookmarkDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) => PaymentRepository(paymentDatasource: injector()),
           ),
         ],
         child: await builder(),

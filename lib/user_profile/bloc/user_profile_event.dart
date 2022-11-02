@@ -9,4 +9,6 @@ abstract class UserProfileEvent extends Equatable {
 
 class EditProfilePressed extends UserProfileEvent {}
 
+class SwitchToHomePressed extends UserProfileEvent {}
+
 class ChooseImagePressed extends UserProfileEvent {}

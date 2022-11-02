@@ -2,23 +2,32 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:post/post.dart';
 
 part 'post_event.dart';
 part 'post_state.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
-  PostBloc({required PostRepository postRepository})
-      : _postRepository = postRepository,
+  PostBloc({
+    required PostRepository postRepository,
+    required AuthenticationBloc authenticationBloc,
+  })  : _postRepository = postRepository,
+        _authenticationBloc = authenticationBloc,
         super(const PostState()) {
     on<GetAllPosts>(_onGetAllPosts);
     on<GetUserPosts>(_onGetUserPosts);
     on<DeleteUserPost>(_onDeleteUserPost);
-    add(GetUserPosts());
+    _authenticationBloc.stream.listen((state) {
+      if (state.user != null) {
+        add(GetUserPosts());
+      }
+    });
     // add(GetAllPosts());
   }
 
   final PostRepository _postRepository;
+  final AuthenticationBloc _authenticationBloc;
 
   Future<void> _onGetAllPosts(
     GetAllPosts event,

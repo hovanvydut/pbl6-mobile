@@ -31,7 +31,7 @@ class RemotePostDatasource implements IPostDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       await _httpHandler.post(
-        ApiPath.post,
+        ApiPath.postFilter,
         body: {
           'title': title,
           'description': description,
@@ -53,7 +53,7 @@ class RemotePostDatasource implements IPostDatasource {
         },
       );
     } catch (e) {
-      log(e.toString());
+      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
       rethrow;
     }
   }
@@ -67,7 +67,7 @@ class RemotePostDatasource implements IPostDatasource {
           .map((data) => Post.fromJson(data as Map<String, dynamic>))
           .toList();
     } catch (e) {
-      log(e.toString());
+      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
       rethrow;
     }
   }
@@ -78,7 +78,7 @@ class RemotePostDatasource implements IPostDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       final responseData = await _httpHandler.get(
-        ApiPath.postHostPersonal,
+        ApiPath.hostPostPersonal,
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },
@@ -89,7 +89,7 @@ class RemotePostDatasource implements IPostDatasource {
           .map((data) => Post.fromJson(data as Map<String, dynamic>))
           .toList();
     } catch (e) {
-      log(e.toString());
+      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
       rethrow;
     }
   }
@@ -112,7 +112,7 @@ class RemotePostDatasource implements IPostDatasource {
     // try {
     final jwt = await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
     await _httpHandler.put(
-      '${ApiPath.post}/$postId',
+      '${ApiPath.postFilter}/$postId',
       body: {
         'title': title,
         'description': description,
@@ -144,13 +144,61 @@ class RemotePostDatasource implements IPostDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       await _httpHandler.delete(
-        '${ApiPath.post}/$postId',
+        '${ApiPath.postFilter}/$postId',
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },
       );
     } catch (e) {
-      log(e.toString());
+      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Post>> filterPosts({
+    List<int>? properties,
+    double? minPrice,
+    double? maxPrice,
+    double? minArea,
+    double? maxArea,
+    int? addressWardId,
+    int? categoryId,
+    int pageNumber = 1,
+    int pageSize = 10,
+    String? searchValue,
+  }) async {
+    try {
+      final jwt =
+          await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
+      final responseData = await _httpHandler.get(
+        ApiPath.postFilter,
+        queryParameter: Map.fromEntries(
+          {
+            'Properties': properties?.join(','),
+            'MinPrice': maxPrice == null ? null : '$minPrice',
+            'MaxPrice': maxPrice == null ? null : '$maxPrice',
+            'MinArea': minArea == null ? null : '$minArea',
+            'MaxArea': maxArea == null ? null : '$maxArea',
+            'AddressWardId': addressWardId == null ? null : '$addressWardId',
+            'CategoryId': categoryId == null ? null : '$categoryId',
+            'PageNumber': '$pageNumber',
+            'PageSize': '$pageSize',
+            'SearchValue': searchValue,
+          }.entries.toList()
+            ..removeWhere((entry) => entry.value == null),
+        ),
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $jwt',
+        },
+      );
+      final data = responseData.data as Map<String, dynamic>;
+      final postsData = data['records'] as List;
+      return postsData
+          .map((data) => Post.fromJson(data as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
       rethrow;
     }
   }

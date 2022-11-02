@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/home/home.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
-class LessorMainView extends StatefulWidget {
-  const LessorMainView({super.key});
+class HostMainView extends StatefulWidget {
+  const HostMainView({super.key});
 
   @override
-  State<LessorMainView> createState() => _LessorMainViewState();
+  State<HostMainView> createState() => _HostMainViewState();
 }
 
-class _LessorMainViewState extends State<LessorMainView> {
+class _HostMainViewState extends State<HostMainView> {
   late ValueNotifier<int> _currentIndexNotifier;
 
   @override
@@ -42,7 +43,7 @@ class _LessorMainViewState extends State<LessorMainView> {
           return IndexedStack(
             index: currentIndex,
             children: const [
-              PostPage(),
+              HomePage(),
               Center(child: Text('Thông báo')),
               SizedBox(),
               Center(child: Text('Tin nhắn')),

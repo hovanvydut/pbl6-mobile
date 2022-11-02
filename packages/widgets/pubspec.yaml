@@ -8,8 +8,10 @@ environment:
   flutter: 3.0.5
 
 dependencies:
+  cached_network_image: ^3.2.2
   flutter:
     sdk: flutter
+  flutter_cache_manager: ^3.3.0
   multiselect:
     path: ../multiselect
 

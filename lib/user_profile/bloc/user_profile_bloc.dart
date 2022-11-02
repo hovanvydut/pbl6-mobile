@@ -7,6 +7,7 @@ part 'user_profile_state.dart';
 class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
   UserProfileBloc() : super(const UserProfileState()) {
     on<EditProfilePressed>(_onEditProfilePressed);
+    on<SwitchToHomePressed>(_onSwitchToHomePressed);
   }
 
   void _onEditProfilePressed(
@@ -14,5 +15,12 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     Emitter<UserProfileState> emit,
   ) {
     emit(state.copyWith(editMode: true));
+  }
+
+  void _onSwitchToHomePressed(
+    SwitchToHomePressed event,
+    Emitter<UserProfileState> emit,
+  ) {
+    emit(state.copyWith(isInHostPanel: !state.isInHostPanel));
   }
 }

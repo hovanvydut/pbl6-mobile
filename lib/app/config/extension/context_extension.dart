@@ -19,4 +19,17 @@ extension ThemeExtension on BuildContext {
 
 extension MoreGoRouterExtenstion on BuildContext {
   String get currentLocation => GoRouter.of(this).location;
+
+  String currentWithChild(String child) {
+    if (currentLocation == '/') {
+      return '/$child';
+    }
+    return '${GoRouter.of(this).location}/$child';
+  }
+
+  void goToChild(String child, {Object? extra}) =>
+      GoRouter.of(this).go(currentWithChild(child), extra: extra);
+
+  void pushToChild(String child, {Object? extra}) =>
+      GoRouter.of(this).push(currentWithChild(child), extra: extra);
 }

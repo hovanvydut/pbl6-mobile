@@ -4,15 +4,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/post/post.dart';
 
 class PostGridCard extends StatelessWidget {
   const PostGridCard({
     super.key,
     required this.post,
+    this.isBookmarked = false,
   });
 
   final Post post;
+  final bool isBookmarked;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class PostGridCard extends StatelessWidget {
                       cacheManager: AppCacheManager.appConfig,
                       imageUrl: post.medias.first.url,
                       imageBuilder: (context, imageProvider) => Hero(
-                        tag: post.medias.first.url,
+                        tag: post.toString(),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.vertical(
@@ -67,23 +71,13 @@ class PostGridCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: 4,
-                      right: 4,
-                      child: CircleAvatar(
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .surface
-                            .withOpacity(0.6),
-                        child: IconButton(
-                          icon: Assets.icons.bookmarkOutline.svg(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
+                    BookmarkIconButton(
+                      isBookmarked: isBookmarked,
+                      onBookmarkedPressed: () => context
+                          .read<BookmarkBloc>()
+                          .add(DeleteBookmark(post)),
+                      onUnBookmarkedPressed: () =>
+                          context.read<BookmarkBloc>().add(AddBookmark(post)),
                     )
                   ],
                 ),
@@ -95,25 +89,33 @@ class PostGridCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
-                        child: Text(
-                          post.title,
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              post.title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
                                     color: Theme.of(context)
                                         .colorScheme
                                         .onSurfaceVariant,
                                   ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
                         ),
                       ),
                       Text(
-                        '${post.price.inCompactLongCurrency}/tháng',
+                        '${post.price.inCompactCurrency}/tháng',
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
-                        maxLines: 2,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
@@ -135,5 +137,56 @@ class PostGridCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class BookmarkIconButton extends StatelessWidget {
+  const BookmarkIconButton({
+    super.key,
+    this.isBookmarked = false,
+    required this.onBookmarkedPressed,
+    required this.onUnBookmarkedPressed,
+  });
+
+  final bool isBookmarked;
+  final VoidCallback onBookmarkedPressed;
+  final VoidCallback onUnBookmarkedPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    if (context.watch<AuthenticationBloc>().state.user == null) {
+      return const SizedBox();
+    }
+    if (isBookmarked) {
+      return Positioned(
+        top: 4,
+        right: 4,
+        child: CircleAvatar(
+          backgroundColor:
+              Theme.of(context).colorScheme.surface.withOpacity(0.6),
+          child: IconButton(
+            icon: Assets.icons.bookmarkBold.svg(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            onPressed: onBookmarkedPressed.call,
+          ),
+        ),
+      );
+    } else {
+      return Positioned(
+        top: 4,
+        right: 4,
+        child: CircleAvatar(
+          backgroundColor:
+              Theme.of(context).colorScheme.surface.withOpacity(0.6),
+          child: IconButton(
+            icon: Assets.icons.bookmarkOutline.svg(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            onPressed: onUnBookmarkedPressed.call,
+          ),
+        ),
+      );
+    }
   }
 }

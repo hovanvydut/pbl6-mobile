@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
+import 'package:pbl6_mobile/post/post.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
@@ -22,18 +24,53 @@ class UserProfilePage extends StatelessWidget {
                 EdgeInsets.only(top: context.padding.top + 8),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon: Assets.icons.setting.svg(
-                      color: theme.colorScheme.onSecondaryContainer,
-                      height: 28,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // BlocBuilder<UserProfileBloc, UserProfileState>(
+                    //   builder: (context, state) {
+                    //     if (!state.isInHostPanel) {
+                    //       return IconButton(
+                    //         tooltip: 'Truy cập giao diện trang chủ',
+                    //         icon: Assets.icons.homeOutline.svg(
+                    //           color: theme.colorScheme.onSecondaryContainer,
+                    //           height: 28,
+                    //         ),
+                    //         onPressed: () {
+                    //           context
+                    //               .read<UserProfileBloc>()
+                    //               .add(SwitchToHomePressed());
+                    //           context.push(AppRouter.guest);
+                    //         },
+                    //       );
+                    //     }
+                    //     return IconButton(
+                    //       tooltip: 'Truy cập giao diện chủ trọ',
+                    //       icon: Assets.icons.document.svg(
+                    //         color: theme.colorScheme.onSecondaryContainer,
+                    //         height: 28,
+                    //       ),
+                    //       onPressed: () {
+                    //         context
+                    //             .read<UserProfileBloc>()
+                    //             .add(SwitchToHomePressed());
+                    //         context.go(AppRouter.host);
+                    //       },
+                    //     );
+                    //   },
+                    // ),
+                    IconButton(
+                      icon: Assets.icons.setting.svg(
+                        color: theme.colorScheme.onSecondaryContainer,
+                        height: 28,
+                      ),
+                      onPressed: () => context
+                          .read<AuthenticationBloc>()
+                          .add(LogoutRequested()),
                     ),
-                    onPressed: () => context
-                        .read<AuthenticationBloc>()
-                        .add(LogoutRequested()),
-                  ),
+                  ],
                 ),
+                const SizedBox(height: 8),
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     final user = state.user;
@@ -125,22 +162,27 @@ class UserProfilePage extends StatelessWidget {
                         trailing: Assets.icons.chevronRight
                             .svg(color: theme.colorScheme.onSurface),
                         onTap: () {
-                          context.push(
-                            context.currentLocation + AppRouter.editUserProfile,
+                          context.pushToChild(
+                            AppRouter.editUserProfile,
                             extra:
                                 context.read<AuthenticationBloc>().state.user,
                           );
                         },
                       ),
                       ListTile(
-                        leading: Assets.icons.document.svg(
+                        leading: Assets.icons.bookmarkOutline.svg(
                           color: theme.colorScheme.onSurface,
                         ),
                         title: const Text('Bài đăng đã lưu'),
-                        subtitle: const Text('Chưa lưu bài viết nào'),
                         trailing: Assets.icons.chevronRight
                             .svg(color: theme.colorScheme.onSurface),
-                        onTap: () {},
+                        onTap: () => context.push(
+                          AppRouter.bookmark,
+                          extra: ExtraParams2<BookmarkBloc, PostBloc>(
+                            param1: context.read<BookmarkBloc>(),
+                            param2: context.read<PostBloc>(),
+                          ),
+                        ),
                       ),
                       ListTile(
                         leading: Assets.icons.calendar.svg(
@@ -163,7 +205,7 @@ class UserProfilePage extends StatelessWidget {
                             subtitle: Text('${user?.currentCredit ?? 0} đồng'),
                             trailing: Assets.icons.chevronRight
                                 .svg(color: theme.colorScheme.onSurface),
-                            onTap: () {},
+                            onTap: () => context.push(AppRouter.payment),
                           );
                         },
                       ),

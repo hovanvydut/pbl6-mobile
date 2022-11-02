@@ -23,17 +23,25 @@ abstract class ApiPath {
   /// Get post by id: GET /api/post/{id}
   /// Edit post by id: PUT /api/post/{id}
   /// Delete post by id: DELETE /api/post/{id}
-  static const post = '/api/post';
+  static const postFilter = '/api/post';
 
   /// Get all posts: GET /api/post
   static const postAll = '/api/post/all';
 
   /// Get host personal posts: GET /api/post
-  static const postHostPersonal = '/api/post/host/personal';
+  static const hostPostPersonal = '/api/host/personal/post';
 
   /// File Media
   static const mediaUpload = '/api/filecontroler/upload';
   // static const addressDistrict = '/api/address/district';
   // static const addressDistrict = '/api/address/district';
   // static const addressDistrict = '/api/address/district';
+
+  /// Bookmark
+  static const bookmark = '/api/bookmark';
+
+  /// Payment
+  static const paymentBankCode = '/api/payment/bank-code';
+  static const payment = '/api/payment';
+  static const paymentHistoryPersonal = '/api/payment/history';
 }

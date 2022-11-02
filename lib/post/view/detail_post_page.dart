@@ -101,7 +101,7 @@ class DetailPostPage extends StatelessWidget {
                       imageUrl: post.medias.first.url,
                       imageBuilder: (context, imageProvider) {
                         return Hero(
-                          tag: post.medias.first.url,
+                          tag: post.toString(),
                           child: Container(
                             height: 250,
                             decoration: BoxDecoration(
@@ -211,7 +211,9 @@ class DetailPostPage extends StatelessWidget {
                                   height: 4,
                                 ),
                                 Text(
-                                  post.prePaidPrice.inCompactCurrencyNotSymbol,
+                                  post.prePaidPrice
+                                          ?.inCompactCurrencyNotSymbol ??
+                                      '',
                                   style: theme.textTheme.bodyLarge,
                                 ),
                               ],
@@ -285,7 +287,7 @@ class DetailPostPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          post.description,
+                          post.description ?? '',
                           style: theme.textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 24),
@@ -345,43 +347,45 @@ class DetailPostPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Text(
-                          'Tiện ích',
-                          style: theme.textTheme.titleLarge,
-                        ),
-                        ListTileTheme(
-                          data: const ListTileThemeData(
-                            minLeadingWidth: 24,
-                            contentPadding: EdgeInsets.zero,
+                        if (post.groupProperties?.elementAt(1) != null) ...[
+                          Text(
+                            'Tiện ích',
+                            style: theme.textTheme.titleLarge,
                           ),
-                          child: ListTile(
-                            leading: Assets.icons.calendar2.svg(
-                              height: 24,
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
-                            title: const Text('10/10/2021'),
-                            subtitle: const Text('30 ngày trước'),
-                          ),
-                        ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            children: post.groupProperties!
+                                .elementAt(1)
+                                .properties
+                                .map<Chip>(
+                                  (property) => Chip(
+                                    label: Text(property.displayName),
+                                  ),
+                                )
+                                .toList(),
+                          )
+                        ] else
+                          const SizedBox(),
                         const SizedBox(height: 16),
-                        Text(
-                          'Địa điểm gần đó',
-                          style: theme.textTheme.titleLarge,
-                        ),
-                        ListTileTheme(
-                          data: const ListTileThemeData(
-                            minLeadingWidth: 24,
-                            contentPadding: EdgeInsets.zero,
+                        if (post.groupProperties?.first != null) ...[
+                          Text(
+                            'Địa điểm gần đó',
+                            style: theme.textTheme.titleLarge,
                           ),
-                          child: ListTile(
-                            leading: Assets.icons.calendar2.svg(
-                              height: 24,
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
-                            title: const Text('10/10/2021'),
-                            subtitle: const Text('30 ngày trước'),
-                          ),
-                        ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            children: post.groupProperties!.first.properties
+                                .map<Chip>(
+                                  (property) => Chip(
+                                    label: Text(property.displayName),
+                                  ),
+                                )
+                                .toList(),
+                          )
+                        ] else
+                          const SizedBox(),
                       ],
                     ),
                   ),

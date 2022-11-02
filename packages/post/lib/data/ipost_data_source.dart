@@ -34,4 +34,17 @@ abstract class IPostDatasource {
   Future<void> deletePost(int postId);
 
   Future<List<Post>> getUserPosts();
-}
+
+  Future<List<Post>> filterPosts({
+    List<int>? properties,
+    double? minPrice,
+    double? maxPrice,
+    double? minArea,
+    double? maxArea,
+    int? addressWardId,
+    int? categoryId,
+    int pageNumber = 1,
+    int pageSize= 10,
+    String? searchValue,
+  });
+ }

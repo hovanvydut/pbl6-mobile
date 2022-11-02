@@ -1,10 +1,12 @@
 import 'package:address/address.dart';
 import 'package:auth/auth.dart';
+import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_client_handler/http_client_handler.dart';
 import 'package:media/media.dart';
+import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
@@ -43,5 +45,12 @@ void initDependences() {
     )
     ..registerLazySingleton<IMediaDatasource>(
       () => RemoteMediaDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IBookmarkDatasource>(
+      () =>
+          RemoteBookmarkDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IPaymentDatasource>(
+      () => RemotePaymentDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }

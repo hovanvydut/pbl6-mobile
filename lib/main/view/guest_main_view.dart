@@ -3,14 +3,14 @@ import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/home/view/home_page.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
-class TenantMainView extends StatefulWidget {
-  const TenantMainView({super.key});
+class GuestMainView extends StatefulWidget {
+  const GuestMainView({super.key});
 
   @override
-  State<TenantMainView> createState() => _TenantMainViewState();
+  State<GuestMainView> createState() => _GuestMainViewState();
 }
 
-class _TenantMainViewState extends State<TenantMainView> {
+class _GuestMainViewState extends State<GuestMainView> {
   late ValueNotifier<int> _currentIndexNotifier;
 
   @override

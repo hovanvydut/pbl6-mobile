@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/home/home.dart';
 import 'package:pbl6_mobile/post/post.dart';
+import 'package:widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,13 +34,24 @@ class HomeView extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Assets.images.logo.svg(),
+        title: GestureDetector(
+          onTap: () {
+            showAboutDialog(
+              context: context,
+              applicationName: 'PBL6 HOMIE',
+            );
+          },
+          child: Assets.images.logo.svg(),
+        ),
         actions: [
           IconButton(
             icon: Assets.icons.searchBold.svg(
               color: theme.colorScheme.onSurface,
             ),
-            onPressed: () => context.push(AppRouter.searchFilter),
+            onPressed: () => context.push(
+              AppRouter.searchFilter,
+              extra: context.read<PostBloc>(),
+            ),
           ),
         ],
       ),
@@ -48,7 +60,11 @@ class HomeView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ImageSlider(images: images),
+            CachedNetworkImageSlider(
+              images: images,
+              height: context.height * 0.28,
+              imageError: Assets.images.notImage.image().image,
+            ),
             const SizedBox(height: 16),
             const PriorityPostGridView(),
           ],

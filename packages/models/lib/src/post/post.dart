@@ -9,13 +9,13 @@ class Post extends Equatable {
   const Post({
     required this.id,
     required this.title,
-    required this.description,
+    this.description,
     required this.area,
     required this.price,
-    required this.prePaidPrice,
+    this.prePaidPrice,
     this.slug,
-    required this.limitTenant,
-    required this.numView,
+    this.limitTenant,
+    this.numView,
     required this.address,
     required this.fullAddress,
     required this.category,
@@ -28,17 +28,18 @@ class Post extends Equatable {
 
   final int id;
   final String title;
-  final String description;
+  final String? description;
   final double area;
   final double price;
-  final double prePaidPrice;
+  final double? prePaidPrice;
   final String? slug;
-  final int limitTenant;
-  final int numView;
+  final int? limitTenant;
+  final int? numView;
   final String address;
   final Address fullAddress;
   final HouseType category;
-  final List<Property> properties;
+  final List<Property>? properties;
+  @JsonKey(name: 'propertyGroup')
   final List<GroupProperty>? groupProperties;
   final List<Media> medias;
 

@@ -7,6 +7,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -39,6 +40,7 @@ class HttpClientHandler {
         path: path,
         queryParameter: queryParameter,
       );
+      log(uri.toString(), name: 'GET');
       return _client
           .get(
             uri,
@@ -132,6 +134,7 @@ class HttpClientHandler {
   }
 
   CommonResponse _handleResponse(http.Response response) {
+    log(response.body, name: 'HTTP_CLIENT_HANDLER');
     final body =
         jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     final commonResponse = CommonResponse.fromJson(body);
