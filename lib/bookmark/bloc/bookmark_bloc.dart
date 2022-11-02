@@ -89,7 +89,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     DeleteBookmark event,
     Emitter<BookmarkState> emit,
   ) async {
-    try { 
+    try {
       emit(
         state.copyWith(
           deleteBookmarkStatus: LoadingStatus.loading,

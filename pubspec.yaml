@@ -60,6 +60,8 @@ dependencies:
     path: packages/bookmark
   payment:
     path: packages/payment
+  booking:
+    path: packages/booking
   cached_network_image: ^3.2.2
   faker: ^2.0.0
   flutter_cache_manager: ^3.3.0

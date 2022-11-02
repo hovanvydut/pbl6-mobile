@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "9.1.0"
+  booking:
+    dependency: "direct main"
+    description:
+      path: "packages/booking"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   bookmark:
     dependency: "direct main"
     description:
