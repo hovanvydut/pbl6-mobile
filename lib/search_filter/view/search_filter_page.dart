@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/search_filter/search_filter.dart';
 import 'package:post/post.dart';
@@ -714,7 +715,8 @@ class _SearchFilterListViewState extends State<SearchFilterListView> {
         final loadingMoreStatus = context
             .select((SearchFilterBloc bloc) => bloc.state.loadingMoreStatus);
         return RefreshIndicator(
-          onRefresh: ()async => context.read<SearchFilterBloc>().add(GetPosts()),
+          onRefresh: () async =>
+              context.read<SearchFilterBloc>().add(GetPosts()),
           child: ListView.separated(
             controller: _searchFilterScrollController,
             padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
@@ -727,7 +729,19 @@ class _SearchFilterListViewState extends State<SearchFilterListView> {
                 return const SizedBox();
               }
               final post = posts[index];
-              return PostListTileCard(post: post);
+              return Builder(
+                builder: (context) {
+                  final bookmarks =
+                      context.watch<BookmarkBloc>().state.bookmarks;
+                  final isBookmarked = bookmarks.any(
+                    (bookmark) => bookmark.id == post.id,
+                  );
+                  return PostListTileCard(
+                    post: post,
+                    isBookmarked: isBookmarked,
+                  );
+                },
+              );
             },
             separatorBuilder: (context, index) {
               return const SizedBox(
