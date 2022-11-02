@@ -25,8 +25,8 @@ class AdaptiveImageProvider extends ImageProvider {
   }
 
   @override
-  ImageStreamCompleter load(Object key, DecoderCallback decode) =>
-      _delegate.load(key, decode);
+  ImageStreamCompleter loadBuffer(Object key, DecoderBufferCallback decode) =>
+      _delegate.loadBuffer(key, decode);
 
   @override
   Future<Object> obtainKey(ImageConfiguration configuration) =>

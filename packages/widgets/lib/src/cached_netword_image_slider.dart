@@ -9,12 +9,16 @@ class CachedNetworkImageSlider extends StatefulWidget {
     required this.imageError,
     required this.height,
     this.cacheManager,
+    this.margin = EdgeInsets.zero,
+    this.borderRadius = BorderRadius.zero,
     this.showIndicator = true,
   });
 
   final List<String> images;
   final ImageProvider<Object> imageError;
   final double height;
+  final EdgeInsets margin;
+  final BorderRadius borderRadius;
   final BaseCacheManager? cacheManager;
   final bool showIndicator;
 
@@ -55,9 +59,9 @@ class _CachedNetworkImageSliderState extends State<CachedNetworkImageSlider> {
                 cacheManager: widget.cacheManager,
                 imageUrl: widget.images[index],
                 imageBuilder: (context, imageProvider) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  margin: widget.margin,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: widget.borderRadius,
                     image: DecorationImage(
                       image: imageProvider,
                       fit: BoxFit.cover,
@@ -67,9 +71,9 @@ class _CachedNetworkImageSliderState extends State<CachedNetworkImageSlider> {
                 placeholder: (context, url) =>
                     const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  margin: widget.margin,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: widget.borderRadius,
                     image: DecorationImage(
                       image: widget.imageError,
                       fit: BoxFit.cover,
@@ -80,9 +84,9 @@ class _CachedNetworkImageSliderState extends State<CachedNetworkImageSlider> {
             },
           ),
         ),
-        if (widget.showIndicator) ...[
+        if (widget.showIndicator && widget.images.length > 1) ...[
           const SizedBox(
-            height: 12,
+            height: 16,
           ),
           Wrap(
             children: widget.images
@@ -109,7 +113,10 @@ class _CachedNetworkImageSliderState extends State<CachedNetworkImageSlider> {
                 )
                 .toList(),
           ),
-        ]
+        ] else
+          const SizedBox(
+            height: 8,
+          ),
       ],
     );
   }

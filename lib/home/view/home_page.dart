@@ -66,6 +66,8 @@ class HomeView extends StatelessWidget {
           children: [
             CachedNetworkImageSlider(
               images: images,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              borderRadius: BorderRadius.circular(20),
               height: context.height * 0.28,
               imageError: Assets.images.notImage.image().image,
             ),
