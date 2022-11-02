@@ -7,7 +7,7 @@ abstract class CreatePaymentEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class CreatePaymentStarted extends CreatePaymentEvent {}
+class CreatePaymentPageStarted extends CreatePaymentEvent {}
 
 class AmountChanged extends CreatePaymentEvent {
   const AmountChanged(this.amount);

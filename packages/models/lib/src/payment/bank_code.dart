@@ -14,7 +14,7 @@ class BankCode extends Equatable {
   factory BankCode.fromJson(Map<String, dynamic> json) =>
       _$BankCodeFromJson(json);
 
-  final String id;
+  final int id;
   final String code;
   final String description;
 

@@ -8,4 +8,15 @@ class PaymentRepository {
   final IPaymentDatasource _paymentDatasource;
 
   Future<List<BankCode>> getBankCodes() => _paymentDatasource.getBankCodes();
+
+  Future<String> createPayment({
+    required int amount,
+    required String bankCode,
+    required String desc,
+  }) =>
+      _paymentDatasource.createPayment(
+        amount: amount,
+        bankCode: bankCode,
+        desc: desc,
+      );
 }

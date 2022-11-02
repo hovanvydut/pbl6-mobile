@@ -7,7 +7,7 @@ part of 'bank_code.dart';
 // **************************************************************************
 
 BankCode _$BankCodeFromJson(Map<String, dynamic> json) => BankCode(
-      id: json['id'] as String,
+      id: json['id'] as int,
       code: json['code'] as String,
       description: json['description'] as String,
     );
