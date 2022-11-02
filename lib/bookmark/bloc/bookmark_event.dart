@@ -9,7 +9,7 @@ abstract class BookmarkEvent extends Equatable {
 
 class GetBookmarks extends BookmarkEvent {}
 
-class SearchButtonPressed extends BookmarkEvent{}
+class SearchButtonPressed extends BookmarkEvent {}
 
 class AddBookmark extends BookmarkEvent {
   const AddBookmark(this.post);

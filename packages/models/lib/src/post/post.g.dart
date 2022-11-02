@@ -23,7 +23,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       properties: (json['properties'] as List<dynamic>?)
           ?.map((e) => Property.fromJson(e as Map<String, dynamic>))
           .toList(),
-      groupProperties: (json['groupProperties'] as List<dynamic>?)
+      groupProperties: (json['propertyGroup'] as List<dynamic>?)
           ?.map((e) => GroupProperty.fromJson(e as Map<String, dynamic>))
           .toList(),
       medias: (json['medias'] as List<dynamic>)

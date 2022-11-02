@@ -5,13 +5,17 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/authentication/authentication.dart';
 
 part 'bookmark_event.dart';
 part 'bookmark_state.dart';
 
 class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
-  BookmarkBloc({required BookmarkRepository bookmarkRepository})
-      : _bookmarkRepository = bookmarkRepository,
+  BookmarkBloc({
+    required BookmarkRepository bookmarkRepository,
+    required AuthenticationBloc authenticationBloc,
+  })  : _bookmarkRepository = bookmarkRepository,
+        _authenticationBloc = authenticationBloc,
         super(const BookmarkState()) {
     on<GetBookmarks>(_onGetBookmarks);
     on<SearchButtonPressed>(_onSearchButtonPressed);
@@ -19,10 +23,16 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     on<DeleteBookmark>(_onDeleteBookmark);
     on<SearchBookmark>(_onSearchBookmark);
     on<ScrollMoreBookmarks>(_onScrollMoreBookmarks);
-    add(GetBookmarks());
+    _authenticationBloc.stream.listen((state) {
+      if (state.user != null) {
+        add(GetBookmarks());
+      }
+    });
   }
 
   final BookmarkRepository _bookmarkRepository;
+
+  final AuthenticationBloc _authenticationBloc;
 
   Future<void> _onGetBookmarks(
     GetBookmarks event,
@@ -79,7 +89,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     DeleteBookmark event,
     Emitter<BookmarkState> emit,
   ) async {
-    try {
+    try { 
       emit(
         state.copyWith(
           deleteBookmarkStatus: LoadingStatus.loading,

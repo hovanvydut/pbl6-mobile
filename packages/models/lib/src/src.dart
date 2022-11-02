@@ -4,6 +4,7 @@ export 'address/province.dart';
 export 'address/ward.dart';
 export 'category/house_type.dart';
 export 'media/media.dart';
+export 'payment/bank_code.dart';
 export 'post/post.dart';
 export 'property/group_property.dart';
 export 'property/property.dart';

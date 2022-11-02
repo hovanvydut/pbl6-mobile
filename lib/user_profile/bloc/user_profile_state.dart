@@ -3,7 +3,7 @@ part of 'user_profile_bloc.dart';
 class UserProfileState extends Equatable {
   const UserProfileState({
     this.editMode = false,
-    this.isInHostPanel = false, 
+    this.isInHostPanel = false,
   });
 
   final bool editMode;

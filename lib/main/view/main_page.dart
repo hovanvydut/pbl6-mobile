@@ -20,6 +20,7 @@ class MainPage extends StatelessWidget {
         BlocProvider(
           create: (context) => PostBloc(
             postRepository: context.read<PostRepository>(),
+            authenticationBloc: context.read<AuthenticationBloc>(),
           ),
         ),
         BlocProvider(
@@ -28,6 +29,7 @@ class MainPage extends StatelessWidget {
         BlocProvider(
           create: (context) => BookmarkBloc(
             bookmarkRepository: context.read<BookmarkRepository>(),
+            authenticationBloc: context.read<AuthenticationBloc>(),
           ),
         ),
       ],

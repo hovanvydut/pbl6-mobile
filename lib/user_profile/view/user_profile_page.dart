@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
-import 'package:pbl6_mobile/user_profile/bloc/user_profile_bloc.dart';
+import 'package:pbl6_mobile/post/post.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
@@ -25,40 +25,40 @@ class UserProfilePage extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    BlocBuilder<UserProfileBloc, UserProfileState>(
-                      builder: (context, state) {
-                        if (!state.isInHostPanel) {
-                          return IconButton(
-                            tooltip: 'Truy cập giao diện trang chủ',
-                            icon: Assets.icons.homeOutline.svg(
-                              color: theme.colorScheme.onSecondaryContainer,
-                              height: 28,
-                            ),
-                            onPressed: () {
-                              context
-                                  .read<UserProfileBloc>()
-                                  .add(SwitchToHomePressed());
-                              context.push(AppRouter.guest);
-                            },
-                          );
-                        }
-                        return IconButton(
-                          tooltip: 'Truy cập giao diện chủ trọ',
-                          icon: Assets.icons.document.svg(
-                            color: theme.colorScheme.onSecondaryContainer,
-                            height: 28,
-                          ),
-                          onPressed: () {
-                            context
-                                .read<UserProfileBloc>()
-                                .add(SwitchToHomePressed());
-                            context.go(AppRouter.host);
-                          },
-                        );
-                      },
-                    ),
+                    // BlocBuilder<UserProfileBloc, UserProfileState>(
+                    //   builder: (context, state) {
+                    //     if (!state.isInHostPanel) {
+                    //       return IconButton(
+                    //         tooltip: 'Truy cập giao diện trang chủ',
+                    //         icon: Assets.icons.homeOutline.svg(
+                    //           color: theme.colorScheme.onSecondaryContainer,
+                    //           height: 28,
+                    //         ),
+                    //         onPressed: () {
+                    //           context
+                    //               .read<UserProfileBloc>()
+                    //               .add(SwitchToHomePressed());
+                    //           context.push(AppRouter.guest);
+                    //         },
+                    //       );
+                    //     }
+                    //     return IconButton(
+                    //       tooltip: 'Truy cập giao diện chủ trọ',
+                    //       icon: Assets.icons.document.svg(
+                    //         color: theme.colorScheme.onSecondaryContainer,
+                    //         height: 28,
+                    //       ),
+                    //       onPressed: () {
+                    //         context
+                    //             .read<UserProfileBloc>()
+                    //             .add(SwitchToHomePressed());
+                    //         context.go(AppRouter.host);
+                    //       },
+                    //     );
+                    //   },
+                    // ),
                     IconButton(
                       icon: Assets.icons.setting.svg(
                         color: theme.colorScheme.onSecondaryContainer,
@@ -162,8 +162,8 @@ class UserProfilePage extends StatelessWidget {
                         trailing: Assets.icons.chevronRight
                             .svg(color: theme.colorScheme.onSurface),
                         onTap: () {
-                          context.push(
-                            context.currentLocation + AppRouter.editUserProfile,
+                          context.pushToChild(
+                            AppRouter.editUserProfile,
                             extra:
                                 context.read<AuthenticationBloc>().state.user,
                           );
@@ -178,7 +178,10 @@ class UserProfilePage extends StatelessWidget {
                             .svg(color: theme.colorScheme.onSurface),
                         onTap: () => context.push(
                           AppRouter.bookmark,
-                          extra: context.read<BookmarkBloc>(),
+                          extra: ExtraParams2<BookmarkBloc, PostBloc>(
+                            param1: context.read<BookmarkBloc>(),
+                            param2: context.read<PostBloc>(),
+                          ),
                         ),
                       ),
                       ListTile(
@@ -202,7 +205,7 @@ class UserProfilePage extends StatelessWidget {
                             subtitle: Text('${user?.currentCredit ?? 0} đồng'),
                             trailing: Assets.icons.chevronRight
                                 .svg(color: theme.colorScheme.onSurface),
-                            onTap: () {},
+                            onTap: () => context.push(AppRouter.payment),
                           );
                         },
                       ),

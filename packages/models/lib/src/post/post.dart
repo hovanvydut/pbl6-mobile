@@ -14,8 +14,8 @@ class Post extends Equatable {
     required this.price,
     this.prePaidPrice,
     this.slug,
-     this.limitTenant,
-     this.numView,
+    this.limitTenant,
+    this.numView,
     required this.address,
     required this.fullAddress,
     required this.category,
@@ -39,6 +39,7 @@ class Post extends Equatable {
   final Address fullAddress;
   final HouseType category;
   final List<Property>? properties;
+  @JsonKey(name: 'propertyGroup')
   final List<GroupProperty>? groupProperties;
   final List<Media> medias;
 
