@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
+import 'package:pbl6_mobile/booking/booking.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
+import 'package:pbl6_mobile/create_booking/create_booking.dart';
 import 'package:pbl6_mobile/create_payment/create_payment.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
 import 'package:pbl6_mobile/edit_user_profile/edit_user_profile.dart';
@@ -30,6 +32,9 @@ abstract class AppRouter {
   static const payment = '/payment';
   static const createPayment = 'create';
 
+  static const booking = '/booking';
+  static const bookingList = 'booking-list';
+
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -43,6 +48,12 @@ abstract class AppRouter {
             builder: (context, state) {
               final user = state.extra! as User;
               return EditUserProfilePage(user: user);
+            },
+          ),
+          GoRoute(
+            path: bookingList,
+            builder: (context, state) {
+              return const BookingPage();
             },
           ),
         ],
@@ -113,6 +124,12 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
+        path: booking,
+        builder: (context, state) {
+          return const CreateBookingPage();
+        },
+      ),
+      GoRoute(
         path: bookmark,
         builder: (context, state) {
           final params = state.extra! as ExtraParams2<BookmarkBloc, PostBloc>;
@@ -153,12 +170,6 @@ abstract class AppRouter {
         path: login,
         builder: (context, state) {
           return const LoginPage();
-        },
-      ),
-      GoRoute(
-        path: register,
-        builder: (context, state) {
-          return const RegisterPage();
         },
       ),
     ],
