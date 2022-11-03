@@ -27,7 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     try {
-    _postBloc.add(GetAllPosts());
+      _postBloc.add(GetAllPosts());
       emit(state.copyWith(homeLoadingStatus: LoadingStatus.loading));
       final fetchedDistricts =
           await _addressRepository.getDistrictsByProvinceId(32);

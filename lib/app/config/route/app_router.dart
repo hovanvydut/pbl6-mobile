@@ -5,6 +5,8 @@ import 'package:pbl6_mobile/booking/booking.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/create_booking/create_booking.dart';
 import 'package:pbl6_mobile/create_payment/create_payment.dart';
+import 'package:pbl6_mobile/detail_host/detail_host.dart';
+import 'package:pbl6_mobile/detail_post/detail_post.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
 import 'package:pbl6_mobile/edit_user_profile/edit_user_profile.dart';
 import 'package:pbl6_mobile/login/login.dart';
@@ -25,7 +27,8 @@ abstract class AppRouter {
   static const host = '/host';
   static const uploadPost = '/upload';
   static const editUserProfile = 'edit-profile';
-  static const detailPost = '/detail';
+  static const detailPost = '/post-detail';
+  static const detailHost = '/host-detail';
   static const editPost = '/edit-post';
   static const searchFilter = '/search-filter';
   static const bookmark = '/bookmark';
@@ -104,6 +107,16 @@ abstract class AppRouter {
           return BlocProvider.value(
             value: extras.param1,
             child: DetailPostPage(post: extras.param2),
+          );
+        },
+      ),
+      GoRoute(
+        path: detailHost,
+        builder: (context, state) {
+          final extras = state.extra! as ExtraParams2<PostBloc, User>;
+          return BlocProvider.value(
+            value: extras.param1,
+            child: DetailHostPage(host: extras.param2),
           );
         },
       ),
