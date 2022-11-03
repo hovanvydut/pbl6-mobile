@@ -17,7 +17,8 @@ abstract class IPostDatasource {
 
   Future<List<Post>> getAllPosts();
 
-  Future<void> updatePostByPostId(int postId,{
+  Future<void> updatePostByPostId(
+    int postId, {
     required String title,
     required String description,
     required double area,
@@ -44,7 +45,9 @@ abstract class IPostDatasource {
     int? addressWardId,
     int? categoryId,
     int pageNumber = 1,
-    int pageSize= 10,
+    int pageSize = 10,
     String? searchValue,
   });
- }
+
+  Future<Post> getDetailPostById(int postId);
+}

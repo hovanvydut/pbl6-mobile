@@ -30,9 +30,9 @@ class User extends Equatable {
   final String? avatar;
   final String address;
   final int addressWardId;
-  final String addressWard;
-  final String addressDistrict;
-  final String addressProvince;
+  final String? addressWard;
+  final String? addressDistrict;
+  final String? addressProvince;
   final int? userAccountId;
   final String? userAccountEmail;
 

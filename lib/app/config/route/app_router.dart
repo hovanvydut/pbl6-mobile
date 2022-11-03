@@ -1,8 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
+import 'package:pbl6_mobile/booking/booking.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
+import 'package:pbl6_mobile/create_booking/create_booking.dart';
 import 'package:pbl6_mobile/create_payment/create_payment.dart';
+import 'package:pbl6_mobile/detail_host/detail_host.dart';
+import 'package:pbl6_mobile/detail_post/detail_post.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
 import 'package:pbl6_mobile/edit_user_profile/edit_user_profile.dart';
 import 'package:pbl6_mobile/login/login.dart';
@@ -23,12 +27,16 @@ abstract class AppRouter {
   static const host = '/host';
   static const uploadPost = '/upload';
   static const editUserProfile = 'edit-profile';
-  static const detailPost = '/detail';
+  static const detailPost = '/post-detail';
+  static const detailHost = '/host-detail';
   static const editPost = '/edit-post';
   static const searchFilter = '/search-filter';
   static const bookmark = '/bookmark';
   static const payment = '/payment';
   static const createPayment = 'create';
+
+  static const booking = '/booking';
+  static const bookingList = 'booking-list';
 
   static final router = GoRouter(
     routes: [
@@ -43,6 +51,12 @@ abstract class AppRouter {
             builder: (context, state) {
               final user = state.extra! as User;
               return EditUserProfilePage(user: user);
+            },
+          ),
+          GoRoute(
+            path: bookingList,
+            builder: (context, state) {
+              return const BookingPage();
             },
           ),
         ],
@@ -97,6 +111,16 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
+        path: detailHost,
+        builder: (context, state) {
+          final extras = state.extra! as ExtraParams2<PostBloc, User>;
+          return BlocProvider.value(
+            value: extras.param1,
+            child: DetailHostPage(host: extras.param2),
+          );
+        },
+      ),
+      GoRoute(
         path: editPost,
         builder: (context, state) {
           final extras = state.extra! as ExtraParams2<PostBloc, Post>;
@@ -110,6 +134,12 @@ abstract class AppRouter {
         path: login,
         builder: (context, state) {
           return const LoginPage();
+        },
+      ),
+      GoRoute(
+        path: booking,
+        builder: (context, state) {
+          return const CreateBookingPage();
         },
       ),
       GoRoute(
@@ -153,12 +183,6 @@ abstract class AppRouter {
         path: login,
         builder: (context, state) {
           return const LoginPage();
-        },
-      ),
-      GoRoute(
-        path: register,
-        builder: (context, state) {
-          return const RegisterPage();
         },
       ),
     ],

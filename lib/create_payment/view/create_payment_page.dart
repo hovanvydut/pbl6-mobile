@@ -1,6 +1,7 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/create_payment/create_payment.dart';
@@ -44,7 +45,19 @@ class CreatePaymentView extends StatelessWidget {
       },
       child: DissmissFocus(
         child: Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Assets.icons.arrorLeft.svg(
+                color: Theme.of(context).colorScheme.onSurface,
+                height: 32,
+              ),
+              onPressed: () => context.pop(),
+            ),
+            title: const Text(
+              'Tạo giao dịch mới',
+            ),
+            centerTitle: true,
+          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Center(

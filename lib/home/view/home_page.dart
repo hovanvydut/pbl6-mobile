@@ -1,3 +1,4 @@
+import 'package:address/address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeBloc(
         postBloc: context.read<PostBloc>(),
+        addressRepository: context.read<AddressRepository>(),
       ),
       lazy: false,
       child: const HomeView(),
@@ -59,22 +61,43 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CachedNetworkImageSlider(
-              images: images,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              borderRadius: BorderRadius.circular(20),
-              height: context.height * 0.28,
-              imageError: Assets.images.notImage.image().image,
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          final homeLoadingStatus = state.homeLoadingStatus;
+          if (homeLoadingStatus == LoadingStatus.loading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CachedNetworkImageSlider(
+                  images: images,
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  borderRadius: BorderRadius.circular(20),
+                  height: context.height * 0.28,
+                  imageError: Assets.images.notImage.image().image,
+                ),
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'Xu hướng tìm kiếm',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                  ),
+                ),
+                const PriorityPostGridView(),
+              ],
             ),
-            const SizedBox(height: 16),
-            const PriorityPostGridView(),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

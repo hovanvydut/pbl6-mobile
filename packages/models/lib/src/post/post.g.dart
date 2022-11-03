@@ -29,4 +29,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       medias: (json['medias'] as List<dynamic>)
           .map((e) => Media.fromJson(e as Map<String, dynamic>))
           .toList(),
+      authorInfo: json['authorInfo'] == null
+          ? null
+          : User.fromJson(json['authorInfo'] as Map<String, dynamic>),
     );

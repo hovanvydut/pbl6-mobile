@@ -93,4 +93,7 @@ class PostRepository {
         pageSize: pageSize,
         searchValue: searchValue,
       );
+
+  Future<Post> getDetailPostById(int postId) =>
+      _postDatasource.getDetailPostById(postId);
 }

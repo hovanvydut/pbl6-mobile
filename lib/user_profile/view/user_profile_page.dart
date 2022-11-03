@@ -192,6 +192,7 @@ class UserProfilePage extends StatelessWidget {
                         subtitle: const Text('Chưa lịch nào'),
                         trailing: Assets.icons.chevronRight
                             .svg(color: theme.colorScheme.onSurface),
+                        onTap: () => context.pushToChild(AppRouter.bookingList),
                       ),
                       Builder(
                         builder: (context) {

@@ -15,9 +15,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       avatar: json['avatar'] as String?,
       address: json['address'] as String,
       addressWardId: json['addressWardId'] as int,
-      addressWard: json['addressWard'] as String,
-      addressDistrict: json['addressDistrict'] as String,
-      addressProvince: json['addressProvince'] as String,
+      addressWard: json['addressWard'] as String?,
+      addressDistrict: json['addressDistrict'] as String?,
+      addressProvince: json['addressProvince'] as String?,
       userAccountId: json['userAccountId'] as int?,
       userAccountEmail: json['userAccountEmail'] as String?,
     );
