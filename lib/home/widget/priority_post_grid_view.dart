@@ -41,6 +41,7 @@ class PriorityPostGridView extends StatelessWidget {
               final allPosts = state.allPostsData;
               final allPostsStatus = state.allPostsLoadingStatus;
               if (allPostsStatus == LoadingStatus.loading) {
+                /// TODO(dungngminh): add shimmer effect
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -84,7 +85,7 @@ class PriorityPostGridView extends StatelessWidget {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisSpacing: 16,
+                      mainAxisSpacing: 8,
                       crossAxisSpacing: 8,
                       mainAxisExtent: 260,
                     ),

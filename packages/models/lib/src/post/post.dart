@@ -22,6 +22,7 @@ class Post extends Equatable {
     required this.properties,
     this.groupProperties,
     required this.medias,
+    this.authorInfo,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
@@ -42,6 +43,7 @@ class Post extends Equatable {
   @JsonKey(name: 'propertyGroup')
   final List<GroupProperty>? groupProperties;
   final List<Media> medias;
+  final User? authorInfo;
 
   @override
   List<Object?> get props {
@@ -61,6 +63,7 @@ class Post extends Equatable {
       properties,
       groupProperties,
       medias,
+      authorInfo,
     ];
   }
 
@@ -80,6 +83,7 @@ class Post extends Equatable {
     List<Property>? properties,
     List<GroupProperty>? groupProperties,
     List<Media>? medias,
+    User? authorInfo,
   }) {
     return Post(
       id: id ?? this.id,
@@ -97,6 +101,7 @@ class Post extends Equatable {
       properties: properties ?? this.properties,
       groupProperties: groupProperties ?? this.groupProperties,
       medias: medias ?? this.medias,
+      authorInfo: authorInfo ?? this.authorInfo,
     );
   }
 }

@@ -228,6 +228,10 @@ class DetailPostPage extends StatelessWidget {
                           )
                         ] else
                           const SizedBox(),
+                        Text(
+                          'Tin nhà trọ khác',
+                          style: theme.textTheme.titleLarge,
+                        ),
                       ],
                     ),
                   ),
@@ -235,7 +239,7 @@ class DetailPostPage extends StatelessWidget {
               ),
             ),
           ),
-          const ConnectionPanel()
+          const ConnectionPanel(),
         ],
       ),
     );

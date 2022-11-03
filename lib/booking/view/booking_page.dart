@@ -32,7 +32,7 @@ class BookingView extends StatelessWidget {
           onPressed: () => context.pop(),
         ),
         title: const Text(
-          'Lịch đã đặt',
+          'Lịch xem trọ',
         ),
         centerTitle: true,
       ),
