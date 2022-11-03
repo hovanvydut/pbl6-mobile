@@ -1,4 +1,9 @@
 export 'bloc/post_bloc.dart';
 export 'view/detail_post_page.dart';
 export 'view/post_page.dart';
+export 'widget/basic_information.dart';
+export 'widget/connection_panel.dart';
+export 'widget/detail_information.dart';
+export 'widget/detail_post_description.dart';
 export 'widget/post_list_tile_card.dart';
+export 'widget/util_information.dart';

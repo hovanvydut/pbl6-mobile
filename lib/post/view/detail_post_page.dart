@@ -113,90 +113,9 @@ class DetailPostPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          post.category.name,
-                          style: theme.textTheme.bodyMedium
-                              ?.copyWith(color: theme.colorScheme.onSurface),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          post.title,
-                          style: theme.textTheme.headlineMedium
-                              ?.copyWith(color: theme.colorScheme.onSurface),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text.rich(
-                          TextSpan(
-                            text: 'Giá phòng: ',
-                            style: theme.textTheme.titleMedium,
-                            children: [
-                              TextSpan(
-                                text:
-                                    '${post.price.inCompactLongCurrency} / tháng',
-                                style: theme.textTheme.titleMedium?.copyWith(
-                                  color: theme.colorScheme.primary,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                        BasicInformation(post: post),
                         const SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  'Tối đa',
-                                  style: theme.textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  '${post.limitTenant} người',
-                                  style: theme.textTheme.bodyLarge,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  'Diện tích',
-                                  style: theme.textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  '${post.area.toStringAsFixed(0)}m²',
-                                  style: theme.textTheme.bodyLarge,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  'Đặt cọc',
-                                  style: theme.textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  post.prePaidPrice
-                                          ?.inCompactCurrencyNotSymbol ??
-                                      '',
-                                  style: theme.textTheme.bodyLarge,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                        DetailInformation(post: post),
                         const SizedBox(
                           height: 8,
                         ),
@@ -208,65 +127,11 @@ class DetailPostPage extends StatelessWidget {
                         const SizedBox(
                           height: 8,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              children: [
-                                Assets.icons.lightBulb.svg(
-                                  height: 28,
-                                  color: theme.colorScheme.outline,
-                                ),
-                                Text(
-                                  8000.inCompactCurrencyNotSymbol,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.colorScheme.onBackground,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Assets.icons.waterDrop.svg(
-                                  height: 28,
-                                  color: theme.colorScheme.outline,
-                                ),
-                                Text(
-                                  40000.inCompactCurrencyNotSymbol,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.colorScheme.onBackground,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Assets.icons.wifi.svg(
-                                  height: 28,
-                                  color: theme.colorScheme.outline,
-                                ),
-                                Text(
-                                  'Miễn phí',
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.colorScheme.onBackground,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                        UtilInformation(post: post),
                         const Divider(
                           height: 32,
                         ),
-                        Text(
-                          'Chi tiết',
-                          style: theme.textTheme.titleLarge,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          post.description ?? '',
-                          style: theme.textTheme.bodyMedium,
-                        ),
+                        DetailPostDescription(post: post),
                         const SizedBox(height: 24),
                         Text(
                           'Địa chỉ và liên hệ',
@@ -373,59 +238,6 @@ class DetailPostPage extends StatelessWidget {
           const ConnectionPanel()
         ],
       ),
-    );
-  }
-}
-
-class ConnectionPanel extends StatelessWidget {
-  const ConnectionPanel({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.theme;
-    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      builder: (context, state) {
-        return Container(
-          height: context.height * 0.12,
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                color: theme.colorScheme.outline.withOpacity(0.3),
-              ),
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FilledButtonWithIcon(
-                onPressed: () {},
-                icon: Assets.icons.messageOutline.svg(
-                  color: theme.colorScheme.onPrimary,
-                ),
-                label: const Text(
-                  'Chat ngay',
-                ),
-              ),
-              OutlinedButton(
-                onPressed: () {},
-                child: const Text(
-                  'Đặt lịch xem trọ',
-                ),
-              ),
-              OutlinedButton.icon(
-                onPressed: () {},
-                icon: Assets.icons.callOutline.svg(height: 20),
-                label: const Text(
-                  'Gọi',
-                ),
-              )
-            ],
-          ),
-        );
-      },
     );
   }
 }

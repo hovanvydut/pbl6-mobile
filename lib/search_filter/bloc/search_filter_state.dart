@@ -1,4 +1,3 @@
-
 part of 'search_filter_bloc.dart';
 
 class SearchFilterState extends Equatable {
@@ -109,7 +108,8 @@ class SearchFilterState extends Equatable {
       selectedOtherUtils: selectedOtherUtils ?? this.selectedOtherUtils,
       priceRange: priceRange ?? this.priceRange,
       areaRange: areaRange ?? this.areaRange,
-      selectedRentailObjects: selectedRentailObjects ?? this.selectedRentailObjects,
+      selectedRentailObjects:
+          selectedRentailObjects ?? this.selectedRentailObjects,
       selectedNearbyPlaces: selectedNearbyPlaces ?? this.selectedNearbyPlaces,
       loadingStatus: loadingStatus ?? this.loadingStatus,
       isInitialFilter: isInitialFilter ?? this.isInitialFilter,
