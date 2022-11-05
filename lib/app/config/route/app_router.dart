@@ -103,9 +103,17 @@ abstract class AppRouter {
       GoRoute(
         path: detailPost,
         builder: (context, state) {
-          final extras = state.extra! as ExtraParams2<PostBloc, Post>;
-          return BlocProvider.value(
-            value: extras.param1,
+          final extras =
+              state.extra! as ExtraParams3<PostBloc, Post, BookmarkBloc>;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: extras.param1,
+              ),
+              BlocProvider.value(
+                value: extras.param3,
+              ),
+            ],
             child: DetailPostPage(post: extras.param2),
           );
         },
@@ -113,9 +121,17 @@ abstract class AppRouter {
       GoRoute(
         path: detailHost,
         builder: (context, state) {
-          final extras = state.extra! as ExtraParams2<PostBloc, User>;
-          return BlocProvider.value(
-            value: extras.param1,
+          final extras =
+              state.extra! as ExtraParams3<PostBloc, User, BookmarkBloc>;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: extras.param1,
+              ),
+              BlocProvider.value(
+                value: extras.param3,
+              ),
+            ],
             child: DetailHostPage(host: extras.param2),
           );
         },

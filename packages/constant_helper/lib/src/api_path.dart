@@ -44,4 +44,7 @@ abstract class ApiPath {
   static const paymentBankCode = '/api/payment/bank-code';
   static const payment = '/api/payment';
   static const paymentHistoryPersonal = '/api/payment/history';
+
+  /// Get other host posts: GET /api/post
+  static String hostPostOther(int hostId) => '/api/host/$hostId/post';
 }
