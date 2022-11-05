@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/detail_post/detail_post.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:post/post.dart';
@@ -271,9 +272,11 @@ class DetailPostView extends StatelessWidget {
                                       title: Text(post.authorInfo!.displayName),
                                       onTap: () => context.push(
                                         AppRouter.detailHost,
-                                        extra: ExtraParams2<PostBloc, User>(
+                                        extra: ExtraParams3<PostBloc, User,
+                                            BookmarkBloc>(
                                           param1: context.read<PostBloc>(),
                                           param2: post.authorInfo!,
+                                          param3: context.read<BookmarkBloc>(),
                                         ),
                                       ),
                                     ),

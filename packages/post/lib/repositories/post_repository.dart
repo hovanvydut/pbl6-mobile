@@ -96,4 +96,7 @@ class PostRepository {
 
   Future<Post> getDetailPostById(int postId) =>
       _postDatasource.getDetailPostById(postId);
+
+  Future<List<Post>> getPostsByHostId(int hostId) =>
+      _postDatasource.getPostsByHostId(hostId);
 }
