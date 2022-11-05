@@ -19,6 +19,7 @@ import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/di/di.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:user/user.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -71,6 +72,7 @@ class AppBlocObserver extends BlocObserver {
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = AppBlocObserver();
   initDependences();
+  timeago.setLocaleMessages('vi', timeago.ViMessages());
   await runZonedGuarded(
     () async => runApp(
       MultiRepositoryProvider(

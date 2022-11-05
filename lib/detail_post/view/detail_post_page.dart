@@ -225,8 +225,8 @@ class DetailPostView extends StatelessWidget {
                                         color:
                                             theme.colorScheme.onSurfaceVariant,
                                       ),
-                                      title: const Text('10/10/2021'),
-                                      subtitle: const Text('30 ngày trước'),
+                                      title: Text(post.createdAt.yMd),
+                                      subtitle: Text(post.createdAt.toTimeAgo),
                                     ),
                                   ),
                                   Text(
@@ -343,7 +343,7 @@ class DetailPostView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const ConnectionPanel(),
+                    ConnectionPanel(post: post),
                   ],
                 ),
         );

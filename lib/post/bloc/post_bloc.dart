@@ -43,7 +43,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         ),
       );
     } catch (e) {
+      addError(e);
       emit(state.copyWith(allPostsLoadingStatus: LoadingStatus.error));
+      rethrow;
     }
   }
 

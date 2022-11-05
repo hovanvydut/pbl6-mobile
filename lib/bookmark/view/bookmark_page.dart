@@ -23,7 +23,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    return DissmissFocus(
+    return DismissFocus(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(

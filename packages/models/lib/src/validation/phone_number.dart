@@ -11,9 +11,7 @@ class PhoneNumber extends FormzInput<String, PhoneNumberValidationError> {
     if (value.isEmpty) {
       return PhoneNumberValidationError.empty;
     }
-    if (!RegExp(
-      '(84|0[3|5|7|8|9])+([0-9]{8})\b',
-    ).hasMatch(value)) {
+    if (!RegExp('(84|0[3|5|7|8|9])+([0-9]{8})').hasMatch(value)) {
       return PhoneNumberValidationError.notValid;
     }
     return null;

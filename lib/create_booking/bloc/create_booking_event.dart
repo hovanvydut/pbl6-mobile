@@ -6,3 +6,19 @@ abstract class CreateBookingEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class StepPressed extends CreateBookingEvent {
+  const StepPressed(this.index);
+  final int index;
+
+  @override
+  List<Object?> get props => [index];
+}
+
+class BookingPhoneNumberChanged extends CreateBookingEvent {
+  const BookingPhoneNumberChanged(this.phoneNumber);
+  final String phoneNumber;
+
+  @override
+  List<Object?> get props => [phoneNumber];
+}

@@ -62,7 +62,7 @@ class EditUserProfileView extends StatelessWidget {
           context.pop();
         }
       },
-      child: DissmissFocus(
+      child: DismissFocus(
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(

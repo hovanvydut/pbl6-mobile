@@ -43,7 +43,7 @@ class CreatePaymentView extends StatelessWidget {
           ToastHelper.showToast('Thao tác thất bại, vui lòng thử lại');
         }
       },
-      child: DissmissFocus(
+      child: DismissFocus(
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(

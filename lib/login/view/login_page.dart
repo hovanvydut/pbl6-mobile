@@ -51,7 +51,7 @@ class LoginView extends StatelessWidget {
           );
         }
       },
-      child: DissmissFocus(
+      child: DismissFocus(
         child: Scaffold(
           body: SingleChildScrollView(
             padding: EdgeInsets.only(

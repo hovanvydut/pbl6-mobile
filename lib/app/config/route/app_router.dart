@@ -35,7 +35,7 @@ abstract class AppRouter {
   static const payment = '/payment';
   static const createPayment = 'create';
 
-  static const booking = '/booking';
+  static const booking = 'booking';
   static const bookingList = 'booking-list';
 
   static final router = GoRouter(
@@ -117,6 +117,26 @@ abstract class AppRouter {
             child: DetailPostPage(post: extras.param2),
           );
         },
+        routes: [
+          GoRoute(
+            path: booking,
+            builder: (context, state) {
+               final extras =
+              state.extra! as ExtraParams3<PostBloc, Post, BookmarkBloc>;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: extras.param1,
+              ),
+              BlocProvider.value(
+                value: extras.param3,
+              ),
+            ],
+            child: CreateBookingPage(post: extras.param2),
+          );
+            },
+          ),
+        ],
       ),
       GoRoute(
         path: detailHost,
@@ -150,12 +170,6 @@ abstract class AppRouter {
         path: login,
         builder: (context, state) {
           return const LoginPage();
-        },
-      ),
-      GoRoute(
-        path: booking,
-        builder: (context, state) {
-          return const CreateBookingPage();
         },
       ),
       GoRoute(
