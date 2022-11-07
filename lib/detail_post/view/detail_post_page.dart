@@ -226,7 +226,7 @@ class DetailPostView extends StatelessWidget {
                                             theme.colorScheme.onSurfaceVariant,
                                       ),
                                       title: Text(post.createdAt.yMd),
-                                      subtitle: Text(post.createdAt.toTimeAgo),
+                                      subtitle: Text(post.createdAt.timeAgo),
                                     ),
                                   ),
                                   Text(

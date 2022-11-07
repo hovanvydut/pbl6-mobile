@@ -8,4 +8,6 @@
 /// A Booking Module
 library booking;
 
-export 'src/booking.dart';
+export 'data/ibooking_datasource.dart';
+export 'data/remote/remote_booking_datasource.dart';
+export 'repositories/booking_repository.dart';

@@ -47,4 +47,27 @@ abstract class ApiPath {
 
   /// Get other host posts: GET /api/post
   static String hostPostOther(int hostId) => '/api/host/$hostId/post';
+
+  /// BOOKING
+
+  /// `POST`: create booking
+  ///
+  /// `GET`: get booking list
+  static const booking = '/api/booking';
+
+  /// `PUT`: Approve Booking
+  static String approveBooking(int bookingId) =>
+      '/api/booking/$bookingId/approve';
+
+  /// `PUT`: Confirm Meeting
+  static String confirmMeeting(int bookingId) =>
+      '/api/booking/$bookingId/confirm-meet';
+
+  /// `POST`: config freetime
+  static const freetime = '/api/booking/free-time';
+
+  /// `GET`: get freetime of user
+  ///
+  static String freetimeOther(int userId) =>
+      '/api/booking/user/$userId/free-time';
 }

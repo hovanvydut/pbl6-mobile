@@ -12,10 +12,12 @@ class PostListTileCard extends StatelessWidget {
     super.key,
     required this.post,
     this.isBookmarked = false,
+    this.isHidden = false,
   });
 
   final Post post;
   final bool isBookmarked;
+  final bool isHidden;
 
   @override
   Widget build(BuildContext context) {
@@ -131,18 +133,19 @@ class PostListTileCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    BookmarkIconButton(
-                      isBookmarked: isBookmarked,
-                      onBookmarkedPressed: () => context
-                          .read<BookmarkBloc>()
-                          .add(DeleteBookmark(post)),
-                      onUnBookmarkedPressed: () =>
-                          context.read<BookmarkBloc>().add(AddBookmark(post)),
-                    )
-                  ],
-                )
+                if (!isHidden)
+                  Column(
+                    children: [
+                      BookmarkIconButton(
+                        isBookmarked: isBookmarked,
+                        onBookmarkedPressed: () => context
+                            .read<BookmarkBloc>()
+                            .add(DeleteBookmark(post)),
+                        onUnBookmarkedPressed: () =>
+                            context.read<BookmarkBloc>().add(AddBookmark(post)),
+                      )
+                    ],
+                  )
               ],
             ),
           ),

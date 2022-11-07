@@ -7,5 +7,12 @@ extension DateTimeExtension on DateTime {
     return dateFormatter.format(this);
   }
 
-  String get toTimeAgo => timeago.format(this, locale: 'vi');
+  String get yMdHm {
+    final dateFormatter = DateFormat.yMd('vi');
+    final timeFormatter = DateFormat.Hm('vi');
+
+    return '${dateFormatter.format(this)} ${timeFormatter.format(this)}';
+  }
+
+  String get timeAgo => timeago.format(this, locale: 'vi');
 }

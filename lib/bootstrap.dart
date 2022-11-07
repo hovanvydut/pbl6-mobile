@@ -10,6 +10,7 @@ import 'dart:developer';
 
 import 'package:address/address.dart';
 import 'package:auth/auth.dart';
+import 'package:booking/booking.dart';
 import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
 import 'package:flutter/widgets.dart';
@@ -104,11 +105,14 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           RepositoryProvider(
             create: (_) => PaymentRepository(paymentDatasource: injector()),
           ),
+          RepositoryProvider(
+            create: (_) => BookingRepository(bookingDatasource: injector()),
+          ),
         ],
         child: await builder(),
       ),
     ),
     (error, stackTrace) =>
-        log(error.toString(), stackTrace: stackTrace, name: 'ERROR'),
+        log(error.toString(), stackTrace: stackTrace, name: 'BLOC_ERROR'),
   );
 }

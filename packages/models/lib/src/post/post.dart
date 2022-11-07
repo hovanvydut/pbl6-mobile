@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:models/models.dart';
@@ -24,7 +23,8 @@ class Post extends Equatable {
     this.groupProperties,
     required this.medias,
     this.authorInfo,
-    required this.createdAt, required this.updatedAt, 
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
