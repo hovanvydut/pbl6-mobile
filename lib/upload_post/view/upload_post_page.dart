@@ -51,17 +51,12 @@ class UploadPostView extends StatelessWidget {
           context.pop();
         }
         if (state.uploadPostStatus == LoadingStatus.error) {
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Đăng bài viết thất bại, vui lòng thử lại'),
-              duration: Duration(milliseconds: 1500),
-            ),
-          );
-          context.pop();
+          context
+            ..showSnackBar(message: 'Đăng bài viết thất bại, vui lòng thử lại')
+            ..pop();
         }
       },
-      child: DissmissFocus(
+      child: DismissFocus(
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(

@@ -1,6 +1,6 @@
 name: pbl6_mobile
 description: A PBL6 Mobile App End-user
-version: 0.10.0+1
+version: 0.11.0+1
 publish_to: none
 
 environment:
@@ -70,6 +70,9 @@ dependencies:
   easy_debounce: ^2.0.2+1
   webview_flutter: ^3.0.4
   flutter_webview_plugin: ^0.4.0
+  flutter_rating_bar: ^4.0.1
+  syncfusion_flutter_calendar: ^20.3.52
+  syncfusion_localizations: ^20.3.52
 
 dev_dependencies:
   bloc_test: ^9.1.0

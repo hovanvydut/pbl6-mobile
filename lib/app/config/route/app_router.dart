@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
+import 'package:pbl6_mobile/config_freetime/config_freetime.dart';
 import 'package:pbl6_mobile/create_booking/create_booking.dart';
 import 'package:pbl6_mobile/create_payment/create_payment.dart';
 import 'package:pbl6_mobile/detail_host/detail_host.dart';
@@ -33,10 +34,11 @@ abstract class AppRouter {
   static const searchFilter = '/search-filter';
   static const bookmark = '/bookmark';
   static const payment = '/payment';
-  static const createPayment = 'create';
+  static const createPayment = 'create-payment';
 
-  static const booking = '/booking';
+  static const booking = 'create-booking';
   static const bookingList = 'booking-list';
+  static const configFreetime = 'config-freetime';
 
   static final router = GoRouter(
     routes: [
@@ -58,6 +60,18 @@ abstract class AppRouter {
             builder: (context, state) {
               return const BookingPage();
             },
+            routes: [
+              GoRoute(
+                path: configFreetime,
+                builder: (context, state) {
+                  final bookingBloc = state.extra! as BookingBloc;
+                  return BlocProvider.value(
+                    value: bookingBloc,
+                    child: const ConfigFreetimePage(),
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),
@@ -117,6 +131,26 @@ abstract class AppRouter {
             child: DetailPostPage(post: extras.param2),
           );
         },
+        routes: [
+          GoRoute(
+            path: booking,
+            builder: (context, state) {
+              final extras =
+                  state.extra! as ExtraParams3<PostBloc, Post, BookmarkBloc>;
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: extras.param1,
+                  ),
+                  BlocProvider.value(
+                    value: extras.param3,
+                  ),
+                ],
+                child: CreateBookingPage(post: extras.param2),
+              );
+            },
+          ),
+        ],
       ),
       GoRoute(
         path: detailHost,
@@ -150,12 +184,6 @@ abstract class AppRouter {
         path: login,
         builder: (context, state) {
           return const LoginPage();
-        },
-      ),
-      GoRoute(
-        path: booking,
-        builder: (context, state) {
-          return const CreateBookingPage();
         },
       ),
       GoRoute(

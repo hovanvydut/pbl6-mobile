@@ -42,16 +42,11 @@ class LoginView extends StatelessWidget {
           context.go(AppRouter.main);
         }
         if (state.formStatus == FormzStatus.submissionFailure) {
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.errorMessage),
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          context.showSnackBar(message: state.errorMessage);
+          
         }
       },
-      child: DissmissFocus(
+      child: DismissFocus(
         child: Scaffold(
           body: SingleChildScrollView(
             padding: EdgeInsets.only(

@@ -6,3 +6,29 @@ abstract class BookingEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class BookingPageStarted extends BookingEvent {}
+
+class EditUpdatedFreetime extends BookingEvent {
+  const EditUpdatedFreetime(this.freetimes);
+  final List<Freetime> freetimes;
+
+  @override
+  List<Object?> get props => [freetimes];
+}
+
+class ApprovePressed extends BookingEvent {
+  const ApprovePressed(this.bookingId);
+  final int bookingId;
+
+  @override
+  List<Object?> get props => [bookingId];
+}
+
+class ConfirmMeetingPressed extends BookingEvent {
+  const ConfirmMeetingPressed(this.bookingId);
+  final int bookingId;
+
+  @override
+  List<Object?> get props => [bookingId];
+}

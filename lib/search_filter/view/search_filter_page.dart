@@ -35,7 +35,7 @@ class SearchFilterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    return DissmissFocus(
+    return DismissFocus(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: PreferredSize(
@@ -121,7 +121,7 @@ class FilterChoicePanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    return DissmissFocus(
+    return DismissFocus(
       child: Container(
         height: context.height * 0.9,
         decoration: BoxDecoration(
@@ -132,7 +132,7 @@ class FilterChoicePanel extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const Center(child: SheetDragHandle()),
+            const SheetDragHandle(),
             const SizedBox(
               height: 16,
             ),

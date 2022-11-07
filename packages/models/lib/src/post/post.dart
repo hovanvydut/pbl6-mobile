@@ -23,6 +23,8 @@ class Post extends Equatable {
     this.groupProperties,
     required this.medias,
     this.authorInfo,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
@@ -44,6 +46,8 @@ class Post extends Equatable {
   final List<GroupProperty>? groupProperties;
   final List<Media> medias;
   final User? authorInfo;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
 
   @override
   List<Object?> get props {
@@ -64,6 +68,8 @@ class Post extends Equatable {
       groupProperties,
       medias,
       authorInfo,
+      createdAt,
+      updatedAt,
     ];
   }
 
@@ -84,6 +90,8 @@ class Post extends Equatable {
     List<GroupProperty>? groupProperties,
     List<Media>? medias,
     User? authorInfo,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return Post(
       id: id ?? this.id,
@@ -102,6 +110,8 @@ class Post extends Equatable {
       groupProperties: groupProperties ?? this.groupProperties,
       medias: medias ?? this.medias,
       authorInfo: authorInfo ?? this.authorInfo,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }
