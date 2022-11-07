@@ -110,7 +110,6 @@ class CreateBookingView extends StatelessWidget {
                                             .first.start.toDateTime.yMdHm,
                                       )
                                     : const Text('Chọn thời gian xem trọ'),
-                               
                                 trailing: Assets.icons.chevronRight.svg(
                                   color:
                                       Theme.of(context).colorScheme.onSurface,
