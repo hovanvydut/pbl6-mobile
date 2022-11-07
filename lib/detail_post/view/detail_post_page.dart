@@ -343,7 +343,7 @@ class DetailPostView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ConnectionPanel(),
+                    const ConnectionPanel(),
                   ],
                 ),
         );
