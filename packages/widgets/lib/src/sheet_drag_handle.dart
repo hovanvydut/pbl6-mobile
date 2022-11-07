@@ -7,16 +7,18 @@ class SheetDragHandle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: 0.4,
-      child: Container(
-        margin: const EdgeInsets.only(top: 8),
-        width: 32,
-        height: 4,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
-          borderRadius: BorderRadius.circular(
-            16,
+    return Center(
+      child: Opacity(
+        opacity: 0.4,
+        child: Container(
+          margin: const EdgeInsets.only(top: 8),
+          width: 32,
+          height: 4,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            borderRadius: BorderRadius.circular(
+              16,
+            ),
           ),
         ),
       ),

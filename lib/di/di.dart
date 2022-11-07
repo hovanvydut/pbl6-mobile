@@ -1,5 +1,6 @@
 import 'package:address/address.dart';
 import 'package:auth/auth.dart';
+import 'package:booking/booking.dart';
 import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
 import 'package:get_it/get_it.dart';
@@ -52,5 +53,8 @@ void initDependences() {
     )
     ..registerLazySingleton<IPaymentDatasource>(
       () => RemotePaymentDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IBookingDatasource>(
+      () => RemoteBookingDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }

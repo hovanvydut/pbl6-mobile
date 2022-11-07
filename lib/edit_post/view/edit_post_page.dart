@@ -54,12 +54,8 @@ class EditPostView extends StatelessWidget {
           previous.editPostStatus != current.editPostStatus,
       listener: (context, state) {
         if (state.loadingStatus == LoadingStatus.error) {
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Không thể lấy dữ liệu, vui lòng thử lại'),
-              duration: Duration(seconds: 2),
-            ),
+          context.showSnackBar(
+            message: 'Không thể lấy dữ liệu, vui lòng thử lại',
           );
         }
         if (state.editPostStatus == LoadingStatus.done) {
@@ -68,16 +64,12 @@ class EditPostView extends StatelessWidget {
           context.go(AppRouter.main);
         }
         if (state.editPostStatus == LoadingStatus.error) {
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Cập nhật bài viết thất bại, vui lòng thử lại'),
-              duration: Duration(milliseconds: 1500),
-            ),
+          context.showSnackBar(
+            message: 'Cập nhật bài viết thất bại, vui lòng thử lại',
           );
         }
       },
-      child: DissmissFocus(
+      child: DismissFocus(
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(

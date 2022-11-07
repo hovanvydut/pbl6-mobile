@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
+import 'package:pbl6_mobile/detail_post/detail_post.dart';
+import 'package:pbl6_mobile/post/post.dart';
 import 'package:widgets/widgets.dart';
 
 class ConnectionPanel extends StatelessWidget {
@@ -32,22 +36,23 @@ class ConnectionPanel extends StatelessWidget {
                 icon: Assets.icons.messageOutline.svg(
                   color: theme.colorScheme.onPrimary,
                 ),
-                label: const Text(
-                  'Chat ngay',
-                ),
+                label: const Text('Chat ngay'),
               ),
               OutlinedButton(
-                onPressed: () {},
-                child: const Text(
-                  'Đặt lịch xem trọ',
+                onPressed: () => context.pushToChild(
+                  AppRouter.booking,
+                  extra: ExtraParams3<PostBloc, Post, BookmarkBloc>(
+                    param1: context.read<PostBloc>(),
+                    param2: context.read<DetailPostCubit>().state.post,
+                    param3: context.read<BookmarkBloc>(),
+                  ),
                 ),
+                child: const Text('Đặt lịch xem trọ'),
               ),
               OutlinedButton.icon(
                 onPressed: () {},
                 icon: Assets.icons.callOutline.svg(height: 20),
-                label: const Text(
-                  'Gọi',
-                ),
+                label: const Text('Gọi'),
               )
             ],
           ),

@@ -14,9 +14,6 @@ import 'package:flutter/services.dart';
 class $AssetsFontsGen {
   const $AssetsFontsGen();
 
-  /// File path: assets/fonts/.gitkeep
-  String get gitkeep => 'assets/fonts/.gitkeep';
-
   /// File path: assets/fonts/Nunito-Black.ttf
   String get nunitoBlack => 'assets/fonts/Nunito-Black.ttf';
 
@@ -46,7 +43,6 @@ class $AssetsFontsGen {
 
   /// List of all assets
   List<String> get values => [
-        gitkeep,
         nunitoBlack,
         nunitoBold,
         nunitoExtraBold,
@@ -96,6 +92,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
+
+  /// File path: assets/icons/clock.svg
+  SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
 
   /// File path: assets/icons/close.svg
   SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
@@ -208,6 +207,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/share.svg
   SvgGenImage get share => const SvgGenImage('assets/icons/share.svg');
 
+  /// File path: assets/icons/tick_circle.svg
+  SvgGenImage get tickCircle =>
+      const SvgGenImage('assets/icons/tick_circle.svg');
+
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
@@ -232,6 +235,7 @@ class $AssetsIconsGen {
         callOutline,
         camera,
         chevronRight,
+        clock,
         close,
         danger,
         delete,
@@ -264,6 +268,7 @@ class $AssetsIconsGen {
         setting,
         settingBold,
         share,
+        tickCircle,
         user,
         wallet,
         waterDrop,

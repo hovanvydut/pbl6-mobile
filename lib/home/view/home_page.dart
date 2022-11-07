@@ -2,6 +2,7 @@ import 'package:address/address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/home/home.dart';
@@ -24,8 +25,33 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +63,16 @@ class HomeView extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: GestureDetector(
-          onTap: () {
-            showAboutDialog(
-              context: context,
-              applicationName: 'PBL6 HOMIE',
-            );
-          },
-          child: Assets.images.logo.svg(),
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Assets.images.logo.svg(),
+            const SizedBox(width: 8),
+            Text(
+              'v${_packageInfo.version}',
+              style: theme.textTheme.titleMedium,
+            )
+          ],
         ),
         actions: [
           IconButton(

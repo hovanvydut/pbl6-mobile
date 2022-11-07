@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DissmissFocus extends StatelessWidget {
-  const DissmissFocus({super.key, required this.child});
+class DismissFocus extends StatelessWidget {
+  const DismissFocus({super.key, required this.child});
 
   final Widget child;
 

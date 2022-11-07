@@ -10,6 +10,7 @@ import 'dart:developer';
 
 import 'package:address/address.dart';
 import 'package:auth/auth.dart';
+import 'package:booking/booking.dart';
 import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
 import 'package:flutter/widgets.dart';
@@ -19,6 +20,7 @@ import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/di/di.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:user/user.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -71,6 +73,7 @@ class AppBlocObserver extends BlocObserver {
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = AppBlocObserver();
   initDependences();
+  timeago.setLocaleMessages('vi', timeago.ViMessages());
   await runZonedGuarded(
     () async => runApp(
       MultiRepositoryProvider(
@@ -102,11 +105,14 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           RepositoryProvider(
             create: (_) => PaymentRepository(paymentDatasource: injector()),
           ),
+          RepositoryProvider(
+            create: (_) => BookingRepository(bookingDatasource: injector()),
+          ),
         ],
         child: await builder(),
       ),
     ),
     (error, stackTrace) =>
-        log(error.toString(), stackTrace: stackTrace, name: 'ERROR'),
+        log(error.toString(), stackTrace: stackTrace, name: 'BLOC_ERROR'),
   );
 }

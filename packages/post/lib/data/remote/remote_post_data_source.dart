@@ -109,33 +109,34 @@ class RemotePostDatasource implements IPostDatasource {
     List<Media>? medias,
     required List<int> properties,
   }) async {
-    // try {
-    final jwt = await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
-    await _httpHandler.put(
-      '${ApiPath.postFilter}/$postId',
-      body: {
-        'title': title,
-        'description': description,
-        'area': area,
-        'address': address,
-        'addressWardId': wardId,
-        'price': price,
-        'prePaidPrice': prePaidPrice,
-        'categoryId': houseTypeId,
-        'limitTenant': limitTenant,
-        'medias': medias!
-            .map<Map<String, dynamic>>((media) => media.toJson())
-            .toList(),
-        'properties': properties,
-      },
-      headers: {
-        HttpHeaders.authorizationHeader: 'Bearer $jwt',
-        HttpHeaders.contentTypeHeader: ContentType.json.value,
-      },
-    );
-    // } catch (e) {
-    //   rethrow;
-    // }
+    try {
+      final jwt =
+          await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
+      await _httpHandler.put(
+        '${ApiPath.postFilter}/$postId',
+        body: {
+          'title': title,
+          'description': description,
+          'area': area,
+          'address': address,
+          'addressWardId': wardId,
+          'price': price,
+          'prePaidPrice': prePaidPrice,
+          'categoryId': houseTypeId,
+          'limitTenant': limitTenant,
+          'medias': medias!
+              .map<Map<String, dynamic>>((media) => media.toJson())
+              .toList(),
+          'properties': properties,
+        },
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $jwt',
+          HttpHeaders.contentTypeHeader: ContentType.json.value,
+        },
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -209,6 +210,22 @@ class RemotePostDatasource implements IPostDatasource {
       final responseData =
           await _httpHandler.get('${ApiPath.postFilter}/$postId');
       return Post.fromJson(responseData.data as Map<String, dynamic>);
+    } catch (e) {
+      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Post>> getPostsByHostId(int hostId) async {
+    try {
+      final responseData =
+          await _httpHandler.get(ApiPath.hostPostOther(hostId));
+      final data = responseData.data as Map<String, dynamic>;
+      final postsData = data['records'] as List;
+      return postsData
+          .map((data) => Post.fromJson(data as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
       rethrow;
