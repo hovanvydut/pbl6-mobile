@@ -15,4 +15,11 @@ extension DateTimeExtension on DateTime {
   }
 
   String get timeAgo => timeago.format(this, locale: 'vi');
+
+  int get dayOfWeek => weekday + 1;
+
+  String get Hm {
+    final timeFormatter = DateFormat.Hm('vi');
+    return timeFormatter.format(this);
+  }
 }

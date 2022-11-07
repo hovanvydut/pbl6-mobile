@@ -7,8 +7,8 @@ abstract class IBookingDatasource {
   });
 
   Future<List<BookingData>> getBookingList({
-    required int month,
-    required int year,
+    int? month,
+    int? year,
     int pageNumber = 1,
     int pageSize = 10,
     String? searchValue,

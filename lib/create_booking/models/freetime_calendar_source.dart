@@ -16,6 +16,4 @@ class FreetimeCalendarSource extends CalendarDataSource {
   DateTime getEndTime(int index) {
     return (appointments as List<Freetime>?)![index].end.toDateTime;
   }
-
-
 }

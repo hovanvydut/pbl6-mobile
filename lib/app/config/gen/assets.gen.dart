@@ -207,6 +207,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/share.svg
   SvgGenImage get share => const SvgGenImage('assets/icons/share.svg');
 
+  /// File path: assets/icons/tick_circle.svg
+  SvgGenImage get tickCircle =>
+      const SvgGenImage('assets/icons/tick_circle.svg');
+
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
@@ -264,6 +268,7 @@ class $AssetsIconsGen {
         setting,
         settingBold,
         share,
+        tickCircle,
         user,
         wallet,
         waterDrop,

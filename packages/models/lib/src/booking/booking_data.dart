@@ -32,4 +32,20 @@ class BookingData extends Equatable {
       isMeet,
     ];
   }
+
+  BookingData copyWith({
+    int? id,
+    GuestInfo? guestInfo,
+    DateTime? time,
+    DateTime? approveTime,
+    bool? isMeet,
+  }) {
+    return BookingData(
+      id: id ?? this.id,
+      guestInfo: guestInfo ?? this.guestInfo,
+      time: time ?? this.time,
+      approveTime: approveTime ?? this.approveTime,
+      isMeet: isMeet ?? this.isMeet,
+    );
+  }
 }

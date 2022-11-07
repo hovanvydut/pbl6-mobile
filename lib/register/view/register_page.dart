@@ -33,24 +33,14 @@ class RegisterView extends StatelessWidget {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state.formStatus.isSubmissionSuccess) {
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content:
-                  Text('Đăng ký thành công, vui lòng xác thực email của bạn'),
-              duration: Duration(milliseconds: 1500),
-            ),
-          );
-          context.pop();
+          context
+            ..showSnackBar(
+              message: 'Đăng ký thành công, vui lòng xác thực email của bạn',
+            )
+            ..pop();
         }
         if (state.formStatus.isSubmissionFailure) {
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Đăng ký thất bại, vui lòng thử lại'),
-              duration: Duration(milliseconds: 1500),
-            ),
-          );
+          context.showSnackBar(message: 'Đăng ký thất bại, vui lòng thử lại');
         }
       },
       child: DismissFocus(

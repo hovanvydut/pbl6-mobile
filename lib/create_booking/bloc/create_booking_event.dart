@@ -35,6 +35,6 @@ class SchedulePressed extends CreateBookingEvent {
 
 class RemoveSchedulePressed extends CreateBookingEvent {}
 
-class ConfirmSchedulePressed extends CreateBookingEvent{}
+class ConfirmSchedulePressed extends CreateBookingEvent {}
 
-class CreateBookingSubmitted extends CreateBookingEvent{}
+class CreateBookingSubmitted extends CreateBookingEvent {}

@@ -71,8 +71,8 @@ class RemoteBookingDatasource implements IBookingDatasource {
 
   @override
   Future<List<BookingData>> getBookingList({
-    required int month,
-    required int year,
+    int? month,
+    int? year,
     int pageNumber = 1,
     int pageSize = 10,
     String? searchValue,
@@ -87,10 +87,10 @@ class RemoteBookingDatasource implements IBookingDatasource {
         },
         queryParameter: Map.fromEntries(
           {
-            'month': month,
-            'year': year,
-            'PageNumber': pageNumber,
-            'PageSize': pageSize,
+            'month': month != null ? '$month' : null,
+            'year': year != null ? '$year' : null,
+            'PageNumber': '$pageNumber',
+            'PageSize': '$pageSize',
             'SearchValue': searchValue,
           }.entries.toList()
             ..removeWhere((entry) => entry.value == null),
@@ -140,7 +140,7 @@ class RemoteBookingDatasource implements IBookingDatasource {
         body: {
           'data': freetimes
               .map(
-                (freetime) => freetime.toJson,
+                (freetime) => freetime.toJson(),
               )
               .toList(),
         },

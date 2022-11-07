@@ -110,12 +110,7 @@ class CreateBookingView extends StatelessWidget {
                                             .first.start.toDateTime.yMdHm,
                                       )
                                     : const Text('Chọn thời gian xem trọ'),
-                                subtitle: selectedTime.isNotEmpty
-                                    ? Text(
-                                        selectedTime
-                                            .first.start.toDateTime.timeAgo,
-                                      )
-                                    : null,
+                               
                                 trailing: Assets.icons.chevronRight.svg(
                                   color:
                                       Theme.of(context).colorScheme.onSurface,
@@ -272,7 +267,9 @@ class BookingCalendarBottomSheet extends StatelessWidget {
                         },
                         firstDayOfWeek: 1,
                         blackoutDates: [
-                          DateTime.now().add(const Duration(hours: 1)),
+                          DateTime.now()
+                              .add(const Duration(days: 1))
+                              .subtract(const Duration(hours: 3)),
                         ],
                       );
                     },
@@ -334,10 +331,6 @@ class BookingCalendarBottomSheet extends StatelessWidget {
                           title: Text(
                             tempSelectedTime.first.start.toDateTime.yMdHm,
                           ),
-                          subtitle: Text(
-                            tempSelectedTime.first.start.toDateTime.timeAgo,
-                          ),
-                          onTap: () {},
                         ),
                       ),
                     );

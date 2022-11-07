@@ -45,34 +45,25 @@ class CreateBookingBloc extends Bloc<CreateBookingEvent, CreateBookingState> {
     );
   }
 
-  void _onPageStarted(
+  Future<void> _onPageStarted(
     CreateBookingPageStarted event,
     Emitter<CreateBookingState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        freetimes: List.from([
-          Freetime(
-            day: 0,
-            start: DateTime.now()
-                .subtract(const Duration(hours: 2))
-                .toIso8601String(),
-            end: DateTime.now()
-                .subtract(const Duration(hours: 1))
-                .toIso8601String(),
-          ),
-          Freetime(
-            day: 1,
-            start:
-                DateTime.now().add(const Duration(days: 1)).toIso8601String(),
-            end: DateTime.now()
-                .add(const Duration(days: 1))
-                .add(const Duration(hours: 2))
-                .toIso8601String(),
-          )
-        ]),
-      ),
-    );
+  ) async {
+    try {
+      emit(state.copyWith(pageLoadingStatus: LoadingStatus.loading));
+      final freetimes = await _bookingRepository
+          .getFreeTimeByUserId(state.post.authorInfo!.id);
+      emit(
+        state.copyWith(
+          pageLoadingStatus: LoadingStatus.done,
+          freetimes: freetimes,
+        ),
+      );
+    } catch (e) {
+      addError(e);
+      emit(state.copyWith(pageLoadingStatus: LoadingStatus.error));
+      rethrow;
+    }
   }
 
   void _onSchedulePressed(

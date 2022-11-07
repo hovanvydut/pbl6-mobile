@@ -53,7 +53,8 @@ void initDependences() {
     )
     ..registerLazySingleton<IPaymentDatasource>(
       () => RemotePaymentDatasource(httpHandler: injector<HttpClientHandler>()),
-    ) ..registerLazySingleton<IBookingDatasource>(
-      ()=> RemoteBookingDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IBookingDatasource>(
+      () => RemoteBookingDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }
