@@ -11,6 +11,7 @@ class PermissionWrapper extends StatelessWidget {
   });
 
   final Permission permission;
+
   final Widget child;
 
   @override

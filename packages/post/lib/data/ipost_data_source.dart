@@ -49,7 +49,7 @@ abstract class IPostDatasource {
     double? maxPrice,
     double? minArea,
     double? maxArea,
-    int? addressWardId,
+    int? addressDistrictId,
     int? categoryId,
     int pageNumber = 1,
     int pageSize = 10,
@@ -59,10 +59,4 @@ abstract class IPostDatasource {
   Future<Post> getDetailPostById(int postId);
 
   Future<List<Post>> getPostsByHostId(int hostId);
-
-  Future<List<Post>> getRelatedPost({
-    required int quantity,
-    required int postId,
-    required int addressWardId,
-  });
 }

@@ -52,7 +52,7 @@ class DetailPostAddressInformation extends StatelessWidget {
             ),
             title: const Text('Số điện thoại'),
             subtitle:
-                Text(post.authorInfo!.phoneNumber ?? 'Không có thông tin'),
+                Text(post.authorInfo?.phoneNumber ?? 'Không có thông tin'),
           ),
         ),
       ],

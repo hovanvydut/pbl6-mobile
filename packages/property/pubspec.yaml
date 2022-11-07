@@ -12,7 +12,7 @@ dependencies:
     path: ../constant_helper
   flutter:
     sdk: flutter
-  http_client_handler: ^0.1.1
+  http_client_handler: ^0.1.0+1
   models:
     path: ../models
 
