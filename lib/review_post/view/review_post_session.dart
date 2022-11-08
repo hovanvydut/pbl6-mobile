@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/review_post/review_post.dart';
 import 'package:review/review.dart';
 
@@ -45,12 +46,21 @@ class ReviewPostView extends StatelessWidget {
               builder: (context) {
                 final reviews = context
                     .select((ReviewPostBloc bloc) => bloc.state.postReviews);
+                final user = context.watch<AuthenticationBloc>().state.user;
+                final post =
+                    context.select((ReviewPostBloc bloc) => bloc.state.post);
                 return Visibility(
-                  visible: reviews.isNotEmpty,
+                  visible:
+                      reviews.isNotEmpty && post.authorInfo!.id != user!.id,
                   child: TextButton(
                     child: const Text('Thêm đánh giá'),
-                    onPressed: () =>
-                        context.pushToChild(AppRouter.createReview),
+                    onPressed: () => context.pushToChild(
+                      AppRouter.createReview,
+                      extra: ExtraParams2<Post, ReviewPostBloc>(
+                        param1: context.read<ReviewPostBloc>().state.post,
+                        param2: context.read<ReviewPostBloc>(),
+                      ),
+                    ),
                   ),
                 );
               },
@@ -70,6 +80,9 @@ class ReviewPostView extends StatelessWidget {
             final canLoadingMore = context.select(
               (ReviewPostBloc bloc) => bloc.state.canLoadingMore,
             );
+
+            final post =
+                context.select((ReviewPostBloc bloc) => bloc.state.post);
             if (reviewLoadingStatus == LoadingStatus.loading) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -80,6 +93,7 @@ class ReviewPostView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 16),
                     Assets.images.errorNotFound.svg(
                       height: 100,
                       width: 150,
@@ -100,7 +114,7 @@ class ReviewPostView extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 12,
+                      height: 16,
                     ),
                     Text(
                       'Chưa có đánh giá nào cho bài viết này',
@@ -108,17 +122,46 @@ class ReviewPostView extends StatelessWidget {
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
                     ),
-                    TextButton(
-                      child: const Text('Hãy là người đầu tiền đánh giá'),
-                      onPressed: () =>
-                          context.pushToChild(AppRouter.createReview),
+                    Builder(
+                      builder: (context) {
+                        final user =
+                            context.watch<AuthenticationBloc>().state.user;
+                        if (post.authorInfo!.id != user!.id) {
+                          return TextButton(
+                            child: const Text('Hãy là người đầu tiền đánh giá'),
+                            onPressed: () => context.pushToChild(
+                              AppRouter.createReview,
+                              extra: ExtraParams2<Post, ReviewPostBloc>(
+                                param1:
+                                    context.read<ReviewPostBloc>().state.post,
+                                param2: context.read<ReviewPostBloc>(),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
                     ),
                   ],
                 ),
               );
             }
+            var avgRating = 0.0;
+            for (final review in reviews) {
+              avgRating += review.rating;
+            }
+            avgRating /= reviews.length;
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 8),
+                Text(
+                  '$avgRating/5',
+                  style: theme.textTheme.titleLarge!
+                      .copyWith(color: theme.colorScheme.primary),
+                ),
+                const SizedBox(height: 16),
                 ...reviews.map(
                   (review) {
                     return Column(
@@ -177,7 +220,7 @@ class ReviewPostView extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  review.createdAt.timeAgo,
+                                  review.createdAt.toUtc().timeAgo,
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     color: theme.colorScheme.onSurface,
                                   ),
@@ -207,12 +250,16 @@ class ReviewPostView extends StatelessWidget {
                               return CachedNetworkImage(
                                 imageUrl: media.url,
                                 imageBuilder: (context, imageProvider) =>
-                                    Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.cover,
+                                    GestureDetector(
+                                  onTap: () =>
+                                      context.pushToViewImage(media.url),
+                                  child: Container(
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -256,11 +303,13 @@ class ReviewPostView extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   )
                 else if (canLoadingMore)
-                  TextButton(
-                    child: const Text('Xem thêm đánh giá'),
-                    onPressed: () => context
-                        .read<ReviewPostBloc>()
-                        .add(LoadingMorePressed()),
+                  Center(
+                    child: TextButton(
+                      child: const Text('Xem thêm đánh giá'),
+                      onPressed: () => context
+                          .read<ReviewPostBloc>()
+                          .add(LoadingMorePressed()),
+                    ),
                   )
                 else
                   const SizedBox(

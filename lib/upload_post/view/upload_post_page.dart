@@ -48,6 +48,8 @@ class UploadPostView extends StatelessWidget {
         if (state.uploadPostStatus == LoadingStatus.done) {
           ToastHelper.showToast('Đăng bài viết thành công');
           context.read<PostBloc>().add(GetUserPosts());
+          context.read<PostBloc>().add(GetAllPosts());
+
           context.pop();
         }
         if (state.uploadPostStatus == LoadingStatus.error) {

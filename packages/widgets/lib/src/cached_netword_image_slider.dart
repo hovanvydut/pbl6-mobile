@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:widgets/widgets.dart';
 
 class CachedNetworkImageSlider extends StatefulWidget {
   const CachedNetworkImageSlider({
@@ -58,13 +59,21 @@ class _CachedNetworkImageSliderState extends State<CachedNetworkImageSlider> {
               return CachedNetworkImage(
                 cacheManager: widget.cacheManager,
                 imageUrl: widget.images[index],
-                imageBuilder: (context, imageProvider) => Container(
-                  margin: widget.margin,
-                  decoration: BoxDecoration(
-                    borderRadius: widget.borderRadius,
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
+                imageBuilder: (context, imageProvider) => GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          FullImageView(imageUrl: widget.images[index]),
+                    ),
+                  ),
+                  child: Container(
+                    margin: widget.margin,
+                    decoration: BoxDecoration(
+                      borderRadius: widget.borderRadius,
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

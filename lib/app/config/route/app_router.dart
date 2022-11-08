@@ -18,6 +18,7 @@ import 'package:pbl6_mobile/main/view/host_main_view.dart';
 import 'package:pbl6_mobile/payment/payment.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/register/register.dart';
+import 'package:pbl6_mobile/review_post/review_post.dart';
 import 'package:pbl6_mobile/search_filter/search_filter.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 
@@ -155,9 +156,11 @@ abstract class AppRouter {
           GoRoute(
             path: createReview,
             builder: (context, state) {
-              // final extras =
-              //     state.extra! as ExtraParams3<PostBloc, Post, BookmarkBloc>;
-              return const CreateReviewPage();
+              final extras = state.extra! as ExtraParams2<Post, ReviewPostBloc>;
+              return BlocProvider.value(
+                value: extras.param2,
+                child: CreateReviewPage(post: extras.param1),
+              );
             },
           ),
         ],

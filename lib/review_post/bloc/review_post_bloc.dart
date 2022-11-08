@@ -27,12 +27,19 @@ class ReviewPostBloc extends Bloc<ReviewPostEvent, ReviewPostState> {
     Emitter<ReviewPostState> emit,
   ) async {
     try {
-      emit(state.copyWith(reviewLoadingStatus: LoadingStatus.loading));
+      emit(
+        state.copyWith(
+          reviewLoadingStatus: LoadingStatus.loading,
+          currentPage: 1,
+        ),
+      );
       final reviews = await _reviewRepository.getReviewsByPostId(state.post.id);
+
       emit(
         state.copyWith(
           reviewLoadingStatus: LoadingStatus.done,
           postReviews: reviews,
+          canLoadingMore: reviews.length > 1,
           currentPage: state.currentPage + 1,
         ),
       );

@@ -1,6 +1,6 @@
 import 'package:formz/formz.dart';
 
-enum DescriptionValidationError { empty, tooShort }
+enum DescriptionValidationError { empty }
 
 class Description extends FormzInput<String, DescriptionValidationError> {
   const Description.pure() : super.pure('');
@@ -8,10 +8,9 @@ class Description extends FormzInput<String, DescriptionValidationError> {
 
   @override
   DescriptionValidationError? validator(String? value) {
-    if (value?.isNotEmpty == true) {
-      return value!.length >= 8 ? null : DescriptionValidationError.tooShort;
-    } else {
+    if (value?.isEmpty == true) {
       return DescriptionValidationError.empty;
     }
+    return null;
   }
 }
