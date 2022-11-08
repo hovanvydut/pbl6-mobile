@@ -109,12 +109,21 @@ class DetailPostView extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                    const ConnectionPanel(),
-                  ],
-                ),
-        );
-      },
+                      Builder(
+                        builder: (context) {
+                          final user =
+                              context.watch<AuthenticationBloc>().state.user;
+                          return DetailPostConnectionPanel(
+                            isLogged: user != null,
+                            visiable: user?.id != post.authorInfo!.id,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                );
+        },
+      ),
     );
   }
 }
