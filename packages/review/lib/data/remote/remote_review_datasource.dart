@@ -64,7 +64,7 @@ class RemoteReviewDatasource implements IReviewDatasource {
         ApiPath.postReview(postId),
         body: {
           'content': content,
-          'medias': medias.map((media) => media.toJson()),
+          'medias': medias.map((media) => media.toJson()).toList(),
           'rating': rating
         },
         headers: {
