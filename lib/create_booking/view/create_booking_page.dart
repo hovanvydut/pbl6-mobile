@@ -34,6 +34,8 @@ class CreateBookingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CreateBookingBloc, CreateBookingState>(
+      listenWhen: (previous, current) =>
+          previous.formzStatus != current.formzStatus,
       listener: (context, state) {
         if (state.formzStatus.isSubmissionFailure) {
           ToastHelper.showToast('Tạo lịch xem trọ thất bại, vui lòng thử lại');

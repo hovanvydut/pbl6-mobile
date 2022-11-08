@@ -22,9 +22,10 @@ class BookmarklListTileCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () => context.push(
           AppRouter.detailPost,
-          extra: ExtraParams2<PostBloc, Post>(
+          extra: ExtraParams3<PostBloc, Post, BookmarkBloc>(
             param1: context.read<PostBloc>(),
             param2: bookmark,
+            param3: context.read<BookmarkBloc>(),
           ),
         ),
         child: Card(

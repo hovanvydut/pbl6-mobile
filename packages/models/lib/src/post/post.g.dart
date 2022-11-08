@@ -32,7 +32,9 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       authorInfo: json['authorInfo'] == null
           ? null
           : User.fromJson(json['authorInfo'] as Map<String, dynamic>),
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),

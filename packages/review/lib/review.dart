@@ -8,4 +8,6 @@
 /// A review module
 library review;
 
-export 'src/review.dart';
+export 'data/ireview_datasource.dart';
+export 'data/remote/remote_review_datasource.dart';
+export 'repositories/review_repository.dart';

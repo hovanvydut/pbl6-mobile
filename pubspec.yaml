@@ -73,6 +73,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   syncfusion_flutter_calendar: ^20.3.52
   syncfusion_localizations: ^20.3.52
+  url_launcher: ^6.1.6
 
 dev_dependencies:
   bloc_test: ^9.1.0

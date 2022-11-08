@@ -6,3 +6,7 @@ abstract class ReviewPostEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class DetailPostStarted extends ReviewPostEvent {}
+
+class LoadingMorePressed extends ReviewPostEvent {}

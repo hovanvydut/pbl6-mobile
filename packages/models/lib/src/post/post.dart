@@ -46,7 +46,7 @@ class Post extends Equatable {
   final List<GroupProperty>? groupProperties;
   final List<Media> medias;
   final User? authorInfo;
-  final DateTime createdAt;
+  final DateTime? createdAt;
   final DateTime? updatedAt;
 
   @override
