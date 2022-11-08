@@ -54,7 +54,7 @@ class _SearchFieldState extends State<SearchField> {
       child: TextFormField(
         focusNode: widget.focusNode,
         controller: _searchController,
-        decoration: InputDecoration(
+        decoration: InputDecoration(  
           border: InputBorder.none,
           hintText: widget.hintText,
           hintStyle: Theme.of(context).textTheme.bodyMedium,
