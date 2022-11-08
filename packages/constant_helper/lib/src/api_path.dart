@@ -70,4 +70,9 @@ abstract class ApiPath {
   ///
   static String freetimeOther(int userId) =>
       '/api/booking/user/$userId/free-time';
+
+  /// `GET`: get reviews by postId
+  ///
+  /// `POST`: create review by postId
+  static String postReview(int postId) => '/api/review/post/$postId';
 }

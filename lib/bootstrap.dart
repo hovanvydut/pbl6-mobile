@@ -20,6 +20,7 @@ import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/di/di.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
+import 'package:review/review.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:user/user.dart';
 
@@ -108,6 +109,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           RepositoryProvider(
             create: (_) => BookingRepository(bookingDatasource: injector()),
           ),
+          RepositoryProvider(
+            create: (_) => ReviewRepository(reviewDatasource: injector()),
+          )
         ],
         child: await builder(),
       ),

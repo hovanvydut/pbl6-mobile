@@ -1,4 +1,3 @@
-
 part of 'config_freetime_cubit.dart';
 
 class ConfigFreetimeState extends Equatable {

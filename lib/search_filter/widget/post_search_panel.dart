@@ -46,9 +46,9 @@ class _PostSearchPanelState extends State<PostSearchPanel> {
       alignment: Alignment.center,
       child: TextFormField(
         controller: _searchController,
-        decoration: InputDecoration(
+        decoration: InputDecoration(  
           border: InputBorder.none,
-          hintText: 'Tìm theo quận, tên đường, địa điểm',
+          hintText: 'Bạn muốn tìm phòng?',
           hintStyle: Theme.of(context).textTheme.bodyMedium,
           suffixIcon: !_isValueEmpty
               ? IconButton(
@@ -56,7 +56,7 @@ class _PostSearchPanelState extends State<PostSearchPanel> {
                       .svg(color: Theme.of(context).colorScheme.onSurface),
                   onPressed: () {
                     _searchController.clear();
-                    context
+                    context 
                         .read<SearchFilterBloc>()
                         .add(SearchChanged(_searchController.text));
                   },
