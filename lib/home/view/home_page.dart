@@ -1,4 +1,5 @@
 import 'package:address/address.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -140,6 +141,139 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
           );
+        },
+      ),
+    );
+  }
+}
+
+class SearchByDistrictView extends StatelessWidget {
+  const SearchByDistrictView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final districts = [
+      {
+        'id': 1,
+        'name': 'Thanh Khê',
+        'imageUrl': 'https://file1.dangcongsan.vn/data/0/'
+            'images/2022/07/26/giangntt/quang-canh-quan-thanh-khe.jpg'
+      },
+      {
+        'id': 2,
+        'name': 'Hải Châu',
+        'imageUrl': 'https://cdn.baogiaothong.vn/upload/'
+            '3-2022/images/2022-07-25/2-1658733315-112-width740height515.jpg'
+      },
+      {
+        'id': 3,
+        'name': 'Cẩm Lệ',
+        'imageUrl': 'https://camle.danang.gov.vn/documents/10184/55713/1_'
+            'trienlam.jpg/842b2a54-f058-4ae4-950a-3f610dc105e9?version=1.2&t='
+            '1508900445000&imageThumbnail=0'
+      },
+      {
+        'id': 4,
+        'name': 'Liên Chiểu',
+        'imageUrl': 'https://photo-cms-sggp.zadn.vn/w580/Uploaded/2022/chu'
+            'kplu/2020_07_28/2402_yepz.jpg'
+      },
+      {
+        'id': 5,
+        'name': 'Ngũ Hành Sơn',
+        'imageUrl': 'https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017'
+            '/08/Ngu-Hanh-Son-e1502127139914.png'
+      },
+      {
+        'id': 6,
+        'name': 'Sơn Trà',
+        'imageUrl':
+            'https://media.loveitopcdn.com/3426/160450-chua-linh-ung-6.jpg'
+      },
+      {
+        'id': 7,
+        'name': 'Huyện Hòa Vang',
+        'imageUrl':
+            'https://dulichdiaphuong.com/imgs/thanh-pho-da-nang/cau-vang.jpg'
+      },
+    ];
+    return SizedBox(
+      height: context.height * 0.2,
+      child: ListView.separated(
+        itemCount: districts.length,
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          final district = districts[index];
+          return CachedNetworkImage(
+            cacheManager: AppCacheManager.appConfig,
+            imageUrl: district['imageUrl']! as String,
+            imageBuilder: (context, imageProvider) => Hero(
+              tag: district['imageUrl']! as String,
+              child: AspectRatio(
+                aspectRatio: 1.2,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: const LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          stops: [0.1, 0.4],
+                          colors: [
+                            Colors.black54,
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        district['name']! as String,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              color: Theme.of(context).colorScheme.surface,
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            placeholder: (context, url) => const AspectRatio(
+              aspectRatio: 1,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            errorWidget: (context, url, error) => AspectRatio(
+              aspectRatio: 1,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(
+                    image: Assets.images.notImage.image().image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const SizedBox(width: 8);
         },
       ),
     );
