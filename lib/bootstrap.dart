@@ -28,46 +28,46 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onCreate(BlocBase bloc) {
     super.onCreate(bloc);
-    log('onBlocCreate -- ${bloc.runtimeType}', name: '${bloc.runtimeType}');
+    log(
+      'onBlocCreate -- ${bloc.runtimeType}',
+      name: '${bloc.runtimeType}_CREATE',
+    );
   }
 
   @override
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
-    log(
-      'onAddEvent -- ${bloc.runtimeType}, $event',
-      name: '${bloc.runtimeType}',
-    );
+    log('onAddEvent -- $event', name: '${bloc.runtimeType}_EVENT');
   }
 
   @override
-  void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
     log(
-      'onStateChange -- ${bloc.runtimeType}, $change',
-      name: '${bloc.runtimeType}',
+      'onStateTransition -- ${bloc.runtimeType}\n'
+      'ADD_EVENT: ${transition.event}\n'
+      'CURRENT_STATE: ${transition.currentState}\n'
+      'NEXT_STATE: ${transition.nextState}',
+      name: '${bloc.runtimeType}_TRANSITION',
     );
   }
-
-  // @override
-  // void onTransition(Bloc bloc, Transition transition) {
-  //   super.onTransition(bloc, transition);
-  //   log(
-  //     'onStateTransition -- ${bloc.runtimeType}, $transition',
-  //     name: '${bloc.runtimeType}',
-  //   );
-  // }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    log('onError -- ${bloc.runtimeType}, $error', name: '${bloc.runtimeType}');
     super.onError(bloc, error, stackTrace);
+    log(
+      'onError -- ${bloc.runtimeType}, $error',
+      name: '${bloc.runtimeType}_ERROR',
+    );
   }
 
   @override
   void onClose(BlocBase bloc) {
     super.onClose(bloc);
-    log('onBlocClose -- ${bloc.runtimeType}', name: '${bloc.runtimeType}');
+    log(
+      'onBlocClose -- ${bloc.runtimeType}',
+      name: '${bloc.runtimeType}_CLOSE',
+    );
   }
 }
 

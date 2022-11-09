@@ -3,6 +3,7 @@ import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/home/home.dart';
+import 'package:platform_helper/platform_helper.dart';
 
 class UnAuthMainView extends StatefulWidget {
   const UnAuthMainView({super.key});
@@ -22,6 +23,7 @@ class _UnAuthMainViewState extends State<UnAuthMainView> {
 
   void _changeCurrentIndex(BuildContext context, {required int currentIndex}) {
     if (currentIndex != 0) {
+      ToastHelper.showToast('Bạn phải đăng nhập để thực hiện hành động này');
       context.push(AppRouter.login);
       return;
     }
