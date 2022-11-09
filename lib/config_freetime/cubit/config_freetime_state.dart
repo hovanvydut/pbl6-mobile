@@ -12,7 +12,7 @@ class ConfigFreetimeState extends Equatable {
 
   final LoadingStatus saveLoadingStatus;
 
-  final List<Freetime> freetimes;
+  final List<AppointmentInfo> freetimes;
 
   final bool isEditing;
 
@@ -22,7 +22,7 @@ class ConfigFreetimeState extends Equatable {
   ConfigFreetimeState copyWith({
     User? user,
     LoadingStatus? saveLoadingStatus,
-    List<Freetime>? freetimes,
+    List<AppointmentInfo>? freetimes,
     bool? isEditing,
   }) {
     return ConfigFreetimeState(

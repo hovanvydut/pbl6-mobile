@@ -9,7 +9,7 @@ part of 'booking_data.dart';
 BookingData _$BookingDataFromJson(Map<String, dynamic> json) => BookingData(
       id: json['id'] as int,
       guestInfo: GuestInfo.fromJson(json['guestInfo'] as Map<String, dynamic>),
-      time: DateTime.parse(json['time'] as String),
+      time: BookingData._fromJson(json['time'] as String),
       approveTime: json['approveTime'] == null
           ? null
           : DateTime.parse(json['approveTime'] as String),

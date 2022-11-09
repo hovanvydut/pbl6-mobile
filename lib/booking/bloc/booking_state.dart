@@ -14,7 +14,7 @@ class BookingState extends Equatable {
 
   final List<AppointmentInfo> appointments;
 
-  final List<Freetime> freetimes;
+  final List<AppointmentInfo> freetimes;
 
   final LoadingStatus pageLoadingStatus;
 
@@ -37,7 +37,7 @@ class BookingState extends Equatable {
   BookingState copyWith({
     User? user,
     List<AppointmentInfo>? appointments,
-    List<Freetime>? freetimes,
+    List<AppointmentInfo>? freetimes,
     LoadingStatus? pageLoadingStatus,
     LoadingStatus? approveStatus,
     LoadingStatus? confirmMeetingStatus,

@@ -19,7 +19,12 @@ class ConfigFreetimePage extends StatelessWidget {
       create: (context) => ConfigFreetimeCubit(
         user: context.read<AuthenticationBloc>().state.user!,
         bookingRepository: context.read<BookingRepository>(),
-        freetimes: context.read<BookingBloc>().state.freetimes,
+        freetimes: context
+            .read<BookingBloc>()
+            .state
+            .appointments
+            .where((appointment) => appointment.bookingData == null)
+            .toList(),
       ),
       child: const ConfigFreetimeView(),
     );
