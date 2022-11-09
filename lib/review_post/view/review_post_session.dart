@@ -207,6 +207,7 @@ class ReviewPostView extends StatelessWidget {
                                   ),
                                 ),
                                 RatingBar(
+                                  itemCount: 4,
                                   initialRating: review.rating.toDouble(),
                                   ratingWidget: RatingWidget(
                                     empty: Assets.icons.starOutline
@@ -216,6 +217,7 @@ class ReviewPostView extends StatelessWidget {
                                     half: const SizedBox(),
                                   ),
                                   itemSize: 20,
+                                  ignoreGestures: true,
                                   onRatingUpdate: (_) {},
                                 ),
                                 const SizedBox(height: 8),
