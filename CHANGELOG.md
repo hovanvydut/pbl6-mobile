@@ -1,3 +1,7 @@
+# 0.12.2
+
+- fix: payment result
+
 # 0.12.1
 
 - enhancement: add `TrendingSearch` by District
