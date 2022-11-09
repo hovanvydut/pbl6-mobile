@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/create_review/create_review.dart';
-import 'package:pbl6_mobile/create_review/widget/review_image_selection_sheet.dart';
 import 'package:platform_helper/platform_helper.dart';
 
 class CreateReviewImagePanel extends StatelessWidget {
