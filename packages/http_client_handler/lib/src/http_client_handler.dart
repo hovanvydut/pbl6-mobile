@@ -42,10 +42,7 @@ class HttpClientHandler {
       );
       log(uri.toString(), name: 'HTTP_CLIENT_HANDLER_GET');
       return _client
-          .get(
-            uri,
-            headers: headers,
-          )
+          .get(uri, headers: headers)
           .then(_handleResponse);
     } on SocketException {
       rethrow;

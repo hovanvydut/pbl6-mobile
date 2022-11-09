@@ -14,10 +14,10 @@ class CreateBookingState extends Equatable {
 
   final int currentStep;
   final Post post;
-  final List<Freetime> freetimes;
+  final List<AppointmentInfo> freetimes;
   final PhoneNumber phoneNumber;
-  final List<Freetime> tempSelectedTime;
-  final List<Freetime> selectedTime;
+  final List<AppointmentInfo> tempSelectedTime;
+  final List<AppointmentInfo> selectedTime;
   final FormzStatus formzStatus;
   final LoadingStatus pageLoadingStatus;
 
@@ -38,10 +38,10 @@ class CreateBookingState extends Equatable {
   CreateBookingState copyWith({
     int? currentStep,
     Post? post,
-    List<Freetime>? freetimes,
+    List<AppointmentInfo>? freetimes,
     PhoneNumber? phoneNumber,
-    List<Freetime>? tempSelectedTime,
-    List<Freetime>? selectedTime,
+    List<AppointmentInfo>? tempSelectedTime,
+    List<AppointmentInfo>? selectedTime,
     FormzStatus? formzStatus,
     LoadingStatus? pageLoadingStatus,
   }) {

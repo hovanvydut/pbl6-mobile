@@ -11,7 +11,7 @@ class BookingPageStarted extends BookingEvent {}
 
 class EditUpdatedFreetime extends BookingEvent {
   const EditUpdatedFreetime(this.freetimes);
-  final List<Freetime> freetimes;
+  final List<AppointmentInfo> freetimes;
 
   @override
   List<Object?> get props => [freetimes];

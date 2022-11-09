@@ -1,15 +1,18 @@
+import 'dart:developer';
+
 import 'package:booking/booking.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/booking/booking.dart';
 
 part 'config_freetime_state.dart';
 
 class ConfigFreetimeCubit extends Cubit<ConfigFreetimeState> {
   ConfigFreetimeCubit({
     required User user,
-    required List<Freetime> freetimes,
+    required List<AppointmentInfo> freetimes,
     required BookingRepository bookingRepository,
   })  : _bookingRepository = bookingRepository,
         super(ConfigFreetimeState(user: user, freetimes: freetimes));
@@ -22,17 +25,17 @@ class ConfigFreetimeCubit extends Cubit<ConfigFreetimeState> {
 
   void addFreetimes(DateTime dateTime) {
     if (state.isEditing) {
-      final isSelected = state.freetimes
-          .any((freetime) => freetime.start.toDateTime == dateTime);
+      final isSelected = state.freetimes.any((freetime) {
+        return freetime.start == dateTime;
+      });
       if (!isSelected) {
         emit(
           state.copyWith(
             freetimes: [
               ...state.freetimes,
-              Freetime(
-                day: dateTime.dayOfWeek,
-                start: dateTime.toIso8601String(),
-                end: dateTime.add(const Duration(hours: 1)).toIso8601String(),
+              AppointmentInfo(
+                start: dateTime,
+                end: dateTime.add(const Duration(hours: 1)),
               )
             ],
           ),
@@ -42,7 +45,7 @@ class ConfigFreetimeCubit extends Cubit<ConfigFreetimeState> {
       emit(
         state.copyWith(
           freetimes: state.freetimes
-              .where((freetime) => freetime.start != dateTime.toIso8601String())
+              .where((freetime) => freetime.start != dateTime)
               .toList(),
         ),
       );
@@ -52,7 +55,17 @@ class ConfigFreetimeCubit extends Cubit<ConfigFreetimeState> {
   Future<void> saveFreetimes() async {
     try {
       emit(state.copyWith(saveLoadingStatus: LoadingStatus.loading));
-      await _bookingRepository.setFreeTime(freetimes: state.freetimes);
+      final freetimesWeekly = state.freetimes
+          .map(
+            (freetime) => Freetime(
+              day: freetime.start.dayOfWeek - 1,
+              start: freetime.start.hour.toString(),
+              end: freetime.end.hour.toString(),
+            ),
+          )
+          .toList();
+      log(freetimesWeekly.toString());
+      await _bookingRepository.setFreeTime(freetimes: freetimesWeekly);
       emit(state.copyWith(saveLoadingStatus: LoadingStatus.done));
     } catch (e) {
       addError(e);

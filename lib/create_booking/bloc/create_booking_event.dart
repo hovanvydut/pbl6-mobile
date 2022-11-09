@@ -27,7 +27,7 @@ class BookingPhoneNumberChanged extends CreateBookingEvent {
 
 class SchedulePressed extends CreateBookingEvent {
   const SchedulePressed(this.time);
-  final Freetime time;
+  final AppointmentInfo time;
 
   @override
   List<Object?> get props => [time];

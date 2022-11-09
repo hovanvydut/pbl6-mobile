@@ -1,3 +1,8 @@
+# 0.12.1
+
+- enhancement: add `TrendingSearch` by District
+- fix: weekly free time
+
 # 0.12.0
 
 - feat: add `Review` and `CreateReview` modules;

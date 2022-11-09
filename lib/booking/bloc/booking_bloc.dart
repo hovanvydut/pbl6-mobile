@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:booking/booking.dart';
+import 'package:constant_helper/constant_helper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
@@ -36,43 +38,37 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       final freetimes =
           await _bookingRepository.getFreeTimeByUserId(state.user.id);
       final appointments = <AppointmentInfo>[];
-      // final test = BookingData(
-      //   id: 131,
-      //   isMeet: false,
-      //   time: '2022-11-08T10:00:00.000'.toDateTime,
-      //   guestInfo: const GuestInfo(
-      //     id: 1,
-      //     displayName: 'Phuong Tran',
-      //     avatar:
-      //         'https://pbl6.s3.ap-southeast-1.amazonaws.com/312554885_1848921128805193_3095384672118521778_n.jpg',
-      //     phoneNumber: '0336615425',
-      //   ),
-      // );
+
       for (final bookingData in bookingDatas) {
+        log(bookingData.time.toLocal().toIso8601String());
         appointments.add(
           AppointmentInfo(
             bookingData: bookingData,
-            start: bookingData.time.toUtc(),
-            end: bookingData.time.add(const Duration(hours: 1)),
+            start: bookingData.time.toLocal(),
+            end: bookingData.time.toLocal().add(const Duration(hours: 1)),
           ),
         );
       }
-      // appointments.add(
-      //   AppointmentInfo(
-      //     bookingData: test,
-      //     start: test.time,
-      //     end: test.time.add(const Duration(hours: 1)),
-      //   ),
-      // );
+      log('====================================');
+
       for (final freetime in freetimes) {
+        final dateFromFreetime =
+            DateTimeHelper.getDateInWeekByDOW(freetime.day);
+        final startTime =
+            dateFromFreetime.add(Duration(hours: int.parse(freetime.start)));
+        final endTime =
+            dateFromFreetime.add(Duration(hours: int.parse(freetime.end)));
+        log(startTime.toIso8601String());
         final isBooking = appointments.any(
-          (appointment) => appointment.start == freetime.start.toDateTime,
+          (appointment) => appointment.start == startTime,
         );
         if (!isBooking) {
           appointments.add(
             AppointmentInfo(
-              start: freetime.start.toDateTime,
-              end: freetime.end.toDateTime,
+              start: startTime,
+              end: endTime,
+              recurrenceRule: 'FREQ=WEEKLY;'
+                  'BYDAY=${DateTimeHelper.getRRuleWeekDay(freetime.day)}',
             ),
           );
         }
@@ -81,7 +77,9 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
         state.copyWith(
           pageLoadingStatus: LoadingStatus.done,
           appointments: appointments,
-          freetimes: freetimes,
+          freetimes: appointments
+              .where((appointment) => appointment.bookingData == null)
+              .toList(),
         ),
       );
     } catch (e) {
@@ -129,7 +127,9 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       emit(state.copyWith(confirmMeetingStatus: LoadingStatus.loading));
       await _bookingRepository.confirmMeeting(bookingId: event.bookingId);
       final appoinment = state.appointments.firstWhere(
-        (appointment) => appointment.bookingData!.id == event.bookingId,
+        (appointment) =>
+            appointment.bookingData != null &&
+            appointment.bookingData!.id == event.bookingId,
       );
       state.appointments.remove(appoinment);
       state.appointments.add(
@@ -158,13 +158,13 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       ..removeWhere((appointment) => appointment.bookingData == null);
     for (final freetime in event.freetimes) {
       final isBooking = currentAppointments.any(
-        (appointment) => appointment.start == freetime.start.toDateTime,
+        (appointment) => appointment.start == freetime.start,
       );
       if (!isBooking) {
         currentAppointments.add(
           AppointmentInfo(
-            start: freetime.start.toDateTime,
-            end: freetime.end.toDateTime,
+            start: freetime.start,
+            end: freetime.end,
           ),
         );
       }

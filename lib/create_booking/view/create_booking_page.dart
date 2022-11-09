@@ -5,6 +5,7 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/booking/booking.dart';
 import 'package:pbl6_mobile/create_booking/create_booking.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:platform_helper/platform_helper.dart';
@@ -108,8 +109,7 @@ class CreateBookingView extends StatelessWidget {
                                 ),
                                 title: selectedTime.isNotEmpty
                                     ? Text(
-                                        selectedTime
-                                            .first.start.toDateTime.yMdHm,
+                                        selectedTime.first.start.yMdHm,
                                       )
                                     : const Text('Chọn thời gian xem trọ'),
                                 trailing: Assets.icons.chevronRight.svg(
@@ -261,7 +261,8 @@ class BookingCalendarBottomSheet extends StatelessWidget {
 
                             context.read<CreateBookingBloc>().add(
                                   SchedulePressed(
-                                    selectedAppointment.first as Freetime,
+                                    selectedAppointment.first
+                                        as AppointmentInfo,
                                   ),
                                 );
                           }
@@ -330,7 +331,7 @@ class BookingCalendarBottomSheet extends StatelessWidget {
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
                           title: Text(
-                            tempSelectedTime.first.start.toDateTime.yMdHm,
+                            tempSelectedTime.first.start.yMdHm,
                           ),
                         ),
                       ),
