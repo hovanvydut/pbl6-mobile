@@ -43,7 +43,6 @@ class LoginView extends StatelessWidget {
         }
         if (state.formStatus == FormzStatus.submissionFailure) {
           context.showSnackBar(message: state.errorMessage);
-          
         }
       },
       child: DismissFocus(

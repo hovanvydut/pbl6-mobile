@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 
-class DetailInformation extends StatelessWidget {
-  const DetailInformation({
+class DetailPostMoreInformation extends StatelessWidget {
+  const DetailPostMoreInformation({
     super.key,
     required this.post,
   });

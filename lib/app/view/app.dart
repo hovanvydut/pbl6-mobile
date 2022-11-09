@@ -30,23 +30,8 @@ class App extends StatelessWidget {
   }
 }
 
-class _AppView extends StatefulWidget {
+class _AppView extends StatelessWidget {
   const _AppView();
-
-  @override
-  State<_AppView> createState() => _AppViewState();
-}
-
-class _AppViewState extends State<_AppView> {
-  @override
-  void initState() {
-    super.initState();
-    _initPackageInfo();
-  }
-
-  Future<void> _initPackageInfo() async {
-    // final info = await PackageInfo.fromPlatform();
-  }
 
   @override
   Widget build(BuildContext context) {

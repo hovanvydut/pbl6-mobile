@@ -7,11 +7,13 @@ class BookmarkIconButton extends StatelessWidget {
   const BookmarkIconButton({
     super.key,
     this.isBookmarked = false,
+    this.backgroundTransprent = false,
     required this.onBookmarkedPressed,
     required this.onUnBookmarkedPressed,
   });
 
   final bool isBookmarked;
+  final bool backgroundTransprent;
   final VoidCallback onBookmarkedPressed;
   final VoidCallback onUnBookmarkedPressed;
 
@@ -24,8 +26,9 @@ class BookmarkIconButton extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.all(4),
         child: CircleAvatar(
-          backgroundColor:
-              Theme.of(context).colorScheme.surface.withOpacity(0.6),
+          backgroundColor: backgroundTransprent
+              ? Colors.transparent
+              : Theme.of(context).colorScheme.surface.withOpacity(0.6),
           child: IconButton(
             icon: Assets.icons.bookmarkBold.svg(
               color: Theme.of(context).colorScheme.onSurface,
@@ -38,8 +41,9 @@ class BookmarkIconButton extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.all(4),
         child: CircleAvatar(
-          backgroundColor:
-              Theme.of(context).colorScheme.surface.withOpacity(0.6),
+          backgroundColor: backgroundTransprent
+              ? Colors.transparent
+              : Theme.of(context).colorScheme.surface.withOpacity(0.6),
           child: IconButton(
             icon: Assets.icons.bookmarkOutline.svg(
               color: Theme.of(context).colorScheme.onSurface,

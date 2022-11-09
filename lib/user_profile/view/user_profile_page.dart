@@ -83,9 +83,15 @@ class UserProfilePage extends StatelessWidget {
                               imageUrl: user?.avatar ??
                                   'https://avatars.githubusercontent.com/u/63831488?v=4',
                               imageBuilder: (context, imageProvider) =>
-                                  CircleAvatar(
-                                radius: 40,
-                                backgroundImage: imageProvider,
+                                  GestureDetector(
+                                onTap: () => context.pushToViewImage(
+                                  user?.avatar ??
+                                      'https://avatars.githubusercontent.com/u/63831488?v=4',
+                                ),
+                                child: CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage: imageProvider,
+                                ),
                               ),
                               placeholder: (context, url) => CircleAvatar(
                                 radius: 40,

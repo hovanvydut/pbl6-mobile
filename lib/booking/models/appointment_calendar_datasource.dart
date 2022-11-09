@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart' as calendar;
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class AppointmentCalendarDatasource extends calendar.CalendarDataSource {
+class AppointmentCalendarDatasource
+    extends CalendarDataSource<AppointmentInfo> {
   AppointmentCalendarDatasource(
     List<AppointmentInfo> appointments, {
     required this.context,
@@ -46,5 +47,21 @@ class AppointmentCalendarDatasource extends calendar.CalendarDataSource {
       }
     }
     return context.theme.colorScheme.inverseSurface.withOpacity(0.3);
+  }
+
+  @override
+  String? getRecurrenceRule(int index) {
+    return (appointments as List<AppointmentInfo>?)![index].recurrenceRule;
+  }
+
+  @override
+  AppointmentInfo? convertAppointmentToObject(
+    AppointmentInfo? customData,
+    Appointment appointment,
+  ) {
+    return AppointmentInfo(
+      start: appointment.startTime,
+      end: appointment.endTime,
+    );
   }
 }

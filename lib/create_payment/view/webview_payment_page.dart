@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:go_router/go_router.dart';
+import 'package:platform_helper/platform_helper.dart';
 
 class WebviewPaymentPage extends StatelessWidget {
   const WebviewPaymentPage({super.key, required this.url});
@@ -8,9 +10,32 @@ class WebviewPaymentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WebviewScaffold(
+    return Scaffold(
       appBar: AppBar(),
-      url: url,
+      body: InAppWebView(
+        initialUrlRequest: URLRequest(url: Uri.parse(url)),
+        onLoadStop: (controller, uri) async {
+          if (uri!.host == 'node-1.silk-cat.software') {
+            await controller
+                .evaluateJavascript(
+              source: 'document.documentElement.innerHTML',
+            )
+                .then((data) {
+              (data as String).splitMapJoin(
+                RegExp('{(?:[^{}]*|(R))*}'),
+                onMatch: (p0) {
+                  ToastHelper.showToast('Nạp tiền thành công');
+                  context
+                    ..pop()
+                    ..pop();
+                  // TODO(dungngminh): Handle get User Infomation
+                  return '';
+                },
+              );
+            });
+          }
+        },
+      ),
     );
   }
 }

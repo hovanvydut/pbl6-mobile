@@ -1,9 +1,11 @@
 import 'package:booking/booking.dart';
+import 'package:constant_helper/constant_helper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/booking/booking.dart';
 
 part 'create_booking_event.dart';
 part 'create_booking_state.dart';
@@ -53,10 +55,33 @@ class CreateBookingBloc extends Bloc<CreateBookingEvent, CreateBookingState> {
       emit(state.copyWith(pageLoadingStatus: LoadingStatus.loading));
       final freetimes = await _bookingRepository
           .getFreeTimeByUserId(state.post.authorInfo!.id);
+      final appointments = <AppointmentInfo>[];
+
+      for (final freetime in freetimes) {
+        final dateFromFreetime =
+            DateTimeHelper.getDateInWeekByDOW(freetime.day);
+        final startTime =
+            dateFromFreetime.add(Duration(hours: int.parse(freetime.start)));
+        final endTime =
+            dateFromFreetime.add(Duration(hours: int.parse(freetime.end)));
+        final isBooking = appointments.any(
+          (appointment) => appointment.start == startTime,
+        );
+        if (!isBooking) {
+          appointments.add(
+            AppointmentInfo(
+              start: startTime,
+              end: endTime,
+              recurrenceRule: 'FREQ=WEEKLY;'
+                  'BYDAY=${DateTimeHelper.getRRuleWeekDay(freetime.day)}',
+            ),
+          );
+        }
+      }
       emit(
         state.copyWith(
           pageLoadingStatus: LoadingStatus.done,
-          freetimes: freetimes,
+          freetimes: appointments,
         ),
       );
     } catch (e) {
@@ -95,7 +120,7 @@ class CreateBookingBloc extends Bloc<CreateBookingEvent, CreateBookingState> {
       emit(state.copyWith(formzStatus: FormzStatus.submissionInProgress));
       await _bookingRepository.createBooking(
         postId: state.post.id,
-        bookingTime: state.selectedTime.first.start.toDateTime,
+        bookingTime: state.selectedTime.first.start,
       );
       emit(state.copyWith(formzStatus: FormzStatus.submissionSuccess));
     } catch (e) {

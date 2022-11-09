@@ -6,6 +6,7 @@ import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/config_freetime/config_freetime.dart';
 import 'package:pbl6_mobile/create_booking/create_booking.dart';
 import 'package:pbl6_mobile/create_payment/create_payment.dart';
+import 'package:pbl6_mobile/create_review/create_review.dart';
 import 'package:pbl6_mobile/detail_host/detail_host.dart';
 import 'package:pbl6_mobile/detail_post/detail_post.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
@@ -17,6 +18,7 @@ import 'package:pbl6_mobile/main/view/host_main_view.dart';
 import 'package:pbl6_mobile/payment/payment.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/register/register.dart';
+import 'package:pbl6_mobile/review_post/review_post.dart';
 import 'package:pbl6_mobile/search_filter/search_filter.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 
@@ -37,6 +39,7 @@ abstract class AppRouter {
   static const createPayment = 'create-payment';
 
   static const booking = 'create-booking';
+  static const createReview = 'create-review';
   static const bookingList = 'booking-list';
   static const configFreetime = 'config-freetime';
 
@@ -147,6 +150,16 @@ abstract class AppRouter {
                   ),
                 ],
                 child: CreateBookingPage(post: extras.param2),
+              );
+            },
+          ),
+          GoRoute(
+            path: createReview,
+            builder: (context, state) {
+              final extras = state.extra! as ExtraParams2<Post, ReviewPostBloc>;
+              return BlocProvider.value(
+                value: extras.param2,
+                child: CreateReviewPage(post: extras.param1),
               );
             },
           ),

@@ -50,7 +50,6 @@ class PriorityPostGridView extends StatelessWidget {
             final allPosts = state.allPostsData;
             final allPostsStatus = state.allPostsLoadingStatus;
             if (allPostsStatus == LoadingStatus.loading) {
-              /// TODO(dungngminh): add shimmer effect
               return const Center(
                 child: CircularProgressIndicator(),
               );
@@ -60,13 +59,14 @@ class PriorityPostGridView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 8),
                     Assets.images.errorNotFound.svg(
                       height: 200,
                       width: 300,
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Không thể cập nhật phòng trọ nổi bật, xin thử lại',
+                      'Không thể cập nhật dữ liệu, xin thử lại',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
@@ -81,10 +81,7 @@ class PriorityPostGridView extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  'Phòng trọ nổi bật',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
+               
                 const SizedBox(height: 8),
                 GridView.builder(
                   padding: const EdgeInsets.only(bottom: 16),

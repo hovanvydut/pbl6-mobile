@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:widgets/widgets.dart';
 
 extension SizeExtension on BuildContext {
   double get height => MediaQuery.of(this).size.height;
@@ -32,4 +33,14 @@ extension MoreGoRouterExtenstion on BuildContext {
 
   void pushToChild(String child, {Object? extra}) =>
       GoRouter.of(this).push(currentWithChild(child), extra: extra);
+}
+
+extension NavigatorOneExtension on BuildContext {
+  void pushToViewImage(String imageUrl) {
+    Navigator.of(this).push(
+      MaterialPageRoute(
+        builder: (_) => FullImageView(imageUrl: imageUrl),
+      ),
+    );
+  }
 }

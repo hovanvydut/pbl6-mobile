@@ -18,6 +18,7 @@ extension DateTimeExtension on DateTime {
 
   int get dayOfWeek => weekday + 1;
 
+  // ignore: non_constant_identifier_names
   String get Hm {
     final timeFormatter = DateFormat.Hm('vi');
     return timeFormatter.format(this);

@@ -9,5 +9,5 @@
 library post;
 
 export 'data/ipost_data_source.dart';
-export 'data/remote/remote_post_data_source.dart';
+export 'data/remote/remote_post_datasource.dart';
 export 'repositories/post_repository.dart';

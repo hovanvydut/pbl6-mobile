@@ -40,12 +40,9 @@ class HttpClientHandler {
         path: path,
         queryParameter: queryParameter,
       );
-      log(uri.toString(), name: 'GET');
+      log(uri.toString(), name: 'HTTP_CLIENT_HANDLER_GET');
       return _client
-          .get(
-            uri,
-            headers: headers,
-          )
+          .get(uri, headers: headers)
           .then(_handleResponse);
     } on SocketException {
       rethrow;
@@ -64,6 +61,7 @@ class HttpClientHandler {
         path: path,
         queryParameter: queryParameter,
       );
+      log(uri.toString(), name: 'HTTP_CLIENT_HANDLER_POST');
       return _client
           .post(uri, headers: headers, body: jsonEncode(body))
           .then(_handleResponse);
@@ -84,6 +82,7 @@ class HttpClientHandler {
         path: path,
         queryParameter: queryParameter,
       );
+      log(uri.toString(), name: 'HTTP_CLIENT_HANDLER_PUT');
 
       return _client
           .put(uri, headers: headers, body: jsonEncode(body))
@@ -105,6 +104,8 @@ class HttpClientHandler {
         path: path,
         queryParameter: queryParameter,
       );
+      log(uri.toString(), name: 'HTTP_CLIENT_HANDLER_DELETE');
+
       return _client
           .delete(uri, headers: headers, body: jsonEncode(body))
           .then(_handleResponse);
@@ -124,6 +125,8 @@ class HttpClientHandler {
       path: path,
       queryParameter: queryParameter,
     );
+    log(uri.toString(), name: 'HTTP_CLIENT_HANDLER_MULTIPART_POST');
+
     final request = http.MultipartRequest('POST', uri)
       ..files.add(
         multipartFile,

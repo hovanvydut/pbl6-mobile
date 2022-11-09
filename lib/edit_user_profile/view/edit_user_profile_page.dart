@@ -229,16 +229,26 @@ class UserAvatar extends StatelessWidget {
           BlocBuilder<EditUserProfileBloc, EditUserProfileState>(
             builder: (context, state) {
               return state.imagePath.isNotNullOrBlank
-                  ? CircleAvatar(
-                      radius: 70,
-                      backgroundImage: Image.file(File(state.imagePath)).image,
+                  ? GestureDetector(
+                      onTap: () => context.pushToViewImage(state.imagePath),
+                      child: CircleAvatar(
+                        radius: 70,
+                        backgroundImage:
+                            Image.file(File(state.imagePath)).image,
+                      ),
                     )
                   : CachedNetworkImage(
                       imageUrl: user.avatar ??
                           'https://avatars.githubusercontent.com/u/63831488?v=4',
-                      imageBuilder: (context, imageProvider) => CircleAvatar(
-                        radius: 70,
-                        backgroundImage: imageProvider,
+                      imageBuilder: (context, imageProvider) => GestureDetector(
+                        onTap: () => context.pushToViewImage(
+                          user.avatar ??
+                              'https://avatars.githubusercontent.com/u/63831488?v=4',
+                        ),
+                        child: CircleAvatar(
+                          radius: 70,
+                          backgroundImage: imageProvider,
+                        ),
                       ),
                       placeholder: (context, url) => CircleAvatar(
                         radius: 40,

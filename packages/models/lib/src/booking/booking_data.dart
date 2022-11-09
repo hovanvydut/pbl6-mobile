@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:models/models.dart';
 
@@ -15,12 +16,17 @@ class BookingData extends Equatable {
   });
   factory BookingData.fromJson(Map<String, dynamic> json) =>
       _$BookingDataFromJson(json);
+
   final int id;
   final GuestInfo guestInfo;
+  @JsonKey(fromJson: _fromJson)
   final DateTime time;
   final DateTime? approveTime;
   @JsonKey(name: 'met')
   final bool isMeet;
+
+  static DateTime _fromJson(String date) =>
+      DateFormat('yyyy-MM-ddTHH:mm:ss').parse(date, true);
 
   @override
   List<Object?> get props {

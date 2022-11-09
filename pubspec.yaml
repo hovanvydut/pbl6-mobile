@@ -1,6 +1,6 @@
 name: pbl6_mobile
 description: A PBL6 Mobile App End-user
-version: 0.11.0+1
+version: 0.12.2+1
 publish_to: none
 
 environment:
@@ -42,7 +42,6 @@ dependencies:
     path: packages/widgets
   multiselect:
     path: packages/multiselect
-  dropdown_button2: ^1.8.5
   address:
     path: packages/address
   platform_helper:
@@ -62,17 +61,19 @@ dependencies:
     path: packages/payment
   booking:
     path: packages/booking
+  review:
+    path: packages/review
   cached_network_image: ^3.2.2
   faker: ^2.0.0
   flutter_cache_manager: ^3.3.0
   timeago: ^3.3.0
   package_info_plus: ^3.0.1
   easy_debounce: ^2.0.2+1
-  webview_flutter: ^3.0.4
-  flutter_webview_plugin: ^0.4.0
   flutter_rating_bar: ^4.0.1
   syncfusion_flutter_calendar: ^20.3.52
   syncfusion_localizations: ^20.3.52
+  url_launcher: ^6.1.6
+  flutter_inappwebview: ^5.7.1
 
 dev_dependencies:
   bloc_test: ^9.1.0

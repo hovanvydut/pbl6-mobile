@@ -35,48 +35,45 @@ class EditingMediaInformation extends StatelessWidget {
                 : Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: SizedBox(
-                      height: 130,
+                      height: 120,
                       child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
                         itemCount: medias.length,
+                        scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          final media = medias[index];
-                          return Stack(
-                            alignment: Alignment.topRight,
-                            children: [
-                              SizedBox(
-                                width: 130,
-                                child: Card(
-                                  color: theme.colorScheme.surface,
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: Image(
-                                        image: AdaptiveImageProvider(media),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
+                          final imagePath = medias[index];
+                          return GestureDetector(
+                            onTap: () => context.pushToViewImage(imagePath),
+                            child: Container(
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                  image: AdaptiveImageProvider(imagePath),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              IconButton(
-                                icon: Assets.icons.close.svg(
-                                  color: theme.colorScheme.onSurface,
+                              alignment: Alignment.topRight,
+                              padding: const EdgeInsets.all(4),
+                              child: CircleAvatar(
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .surface
+                                    .withOpacity(0.5),
+                                child: IconButton(
+                                  icon: Assets.icons.close.svg(
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
+                                  ),
+                                  onPressed: () => context
+                                      .read<EditPostBloc>()
+                                      .add(MediaRemovePressed(imagePath)),
                                 ),
-                                onPressed: () =>
-                                    context.read<EditPostBloc>().add(
-                                          MediaRemovePressed(media),
-                                        ),
-                              )
-                            ],
+                              ),
+                            ),
                           );
                         },
                         separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            width: 8,
-                          );
+                          return const SizedBox(width: 16);
                         },
                       ),
                     ),

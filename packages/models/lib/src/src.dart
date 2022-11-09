@@ -11,6 +11,7 @@ export 'payment/bank_code.dart';
 export 'post/post.dart';
 export 'property/group_property.dart';
 export 'property/property.dart';
+export 'review/review.dart';
 export 'user/user.dart';
 export 'validation/address_form.dart';
 export 'validation/confirmation_password.dart';

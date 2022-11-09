@@ -11,6 +11,7 @@ import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
+import 'package:review/review.dart';
 import 'package:user/user.dart';
 
 final injector = GetIt.instance;
@@ -56,5 +57,7 @@ void initDependences() {
     )
     ..registerLazySingleton<IBookingDatasource>(
       () => RemoteBookingDatasource(httpHandler: injector<HttpClientHandler>()),
+    )..registerLazySingleton<IReviewDatasource>(
+      () => RemoteReviewDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }
