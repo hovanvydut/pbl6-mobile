@@ -617,8 +617,17 @@ class SearchFilterBodyView extends StatelessWidget {
       builder: (context, state) {
         final loadingStatus = state.loadingStatus;
         if (loadingStatus == LoadingStatus.loading) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return ListView.separated(
+            padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return const PostListTileCardPlaceholder();
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                height: 8,
+              );
+            },
           );
         } else if (loadingStatus == LoadingStatus.error) {
           return Center(

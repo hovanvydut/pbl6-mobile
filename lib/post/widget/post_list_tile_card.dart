@@ -6,6 +6,7 @@ import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/post/post.dart';
+import 'package:shimmer/shimmer.dart';
 
 class PostListTileCard extends StatelessWidget {
   const PostListTileCard({
@@ -57,8 +58,17 @@ class PostListTileCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: kShimmerBaseColor,
+                        highlightColor: kHightlightColor,
+                        child: Container(
+                          height: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                       errorWidget: (context, url, error) =>
                           Assets.images.notImage.image(
                         fit: BoxFit.cover,

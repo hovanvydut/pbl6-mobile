@@ -1,3 +1,7 @@
+# 0.12.3
+
+- fix: `DetailPost` review timeago
+
 # 0.12.2
 
 - fix: payment result
