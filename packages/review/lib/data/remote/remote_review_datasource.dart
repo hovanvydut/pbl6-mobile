@@ -21,13 +21,8 @@ class RemoteReviewDatasource implements IReviewDatasource {
     String? searchValue,
   }) async {
     try {
-      final jwt =
-          await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       final responseData = await _httpHandler.get(
         ApiPath.postReview(postId),
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $jwt',
-        },
         queryParameter: Map.fromEntries(
           {
             'PageNumber': '$pageNumber',

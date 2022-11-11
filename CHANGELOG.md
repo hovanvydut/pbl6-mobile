@@ -1,6 +1,11 @@
 # 0.12.3
 
 - fix: `DetailPost` review timeago
+- fix: payment credit
+- fix: `GetUserInformation` when payment action is successful
+- fix: `ReviewSession` error when user is not logged in
+- chore: change app name to `Homie`
+- chore: update `README.md`
 
 # 0.12.2
 

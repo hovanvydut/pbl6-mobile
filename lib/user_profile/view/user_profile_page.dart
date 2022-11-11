@@ -208,7 +208,9 @@ class UserProfilePage extends StatelessWidget {
                               color: theme.colorScheme.onSurface,
                             ),
                             title: const Text('Số dư hiện tại'),
-                            subtitle: Text('${user?.currentCredit ?? 0} đồng'),
+                            subtitle: Text(
+                              '${user?.currentCredit == null ? 0 : user!.currentCredit! / 100} đồng',
+                            ),
                             trailing: Assets.icons.chevronRight
                                 .svg(color: theme.colorScheme.onSurface),
                             onTap: () => context.push(AppRouter.payment),
