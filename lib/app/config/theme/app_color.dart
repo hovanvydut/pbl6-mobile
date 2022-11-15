@@ -64,5 +64,5 @@ const darkColorScheme = ColorScheme(
   surfaceTint: Color(0xFFC1C1FF),
 );
 
-final  kShimmerBaseColor = Colors.grey.shade300;
-final kHightlightColor = Colors.grey.shade100;
+final kShimmerBaseColor = Colors.grey.shade300;
+final kShimmerHightlightColor = Colors.grey.shade100;

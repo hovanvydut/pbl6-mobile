@@ -13,6 +13,7 @@ class CachedNetworkImageSlider extends StatefulWidget {
     this.margin = EdgeInsets.zero,
     this.borderRadius = BorderRadius.zero,
     this.showIndicator = true,
+    this.onTapToViewImage = true,
   });
 
   final List<String> images;
@@ -22,6 +23,7 @@ class CachedNetworkImageSlider extends StatefulWidget {
   final BorderRadius borderRadius;
   final BaseCacheManager? cacheManager;
   final bool showIndicator;
+  final bool onTapToViewImage;
 
   @override
   State<CachedNetworkImageSlider> createState() =>
@@ -60,12 +62,14 @@ class _CachedNetworkImageSliderState extends State<CachedNetworkImageSlider> {
                 cacheManager: widget.cacheManager,
                 imageUrl: widget.images[index],
                 imageBuilder: (context, imageProvider) => GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          FullImageView(imageUrl: widget.images[index]),
-                    ),
-                  ),
+                  onTap: widget.onTapToViewImage
+                      ? () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  FullImageView(imageUrl: widget.images[index]),
+                            ),
+                          )
+                      : null,
                   child: Container(
                     margin: widget.margin,
                     decoration: BoxDecoration(

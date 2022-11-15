@@ -40,10 +40,15 @@ abstract class ApiPath {
   /// Bookmark
   static const bookmark = '/api/bookmark';
 
-  /// Payment
+  /// Create Payment and Transaction
   static const paymentBankCode = '/api/payment/bank-code';
   static const payment = '/api/payment';
-  static const paymentHistoryPersonal = '/api/payment/history';
+  static const paymentPersonalHistory = '/api/payment/history';
+
+  /// Service Payment Transaction
+  ///
+  ///
+  static const personalHistoryTransaction = '/api/payment-history/personal';
 
   /// Get other host posts: GET /api/post
   static String hostPostOther(int hostId) => '/api/host/$hostId/post';

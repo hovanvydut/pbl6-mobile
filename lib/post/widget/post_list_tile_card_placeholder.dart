@@ -19,7 +19,7 @@ class PostListTileCardPlaceholder extends StatelessWidget {
                 flex: 4,
                 child: Shimmer.fromColors(
                   baseColor: kShimmerBaseColor,
-                  highlightColor: kHightlightColor,
+                  highlightColor: kShimmerHightlightColor,
                   child: Container(
                     height: 120,
                     decoration: BoxDecoration(
@@ -45,7 +45,7 @@ class PostListTileCardPlaceholder extends StatelessWidget {
                           children: [
                             Shimmer.fromColors(
                               baseColor: kShimmerBaseColor,
-                              highlightColor: kHightlightColor,
+                              highlightColor: kShimmerHightlightColor,
                               child: Container(
                                 height: 40,
                                 decoration: BoxDecoration(
@@ -59,7 +59,7 @@ class PostListTileCardPlaceholder extends StatelessWidget {
                       ),
                       Shimmer.fromColors(
                         baseColor: kShimmerBaseColor,
-                        highlightColor: kHightlightColor,
+                        highlightColor: kShimmerHightlightColor,
                         child: Container(
                           height: 20,
                           decoration: BoxDecoration(
@@ -71,7 +71,7 @@ class PostListTileCardPlaceholder extends StatelessWidget {
                       const SizedBox(height: 8),
                       Shimmer.fromColors(
                         baseColor: kShimmerBaseColor,
-                        highlightColor: kHightlightColor,
+                        highlightColor: kShimmerHightlightColor,
                         child: Container(
                           height: 20,
                           decoration: BoxDecoration(
@@ -91,7 +91,7 @@ class PostListTileCardPlaceholder extends StatelessWidget {
                 children: [
                   Shimmer.fromColors(
                     baseColor: kShimmerBaseColor,
-                    highlightColor: kHightlightColor,
+                    highlightColor: kShimmerHightlightColor,
                     child: const CircleAvatar(
                       backgroundColor: Colors.white,
                     ),

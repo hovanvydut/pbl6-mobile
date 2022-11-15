@@ -221,7 +221,7 @@ class BookingCalendarBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     return Container(
-      height: context.height * 0.75,
+      height: context.height * 0.8,
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: const BorderRadius.vertical(
@@ -237,6 +237,12 @@ class BookingCalendarBottomSheet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Text(
+                  '*Lưu ý: Lịch rảnh của chủ trọ chỉ mang tính chất tham khảo',
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
                 SizedBox(
                   height: context.height * 0.5,
                   child: BlocBuilder<CreateBookingBloc, CreateBookingState>(
@@ -248,22 +254,20 @@ class BookingCalendarBottomSheet extends StatelessWidget {
                         view: CalendarView.week,
                         dataSource: FreetimeCalendarSource(freetimes),
                         timeSlotViewSettings: const TimeSlotViewSettings(
-                          timeIntervalHeight: 50,
+                          timeIntervalHeight: 80,
                           startHour: 6,
                           endHour: 21,
-                          timeInterval: Duration(minutes: 30),
                           timeFormat: 'hh:mm a',
                         ),
                         onTap: (calendarTapDetails) {
-                          if (calendarTapDetails.appointments != null) {
-                            final selectedAppointment =
-                                calendarTapDetails.appointments!;
-
+                          if (calendarTapDetails.date != null) {
+                            final selectedDate = calendarTapDetails.date!;
+                            final appointmentInfo = AppointmentInfo(
+                              start: selectedDate,
+                              end: selectedDate.add(const Duration(hours: 1)),
+                            );
                             context.read<CreateBookingBloc>().add(
-                                  SchedulePressed(
-                                    selectedAppointment.first
-                                        as AppointmentInfo,
-                                  ),
+                                  SchedulePressed(appointmentInfo),
                                 );
                           }
                         },

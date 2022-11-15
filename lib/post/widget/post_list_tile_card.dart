@@ -60,7 +60,7 @@ class PostListTileCard extends StatelessWidget {
                       ),
                       placeholder: (context, url) => Shimmer.fromColors(
                         baseColor: kShimmerBaseColor,
-                        highlightColor: kHightlightColor,
+                        highlightColor: kShimmerHightlightColor,
                         child: Container(
                           height: 120,
                           decoration: BoxDecoration(

@@ -50,7 +50,7 @@ class _AppView extends StatelessWidget {
         textTheme: AppTextTheme().textTheme,
         scaffoldBackgroundColor: darkColorScheme.background,
       ),
-      title: 'Tìm phòng trọ hehe',
+      title: 'Homie',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         AppLocalizations.delegate,

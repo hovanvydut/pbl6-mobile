@@ -107,6 +107,7 @@ class _HomeViewState extends State<HomeView> {
                   borderRadius: BorderRadius.circular(20),
                   height: context.height * 0.28,
                   imageError: Assets.images.notImage.image().image,
+                  onTapToViewImage: false,
                 ),
                 const SizedBox(height: 16),
                 Column(
@@ -236,7 +237,7 @@ class SearchByDistrictView extends StatelessWidget {
                       child: Text(
                         district['name']! as String,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              color: Theme.of(context).colorScheme.surface,
+                              color: lightColorScheme.surface,
                               fontWeight: FontWeight.w700,
                             ),
                       ),
@@ -246,13 +247,13 @@ class SearchByDistrictView extends StatelessWidget {
               ),
             ),
             placeholder: (context, url) => const AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 1.2,
               child: Center(
                 child: CircularProgressIndicator(),
               ),
             ),
             errorWidget: (context, url, error) => AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 1.2,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
