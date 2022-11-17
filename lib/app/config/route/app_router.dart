@@ -81,7 +81,7 @@ abstract class AppRouter {
       GoRoute(
         path: searchFilter,
         builder: (context, state) {
-          final extras = state.extra! as ExtraParams2<PostBloc, BookmarkBloc>;
+          final extras = state.extra! as ExtraParams3<PostBloc, BookmarkBloc, int?>;
           return MultiBlocProvider(
             providers: [
               BlocProvider.value(
@@ -91,7 +91,7 @@ abstract class AppRouter {
                 value: extras.param2,
               ),
             ],
-            child: const SearchFilterPage(),
+            child:  SearchFilterPage(),
           );
         },
       ),
