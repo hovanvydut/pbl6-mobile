@@ -2,7 +2,7 @@
     package="me.dungngminh.pbl6_mobile">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="${appName}"
+        android:label="Homie"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

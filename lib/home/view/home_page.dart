@@ -82,9 +82,10 @@ class _HomeViewState extends State<HomeView> {
             ),
             onPressed: () => context.push(
               AppRouter.searchFilter,
-              extra: ExtraParams2<PostBloc, BookmarkBloc>(
+              extra: ExtraParams3<PostBloc, BookmarkBloc, int?>(
                 param1: context.read<PostBloc>(),
                 param2: context.read<BookmarkBloc>(),
+                param3: null,
               ),
             ),
           ),
@@ -107,6 +108,7 @@ class _HomeViewState extends State<HomeView> {
                   borderRadius: BorderRadius.circular(20),
                   height: context.height * 0.28,
                   imageError: Assets.images.notImage.image().image,
+                  onTapToViewImage: false,
                 ),
                 const SizedBox(height: 16),
                 Column(

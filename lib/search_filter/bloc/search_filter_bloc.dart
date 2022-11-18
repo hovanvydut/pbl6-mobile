@@ -21,11 +21,12 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
     required CategoryRepository categoryRepository,
     required PropertyRepository propertyRepository,
     required PostRepository postRepository,
+    int? districtId,
   })  : _addressRepository = addressRepository,
         _categoryRepository = categoryRepository,
         _propertyRepository = propertyRepository,
         _postRepository = postRepository,
-        super(const SearchFilterState()) {
+        super(SearchFilterState(selectedDistrict: districtId ?? 0)) {
     on<SearchPageStarted>(_onSearchPageStarted);
     on<GetPosts>(_onGetPosts);
     on<HouseTypeSelected>(_onHouseTypeSelected);
@@ -65,17 +66,35 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
       );
       final fetchedHouseTypes = await _categoryRepository.getHouseTypes();
       final fetchedProperties = await _propertyRepository.getGroupProperties();
-      final fetchedPosts = await _postRepository.filterPosts();
-      emit(
-        state.copyWith(
-          posts: fetchedPosts,
-          houseTypesData: fetchedHouseTypes,
-          otherUtilsData: fetchedProperties[PropertyType.util]!.properties,
-          rentalObjectsData: fetchedProperties[PropertyType.rental]!.properties,
-          nearbyPlacesData: fetchedProperties[PropertyType.nearby]!.properties,
-          loadingStatus: LoadingStatus.done,
-        ),
-      );
+      if (state.selectedDistrict != 0) {
+        final fetchedPosts = await _postRepository.filterPosts();
+        emit(
+          state.copyWith(
+            posts: fetchedPosts,
+            houseTypesData: fetchedHouseTypes,
+            otherUtilsData: fetchedProperties[PropertyType.util]!.properties,
+            rentalObjectsData:
+                fetchedProperties[PropertyType.rental]!.properties,
+            nearbyPlacesData:
+                fetchedProperties[PropertyType.nearby]!.properties,
+            loadingStatus: LoadingStatus.done,
+          ),
+        );
+      } else {
+        final fetchedPosts = await _postRepository.filterPosts();
+        emit(
+          state.copyWith(
+            posts: fetchedPosts,
+            houseTypesData: fetchedHouseTypes,
+            otherUtilsData: fetchedProperties[PropertyType.util]!.properties,
+            rentalObjectsData:
+                fetchedProperties[PropertyType.rental]!.properties,
+            nearbyPlacesData:
+                fetchedProperties[PropertyType.nearby]!.properties,
+            loadingStatus: LoadingStatus.done,
+          ),
+        );
+      }
       pageNumber++;
     } catch (e) {
       emit(state.copyWith(loadingStatus: LoadingStatus.error));

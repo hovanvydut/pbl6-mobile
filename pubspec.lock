@@ -11,8 +11,8 @@ packages:
   address:
     dependency: "direct main"
     description:
-      path: "/media/dungngminh/Data/project/pbl6/mobile/packages/address"
-      relative: false
+      path: "packages/address"
+      relative: true
     source: path
     version: "0.1.0+1"
   analyzer:
@@ -140,42 +140,14 @@ packages:
       name: connectivity_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.7"
-  connectivity_plus_linux:
-    dependency: transitive
-    description:
-      name: connectivity_plus_linux
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.3.1"
-  connectivity_plus_macos:
-    dependency: transitive
-    description:
-      name: connectivity_plus_macos
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.4"
+    version: "3.0.2"
   connectivity_plus_platform_interface:
     dependency: transitive
     description:
       name: connectivity_plus_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
-  connectivity_plus_web:
-    dependency: transitive
-    description:
-      name: connectivity_plus_web
-      url: "https://pub.dartlang.org"
-    source: hosted
     version: "1.2.3"
-  connectivity_plus_windows:
-    dependency: transitive
-    description:
-      name: connectivity_plus_windows
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.2"
   constant_helper:
     dependency: "direct main"
     description:
@@ -252,7 +224,7 @@ packages:
       name: dotted_border
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0+2"
+    version: "2.0.0+3"
   easy_debounce:
     dependency: "direct main"
     description:
@@ -321,13 +293,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
+  flutter_inappwebview:
+    dependency: "direct main"
+    description:
+      name: flutter_inappwebview
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.7.1+2"
   flutter_lazy_indexed_stack:
     dependency: "direct main"
     description:
       name: flutter_lazy_indexed_stack
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -339,7 +318,7 @@ packages:
       name: flutter_native_splash
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.9"
+    version: "2.2.14"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -402,7 +381,7 @@ packages:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.5"
+    version: "1.1.6"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -413,13 +392,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_webview_plugin:
-    dependency: "direct main"
-    description:
-      name: flutter_webview_plugin
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.0"
   fluttertoast:
     dependency: "direct main"
     description:
@@ -468,7 +440,7 @@ packages:
       name: html
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.15.0"
+    version: "0.15.1"
   http:
     dependency: "direct main"
     description:
@@ -503,7 +475,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.2.2"
   image_picker:
     dependency: transitive
     description:
@@ -567,13 +539,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.7.0"
-  lint:
-    dependency: transitive
-    description:
-      name: lint
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.10.0"
   logging:
     dependency: transitive
     description:
@@ -626,8 +591,8 @@ packages:
   models:
     dependency: "direct main"
     description:
-      path: "/media/dungngminh/Data/project/pbl6/mobile/packages/models"
-      relative: false
+      path: "packages/models"
+      relative: true
     source: path
     version: "0.1.0+1"
   multiselect:
@@ -678,7 +643,7 @@ packages:
       name: package_info_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
@@ -787,8 +752,8 @@ packages:
   platform_helper:
     dependency: "direct main"
     description:
-      path: "/media/dungngminh/Data/project/pbl6/mobile/packages/platform_helper"
-      relative: false
+      path: "packages/platform_helper"
+      relative: true
     source: path
     version: "0.1.0+1"
   plugin_platform_interface:
@@ -822,8 +787,8 @@ packages:
   property:
     dependency: "direct main"
     description:
-      path: "/media/dungngminh/Data/project/pbl6/mobile/packages/property"
-      relative: false
+      path: "packages/property"
+      relative: true
     source: path
     version: "0.1.0+1"
   provider:
@@ -970,28 +935,28 @@ packages:
       name: syncfusion_flutter_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.52"
+    version: "20.3.57"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.52"
+    version: "20.3.57"
   syncfusion_flutter_datepicker:
     dependency: transitive
     description:
       name: syncfusion_flutter_datepicker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.52"
+    version: "20.3.57"
   syncfusion_localizations:
     dependency: "direct main"
     description:
       name: syncfusion_localizations
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.52"
+    version: "20.3.57"
   synchronized:
     dependency: transitive
     description:
@@ -1210,5 +1175,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
+  dart: ">=2.18.2 <3.0.0"
   flutter: ">=3.3.6"
