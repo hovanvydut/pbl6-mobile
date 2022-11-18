@@ -3,6 +3,7 @@ import 'package:category/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/search_filter/search_filter.dart';
 import 'package:post/post.dart';
