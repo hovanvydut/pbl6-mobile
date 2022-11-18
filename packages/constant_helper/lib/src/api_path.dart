@@ -80,4 +80,18 @@ abstract class ApiPath {
   ///
   /// `POST`: create review by postId
   static String postReview(int postId) => '/api/review/post/$postId';
+
+  /// Uptop
+  ///
+  /// `GET` : get uptop by postID
+  ///
+  /// `POST`: uptop post
+  static String uptop(int? postId) =>
+      '/api/uptop${postId == null ? '' : '/$postId'}';
+
+  /// **Uptop**
+  ///
+  /// `GET` duplicate: get duplicate
+  ///
+  static const uptopDuplicate = '/api/uptop/duplicate';
 }

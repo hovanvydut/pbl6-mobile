@@ -22,6 +22,7 @@ import 'package:post/post.dart';
 import 'package:property/property.dart';
 import 'package:review/review.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:uptop/uptop.dart';
 import 'package:user/user.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -111,6 +112,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           ),
           RepositoryProvider(
             create: (_) => ReviewRepository(reviewDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) => UptopRepository(uptopDatasource: injector()),
           )
         ],
         child: await builder(),

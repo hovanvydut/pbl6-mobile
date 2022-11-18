@@ -26,6 +26,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       groupProperties: (json['propertyGroup'] as List<dynamic>?)
           ?.map((e) => GroupProperty.fromJson(e as Map<String, dynamic>))
           .toList(),
+      averageRating: (json['averageRating'] as num?)?.toDouble(),
       medias: (json['medias'] as List<dynamic>)
           .map((e) => Media.fromJson(e as Map<String, dynamic>))
           .toList(),

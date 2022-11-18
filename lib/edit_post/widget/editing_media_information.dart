@@ -16,7 +16,6 @@ class EditingMediaInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.theme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

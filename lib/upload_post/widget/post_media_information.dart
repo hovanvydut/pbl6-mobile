@@ -12,10 +12,7 @@ class PostMediaInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const box16 = SizedBox(
-      height: 16,
-    );
-
+    const box16 = SizedBox(height: 16);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -28,9 +25,7 @@ class PostMediaInformation extends StatelessWidget {
           builder: (context, state) {
             final medias = state.medias;
             return medias.isEmpty
-                ? const SizedBox(
-                    height: 16,
-                  )
+                ? box16
                 : Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: SizedBox(
@@ -98,9 +93,7 @@ class PostMediaInformation extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Assets.images.uploadCloud.svg(),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  box16,
                   Text(
                     'Chọn ảnh của bạn',
                     style: Theme.of(context).textTheme.bodyMedium,

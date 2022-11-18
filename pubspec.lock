@@ -1027,6 +1027,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
+  uptop:
+    dependency: "direct main"
+    description:
+      path: "packages/uptop"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   url_launcher:
     dependency: "direct main"
     description:

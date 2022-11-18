@@ -21,6 +21,7 @@ class Post extends Equatable {
     required this.category,
     required this.properties,
     this.groupProperties,
+   this.averageRating,
     required this.medias,
     this.authorInfo,
     required this.createdAt,
@@ -45,6 +46,7 @@ class Post extends Equatable {
   @JsonKey(name: 'propertyGroup')
   final List<GroupProperty>? groupProperties;
   final List<Media> medias;
+  final double? averageRating;
   final User? authorInfo;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -67,6 +69,7 @@ class Post extends Equatable {
       properties,
       groupProperties,
       medias,
+      averageRating,
       authorInfo,
       createdAt,
       updatedAt,
@@ -89,6 +92,7 @@ class Post extends Equatable {
     List<Property>? properties,
     List<GroupProperty>? groupProperties,
     List<Media>? medias,
+    double? averageRating,
     User? authorInfo,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -109,6 +113,7 @@ class Post extends Equatable {
       properties: properties ?? this.properties,
       groupProperties: groupProperties ?? this.groupProperties,
       medias: medias ?? this.medias,
+      averageRating: averageRating ?? this.averageRating,
       authorInfo: authorInfo ?? this.authorInfo,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,

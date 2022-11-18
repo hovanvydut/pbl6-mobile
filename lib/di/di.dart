@@ -12,6 +12,7 @@ import 'package:pbl6_mobile/app/app.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
 import 'package:review/review.dart';
+import 'package:uptop/uptop.dart';
 import 'package:user/user.dart';
 
 final injector = GetIt.instance;
@@ -59,5 +60,7 @@ void initDependences() {
       () => RemoteBookingDatasource(httpHandler: injector<HttpClientHandler>()),
     )..registerLazySingleton<IReviewDatasource>(
       () => RemoteReviewDatasource(httpHandler: injector<HttpClientHandler>()),
+    )..registerLazySingleton<IUptopDatasource>(
+      () => RemoteUptopDatasource(httpHandler: injector<HttpClientHandler>()),
     );
 }
