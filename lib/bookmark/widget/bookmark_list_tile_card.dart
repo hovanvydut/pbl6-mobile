@@ -61,7 +61,7 @@ class BookmarklListTileCard extends StatelessWidget {
                   )
                 else
                   Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Assets.images.notImage.image(

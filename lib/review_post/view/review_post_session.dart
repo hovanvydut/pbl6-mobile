@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/review_post/review_post.dart';
+import 'package:platform_helper/platform_helper.dart';
 import 'package:review/review.dart';
 
 class ReviewPostSession extends StatelessWidget {
@@ -51,7 +53,7 @@ class ReviewPostView extends StatelessWidget {
                     context.select((ReviewPostBloc bloc) => bloc.state.post);
                 return Visibility(
                   visible:
-                      reviews.isNotEmpty && post.authorInfo!.id != user!.id,
+                      reviews.isNotEmpty && post.authorInfo!.id != user?.id,
                   child: TextButton(
                     child: const Text('Thêm đánh giá'),
                     onPressed: () => context.pushToChild(
@@ -126,17 +128,27 @@ class ReviewPostView extends StatelessWidget {
                       builder: (context) {
                         final user =
                             context.watch<AuthenticationBloc>().state.user;
-                        if (post.authorInfo!.id != user!.id) {
+                        if (post.authorInfo!.id != user?.id) {
                           return TextButton(
+                            onPressed: user?.id == null
+                                ? () {
+                                    ToastHelper.showToast(
+                                      'Bạn phải đăng nhập '
+                                      'để thực hiện hành động này',
+                                    );
+                                    context.push(AppRouter.login);
+                                  }
+                                : () => context.pushToChild(
+                                      AppRouter.createReview,
+                                      extra: ExtraParams2<Post, ReviewPostBloc>(
+                                        param1: context
+                                            .read<ReviewPostBloc>()
+                                            .state
+                                            .post,
+                                        param2: context.read<ReviewPostBloc>(),
+                                      ),
+                                    ),
                             child: const Text('Hãy là người đầu tiền đánh giá'),
-                            onPressed: () => context.pushToChild(
-                              AppRouter.createReview,
-                              extra: ExtraParams2<Post, ReviewPostBloc>(
-                                param1:
-                                    context.read<ReviewPostBloc>().state.post,
-                                param2: context.read<ReviewPostBloc>(),
-                              ),
-                            ),
                           );
                         } else {
                           return const SizedBox();

@@ -44,10 +44,8 @@ class _HostMainViewState extends State<HostMainView> {
             index: currentIndex,
             children: const [
               HomePage(),
-              Center(child: Text('Thông báo')),
               SizedBox(),
-              Center(child: Text('Tin nhắn')),
-              UserProfilePage()
+              UserProfilePage(),
             ],
           );
         },
@@ -68,36 +66,36 @@ class _HostMainViewState extends State<HostMainView> {
             onDestinationSelected: _changeCurrentIndex,
             destinations: [
               NavigationDestination(
-                selectedIcon: Assets.icons.documentBold.svg(
+                selectedIcon: Assets.icons.homeBold.svg(
                   color: theme.colorScheme.onSecondaryContainer,
                 ),
-                icon: Assets.icons.document.svg(
+                icon: Assets.icons.homeOutline.svg(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
-                label: 'Bài viết',
+                label: 'Trang chủ',
               ),
-              NavigationDestination(
-                selectedIcon: Assets.icons.notificationBold.svg(
-                  color: theme.colorScheme.onSecondaryContainer,
-                ),
-                icon: Assets.icons.notificationOutline.svg(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-                label: 'Thông báo',
-              ),
+              // NavigationDestination(
+              //   selectedIcon: Assets.icons.notificationBold.svg(
+              //     color: theme.colorScheme.onSecondaryContainer,
+              //   ),
+              //   icon: Assets.icons.notificationOutline.svg(
+              //     color: theme.colorScheme.onSurfaceVariant,
+              //   ),
+              //   label: 'Thông báo',
+              // ),
               const Visibility(
                 visible: false,
                 child: SizedBox(),
               ),
-              NavigationDestination(
-                selectedIcon: Assets.icons.messageBold.svg(
-                  color: theme.colorScheme.onSecondaryContainer,
-                ),
-                icon: Assets.icons.messageOutline.svg(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-                label: 'Tin nhắn',
-              ),
+              // NavigationDestination(
+              //   selectedIcon: Assets.icons.messageBold.svg(
+              //     color: theme.colorScheme.onSecondaryContainer,
+              //   ),
+              //   icon: Assets.icons.messageOutline.svg(
+              //     color: theme.colorScheme.onSurfaceVariant,
+              //   ),
+              //   label: 'Tin nhắn',
+              // ),
               NavigationDestination(
                 selectedIcon: Assets.icons.profileBold.svg(
                   color: theme.colorScheme.onSecondaryContainer,

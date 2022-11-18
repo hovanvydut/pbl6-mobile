@@ -4,6 +4,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/post/post.dart';
@@ -617,8 +618,17 @@ class SearchFilterBodyView extends StatelessWidget {
       builder: (context, state) {
         final loadingStatus = state.loadingStatus;
         if (loadingStatus == LoadingStatus.loading) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return ListView.separated(
+            padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return const PostListTileCardPlaceholder();
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                height: 8,
+              );
+            },
           );
         } else if (loadingStatus == LoadingStatus.error) {
           return Center(
@@ -739,6 +749,14 @@ class _SearchFilterListViewState extends State<SearchFilterListView> {
                   return PostListTileCard(
                     post: post,
                     isBookmarked: isBookmarked,
+                    onCardTap: () => context.push(
+                      AppRouter.detailPost,
+                      extra: ExtraParams3<PostBloc, Post, BookmarkBloc?>(
+                        param1: context.read<PostBloc>(),
+                        param2: post,
+                        param3: context.read<BookmarkBloc>(),
+                      ),
+                    ),
                   );
                 },
               );

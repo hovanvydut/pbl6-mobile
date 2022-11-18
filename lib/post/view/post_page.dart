@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/post/post.dart';
 
-class PostPage extends StatefulWidget {
+class PostPage extends StatelessWidget {
   const PostPage({super.key});
-
-  @override
-  State<PostPage> createState() => _PostPageState();
-}
-
-class _PostPageState extends State<PostPage> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<PostBloc>().add(GetUserPosts());
-  }
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
     return Scaffold(
       appBar: AppBar(
-        title: Align(
-          alignment: Alignment.centerLeft,
-          child: Assets.images.logo.svg(),
+        leading: IconButton(
+          icon: Assets.icons.arrorLeft.svg(
+            color: theme.colorScheme.onSurface,
+            height: 32,
+          ),
+          onPressed: () => context.pop(),
+        ),
+        title: const Text(
+          'Bài đăng của bạn',
         ),
         actions: const [
           RefreshActionButton(),
         ],
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -45,40 +44,46 @@ class _PostPageState extends State<PostPage> {
           builder: (context, state) {
             final loadingStatus = state.userPostsLoadingStatus;
             if (loadingStatus == LoadingStatus.loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return ListView.separated(
+                padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return const PostListTileCardPlaceholder();
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 8,
+                  );
+                },
               );
             } else if (loadingStatus == LoadingStatus.error) {
               return Center(
-                child: RefreshIndicator(
-                  onRefresh: () async =>
-                      context.read<PostBloc>().add(GetUserPosts()),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Assets.images.errorNotFound.svg(
-                          height: 200,
-                          width: 300,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Đã có lỗi xảy ra, vui lòng thử lại',
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            color: theme.colorScheme.onSurface,
-                          ),
-                        )
-                      ],
+                child: Column(
+                  children: [
+                    const Spacer(),
+                    Assets.images.errorNotFound.svg(
+                      height: 200,
+                      width: 300,
                     ),
-                  ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Đã có lỗi xảy ra, vui lòng thử lại',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                    const Spacer(
+                      flex: 2,
+                    ),
+                  ],
                 ),
               );
             }
             if (state.userPostsData.isEmpty) {
               return Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const Spacer(),
                     Assets.images.empty.svg(
                       height: 200,
                       width: 300,
@@ -89,42 +94,40 @@ class _PostPageState extends State<PostPage> {
                       style: theme.textTheme.bodyLarge?.copyWith(
                         color: theme.colorScheme.onSurface,
                       ),
-                    )
+                    ),
+                    const Spacer(
+                      flex: 2,
+                    ),
                   ],
                 ),
               );
             }
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'Tất cả bài viết của bạn',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    color: theme.colorScheme.onSurface,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () async =>
-                        context.read<PostBloc>().add(GetUserPosts()),
-                    child: ListView.separated(
-                      itemCount: state.userPostsData.length,
-                      itemBuilder: (context, index) {
-                        final post = state.userPostsData[index];
-                        return PostListTileCard(post: post);
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 8,
-                        );
-                      },
+            return RefreshIndicator(
+              onRefresh: () async =>
+                  context.read<PostBloc>().add(GetUserPosts()),
+              child: ListView.separated(
+                itemCount: state.userPostsData.length,
+                itemBuilder: (context, index) {
+                  final post = state.userPostsData[index];
+                  return PostListTileCard(
+                    post: post,
+                    hideBookmark: true,
+                    onCardTap: () => context.push(
+                      AppRouter.detailPost,
+                      extra: ExtraParams3<PostBloc, Post, BookmarkBloc?>(
+                        param1: context.read<PostBloc>(),
+                        param2: post,
+                        param3: null,
+                      ),
                     ),
-                  ),
-                ),
-              ],
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 8,
+                  );
+                },
+              ),
             );
           },
         ),

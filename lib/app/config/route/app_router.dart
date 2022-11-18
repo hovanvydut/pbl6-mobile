@@ -14,7 +14,6 @@ import 'package:pbl6_mobile/edit_user_profile/edit_user_profile.dart';
 import 'package:pbl6_mobile/login/login.dart';
 import 'package:pbl6_mobile/main/main.dart';
 import 'package:pbl6_mobile/main/view/guest_main_view.dart';
-import 'package:pbl6_mobile/main/view/host_main_view.dart';
 import 'package:pbl6_mobile/payment/payment.dart';
 import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/register/register.dart';
@@ -27,7 +26,7 @@ abstract class AppRouter {
   static const register = '/register';
   static const main = '/';
   static const guest = '/guest';
-  static const host = '/host';
+  static const userPost = 'user-post';
   static const uploadPost = '/upload';
   static const editUserProfile = 'edit-profile';
   static const detailPost = '/post-detail';
@@ -76,12 +75,24 @@ abstract class AppRouter {
               ),
             ],
           ),
+          GoRoute(
+            path: userPost,
+            builder: (context, state) {
+              final extra = state.extra! as PostBloc;
+
+              return BlocProvider.value(
+                value: extra,
+                child: const PostPage(),
+              );
+            },
+          ),
         ],
       ),
       GoRoute(
         path: searchFilter,
         builder: (context, state) {
-          final extras = state.extra! as ExtraParams2<PostBloc, BookmarkBloc>;
+          final extras =
+              state.extra! as ExtraParams3<PostBloc, BookmarkBloc, int?>;
           return MultiBlocProvider(
             providers: [
               BlocProvider.value(
@@ -102,12 +113,6 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: host,
-        builder: (context, state) {
-          return const HostMainView();
-        },
-      ),
-      GoRoute(
         path: uploadPost,
         builder: (context, state) {
           final postBloc = state.extra! as PostBloc;
@@ -121,15 +126,16 @@ abstract class AppRouter {
         path: detailPost,
         builder: (context, state) {
           final extras =
-              state.extra! as ExtraParams3<PostBloc, Post, BookmarkBloc>;
+              state.extra! as ExtraParams3<PostBloc, Post, BookmarkBloc?>;
           return MultiBlocProvider(
             providers: [
               BlocProvider.value(
                 value: extras.param1,
               ),
-              BlocProvider.value(
-                value: extras.param3,
-              ),
+              if (extras.param3 != null)
+                BlocProvider.value(
+                  value: extras.param3!,
+                ),
             ],
             child: DetailPostPage(post: extras.param2),
           );

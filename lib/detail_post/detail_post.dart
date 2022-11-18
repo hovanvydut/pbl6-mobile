@@ -1,14 +1,14 @@
 export 'cubit/detail_post_cubit.dart';
 export 'view/detail_post_page.dart';
-export 'widget/detail_post_basic_information.dart';
-export 'widget/detail_post_connection_panel.dart';
-export 'widget/detail_post_more_information.dart';
 export 'widget/detail_post_address_information.dart';
 export 'widget/detail_post_app_bar.dart';
 export 'widget/detail_post_author_info.dart';
+export 'widget/detail_post_basic_information.dart';
+export 'widget/detail_post_connection_panel.dart';
 export 'widget/detail_post_created_date_info.dart';
 export 'widget/detail_post_description.dart';
 export 'widget/detail_post_image.dart';
+export 'widget/detail_post_more_information.dart';
 export 'widget/detail_post_nearby_places_info.dart';
 export 'widget/detail_post_other_utils_info.dart';
 export 'widget/detail_post_util_information.dart';

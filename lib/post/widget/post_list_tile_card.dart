@@ -1,23 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:shimmer/shimmer.dart';
 
 class PostListTileCard extends StatelessWidget {
   const PostListTileCard({
     super.key,
     required this.post,
     this.isBookmarked = false,
-    this.isHidden = false,
+    this.hideBookmark = false,
+    required this.onCardTap,
   });
 
   final Post post;
   final bool isBookmarked;
-  final bool isHidden;
+  final bool hideBookmark;
+  final VoidCallback onCardTap;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +27,7 @@ class PostListTileCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
-          context.push(
-            AppRouter.detailPost,
-            extra: ExtraParams3<PostBloc, Post, BookmarkBloc>(
-              param1: context.read<PostBloc>(),
-              param2: post,
-              param3: context.read<BookmarkBloc>(),
-            ),
-          );
+          onCardTap.call();
         },
         child: Card(
           color: Theme.of(context).colorScheme.surface,
@@ -57,8 +51,17 @@ class PostListTileCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: kShimmerBaseColor,
+                        highlightColor: kShimmerHightlightColor,
+                        child: Container(
+                          height: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                       errorWidget: (context, url, error) =>
                           Assets.images.notImage.image(
                         fit: BoxFit.cover,
@@ -133,7 +136,7 @@ class PostListTileCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (!isHidden)
+                if (!hideBookmark)
                   Column(
                     children: [
                       BookmarkIconButton(

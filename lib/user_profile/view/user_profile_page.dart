@@ -60,10 +60,7 @@ class UserProfilePage extends StatelessWidget {
                     //   },
                     // ),
                     IconButton(
-                      icon: Assets.icons.setting.svg(
-                        color: theme.colorScheme.onSecondaryContainer,
-                        height: 28,
-                      ),
+                      icon: const Icon(Icons.logout),
                       onPressed: () => context
                           .read<AuthenticationBloc>()
                           .add(LogoutRequested()),
@@ -176,6 +173,20 @@ class UserProfilePage extends StatelessWidget {
                         },
                       ),
                       ListTile(
+                        leading: Assets.icons.document.svg(
+                          color: theme.colorScheme.onSurface,
+                        ),
+                        title: const Text('Bài viết của bạn'),
+                        trailing: Assets.icons.chevronRight
+                            .svg(color: theme.colorScheme.onSurface),
+                        onTap: () {
+                          context.pushToChild(
+                            AppRouter.userPost,
+                            extra: context.read<PostBloc>(),
+                          );
+                        },
+                      ),
+                      ListTile(
                         leading: Assets.icons.bookmarkOutline.svg(
                           color: theme.colorScheme.onSurface,
                         ),
@@ -208,7 +219,9 @@ class UserProfilePage extends StatelessWidget {
                               color: theme.colorScheme.onSurface,
                             ),
                             title: const Text('Số dư hiện tại'),
-                            subtitle: Text('${user?.currentCredit ?? 0} đồng'),
+                            subtitle: Text(
+                              '${user?.currentCredit == null ? 0 : (user!.currentCredit! / 100).toStringAsFixed(0)} đồng',
+                            ),
                             trailing: Assets.icons.chevronRight
                                 .svg(color: theme.colorScheme.onSurface),
                             onTap: () => context.push(AppRouter.payment),

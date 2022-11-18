@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:platform_helper/platform_helper.dart';
 
 class WebviewPaymentPage extends StatelessWidget {
@@ -28,7 +30,7 @@ class WebviewPaymentPage extends StatelessWidget {
                   context
                     ..pop()
                     ..pop();
-                  // TODO(dungngminh): Handle get User Infomation
+                  context.read<AuthenticationBloc>().add(GetUserInformation());
                   return '';
                 },
               );

@@ -50,8 +50,20 @@ class PriorityPostGridView extends StatelessWidget {
             final allPosts = state.allPostsData;
             final allPostsStatus = state.allPostsLoadingStatus;
             if (allPostsStatus == LoadingStatus.loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return GridView.builder(
+                padding: const EdgeInsets.only(bottom: 16, top: 8),
+                shrinkWrap: true,
+                primary: false,
+                itemCount: 6,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  mainAxisExtent: 260,
+                ),
+                itemBuilder: (context, index) {
+                  return const PostGridCardPlaceholder();
+                },
               );
             }
             if (allPostsStatus == LoadingStatus.error) {
@@ -81,7 +93,6 @@ class PriorityPostGridView extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-               
                 const SizedBox(height: 8),
                 GridView.builder(
                   padding: const EdgeInsets.only(bottom: 16),

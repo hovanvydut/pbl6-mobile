@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:models/models.dart';
 
@@ -23,7 +24,11 @@ class Review extends Equatable {
   final String content;
   final int rating;
   final List<Media> medias;
+  @JsonKey(fromJson: _fromJson)
   final DateTime createdAt;
+
+    static DateTime _fromJson(String date) =>
+      DateFormat('yyyy-MM-ddTHH:mm:ss').parse(date, true);
 
   @override
   List<Object?> get props {
