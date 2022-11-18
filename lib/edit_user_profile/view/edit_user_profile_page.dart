@@ -43,25 +43,38 @@ class EditUserProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    return BlocListener<EditUserProfileBloc, EditUserProfileState>(
-      listener: (context, state) {
-        if (state.formzStatus == FormzStatus.submissionFailure) {
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'Cập nhật thông tin người dùng thất bại, vui lòng thử lại',
-              ),
-              duration: Duration(seconds: 2),
-            ),
-          );
-        }
-        if (state.formzStatus == FormzStatus.submissionSuccess) {
-          ToastHelper.showToast('Đã cập nhật thông tin người dùng');
-          context.read<AuthenticationBloc>().add(GetUserInformation());
-          context.pop();
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<EditUserProfileBloc, EditUserProfileState>(
+          listener: (context, state) {
+            if (state.formzStatus == FormzStatus.submissionFailure) {
+              ScaffoldMessenger.of(context).removeCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'Cập nhật thông tin người dùng thất bại, vui lòng thử lại',
+                  ),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            }
+            if (state.formzStatus == FormzStatus.submissionSuccess) {
+              ToastHelper.showToast('Đã cập nhật thông tin người dùng');
+              context.read<AuthenticationBloc>().add(GetUserInformation());
+              context.pop();
+            }
+          },
+        ),
+        BlocListener<EditUserProfileBloc, EditUserProfileState>(
+          listenWhen: (previous, current) =>
+              previous.editMode != current.editMode,
+          listener: (context, state) {
+            if (state.editMode) {
+              context.showSnackBar(message: 'Bạn đang ở chế độ chỉnh sửa');
+            }
+          },
+        ),
+      ],
       child: DismissFocus(
         child: Scaffold(
           appBar: AppBar(

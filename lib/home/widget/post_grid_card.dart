@@ -111,6 +111,12 @@ class PostGridCardImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isUserPost = context
+        .watch<PostBloc>()
+        .state
+        .userPostsData
+        .any((userPost) => userPost.id == post.id);
+
     return SizedBox(
       height: 130,
       child: Stack(
@@ -161,13 +167,14 @@ class PostGridCardImage extends StatelessWidget {
                 ),
               ),
             ),
-          BookmarkIconButton(
-            isBookmarked: isBookmarked,
-            onBookmarkedPressed: () =>
-                context.read<BookmarkBloc>().add(DeleteBookmark(post)),
-            onUnBookmarkedPressed: () =>
-                context.read<BookmarkBloc>().add(AddBookmark(post)),
-          )
+          if (!isUserPost)
+            BookmarkIconButton(
+              isBookmarked: isBookmarked,
+              onBookmarkedPressed: () =>
+                  context.read<BookmarkBloc>().add(DeleteBookmark(post)),
+              onUnBookmarkedPressed: () =>
+                  context.read<BookmarkBloc>().add(AddBookmark(post)),
+            )
         ],
       ),
     );

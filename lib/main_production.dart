@@ -14,7 +14,7 @@ Future<void> main() async {
   FlavorConfig(
     flavor: Flavor.production,
     values: FlavorValues(
-      baseUrl: 'https://node-1.silk-cat.software',
+      baseUrl: 'https://node-2.silk-cat.software',
     ),
   );
   await bootstrap(App.new);

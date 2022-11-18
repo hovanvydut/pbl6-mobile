@@ -23,7 +23,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         add(GetUserPosts());
       }
     });
-    // add(GetAllPosts());
   }
 
   final PostRepository _postRepository;

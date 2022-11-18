@@ -175,12 +175,10 @@ class _DropDownMultiSelectState extends State<DropDownMultiSelect> {
                       onTap: !widget.readOnly
                           ? () {
                               if (widget.selectedValues.contains(x)) {
-                                var ns = widget.selectedValues;
-                                ns.add(x);
+                                var ns = widget.selectedValues..add(x);
                                 widget.onChanged(ns);
                               } else {
-                                var ns = widget.selectedValues;
-                                ns.remove(x);
+                                var ns = widget.selectedValues..remove(x);
 
                                 widget.onChanged(ns);
                               }
@@ -194,12 +192,10 @@ class _DropDownMultiSelectState extends State<DropDownMultiSelect> {
                                 text: x,
                                 onChange: (isSelected) {
                                   if (isSelected) {
-                                    var ns = widget.selectedValues;
-                                    ns.add(x);
+                                    var ns = widget.selectedValues..add(x);
                                     widget.onChanged(ns);
                                   } else {
-                                    var ns = widget.selectedValues;
-                                    ns.remove(x);
+                                    var ns = widget.selectedValues..remove(x);
 
                                     widget.onChanged(ns);
                                   }

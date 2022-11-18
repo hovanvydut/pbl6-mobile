@@ -26,7 +26,7 @@ class TrendingDistrictBox extends StatelessWidget {
             extra: ExtraParams3<PostBloc, BookmarkBloc, int>(
               param1: context.read<PostBloc>(),
               param2: context.read<BookmarkBloc>(),
-              param3: district['imageUrl']! as int,
+              param3: district['id']! as int,
             ),
           ),
           child: Hero(

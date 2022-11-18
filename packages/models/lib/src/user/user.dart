@@ -52,6 +52,7 @@ class User extends Equatable {
       phoneNumber,
       identityNumber,
       currentCredit,
+      avatar,
       address,
       addressWardId,
       addressWard,

@@ -9,6 +9,11 @@
 - enhancement: add shimmer effect to post card.
 - fix: `CreateBooking` module, choose date session now can choose date not is in free time date of hosts.
 - feat: add `SearchByDistrict`.
+- feat: add `UserPostList` in `UserProfile`.
+- enhancement: hide bookmark button when post is own.
+- chore: hide `NotificationModule` and `MessageModule`.
+- deps: upgrade some deps to newest version (not `go_router`).
+- pumps: version 1.0.0
 
 # 0.12.2
 

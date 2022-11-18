@@ -48,8 +48,6 @@ class _UnAuthMainViewState extends State<UnAuthMainView> {
             index: currentIndex,
             children: const [
               HomePage(),
-              Center(child: Text('Thông báo')),
-              Center(child: Text('Tin nhắn')),
               Center(child: Text('Trang cá nhân')),
             ],
           );
@@ -72,24 +70,24 @@ class _UnAuthMainViewState extends State<UnAuthMainView> {
                 ),
                 label: 'Trang chủ',
               ),
-              NavigationDestination(
-                selectedIcon: Assets.icons.notificationBold.svg(
-                  color: theme.colorScheme.onSecondaryContainer,
-                ),
-                icon: Assets.icons.notificationOutline.svg(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-                label: 'Thông báo',
-              ),
-              NavigationDestination(
-                selectedIcon: Assets.icons.messageBold.svg(
-                  color: theme.colorScheme.onSecondaryContainer,
-                ),
-                icon: Assets.icons.messageOutline.svg(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-                label: 'Tin nhắn',
-              ),
+              // NavigationDestination(
+              //   selectedIcon: Assets.icons.notificationBold.svg(
+              //     color: theme.colorScheme.onSecondaryContainer,
+              //   ),
+              //   icon: Assets.icons.notificationOutline.svg(
+              //     color: theme.colorScheme.onSurfaceVariant,
+              //   ),
+              //   label: 'Thông báo',
+              // ),
+              // NavigationDestination(
+              //   selectedIcon: Assets.icons.messageBold.svg(
+              //     color: theme.colorScheme.onSecondaryContainer,
+              //   ),
+              //   icon: Assets.icons.messageOutline.svg(
+              //     color: theme.colorScheme.onSurfaceVariant,
+              //   ),
+              //   label: 'Tin nhắn',
+              // ),
               NavigationDestination(
                 selectedIcon: Assets.icons.profileBold.svg(
                   color: theme.colorScheme.onSecondaryContainer,
