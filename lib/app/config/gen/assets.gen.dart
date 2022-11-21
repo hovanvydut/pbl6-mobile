@@ -64,6 +64,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/arror_left.svg
   SvgGenImage get arrorLeft => const SvgGenImage('assets/icons/arror_left.svg');
 
+  /// File path: assets/icons/arrow_down.svg
+  SvgGenImage get arrowDown => const SvgGenImage('assets/icons/arrow_down.svg');
+
+  /// File path: assets/icons/arrow_up.svg
+  SvgGenImage get arrowUp => const SvgGenImage('assets/icons/arrow_up.svg');
+
   /// File path: assets/icons/bookmark_bold.svg
   SvgGenImage get bookmarkBold =>
       const SvgGenImage('assets/icons/bookmark_bold.svg');
@@ -92,6 +98,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
+
+  /// File path: assets/icons/circle_check.svg
+  SvgGenImage get circleCheck =>
+      const SvgGenImage('assets/icons/circle_check.svg');
+
+  /// File path: assets/icons/circle_warning.svg
+  SvgGenImage get circleWarning =>
+      const SvgGenImage('assets/icons/circle_warning.svg');
 
   /// File path: assets/icons/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
@@ -234,6 +248,8 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [
         add,
         arrorLeft,
+        arrowDown,
+        arrowUp,
         bookmarkBold,
         bookmarkOutline,
         calendar,
@@ -242,6 +258,8 @@ class $AssetsIconsGen {
         callOutline,
         camera,
         chevronRight,
+        circleCheck,
+        circleWarning,
         clock,
         close,
         danger,

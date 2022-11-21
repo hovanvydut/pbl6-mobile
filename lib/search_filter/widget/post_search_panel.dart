@@ -41,22 +41,22 @@ class _PostSearchPanelState extends State<PostSearchPanel> {
       padding: const EdgeInsets.only(left: 16, right: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
+        color: context.colorScheme.primary.withOpacity(0.08),
       ),
       alignment: Alignment.center,
       child: TextFormField(
         controller: _searchController,
-        decoration: InputDecoration(  
+        decoration: InputDecoration(
           border: InputBorder.none,
           hintText: 'Bạn muốn tìm phòng?',
-          hintStyle: Theme.of(context).textTheme.bodyMedium,
+          hintStyle: context.textTheme.bodyMedium,
           suffixIcon: !_isValueEmpty
               ? IconButton(
                   icon: Assets.icons.close
-                      .svg(color: Theme.of(context).colorScheme.onSurface),
+                      .svg(color: context.colorScheme.onSurface),
                   onPressed: () {
                     _searchController.clear();
-                    context 
+                    context
                         .read<SearchFilterBloc>()
                         .add(SearchChanged(_searchController.text));
                   },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 import 'package:widgets/widgets.dart';
 
@@ -22,7 +23,7 @@ class PostGeneralInformation extends StatelessWidget {
       children: [
         Text(
           'Thông tin chung',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: context.textTheme.titleLarge,
         ),
         box16,
         AppTextField(

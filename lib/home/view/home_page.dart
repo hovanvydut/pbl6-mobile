@@ -118,7 +118,7 @@ class _HomeViewState extends State<HomeView> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Xu hướng tìm kiếm',
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: context.textTheme.titleLarge,
                       ),
                     ),
                     const SearchByDistrictView(),
@@ -127,7 +127,7 @@ class _HomeViewState extends State<HomeView> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Phòng trọ nổi bật',
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: context.textTheme.titleLarge,
                       ),
                     ),
                   ],
@@ -237,10 +237,10 @@ class SearchByDistrictView extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: Text(
                         district['name']! as String,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              color: Theme.of(context).colorScheme.surface,
-                              fontWeight: FontWeight.w700,
-                            ),
+                        style: context.textTheme.bodyLarge!.copyWith(
+                          color: context.colorScheme.surface,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ],

@@ -30,7 +30,7 @@ class PostListTileCard extends StatelessWidget {
           onCardTap.call();
         },
         child: Card(
-          color: Theme.of(context).colorScheme.surface,
+          color: context.colorScheme.surface,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
             child: Row(
@@ -112,23 +112,18 @@ class PostListTileCard extends StatelessWidget {
                         ),
                         Text(
                           '${post.price.inCompactCurrency}/tháng',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: context.colorScheme.primary,
+                                  ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           '${post.address}, ${post.fullAddress}',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurfaceVariant,
-                                  ),
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: context.colorScheme.onSurfaceVariant,
+                          ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),

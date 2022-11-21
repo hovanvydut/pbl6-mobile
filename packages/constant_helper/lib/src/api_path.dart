@@ -43,12 +43,12 @@ abstract class ApiPath {
   /// Create Payment and Transaction
   static const paymentBankCode = '/api/payment/bank-code';
   static const payment = '/api/payment';
-  static const paymentPersonalHistory = '/api/payment/history';
+  static const personalCreditHistory = '/api/payment/history/personal';
 
   /// Service Payment Transaction
   ///
   ///
-  static const personalHistoryTransaction = '/api/payment-history/personal';
+  static const personalDebitHistory = '/api/payment-history/personal';
 
   /// Get other host posts: GET /api/post
   static String hostPostOther(int hostId) => '/api/host/$hostId/post';
@@ -86,7 +86,7 @@ abstract class ApiPath {
   /// `GET` : get uptop by postID
   ///
   /// `POST`: uptop post
-  static String uptop(int? postId) =>
+  static String uptop([int? postId]) =>
       '/api/uptop${postId == null ? '' : '/$postId'}';
 
   /// **Uptop**

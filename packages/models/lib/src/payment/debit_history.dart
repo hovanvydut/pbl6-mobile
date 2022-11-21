@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'payment_transaction.g.dart';
+part 'debit_history.g.dart';
 
 @JsonSerializable()
-class PaymentTransaction extends Equatable {
-  const PaymentTransaction({
+class DebitHistory extends Equatable {
+  const DebitHistory({
     required this.paymentCode,
     required this.hostId,
     required this.hostEmail,
@@ -17,9 +17,9 @@ class PaymentTransaction extends Equatable {
     required this.createdAt,
   });
 
-  factory PaymentTransaction.fromJson(Map<String, dynamic> json) =>
-      _$PaymentTransactionFromJson(json);
-      
+  factory DebitHistory.fromJson(Map<String, dynamic> json) =>
+      _$DebitHistoryFromJson(json);
+
   final String paymentCode;
   final int hostId;
   final String hostEmail;

@@ -29,10 +29,10 @@ class BookmarkIconButton extends StatelessWidget {
         child: CircleAvatar(
           backgroundColor: backgroundTransprent
               ? Colors.transparent
-              : Theme.of(context).colorScheme.surface.withOpacity(0.6),
+              : context.colorScheme.surface.withOpacity(0.6),
           child: IconButton(
             icon: Assets.icons.bookmarkBold.svg(
-              color: Theme.of(context).colorScheme.onSurface,
+              color: context.colorScheme.onSurface,
             ),
             onPressed: onBookmarkedPressed.call,
           ),
@@ -44,10 +44,10 @@ class BookmarkIconButton extends StatelessWidget {
         child: CircleAvatar(
           backgroundColor: backgroundTransprent
               ? Colors.transparent
-              : Theme.of(context).colorScheme.surface.withOpacity(0.6),
+              : context.colorScheme.surface.withOpacity(0.6),
           child: IconButton(
             icon: Assets.icons.bookmarkOutline.svg(
-              color: Theme.of(context).colorScheme.onSurface,
+              color: context.colorScheme.onSurface,
             ),
             onPressed: onUnBookmarkedPressed.call,
           ),

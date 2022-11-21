@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'payment_transaction.dart';
+part of 'debit_history.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PaymentTransaction _$PaymentTransactionFromJson(Map<String, dynamic> json) =>
-    PaymentTransaction(
+DebitHistory _$DebitHistoryFromJson(Map<String, dynamic> json) => DebitHistory(
       paymentCode: json['paymentCode'] as String,
       hostId: json['hostId'] as int,
       hostEmail: json['hostEmail'] as String,
@@ -15,10 +14,10 @@ PaymentTransaction _$PaymentTransactionFromJson(Map<String, dynamic> json) =>
       paymentType: json['paymentType'] as String,
       amount: json['amount'] as int,
       description: json['description'] as String,
-      createdAt: PaymentTransaction._fromJson(json['createdAt'] as String),
+      createdAt: DebitHistory._fromJson(json['createdAt'] as String),
     );
 
-Map<String, dynamic> _$PaymentTransactionToJson(PaymentTransaction instance) =>
+Map<String, dynamic> _$DebitHistoryToJson(DebitHistory instance) =>
     <String, dynamic>{
       'paymentCode': instance.paymentCode,
       'hostId': instance.hostId,

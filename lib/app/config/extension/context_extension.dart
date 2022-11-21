@@ -16,6 +16,10 @@ extension EdgeInsetsExtension on BuildContext {
 
 extension ThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
+
+  TextTheme get textTheme => theme.textTheme;
+
+  ColorScheme get colorScheme => theme.colorScheme;
 }
 
 extension MoreGoRouterExtenstion on BuildContext {
@@ -35,7 +39,7 @@ extension MoreGoRouterExtenstion on BuildContext {
       GoRouter.of(this).push(currentWithChild(child), extra: extra);
 }
 
-extension NavigatorOneExtension on BuildContext {
+extension NavigatorToViewFullImageExtension on BuildContext {
   void pushToViewImage(String imageUrl) {
     Navigator.of(this).push(
       MaterialPageRoute(

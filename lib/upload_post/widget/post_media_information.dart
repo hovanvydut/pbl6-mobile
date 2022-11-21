@@ -18,7 +18,7 @@ class PostMediaInformation extends StatelessWidget {
       children: [
         Text(
           'Hình ảnh trọ',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: context.textTheme.titleLarge,
         ),
         BlocBuilder<UploadPostBloc, UploadPostState>(
           buildWhen: (previous, current) => previous.medias != current.medias,
@@ -55,8 +55,7 @@ class PostMediaInformation extends StatelessWidget {
                                     .withOpacity(0.5),
                                 child: IconButton(
                                   icon: Assets.icons.close.svg(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
+                                    color: context.colorScheme.onSurface,
                                   ),
                                   onPressed: () => context
                                       .read<UploadPostBloc>()
@@ -81,11 +80,11 @@ class PostMediaInformation extends StatelessWidget {
             radius: const Radius.circular(10),
             dashPattern: const [10, 4],
             strokeCap: StrokeCap.round,
-            color: Theme.of(context).colorScheme.primary,
+            color: context.colorScheme.primary,
             child: Container(
               height: 150,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
+                color: context.colorScheme.surface,
                 borderRadius: BorderRadius.circular(10),
               ),
               alignment: Alignment.center,
@@ -96,7 +95,7 @@ class PostMediaInformation extends StatelessWidget {
                   box16,
                   Text(
                     'Chọn ảnh của bạn',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: context.textTheme.bodyMedium,
                   ),
                 ],
               ),

@@ -176,7 +176,7 @@ class UserProfilePage extends StatelessWidget {
                         leading: Assets.icons.document.svg(
                           color: theme.colorScheme.onSurface,
                         ),
-                        title: const Text('Bài viết của bạn'),
+                        title: const Text('Bài đăng của bạn'),
                         trailing: Assets.icons.chevronRight
                             .svg(color: theme.colorScheme.onSurface),
                         onTap: () {
@@ -220,7 +220,9 @@ class UserProfilePage extends StatelessWidget {
                             ),
                             title: const Text('Số dư hiện tại'),
                             subtitle: Text(
-                              '${user?.currentCredit == null ? 0 : (user!.currentCredit! / 100).toStringAsFixed(0)} đồng',
+                              '${user?.currentCredit == null
+                               ? 0 : (user!.currentCredit! / 100)
+                               .toStringAsFixed(0)} đồng',
                             ),
                             trailing: Assets.icons.chevronRight
                                 .svg(color: theme.colorScheme.onSurface),
