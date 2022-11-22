@@ -295,6 +295,13 @@ class $AssetsImagesGen {
   SvgGenImage get errorNotFound =>
       const SvgGenImage('assets/images/error_not_found.svg');
 
+  /// File path: assets/images/home.png
+  AssetGenImage get home => const AssetGenImage('assets/images/home.png');
+
+  /// File path: assets/images/home_splash.png
+  AssetGenImage get homeSplash =>
+      const AssetGenImage('assets/images/home_splash.png');
+
   /// File path: assets/images/komkat.jpeg
   AssetGenImage get komkat => const AssetGenImage('assets/images/komkat.jpeg');
 
@@ -317,6 +324,8 @@ class $AssetsImagesGen {
   List<dynamic> get values => [
         empty,
         errorNotFound,
+        home,
+        homeSplash,
         komkat,
         logo,
         notImage,
