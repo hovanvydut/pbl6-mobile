@@ -451,9 +451,9 @@ packages:
   http_client_handler:
     dependency: "direct main"
     description:
-      path: "packages/http_client_handler"
-      relative: true
-    source: path
+      name: http_client_handler
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.1.0+1"
   http_multi_server:
     dependency: transitive
