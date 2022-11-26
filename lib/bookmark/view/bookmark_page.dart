@@ -171,19 +171,19 @@ class BookmarkActionIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final refreshButton = IconButton(
       icon: Assets.icons.refresh.svg(
-        color: context.colorScheme.onSurface,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
       onPressed: () => context.read<BookmarkBloc>().add(GetBookmarks()),
     );
     final searchButton = IconButton(
       icon: Assets.icons.searchOutline.svg(
-        color: context.colorScheme.onSurface,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
       onPressed: () => context.read<BookmarkBloc>().add(SearchButtonPressed()),
     );
     final closeButton = IconButton(
       icon: Assets.icons.close.svg(
-        color: context.colorScheme.onSurface,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
       onPressed: () => context.read<BookmarkBloc>().add(SearchButtonPressed()),
     );

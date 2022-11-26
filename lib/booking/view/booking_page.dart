@@ -77,9 +77,9 @@ class BookingView extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(
                     'Đã có lỗi xảy ra, xin thử lại',
-                    style: context.textTheme.bodyLarge?.copyWith(
-                      color: context.colorScheme.onSurface,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
                   const Spacer(flex: 2),
                 ],

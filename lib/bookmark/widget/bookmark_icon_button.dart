@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/post/post.dart';
 
 class BookmarkIconButton extends StatelessWidget {
   const BookmarkIconButton({
@@ -22,17 +23,17 @@ class BookmarkIconButton extends StatelessWidget {
     if (context.watch<AuthenticationBloc>().state.user == null) {
       return const SizedBox();
     }
-
+    
     if (isBookmarked) {
       return Padding(
         padding: const EdgeInsets.all(4),
         child: CircleAvatar(
           backgroundColor: backgroundTransprent
               ? Colors.transparent
-              : context.colorScheme.surface.withOpacity(0.6),
+              : Theme.of(context).colorScheme.surface.withOpacity(0.6),
           child: IconButton(
             icon: Assets.icons.bookmarkBold.svg(
-              color: context.colorScheme.onSurface,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: onBookmarkedPressed.call,
           ),
@@ -44,10 +45,10 @@ class BookmarkIconButton extends StatelessWidget {
         child: CircleAvatar(
           backgroundColor: backgroundTransprent
               ? Colors.transparent
-              : context.colorScheme.surface.withOpacity(0.6),
+              : Theme.of(context).colorScheme.surface.withOpacity(0.6),
           child: IconButton(
             icon: Assets.icons.bookmarkOutline.svg(
-              color: context.colorScheme.onSurface,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: onUnBookmarkedPressed.call,
           ),

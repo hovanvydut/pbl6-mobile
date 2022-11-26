@@ -52,7 +52,7 @@ class CreateReviewView extends StatelessWidget {
           appBar: AppBar(
             leading: IconButton(
               icon: Assets.icons.arrorLeft.svg(
-                color: context.colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.onSurface,
                 height: 32,
               ),
               onPressed: () => context.pop(),

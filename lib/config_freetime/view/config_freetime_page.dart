@@ -121,7 +121,7 @@ class ConfigFreetimeActionButton extends StatelessWidget {
         return isEditing
             ? IconButton(
                 icon: Assets.icons.save.svg(
-                  color: context.colorScheme.onSurfaceVariant,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 tooltip: 'Lưu lịch rảnh',
                 onPressed: () =>
@@ -129,7 +129,7 @@ class ConfigFreetimeActionButton extends StatelessWidget {
               )
             : IconButton(
                 icon: Assets.icons.edit.svg(
-                  color: context.colorScheme.onSurfaceVariant,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 tooltip: 'Chỉnh sửa lịch rảnh',
                 onPressed: () =>

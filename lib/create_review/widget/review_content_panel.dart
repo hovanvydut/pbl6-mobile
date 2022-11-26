@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/create_review/create_review.dart';
 import 'package:widgets/widgets.dart';
 
@@ -19,7 +18,7 @@ class ReviewContentPanel extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .titleLarge!
-              .copyWith(color: context.colorScheme.onSurface),
+              .copyWith(color: Theme.of(context).colorScheme.onSurface),
         ),
         const SizedBox(height: 16),
         Builder(

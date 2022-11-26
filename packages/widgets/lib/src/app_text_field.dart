@@ -17,8 +17,6 @@ class AppTextField extends StatelessWidget {
     this.lastField = false,
     this.initialValue,
     this.readOnly = false,
-    this.prefixIcon,
-    this.textEditingController,
   });
 
   final String? labelText;
@@ -34,8 +32,6 @@ class AppTextField extends StatelessWidget {
   final bool lastField;
   final String? initialValue;
   final bool readOnly;
-  final Widget? prefixIcon;
-  final TextEditingController? textEditingController;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +40,6 @@ class AppTextField extends StatelessWidget {
         (lastField ? TextInputAction.go : TextInputAction.next);
     return TextFormField(
       initialValue: initialValue,
-      controller: textEditingController,
       obscureText: obscureText,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
@@ -62,7 +57,10 @@ class AppTextField extends StatelessWidget {
         errorText: errorText,
         suffixIcon: suffixIcon,
         hintStyle: theme.textTheme.bodyLarge,
-        prefixIcon: prefixIcon,
+        // prefixIcon: Padding(
+        //   padding: const EdgeInsets.all(8),
+        //   child: Assets.icons.emailOutline.svg(),
+        // ),
       ),
       textInputAction: inputAction,
       onChanged: onChanged,

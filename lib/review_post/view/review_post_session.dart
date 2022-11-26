@@ -40,9 +40,9 @@ class ReviewPostView extends StatelessWidget {
           children: [
             Text(
               'Đánh giá',
-              style: context.textTheme.titleLarge?.copyWith(
-                color: context.colorScheme.onSurface,
-              ),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
             ),
             Builder(
               builder: (context) {
@@ -103,9 +103,9 @@ class ReviewPostView extends StatelessWidget {
                     const SizedBox(height: 16),
                     Text(
                       'Có lỗi xảy ra vui lòng thử lại',
-                      style: context.textTheme.bodyLarge?.copyWith(
-                        color: context.colorScheme.onSurface,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                     )
                   ],
                 ),
@@ -120,9 +120,9 @@ class ReviewPostView extends StatelessWidget {
                     ),
                     Text(
                       'Chưa có đánh giá nào cho bài viết này',
-                      style: context.textTheme.bodyMedium?.copyWith(
-                        color: context.colorScheme.onSurface,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                     ),
                     Builder(
                       builder: (context) {

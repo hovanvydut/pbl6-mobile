@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
-import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
 import 'package:widgets/widgets.dart';
 
@@ -27,7 +26,7 @@ class EditingAddressInformation extends StatelessWidget {
       children: [
         Text(
           'Địa chỉ',
-          style: context.textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         box16,
         BlocBuilder<EditPostBloc, EditPostState>(

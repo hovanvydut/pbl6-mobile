@@ -1,8 +1,0 @@
-flutter_native_splash:
-  color: "#ffffff"
-  image: "assets/images/home.png"
-  android_12:
-    image: assets/images/home_splash.png
-    color: "#ffffff"
-
-  ios: false

@@ -1,7 +1,6 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 import 'package:widgets/widgets.dart';
 
@@ -24,7 +23,7 @@ class PostDetailInformation extends StatelessWidget {
       children: [
         Text(
           'Thông tin chi tiết',
-          style: context.textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         box16,
         BlocBuilder<UploadPostBloc, UploadPostState>(

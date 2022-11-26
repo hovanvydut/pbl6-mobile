@@ -23,8 +23,7 @@ class RemotePaymentDatasource implements IPaymentDatasource {
           .map((data) => BankCode.fromJson(data as Map<String, dynamic>))
           .toList();
     } catch (e) {
-      log(e.toString(), name: runtimeType.toString());
-
+      log(e.toString());
       rethrow;
     }
   }
@@ -52,88 +51,10 @@ class RemotePaymentDatasource implements IPaymentDatasource {
       );
       return responseData.data as String;
     } catch (e) {
-      log(e.toString(), name: runtimeType.toString());
+      log(e.toString());
       rethrow;
     }
   }
 
-  @override
-  Future<List<CreditHistory>> getPersonalCreditHistory({
-    String? fromDate,
-    String? toDate,
-    int pageSize = 10,
-    int pageNumber = 1,
-    String? searchValue,
-  }) async {
-    try {
-      final jwt =
-          await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
-      final responseData = await _httpHandler.get(
-        ApiPath.personalCreditHistory,
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $jwt',
-        },
-        queryParameter: Map.fromEntries(
-          {
-            'FromDate': fromDate,
-            'ToDate': toDate,
-            'PageNumber': '$pageNumber',
-            'PageSize': '$pageSize',
-            'searchValue': searchValue
-          }.entries.toList()
-            ..removeWhere((entry) => entry.value == null),
-        ),
-      );
-      final data =
-          (responseData.data as Map<String, dynamic>)['records'] as List;
-      return data
-          .map(
-            (e) => CreditHistory.fromJson(e as Map<String, dynamic>),
-          )
-          .toList();
-    } catch (e) {
-      log(e.toString(), name: runtimeType.toString());
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<DebitHistory>> getPersonalDebitHistory({
-    String? fromDate,
-    String? toDate,
-    int pageSize = 10,
-    int pageNumber = 1,
-    String? searchValue,
-  }) async {
-    try {
-      final jwt =
-          await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
-      final responseData = await _httpHandler.get(
-        ApiPath.personalDebitHistory,
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $jwt',
-        },
-        queryParameter: Map.fromEntries(
-          {
-            'FromDate': fromDate,
-            'ToDate': toDate,
-            'PageNumber': '$pageNumber',
-            'PageSize': '$pageSize',
-            'searchValue': searchValue
-          }.entries.toList()
-            ..removeWhere((entry) => entry.value == null),
-        ),
-      );
-      final data =
-          (responseData.data as Map<String, dynamic>)['records'] as List;
-      return data
-          .map(
-            (e) => DebitHistory.fromJson(e as Map<String, dynamic>),
-          )
-          .toList();
-    } catch (e) {
-      log(e.toString(), name: runtimeType.toString());
-      rethrow;
-    }
-  }
+  // Future<>
 }

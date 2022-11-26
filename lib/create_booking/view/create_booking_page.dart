@@ -54,7 +54,7 @@ class CreateBookingView extends StatelessWidget {
           appBar: AppBar(
             leading: IconButton(
               icon: Assets.icons.arrorLeft.svg(
-                color: context.colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.onSurface,
                 height: 32,
               ),
               onPressed: () => context.pop(),
@@ -122,7 +122,8 @@ class CreateBookingView extends StatelessWidget {
                                       )
                                     : const Text('Chọn thời gian xem trọ'),
                                 trailing: Assets.icons.chevronRight.svg(
-                                  color: context.colorScheme.onSurface,
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
                                 ),
                                 onTap: () {
                                   showModalBottomSheet(
@@ -322,7 +323,7 @@ class BookingCalendarBottomSheet extends StatelessWidget {
                           child: ListTile(
                             leading: Assets.icons.clock.svg(
                               height: 24,
-                              color: context.colorScheme.onSurface,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                             title: const Text(
                               'Không có thông tin',
@@ -340,7 +341,7 @@ class BookingCalendarBottomSheet extends StatelessWidget {
                         child: ListTile(
                           leading: Assets.icons.clock.svg(
                             height: 24,
-                            color: context.colorScheme.onSurface,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                           title: Text(
                             tempSelectedTime.first.start.yMdHm,

@@ -17,9 +17,9 @@ class CreateReviewImagePanel extends StatelessWidget {
       children: [
         Text(
           'Thêm hình ảnh',
-          style: context.textTheme.titleLarge!.copyWith(
-            color: context.colorScheme.onSurface,
-          ),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
         ),
         Builder(
           builder: (context) {
@@ -58,7 +58,7 @@ class CreateReviewImagePanel extends StatelessWidget {
                             .withOpacity(0.5),
                         child: IconButton(
                           icon: Assets.icons.close.svg(
-                            color: context.colorScheme.onSurface,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                           onPressed: () => context
                               .read<CreateReviewBloc>()
@@ -92,11 +92,11 @@ class CreateReviewImagePanel extends StatelessWidget {
             radius: const Radius.circular(16),
             dashPattern: const [10, 4],
             strokeCap: StrokeCap.round,
-            color: context.colorScheme.primary,
+            color: Theme.of(context).colorScheme.primary,
             child: Container(
               height: 150,
               decoration: BoxDecoration(
-                color: context.colorScheme.surface,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(10),
               ),
               alignment: Alignment.center,
@@ -109,7 +109,7 @@ class CreateReviewImagePanel extends StatelessWidget {
                   ),
                   Text(
                     'Chọn ảnh của bạn',
-                    style: context.textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),

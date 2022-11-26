@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 import 'package:widgets/widgets.dart';
 
@@ -23,7 +22,7 @@ class PostAddressInformation extends StatelessWidget {
       children: [
         Text(
           'Địa chỉ',
-          style: context.textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         box16,
         BlocBuilder<UploadPostBloc, UploadPostState>(

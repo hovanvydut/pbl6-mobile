@@ -1,7 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 
 class BookmarkSearchPanel extends StatelessWidget {
@@ -24,14 +23,14 @@ class BookmarkSearchPanel extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: context.colorScheme.primary.withOpacity(0.08),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
           ),
           alignment: Alignment.center,
           child: TextFormField(
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: 'Tìm kiếm theo tiêu đề',
-              hintStyle: context.textTheme.bodyMedium,
+              hintStyle: Theme.of(context).textTheme.bodyMedium,
             ),
             onChanged: (value) => EasyDebounce.debounce(
               'search bookmark',

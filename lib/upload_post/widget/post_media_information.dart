@@ -12,20 +12,25 @@ class PostMediaInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const box16 = SizedBox(height: 16);
+    const box16 = SizedBox(
+      height: 16,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
           'Hình ảnh trọ',
-          style: context.textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         BlocBuilder<UploadPostBloc, UploadPostState>(
           buildWhen: (previous, current) => previous.medias != current.medias,
           builder: (context, state) {
             final medias = state.medias;
             return medias.isEmpty
-                ? box16
+                ? const SizedBox(
+                    height: 16,
+                  )
                 : Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: SizedBox(
@@ -55,7 +60,8 @@ class PostMediaInformation extends StatelessWidget {
                                     .withOpacity(0.5),
                                 child: IconButton(
                                   icon: Assets.icons.close.svg(
-                                    color: context.colorScheme.onSurface,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
                                   ),
                                   onPressed: () => context
                                       .read<UploadPostBloc>()
@@ -80,11 +86,11 @@ class PostMediaInformation extends StatelessWidget {
             radius: const Radius.circular(10),
             dashPattern: const [10, 4],
             strokeCap: StrokeCap.round,
-            color: context.colorScheme.primary,
+            color: Theme.of(context).colorScheme.primary,
             child: Container(
               height: 150,
               decoration: BoxDecoration(
-                color: context.colorScheme.surface,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(10),
               ),
               alignment: Alignment.center,
@@ -92,10 +98,12 @@ class PostMediaInformation extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Assets.images.uploadCloud.svg(),
-                  box16,
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Text(
                     'Chọn ảnh của bạn',
-                    style: context.textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),

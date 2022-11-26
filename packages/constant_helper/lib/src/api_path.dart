@@ -43,12 +43,12 @@ abstract class ApiPath {
   /// Create Payment and Transaction
   static const paymentBankCode = '/api/payment/bank-code';
   static const payment = '/api/payment';
-  static const personalCreditHistory = '/api/payment/history/personal';
+  static const paymentPersonalHistory = '/api/payment/history';
 
   /// Service Payment Transaction
   ///
   ///
-  static const personalDebitHistory = '/api/payment-history/personal';
+  static const personalHistoryTransaction = '/api/payment-history/personal';
 
   /// Get other host posts: GET /api/post
   static String hostPostOther(int hostId) => '/api/host/$hostId/post';
@@ -58,7 +58,7 @@ abstract class ApiPath {
   /// `POST`: create booking
   ///
   /// `GET`: get booking list
-  static const booking = '/api/booking/personal';
+  static const booking = '/api/booking';
 
   /// `PUT`: Approve Booking
   static String approveBooking(int bookingId) =>
@@ -80,60 +80,4 @@ abstract class ApiPath {
   ///
   /// `POST`: create review by postId
   static String postReview(int postId) => '/api/review/post/$postId';
-
-  /// Uptop
-  ///
-  /// `GET` : get uptop by postID
-  ///
-  /// `POST`: uptop post
-  static String uptop([int? postId]) =>
-      '/api/uptop${postId == null ? '' : '/$postId'}';
-
-  /// **Uptop**
-  ///
-  /// `GET` duplicate: get duplicate
-  ///
-  static const uptopDuplicate = '/api/uptop/duplicate';
-
-  /// **Config**
-  ///
-  /// `GET` config value by key
-  ///
-  static String configSetting(String key) => '/api/config-setting/$key';
-
-  /// **Post Statistics**
-  ///
-  /// `GET` post statistics
-  ///
-  static const postStatistics = '/api/post-statistic';
-
-  /// **Detail Post Statistics**
-  ///
-  /// `GET` detail post statistics
-  ///
-  static const detailPostStatistics = '/api/post-statistic/detail';
-
-  /// **Top Post Statistics**
-  ///
-  /// `GET` top post statistics
-  ///
-  static const topPostStatistics = '/api/post-statistic/top';
-
-  /// **User Statistics**
-  ///
-  /// `GET` User statistics
-  ///
-  static const userStatistics = '/api/user-statistic';
-
-  /// **Detail User Statistics**
-  ///
-  /// `GET` top user statistics
-  ///
-  static const detailUserStatistics = '/api/user-statistic/detail';
-
-  /// **Top User Statistics**
-  ///
-  /// `GET` top user statistics
-  ///
-  static const toplUserStatistics = '/api/user-statistic/top';
 }

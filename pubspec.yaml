@@ -31,7 +31,8 @@ dependencies:
   get_it: ^7.2.0
   go_router: ^4.5.0
   http: ^0.13.5
-  http_client_handler: ^0.1.0+1
+  http_client_handler:
+    path: packages/http_client_handler
   intl: ^0.17.0
   models:
     path: packages/models
@@ -62,12 +63,6 @@ dependencies:
     path: packages/booking
   review:
     path: packages/review
-  uptop:
-    path: packages/uptop
-  config:
-    path: packages/config
-  statistics:
-    path: packages/statistics
   cached_network_image: ^3.2.2
   faker: ^2.0.0
   flutter_cache_manager: ^3.3.0
@@ -79,8 +74,6 @@ dependencies:
   syncfusion_localizations: ^20.3.57
   url_launcher: ^6.1.6
   flutter_inappwebview: ^5.7.1+2
-  fl_chart: ^0.55.2
-  syncfusion_flutter_charts: ^20.3.58
 
 dev_dependencies:
   bloc_test: ^9.1.0

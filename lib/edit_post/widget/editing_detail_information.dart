@@ -2,7 +2,6 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
-import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
 import 'package:widgets/widgets.dart';
 
@@ -28,7 +27,7 @@ class EditingDetailInformation extends StatelessWidget {
       children: [
         Text(
           'Thông tin chi tiết',
-          style: context.textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         box16,
         BlocBuilder<EditPostBloc, EditPostState>(

@@ -13,14 +13,12 @@ class PostListTileCard extends StatelessWidget {
     this.isBookmarked = false,
     this.hideBookmark = false,
     required this.onCardTap,
-    this.onCardLongPress,
   });
 
   final Post post;
   final bool isBookmarked;
   final bool hideBookmark;
   final VoidCallback onCardTap;
-  final VoidCallback? onCardLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +29,8 @@ class PostListTileCard extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus();
           onCardTap.call();
         },
-        onLongPress: onCardLongPress,
         child: Card(
-          color: context.colorScheme.surface,
+          color: Theme.of(context).colorScheme.surface,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
             child: Row(
@@ -115,18 +112,23 @@ class PostListTileCard extends StatelessWidget {
                         ),
                         Text(
                           '${post.price.inCompactCurrency}/tháng',
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: context.colorScheme.primary,
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           '${post.address}, ${post.fullAddress}',
-                          style: context.textTheme.bodySmall?.copyWith(
-                            color: context.colorScheme.onSurfaceVariant,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant,
+                                  ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),

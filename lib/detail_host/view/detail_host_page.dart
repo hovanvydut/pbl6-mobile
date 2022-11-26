@@ -35,7 +35,7 @@ class DetailHostView extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Assets.icons.arrorLeft.svg(
-            color: context.colorScheme.onSurface,
+            color: Theme.of(context).colorScheme.onSurface,
             height: 32,
           ),
           onPressed: () => context.pop(),
@@ -65,9 +65,9 @@ class DetailHostView extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(
                     'Không thể lấy dữ liệu',
-                    style: context.textTheme.bodyLarge?.copyWith(
-                      color: context.colorScheme.onSurface,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                   )
                 ],
               ),
@@ -83,7 +83,7 @@ class DetailHostView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   'Tất cả bài viết',
-                  style: context.textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
               const SizedBox(height: 8),
@@ -148,16 +148,16 @@ class HostDetailInformation extends StatelessWidget {
                 ),
                 placeholder: (context, url) => CircleAvatar(
                   radius: 40,
-                  backgroundColor: context.colorScheme.surface,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   child: const CircularProgressIndicator(
                     strokeWidth: 2.5,
                   ),
                 ),
                 errorWidget: (context, url, error) => CircleAvatar(
                   radius: 40,
-                  backgroundColor: context.colorScheme.surface,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   child: Assets.icons.danger.svg(
-                    color: context.colorScheme.onSurface,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -171,15 +171,17 @@ class HostDetailInformation extends StatelessWidget {
                   children: [
                     Text(
                       host.displayName,
-                      style: context.textTheme.titleLarge!.copyWith(
-                        color: context.colorScheme.onSecondaryContainer,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer,
+                          ),
                     ),
                     Text(
                       host.userAccountEmail ?? 'Không có thông tin',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: context.textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),

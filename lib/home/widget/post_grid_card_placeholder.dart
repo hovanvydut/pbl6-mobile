@@ -33,7 +33,7 @@ class PostGridCardPlaceholder extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(4),
                     child: CircleAvatar(
-                      backgroundColor: context.colorScheme.surface,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                 ],
