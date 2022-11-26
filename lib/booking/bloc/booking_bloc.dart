@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:booking/booking.dart';
 import 'package:constant_helper/constant_helper.dart';
@@ -40,7 +39,6 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       final appointments = <AppointmentInfo>[];
 
       for (final bookingData in bookingDatas) {
-        log(bookingData.time.toLocal().toIso8601String());
         appointments.add(
           AppointmentInfo(
             bookingData: bookingData,
@@ -49,7 +47,6 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
           ),
         );
       }
-      log('====================================');
 
       for (final freetime in freetimes) {
         final dateFromFreetime =
@@ -58,7 +55,6 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
             dateFromFreetime.add(Duration(hours: int.parse(freetime.start)));
         final endTime =
             dateFromFreetime.add(Duration(hours: int.parse(freetime.end)));
-        log(startTime.toIso8601String());
         final isBooking = appointments.any(
           (appointment) => appointment.start == startTime,
         );

@@ -1,3 +1,8 @@
+# 1.1.0
+
+- feat: add `UptopModule`.
+- feat: add `HistoryPayment`.
+
 # 1.0.0
 
 - fix: `DetailPost` review timeago.

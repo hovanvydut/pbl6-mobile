@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'create_payment_history.g.dart';
+part 'credit_history.g.dart';
 
-@JsonSerializable()
-class CreatePaymentHistory extends Equatable {
-  const CreatePaymentHistory({
+@JsonSerializable(createToJson: false)
+class CreditHistory extends Equatable {
+  const CreditHistory({
     required this.orderInfo,
     required this.amount,
     required this.bankCode,
@@ -15,11 +15,11 @@ class CreatePaymentHistory extends Equatable {
     required this.userEmail,
     required this.createdAt,
   });
-  factory CreatePaymentHistory.fromJson(Map<String, dynamic> json) =>
-      _$CreatePaymentHistoryFromJson(json);
+  factory CreditHistory.fromJson(Map<String, dynamic> json) =>
+      _$CreditHistoryFromJson(json);
 
   final String orderInfo;
-  final int amount;
+  final double amount;
   final String bankCode;
   final String transactionStatus;
   @JsonKey(name: 'userAccountId')
@@ -30,6 +30,10 @@ class CreatePaymentHistory extends Equatable {
 
   static DateTime _fromJson(String date) =>
       DateFormat('yyyy-MM-ddTHH:mm:ss').parse(date, true);
+
+  bool get isSuccessful => transactionStatus == 'Giao dịch thành công';
+
+  bool get isNotSuccessful => !isSuccessful;
 
   @override
   List<Object?> get props {

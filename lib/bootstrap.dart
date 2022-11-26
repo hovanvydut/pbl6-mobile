@@ -13,6 +13,7 @@ import 'package:auth/auth.dart';
 import 'package:booking/booking.dart';
 import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
+import 'package:config/config.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media/media.dart';
@@ -21,7 +22,9 @@ import 'package:pbl6_mobile/di/di.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
 import 'package:review/review.dart';
+import 'package:statistics/repositories/statistics_repository.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:uptop/uptop.dart';
 import 'package:user/user.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -111,6 +114,16 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           ),
           RepositoryProvider(
             create: (_) => ReviewRepository(reviewDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) => UptopRepository(uptopDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) => ConfigRepository(configDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) =>
+                StatisticsRepository(statisticsDatasource: injector()),
           )
         ],
         child: await builder(),

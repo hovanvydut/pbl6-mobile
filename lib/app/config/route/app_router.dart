@@ -19,28 +19,32 @@ import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/register/register.dart';
 import 'package:pbl6_mobile/review_post/review_post.dart';
 import 'package:pbl6_mobile/search_filter/search_filter.dart';
+import 'package:pbl6_mobile/statistics/statistics.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 
 abstract class AppRouter {
-  static const login = '/login';
-  static const register = '/register';
   static const main = '/';
-  static const guest = '/guest';
+
   static const userPost = 'user-post';
-  static const uploadPost = '/upload';
+  static const uploadPost = 'upload';
   static const editUserProfile = 'edit-profile';
-  static const detailPost = '/post-detail';
-  static const detailHost = '/host-detail';
+  static const statistics = 'statistics';
+  static const detailHost = 'host-detail';
   static const editPost = '/edit-post';
-  static const searchFilter = '/search-filter';
-  static const bookmark = '/bookmark';
-  static const payment = '/payment';
+  static const searchFilter = 'search-filter';
+  static const bookmark = 'bookmark';
+  static const payment = 'payment';
   static const createPayment = 'create-payment';
 
   static const booking = 'create-booking';
   static const createReview = 'create-review';
   static const bookingList = 'booking-list';
+  static const detailPost = '/post-detail';
   static const configFreetime = 'config-freetime';
+
+  static const guest = '/guest';
+  static const login = '/login';
+  static const register = '/register';
 
   static final router = GoRouter(
     routes: [
@@ -86,40 +90,78 @@ abstract class AppRouter {
               );
             },
           ),
-        ],
-      ),
-      GoRoute(
-        path: searchFilter,
-        builder: (context, state) {
-          final extras =
-              state.extra! as ExtraParams3<PostBloc, BookmarkBloc, int?>;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider.value(
-                value: extras.param1,
-              ),
-              BlocProvider.value(
-                value: extras.param2,
+          GoRoute(
+            path: statistics,
+            builder: (context, state) {
+              return const StatisticsPage();
+            },
+          ),
+          GoRoute(
+            path: payment,
+            builder: (context, state) {
+              return const PaymentPage();
+            },
+            routes: [
+              GoRoute(
+                path: createPayment,
+                builder: (context, state) {
+                  return const CreatePaymentPage();
+                },
               ),
             ],
-            child: const SearchFilterPage(),
-          );
-        },
+          ),
+          GoRoute(
+            path: searchFilter,
+            builder: (context, state) {
+              final extras =
+                  state.extra! as ExtraParams3<PostBloc, BookmarkBloc, int?>;
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: extras.param1,
+                  ),
+                  BlocProvider.value(
+                    value: extras.param2,
+                  ),
+                ],
+                child: const SearchFilterPage(),
+              );
+            },
+          ),
+          GoRoute(
+            path: bookmark,
+            builder: (context, state) {
+              final params =
+                  state.extra! as ExtraParams2<BookmarkBloc, PostBloc>;
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: params.param1,
+                  ),
+                  BlocProvider.value(
+                    value: params.param2,
+                  ),
+                ],
+                child: const BookmarkPage(),
+              );
+            },
+          ),
+          GoRoute(
+            path: uploadPost,
+            builder: (context, state) {
+              final postBloc = state.extra! as PostBloc;
+              return BlocProvider.value(
+                value: postBloc,
+                child: const UploadPostPage(),
+              );
+            },
+          ),
+        ],
       ),
       GoRoute(
         path: guest,
         builder: (context, state) {
           return const GuestMainView();
-        },
-      ),
-      GoRoute(
-        path: uploadPost,
-        builder: (context, state) {
-          final postBloc = state.extra! as PostBloc;
-          return BlocProvider.value(
-            value: postBloc,
-            child: const UploadPostPage(),
-          );
         },
       ),
       GoRoute(
@@ -169,25 +211,25 @@ abstract class AppRouter {
               );
             },
           ),
+          GoRoute(
+            path: detailHost,
+            builder: (context, state) {
+              final extras =
+                  state.extra! as ExtraParams3<PostBloc, User, BookmarkBloc>;
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: extras.param1,
+                  ),
+                  BlocProvider.value(
+                    value: extras.param3,
+                  ),
+                ],
+                child: DetailHostPage(host: extras.param2),
+              );
+            },
+          )
         ],
-      ),
-      GoRoute(
-        path: detailHost,
-        builder: (context, state) {
-          final extras =
-              state.extra! as ExtraParams3<PostBloc, User, BookmarkBloc>;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider.value(
-                value: extras.param1,
-              ),
-              BlocProvider.value(
-                value: extras.param3,
-              ),
-            ],
-            child: DetailHostPage(host: extras.param2),
-          );
-        },
       ),
       GoRoute(
         path: editPost,
@@ -206,46 +248,9 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: bookmark,
-        builder: (context, state) {
-          final params = state.extra! as ExtraParams2<BookmarkBloc, PostBloc>;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider.value(
-                value: params.param1,
-              ),
-              BlocProvider.value(
-                value: params.param2,
-              ),
-            ],
-            child: const BookmarkPage(),
-          );
-        },
-      ),
-      GoRoute(
-        path: payment,
-        builder: (context, state) {
-          return const PaymentPage();
-        },
-        routes: [
-          GoRoute(
-            path: createPayment,
-            builder: (context, state) {
-              return const CreatePaymentPage();
-            },
-          ),
-        ],
-      ),
-      GoRoute(
         path: register,
         builder: (context, state) {
           return const RegisterPage();
-        },
-      ),
-      GoRoute(
-        path: login,
-        builder: (context, state) {
-          return const LoginPage();
         },
       ),
     ],

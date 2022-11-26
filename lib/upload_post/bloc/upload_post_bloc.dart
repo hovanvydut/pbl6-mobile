@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:address/address.dart';
 import 'package:category/category.dart';
@@ -293,9 +292,10 @@ class UploadPostBloc extends Bloc<UploadPostEvent, UploadPostState> {
             .toList(),
       );
       emit(state.copyWith(uploadPostStatus: LoadingStatus.done));
-    } catch (e) {
-      log(e.toString());
+    } catch (e, ee) {
+      addError(e, ee);
       emit(state.copyWith(uploadPostStatus: LoadingStatus.error));
+      rethrow;
     }
   }
 

@@ -64,6 +64,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/arror_left.svg
   SvgGenImage get arrorLeft => const SvgGenImage('assets/icons/arror_left.svg');
 
+  /// File path: assets/icons/arrow_down.svg
+  SvgGenImage get arrowDown => const SvgGenImage('assets/icons/arrow_down.svg');
+
+  /// File path: assets/icons/arrow_up.svg
+  SvgGenImage get arrowUp => const SvgGenImage('assets/icons/arrow_up.svg');
+
   /// File path: assets/icons/bookmark_bold.svg
   SvgGenImage get bookmarkBold =>
       const SvgGenImage('assets/icons/bookmark_bold.svg');
@@ -92,6 +98,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
+
+  /// File path: assets/icons/circle_check.svg
+  SvgGenImage get circleCheck =>
+      const SvgGenImage('assets/icons/circle_check.svg');
+
+  /// File path: assets/icons/circle_warning.svg
+  SvgGenImage get circleWarning =>
+      const SvgGenImage('assets/icons/circle_warning.svg');
 
   /// File path: assets/icons/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
@@ -214,9 +228,15 @@ class $AssetsIconsGen {
   SvgGenImage get starOutline =>
       const SvgGenImage('assets/icons/star_outline.svg');
 
+  /// File path: assets/icons/stat.svg
+  SvgGenImage get stat => const SvgGenImage('assets/icons/stat.svg');
+
   /// File path: assets/icons/tick_circle.svg
   SvgGenImage get tickCircle =>
       const SvgGenImage('assets/icons/tick_circle.svg');
+
+  /// File path: assets/icons/up_square.svg
+  SvgGenImage get upSquare => const SvgGenImage('assets/icons/up_square.svg');
 
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
@@ -234,6 +254,8 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [
         add,
         arrorLeft,
+        arrowDown,
+        arrowUp,
         bookmarkBold,
         bookmarkOutline,
         calendar,
@@ -242,6 +264,8 @@ class $AssetsIconsGen {
         callOutline,
         camera,
         chevronRight,
+        circleCheck,
+        circleWarning,
         clock,
         close,
         danger,
@@ -277,7 +301,9 @@ class $AssetsIconsGen {
         share,
         starBold,
         starOutline,
+        stat,
         tickCircle,
+        upSquare,
         user,
         wallet,
         waterDrop,
