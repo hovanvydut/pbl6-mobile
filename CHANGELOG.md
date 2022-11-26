@@ -1,7 +1,10 @@
-# 1.1.0
+# 1.3.0
 
 - feat: add `UptopModule`.
 - feat: add `HistoryPayment`.
+- feat: check `UptopPost` and detail time of `UptopPost`.
+- feat: add `PostStatistics` and `DetailPostStatistics`
+- chore: add splash screen and logo app
 
 # 1.0.0
 
