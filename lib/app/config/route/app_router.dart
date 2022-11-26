@@ -25,8 +25,10 @@ import 'package:pbl6_mobile/upload_post/upload_post.dart';
 abstract class AppRouter {
   static const main = '/';
 
+
   static const userPost = 'user-post';
   static const uploadPost = 'upload';
+
   static const editUserProfile = 'edit-profile';
   static const statistics = 'statistics';
   static const detailHost = 'host-detail';
@@ -90,6 +92,7 @@ abstract class AppRouter {
               );
             },
           ),
+
           GoRoute(
             path: statistics,
             builder: (context, state) {
@@ -107,6 +110,7 @@ abstract class AppRouter {
                 builder: (context, state) {
                   return const CreatePaymentPage();
                 },
+
               ),
             ],
           ),
@@ -165,6 +169,7 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
+
         path: detailPost,
         builder: (context, state) {
           final extras =

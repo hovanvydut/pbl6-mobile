@@ -957,6 +957,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "20.3.57"
+
   syncfusion_flutter_charts:
     dependency: "direct main"
     description:

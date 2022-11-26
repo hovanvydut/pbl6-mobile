@@ -65,6 +65,7 @@ class TrendingDistrictBox extends StatelessWidget {
                         color: lightColorScheme.surface,
                         fontWeight: FontWeight.w700,
                       ),
+
                     ),
                   ),
                 ],
