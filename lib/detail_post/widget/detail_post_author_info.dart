@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
@@ -55,7 +54,7 @@ class DetailPostAuthorInfo extends StatelessWidget {
               ),
             ),
             title: Text(post.authorInfo!.displayName),
-            onTap: () => context.push(
+            onTap: () => context.pushToChild(
               AppRouter.detailHost,
               extra: ExtraParams3<PostBloc, User, BookmarkBloc>(
                 param1: context.read<PostBloc>(),

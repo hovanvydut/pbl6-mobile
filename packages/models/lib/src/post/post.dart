@@ -16,11 +16,13 @@ class Post extends Equatable {
     this.slug,
     this.limitTenant,
     this.numView,
+    required this.isPriorityPost,
     required this.address,
     required this.fullAddress,
     required this.category,
-    required this.properties,
+    this.properties,
     this.groupProperties,
+    this.averageRating,
     required this.medias,
     this.authorInfo,
     required this.createdAt,
@@ -45,6 +47,8 @@ class Post extends Equatable {
   @JsonKey(name: 'propertyGroup')
   final List<GroupProperty>? groupProperties;
   final List<Media> medias;
+  final bool? isPriorityPost;
+  final double? averageRating;
   final User? authorInfo;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -60,6 +64,7 @@ class Post extends Equatable {
       prePaidPrice,
       slug,
       limitTenant,
+      isPriorityPost,
       numView,
       address,
       fullAddress,
@@ -67,6 +72,7 @@ class Post extends Equatable {
       properties,
       groupProperties,
       medias,
+      averageRating,
       authorInfo,
       createdAt,
       updatedAt,
@@ -83,12 +89,14 @@ class Post extends Equatable {
     String? slug,
     int? limitTenant,
     int? numView,
+    bool? isPriorityPost,
     String? address,
     Address? fullAddress,
     HouseType? category,
     List<Property>? properties,
     List<GroupProperty>? groupProperties,
     List<Media>? medias,
+    double? averageRating,
     User? authorInfo,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -101,6 +109,7 @@ class Post extends Equatable {
       price: price ?? this.price,
       prePaidPrice: prePaidPrice ?? this.prePaidPrice,
       slug: slug ?? this.slug,
+      isPriorityPost: isPriorityPost ?? this.isPriorityPost,
       limitTenant: limitTenant ?? this.limitTenant,
       numView: numView ?? this.numView,
       address: address ?? this.address,
@@ -109,6 +118,7 @@ class Post extends Equatable {
       properties: properties ?? this.properties,
       groupProperties: groupProperties ?? this.groupProperties,
       medias: medias ?? this.medias,
+      averageRating: averageRating ?? this.averageRating,
       authorInfo: authorInfo ?? this.authorInfo,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,

@@ -134,6 +134,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
+  config:
+    dependency: "direct main"
+    description:
+      path: "packages/config"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   connectivity_plus:
     dependency: "direct main"
     description:
@@ -267,6 +274,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  fl_chart:
+    dependency: "direct main"
+    description:
+      name: fl_chart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.55.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -451,9 +465,9 @@ packages:
   http_client_handler:
     dependency: "direct main"
     description:
-      path: "packages/http_client_handler"
-      relative: true
-    source: path
+      name: http_client_handler
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.1.0+1"
   http_multi_server:
     dependency: transitive
@@ -915,6 +929,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.0+1"
+  statistics:
+    dependency: "direct main"
+    description:
+      path: "packages/statistics"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   stream_channel:
     dependency: transitive
     description:
@@ -936,13 +957,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "20.3.57"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.3.58"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.57"
+    version: "20.3.58"
   syncfusion_flutter_datepicker:
     dependency: transitive
     description:
@@ -1027,6 +1055,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
+  uptop:
+    dependency: "direct main"
+    description:
+      path: "packages/uptop"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   url_launcher:
     dependency: "direct main"
     description:

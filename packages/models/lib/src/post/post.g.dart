@@ -16,6 +16,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       slug: json['slug'] as String?,
       limitTenant: json['limitTenant'] as int?,
       numView: json['numView'] as int?,
+      isPriorityPost: json['isPriorityPost'] as bool?,
       address: json['address'] as String,
       fullAddress:
           Address.fromJson(json['fullAddress'] as Map<String, dynamic>),
@@ -26,6 +27,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       groupProperties: (json['propertyGroup'] as List<dynamic>?)
           ?.map((e) => GroupProperty.fromJson(e as Map<String, dynamic>))
           .toList(),
+      averageRating: (json['averageRating'] as num?)?.toDouble(),
       medias: (json['medias'] as List<dynamic>)
           .map((e) => Media.fromJson(e as Map<String, dynamic>))
           .toList(),

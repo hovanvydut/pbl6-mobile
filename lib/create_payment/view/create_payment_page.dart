@@ -48,7 +48,7 @@ class CreatePaymentView extends StatelessWidget {
           appBar: AppBar(
             leading: IconButton(
               icon: Assets.icons.arrorLeft.svg(
-                color: Theme.of(context).colorScheme.onSurface,
+                color: context.colorScheme.onSurface,
                 height: 32,
               ),
               onPressed: () => context.pop(),

@@ -21,7 +21,7 @@ class CreateReviewRatingBar extends StatelessWidget {
               full: Assets.icons.starBold.svg(color: Colors.yellow),
               half: const SizedBox(),
               empty: Assets.icons.starOutline
-                  .svg(color: Theme.of(context).colorScheme.outline),
+                  .svg(color: context.colorScheme.outline),
             ),
             initialRating: state.rating.toDouble(),
             onRatingUpdate: (value) =>
