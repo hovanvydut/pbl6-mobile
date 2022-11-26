@@ -48,13 +48,13 @@ class _SearchFieldState extends State<SearchField> {
       padding: const EdgeInsets.only(left: 16, right: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
+        color: context.colorScheme.primary.withOpacity(0.08),
       ),
       alignment: Alignment.center,
       child: TextFormField(
         focusNode: widget.focusNode,
         controller: _searchController,
-        decoration: InputDecoration(  
+        decoration: InputDecoration(
           border: InputBorder.none,
           hintText: widget.hintText,
           hintStyle: Theme.of(context).textTheme.bodyMedium,
