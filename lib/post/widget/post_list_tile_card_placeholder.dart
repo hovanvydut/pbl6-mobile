@@ -10,7 +10,7 @@ class PostListTileCardPlaceholder extends StatelessWidget {
     return SizedBox(
       height: 130,
       child: Card(
-        color: Theme.of(context).colorScheme.surface,
+        color: context.colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
           child: Row(
