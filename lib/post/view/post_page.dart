@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/post/post.dart';
 
 class PostPage extends StatelessWidget {
