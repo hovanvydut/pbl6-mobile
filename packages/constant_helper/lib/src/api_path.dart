@@ -58,7 +58,7 @@ abstract class ApiPath {
   /// `POST`: create booking
   ///
   /// `GET`: get booking list
-  static const booking = '/api/booking';
+  static const booking = '/api/booking/personal';
 
   /// `PUT`: Approve Booking
   static String approveBooking(int bookingId) =>
@@ -94,4 +94,46 @@ abstract class ApiPath {
   /// `GET` duplicate: get duplicate
   ///
   static const uptopDuplicate = '/api/uptop/duplicate';
+
+  /// **Config**
+  ///
+  /// `GET` config value by key
+  ///
+  static String configSetting(String key) => '/api/config-setting/$key';
+
+  /// **Post Statistics**
+  ///
+  /// `GET` post statistics
+  ///
+  static const postStatistics = '/api/post-statistic';
+
+  /// **Detail Post Statistics**
+  ///
+  /// `GET` detail post statistics
+  ///
+  static const detailPostStatistics = '/api/post-statistic/detail';
+
+  /// **Top Post Statistics**
+  ///
+  /// `GET` top post statistics
+  ///
+  static const topPostStatistics = '/api/post-statistic/top';
+
+  /// **User Statistics**
+  ///
+  /// `GET` User statistics
+  ///
+  static const userStatistics = '/api/user-statistic';
+
+  /// **Detail User Statistics**
+  ///
+  /// `GET` top user statistics
+  ///
+  static const detailUserStatistics = '/api/user-statistic/detail';
+
+  /// **Top User Statistics**
+  ///
+  /// `GET` top user statistics
+  ///
+  static const toplUserStatistics = '/api/user-statistic/top';
 }

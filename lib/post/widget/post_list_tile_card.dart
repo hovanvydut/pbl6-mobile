@@ -13,12 +13,14 @@ class PostListTileCard extends StatelessWidget {
     this.isBookmarked = false,
     this.hideBookmark = false,
     required this.onCardTap,
+    this.onCardLongPress,
   });
 
   final Post post;
   final bool isBookmarked;
   final bool hideBookmark;
   final VoidCallback onCardTap;
+  final VoidCallback? onCardLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class PostListTileCard extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus();
           onCardTap.call();
         },
+        onLongPress: onCardLongPress,
         child: Card(
           color: context.colorScheme.surface,
           child: Padding(

@@ -228,9 +228,15 @@ class $AssetsIconsGen {
   SvgGenImage get starOutline =>
       const SvgGenImage('assets/icons/star_outline.svg');
 
+  /// File path: assets/icons/stat.svg
+  SvgGenImage get stat => const SvgGenImage('assets/icons/stat.svg');
+
   /// File path: assets/icons/tick_circle.svg
   SvgGenImage get tickCircle =>
       const SvgGenImage('assets/icons/tick_circle.svg');
+
+  /// File path: assets/icons/up_square.svg
+  SvgGenImage get upSquare => const SvgGenImage('assets/icons/up_square.svg');
 
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
@@ -295,7 +301,9 @@ class $AssetsIconsGen {
         share,
         starBold,
         starOutline,
+        stat,
         tickCircle,
+        upSquare,
         user,
         wallet,
         waterDrop,

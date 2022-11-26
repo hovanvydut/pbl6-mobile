@@ -9,7 +9,7 @@ class UptopData extends Equatable {
   const UptopData({
     required this.uptopId,
     required this.title,
-    required this.slug,
+    this.slug,
     required this.address,
     required this.startTime,
     required this.endTime,
@@ -18,9 +18,10 @@ class UptopData extends Equatable {
   factory UptopData.fromJson(Map<String, dynamic> json) =>
       _$UptopDataFromJson(json);
 
+  @JsonKey(name: 'id')
   final int uptopId;
   final String title;
-  final String slug;
+  final String? slug;
   final String address;
   @JsonKey(fromJson: _fromJson)
   final DateTime startTime;

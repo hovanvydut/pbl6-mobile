@@ -21,7 +21,9 @@ class DebitHistory extends Equatable {
       _$DebitHistoryFromJson(json);
 
   final String paymentCode;
+  @JsonKey(name: 'userId')
   final int hostId;
+  @JsonKey(name: 'userEmail')
   final String hostEmail;
   final int postId;
   final String paymentType;

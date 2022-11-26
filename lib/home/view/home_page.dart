@@ -1,7 +1,6 @@
 import 'package:address/address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
@@ -85,7 +84,7 @@ class _HomeViewState extends State<HomeView> {
             icon: Assets.icons.searchBold.svg(
               color: theme.colorScheme.onSurface,
             ),
-            onPressed: () => context.push(
+            onPressed: () => context.pushToChild(
               AppRouter.searchFilter,
               extra: ExtraParams3<PostBloc, BookmarkBloc, int?>(
                 param1: context.read<PostBloc>(),

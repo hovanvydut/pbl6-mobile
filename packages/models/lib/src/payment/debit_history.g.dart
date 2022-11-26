@@ -8,8 +8,8 @@ part of 'debit_history.dart';
 
 DebitHistory _$DebitHistoryFromJson(Map<String, dynamic> json) => DebitHistory(
       paymentCode: json['paymentCode'] as String,
-      hostId: json['hostId'] as int,
-      hostEmail: json['hostEmail'] as String,
+      hostId: json['userId'] as int,
+      hostEmail: json['userEmail'] as String,
       postId: json['postId'] as int,
       paymentType: json['paymentType'] as String,
       amount: json['amount'] as int,
@@ -20,8 +20,8 @@ DebitHistory _$DebitHistoryFromJson(Map<String, dynamic> json) => DebitHistory(
 Map<String, dynamic> _$DebitHistoryToJson(DebitHistory instance) =>
     <String, dynamic>{
       'paymentCode': instance.paymentCode,
-      'hostId': instance.hostId,
-      'hostEmail': instance.hostEmail,
+      'userId': instance.hostId,
+      'userEmail': instance.hostEmail,
       'postId': instance.postId,
       'paymentType': instance.paymentType,
       'amount': instance.amount,

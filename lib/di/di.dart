@@ -3,6 +3,7 @@ import 'package:auth/auth.dart';
 import 'package:booking/booking.dart';
 import 'package:bookmark/bookmark.dart';
 import 'package:category/category.dart';
+import 'package:config/config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_client_handler/http_client_handler.dart';
@@ -12,6 +13,7 @@ import 'package:pbl6_mobile/app/app.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
 import 'package:review/review.dart';
+import 'package:statistics/statistics.dart';
 import 'package:uptop/uptop.dart';
 import 'package:user/user.dart';
 
@@ -58,9 +60,19 @@ void initDependences() {
     )
     ..registerLazySingleton<IBookingDatasource>(
       () => RemoteBookingDatasource(httpHandler: injector<HttpClientHandler>()),
-    )..registerLazySingleton<IReviewDatasource>(
+    )
+    ..registerLazySingleton<IReviewDatasource>(
       () => RemoteReviewDatasource(httpHandler: injector<HttpClientHandler>()),
-    )..registerLazySingleton<IUptopDatasource>(
+    )
+    ..registerLazySingleton<IUptopDatasource>(
       () => RemoteUptopDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IConfigDatasource>(
+      () => RemoteConfigDatasource(httpHandler: injector<HttpClientHandler>()),
+    )
+    ..registerLazySingleton<IStatisticsDatasource>(
+      () => RemoteStatisticsDatasource(
+        httpHandler: injector<HttpClientHandler>(),
+      ),
     );
 }

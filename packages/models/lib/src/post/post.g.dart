@@ -16,6 +16,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       slug: json['slug'] as String?,
       limitTenant: json['limitTenant'] as int?,
       numView: json['numView'] as int?,
+      isPriorityPost: json['isPriorityPost'] as bool?,
       address: json['address'] as String,
       fullAddress:
           Address.fromJson(json['fullAddress'] as Map<String, dynamic>),

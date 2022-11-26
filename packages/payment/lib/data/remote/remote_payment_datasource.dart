@@ -80,7 +80,8 @@ class RemotePaymentDatasource implements IPaymentDatasource {
             'PageNumber': '$pageNumber',
             'PageSize': '$pageSize',
             'searchValue': searchValue
-          }.entries.where((entry) => entry.value == null),
+          }.entries.toList()
+            ..removeWhere((entry) => entry.value == null),
         ),
       );
       final data =
@@ -119,7 +120,8 @@ class RemotePaymentDatasource implements IPaymentDatasource {
             'PageNumber': '$pageNumber',
             'PageSize': '$pageSize',
             'searchValue': searchValue
-          }.entries.where((entry) => entry.value == null),
+          }.entries.toList()
+            ..removeWhere((entry) => entry.value == null),
         ),
       );
       final data =
