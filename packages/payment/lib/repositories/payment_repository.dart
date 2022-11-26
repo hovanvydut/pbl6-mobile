@@ -19,4 +19,34 @@ class PaymentRepository {
         bankCode: bankCode,
         desc: desc,
       );
+
+  Future<List<DebitHistory>> getPersonalDebitHistory({
+    String? fromDate,
+    String? toDate,
+    int pageSize = 10,
+    int pageNumber = 1,
+    String? searchValue,
+  }) =>
+      _paymentDatasource.getPersonalDebitHistory(
+        fromDate: fromDate,
+        pageNumber: pageNumber,
+        pageSize: pageNumber,
+        searchValue: searchValue,
+        toDate: toDate,
+      );
+
+  Future<List<CreditHistory>> getPersonalCreditHistory({
+    String? fromDate,
+    String? toDate,
+    int pageSize = 10,
+    int pageNumber = 1,
+    String? searchValue,
+  }) =>
+      _paymentDatasource.getPersonalCreditHistory(
+        fromDate: fromDate,
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        toDate: toDate,
+        searchValue: searchValue,
+      );
 }

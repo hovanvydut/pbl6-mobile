@@ -79,9 +79,9 @@ class PriorityPostGridView extends StatelessWidget {
                     const SizedBox(height: 16),
                     Text(
                       'Không thể cập nhật dữ liệu, xin thử lại',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
+                      style: context.textTheme.bodyLarge?.copyWith(
+                        color: context.colorScheme.onSurface,
+                      ),
                     )
                   ],
                 ),

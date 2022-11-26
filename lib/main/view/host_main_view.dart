@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/home/home.dart';
 import 'package:pbl6_mobile/post/post.dart';
@@ -51,7 +50,7 @@ class _HostMainViewState extends State<HostMainView> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push(
+        onPressed: () => context.pushToChild(
           AppRouter.uploadPost,
           extra: context.read<PostBloc>(),
         ),

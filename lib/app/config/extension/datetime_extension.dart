@@ -14,6 +14,13 @@ extension DateTimeExtension on DateTime {
     return '${dateFormatter.format(this)} ${timeFormatter.format(this)}';
   }
 
+  String get yMdHms {
+    final dateFormatter = DateFormat.yMd('vi');
+    final timeFormatter = DateFormat.Hms('vi');
+
+    return '${dateFormatter.format(this)} ${timeFormatter.format(this)}';
+  }
+
   String get timeAgo => timeago.format(this, locale: 'vi');
 
   int get dayOfWeek => weekday + 1;
