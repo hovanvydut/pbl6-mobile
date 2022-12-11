@@ -17,9 +17,10 @@ class ReviewPostSession extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ReviewPostBloc(
+      create: (context) => ReviewUserPostBloc(
         post: post,
         reviewRepository: context.read<ReviewRepository>(),
+        authenticationBloc: context.read<AuthenticationBloc>(),
       ),
       child: const ReviewPostView(),
     );
@@ -46,23 +47,35 @@ class ReviewPostView extends StatelessWidget {
             ),
             Builder(
               builder: (context) {
-                final reviews = context
-                    .select((ReviewPostBloc bloc) => bloc.state.postReviews);
+                final reviews = context.select(
+                  (ReviewUserPostBloc bloc) => bloc.state.postReviews,
+                );
                 final user = context.watch<AuthenticationBloc>().state.user;
-                final post =
-                    context.select((ReviewPostBloc bloc) => bloc.state.post);
+                final post = context
+                    .select((ReviewUserPostBloc bloc) => bloc.state.post);
+                final canReview = context
+                    .select((ReviewUserPostBloc bloc) => bloc.state.canReview);
                 return Visibility(
                   visible:
                       reviews.isNotEmpty && post.authorInfo!.id != user?.id,
                   child: TextButton(
                     child: const Text('Thêm đánh giá'),
-                    onPressed: () => context.pushToChild(
-                      AppRouter.createReview,
-                      extra: ExtraParams2<Post, ReviewPostBloc>(
-                        param1: context.read<ReviewPostBloc>().state.post,
-                        param2: context.read<ReviewPostBloc>(),
-                      ),
-                    ),
+                    onPressed: () {
+                      if (canReview) {
+                        context.pushToChild(
+                          AppRouter.createReview,
+                          extra: ExtraParams2<Post, ReviewUserPostBloc>(
+                            param1:
+                                context.read<ReviewUserPostBloc>().state.post,
+                            param2: context.read<ReviewUserPostBloc>(),
+                          ),
+                        );
+                        return;
+                      }
+                      ToastHelper.showToast(
+                        'Bạn chưa đủ điều kiện để đánh giá bài đăng này',
+                      );
+                    },
                   ),
                 );
               },
@@ -72,19 +85,19 @@ class ReviewPostView extends StatelessWidget {
         Builder(
           builder: (context) {
             final reviewLoadingStatus = context.select(
-              (ReviewPostBloc bloc) => bloc.state.reviewLoadingStatus,
+              (ReviewUserPostBloc bloc) => bloc.state.reviewLoadingStatus,
             );
-            final reviews =
-                context.select((ReviewPostBloc bloc) => bloc.state.postReviews);
+            final reviews = context
+                .select((ReviewUserPostBloc bloc) => bloc.state.postReviews);
             final loadingMoreStatus = context.select(
-              (ReviewPostBloc bloc) => bloc.state.reviewLoadingMoreStatus,
+              (ReviewUserPostBloc bloc) => bloc.state.reviewLoadingMoreStatus,
             );
             final canLoadingMore = context.select(
-              (ReviewPostBloc bloc) => bloc.state.canLoadingMore,
+              (ReviewUserPostBloc bloc) => bloc.state.canLoadingMore,
             );
 
             final post =
-                context.select((ReviewPostBloc bloc) => bloc.state.post);
+                context.select((ReviewUserPostBloc bloc) => bloc.state.post);
             if (reviewLoadingStatus == LoadingStatus.loading) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -128,6 +141,9 @@ class ReviewPostView extends StatelessWidget {
                       builder: (context) {
                         final user =
                             context.watch<AuthenticationBloc>().state.user;
+                        final canReview = context.select(
+                          (ReviewUserPostBloc bloc) => bloc.state.canReview,
+                        );
                         if (post.authorInfo!.id != user?.id) {
                           return TextButton(
                             onPressed: user?.id == null
@@ -138,16 +154,26 @@ class ReviewPostView extends StatelessWidget {
                                     );
                                     context.push(AppRouter.login);
                                   }
-                                : () => context.pushToChild(
-                                      AppRouter.createReview,
-                                      extra: ExtraParams2<Post, ReviewPostBloc>(
-                                        param1: context
-                                            .read<ReviewPostBloc>()
-                                            .state
-                                            .post,
-                                        param2: context.read<ReviewPostBloc>(),
-                                      ),
-                                    ),
+                                : () {
+                                    if (canReview) {
+                                      context.pushToChild(
+                                        AppRouter.createReview,
+                                        extra: ExtraParams2<Post,
+                                            ReviewUserPostBloc>(
+                                          param1: context
+                                              .read<ReviewUserPostBloc>()
+                                              .state
+                                              .post,
+                                          param2: context
+                                              .read<ReviewUserPostBloc>(),
+                                        ),
+                                      );
+                                      return;
+                                    }
+                                    ToastHelper.showToast(
+                                      'Bạn chưa đủ điều kiện để đánh giá bài đăng này',
+                                    );
+                                  },
                             child: const Text('Hãy là người đầu tiền đánh giá'),
                           );
                         } else {
@@ -321,7 +347,7 @@ class ReviewPostView extends StatelessWidget {
                     child: TextButton(
                       child: const Text('Xem thêm đánh giá'),
                       onPressed: () => context
-                          .read<ReviewPostBloc>()
+                          .read<ReviewUserPostBloc>()
                           .add(LoadingMorePressed()),
                     ),
                   )

@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Very Good Ventures
+// Copyright (c) 2022, Nguyen Minh Dung
 // https://verygood.ventures
 //
 // Use of this source code is governed by an MIT-style
@@ -41,9 +41,7 @@ class HttpClientHandler {
         queryParameter: queryParameter,
       );
       log(uri.toString(), name: 'HTTP_CLIENT_HANDLER_GET');
-      return _client
-          .get(uri, headers: headers)
-          .then(_handleResponse);
+      return _client.get(uri, headers: headers).then(_handleResponse);
     } on SocketException {
       rethrow;
     }

@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_client_handler/http_client_handler.dart';
 import 'package:media/media.dart';
+import 'package:notification/notification.dart';
 import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:post/post.dart';
@@ -72,6 +73,11 @@ void initDependences() {
     )
     ..registerLazySingleton<IStatisticsDatasource>(
       () => RemoteStatisticsDatasource(
+        httpHandler: injector<HttpClientHandler>(),
+      ),
+    )
+    ..registerLazySingleton<INotificationDatasource>(
+      () => RemoteNotificationDatasource(
         httpHandler: injector<HttpClientHandler>(),
       ),
     );

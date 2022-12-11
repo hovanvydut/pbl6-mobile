@@ -1,9 +1,9 @@
 part of 'upload_post_bloc.dart';
 
-class UploadPostState {
-  const UploadPostState({
-    this.title = '',
-    this.description = '',
+class UploadUserPostState {
+  const UploadUserPostState({
+    this.title = const LimitLengthField.pure(8),
+    this.description = const NotEmptyField.pure(),
     this.provincesData = const <Province>[],
     this.districtsData = const <District>[],
     this.wardsData = const <Ward>[],
@@ -17,19 +17,20 @@ class UploadPostState {
     this.selectedProvince = 0,
     this.selectedDistrict = 0,
     this.selectedWard = 0,
-    this.detailAddress = '',
+    this.detailAddress = const NotEmptyField.pure(),
     this.selectedHouseType = 0,
-    this.price = 0,
-    this.area = 0.0,
-    this.maxOfPerson = 0,
-    this.diposit = 0,
+    this.price = const NumbericField.pure(),
+    this.area = const NumbericField.pure(),
+    this.maxOfPerson = const NumbericField.pure(),
+    this.diposit = const NumbericField.pure(),
     this.loadingStatus = LoadingStatus.initial,
     this.uploadPostStatus = LoadingStatus.initial,
     this.medias = const <String>[],
+    this.formValidationStatus = FormzStatus.pure,
   });
 
-  final String title;
-  final String description;
+  final LimitLengthField title;
+  final NotEmptyField description;
   final List<Province> provincesData;
   final List<District> districtsData;
   final List<Ward> wardsData;
@@ -40,18 +41,19 @@ class UploadPostState {
   final int selectedProvince;
   final int selectedDistrict;
   final int selectedWard;
-  final String detailAddress;
+  final NotEmptyField detailAddress;
   final int selectedHouseType;
-  final double price;
-  final double area;
-  final int maxOfPerson;
-  final double diposit;
+  final NumbericField price;
+  final NumbericField area;
+  final NumbericField maxOfPerson;
+  final NumbericField diposit;
   final List<String> selectedOtherUtils;
   final List<String> selectedRentailObjects;
   final List<String> selectedNearbyPlaces;
   final LoadingStatus loadingStatus;
   final LoadingStatus uploadPostStatus;
   final List<String> medias;
+  final FormzStatus formValidationStatus;
 
   // @override
   // List<Object?> get props {
@@ -81,9 +83,9 @@ class UploadPostState {
   //   ];
   // }
 
-  UploadPostState copyWith({
-    String? title,
-    String? description,
+  UploadUserPostState copyWith({
+    LimitLengthField? title,
+    NotEmptyField? description,
     List<Province>? provincesData,
     List<District>? districtsData,
     List<Ward>? wardsData,
@@ -94,20 +96,21 @@ class UploadPostState {
     int? selectedProvince,
     int? selectedDistrict,
     int? selectedWard,
-    String? detailAddress,
+    NotEmptyField? detailAddress,
     int? selectedHouseType,
-    double? price,
-    double? area,
-    int? maxOfPerson,
-    double? diposit,
+    NumbericField? price,
+    NumbericField? area,
+    NumbericField? maxOfPerson,
+    NumbericField? diposit,
     List<String>? selectedOtherUtils,
     List<String>? selectedRentailObjects,
     List<String>? selectedNearbyPlaces,
     List<String>? medias,
     LoadingStatus? loadingStatus,
     LoadingStatus? uploadPostStatus,
+    FormzStatus? formValidationStatus,
   }) {
-    return UploadPostState(
+    return UploadUserPostState(
       title: title ?? this.title,
       description: description ?? this.description,
       provincesData: provincesData ?? this.provincesData,
@@ -132,6 +135,7 @@ class UploadPostState {
       selectedNearbyPlaces: selectedNearbyPlaces ?? this.selectedNearbyPlaces,
       uploadPostStatus: uploadPostStatus ?? this.uploadPostStatus,
       medias: medias ?? this.medias,
+      formValidationStatus: formValidationStatus ?? this.formValidationStatus,
     );
   }
 }

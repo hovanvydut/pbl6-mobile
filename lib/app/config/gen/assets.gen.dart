@@ -88,12 +88,27 @@ class $AssetsIconsGen {
   SvgGenImage get calendarBold =>
       const SvgGenImage('assets/icons/calendar_bold.svg');
 
+  /// File path: assets/icons/calendar_check.svg
+  SvgGenImage get calendarCheck =>
+      const SvgGenImage('assets/icons/calendar_check.svg');
+
+  /// File path: assets/icons/calendar_clock.svg
+  SvgGenImage get calendarClock =>
+      const SvgGenImage('assets/icons/calendar_clock.svg');
+
   /// File path: assets/icons/call_outline.svg
   SvgGenImage get callOutline =>
       const SvgGenImage('assets/icons/call_outline.svg');
 
   /// File path: assets/icons/camera.svg
   SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
+
+  /// File path: assets/icons/check_cert.svg
+  SvgGenImage get checkCert => const SvgGenImage('assets/icons/check_cert.svg');
+
+  /// File path: assets/icons/check_check.svg
+  SvgGenImage get checkCheck =>
+      const SvgGenImage('assets/icons/check_check.svg');
 
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
@@ -126,6 +141,9 @@ class $AssetsIconsGen {
   SvgGenImage get documentBold =>
       const SvgGenImage('assets/icons/document_bold.svg');
 
+  /// File path: assets/icons/dot_menu.svg
+  SvgGenImage get dotMenu => const SvgGenImage('assets/icons/dot_menu.svg');
+
   /// File path: assets/icons/edit.svg
   SvgGenImage get edit => const SvgGenImage('assets/icons/edit.svg');
 
@@ -152,6 +170,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/gallery.svg
   SvgGenImage get gallery => const SvgGenImage('assets/icons/gallery.svg');
+
+  /// File path: assets/icons/half_star.svg
+  SvgGenImage get halfStar => const SvgGenImage('assets/icons/half_star.svg');
 
   /// File path: assets/icons/home_bold.svg
   SvgGenImage get homeBold => const SvgGenImage('assets/icons/home_bold.svg');
@@ -241,6 +262,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
+  /// File path: assets/icons/user_check.svg
+  SvgGenImage get userCheck => const SvgGenImage('assets/icons/user_check.svg');
+
   /// File path: assets/icons/wallet.svg
   SvgGenImage get wallet => const SvgGenImage('assets/icons/wallet.svg');
 
@@ -261,8 +285,12 @@ class $AssetsIconsGen {
         calendar,
         calendar2,
         calendarBold,
+        calendarCheck,
+        calendarClock,
         callOutline,
         camera,
+        checkCert,
+        checkCheck,
         chevronRight,
         circleCheck,
         circleWarning,
@@ -272,6 +300,7 @@ class $AssetsIconsGen {
         delete,
         document,
         documentBold,
+        dotMenu,
         edit,
         editBold,
         emailOutline,
@@ -280,6 +309,7 @@ class $AssetsIconsGen {
         filterBold,
         filterOutline,
         gallery,
+        halfStar,
         homeBold,
         homeOutline,
         lightBulb,
@@ -305,6 +335,7 @@ class $AssetsIconsGen {
         tickCircle,
         upSquare,
         user,
+        userCheck,
         wallet,
         waterDrop,
         wifi

@@ -22,7 +22,7 @@ class EditingDetailInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
-    final editPostBloc = context.read<EditPostBloc>();
+    final editUserPostBloc = context.read<EditUserPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -31,7 +31,7 @@ class EditingDetailInformation extends StatelessWidget {
           style: context.textTheme.titleLarge,
         ),
         box16,
-        BlocBuilder<EditPostBloc, EditPostState>(
+        BlocBuilder<EditUserPostBloc, EditUserPostState>(
           builder: (context, state) {
             return AppDropDownField<String>(
               value: state.selectedHouseType == 0
@@ -48,7 +48,7 @@ class EditingDetailInformation extends StatelessWidget {
                   .toList(),
               onChanged: (houseType) {
                 if (houseType != null) {
-                  editPostBloc.add(HouseTypeSelected(houseType));
+                  editUserPostBloc.add(HouseTypeSelected(houseType));
                 }
               },
             );
@@ -67,7 +67,7 @@ class EditingDetailInformation extends StatelessWidget {
               labelText: 'Giá',
               inputFormatters: [formatter],
               keyboardType: TextInputType.number,
-              onChanged: (_) => editPostBloc
+              onChanged: (_) => editUserPostBloc
                   .add(RoomPriceChanged(formatter.getUnformattedValue())),
             );
           },
@@ -76,7 +76,7 @@ class EditingDetailInformation extends StatelessWidget {
         AppTextField(
           labelText: 'Diện tích',
           initialValue: post.area.toString(),
-          onChanged: (area) => editPostBloc.add(RoomAreaChanged(area)),
+          onChanged: (area) => editUserPostBloc.add(RoomAreaChanged(area)),
           keyboardType: TextInputType.number,
         )
       ],

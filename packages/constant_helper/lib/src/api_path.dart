@@ -23,10 +23,7 @@ abstract class ApiPath {
   /// Get post by id: GET /api/post/{id}
   /// Edit post by id: PUT /api/post/{id}
   /// Delete post by id: DELETE /api/post/{id}
-  static const postFilter = '/api/post';
-
-  /// Get all posts: GET /api/post
-  static const postAll = '/api/post/all';
+  static const post = '/api/post';
 
   /// Get host personal posts: GET /api/post
   static const hostPostPersonal = '/api/host/personal/post';
@@ -80,6 +77,12 @@ abstract class ApiPath {
   ///
   /// `POST`: create review by postId
   static String postReview(int postId) => '/api/review/post/$postId';
+
+  /// `GET`: check can review post
+  ///
+  ///
+  static String checkReviewPost(int postId) =>
+      '/api/review/check-review/post/$postId';
 
   /// Uptop
   ///
@@ -136,4 +139,28 @@ abstract class ApiPath {
   /// `GET` top user statistics
   ///
   static const toplUserStatistics = '/api/user-statistic/top';
+
+  /// **Get notification**
+  ///
+  /// `GET` notifications;
+  ///
+  static const notifications = '/api/notification';
+
+  /// **Count unread notification**
+  ///
+  /// `GET` get count unread notification
+  /// 
+  static const countUnreadNotification = '/api/notification/unread/count';
+
+  /// **Read notification by id**
+  ///
+  /// `PUT` read notification by id
+  ///
+  static String readNotification(int id) => '/api/notification/has-read/$id';
+
+  /// **Read all notification**
+  ///
+  /// `PUT` read all notifications
+  ///
+  static const readAllNotification = '/api/notification/mark-all-read';
 }

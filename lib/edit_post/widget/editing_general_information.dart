@@ -34,7 +34,7 @@ class EditingGeneralInformation extends StatelessWidget {
           hintText: 'Tiêu đề cho bài viết',
           initialValue: post.title,
           onChanged: (title) =>
-              context.read<EditPostBloc>().add(TitleChanged(title)),
+              context.read<EditUserPostBloc>().add(TitleChanged(title)),
         ),
         box24,
         AppTextField(
@@ -44,7 +44,7 @@ class EditingGeneralInformation extends StatelessWidget {
           hintText: 'Mô tả chung của bài viết',
           initialValue: post.description,
           onChanged: (description) => context
-              .read<EditPostBloc>()
+              .read<EditUserPostBloc>()
               .add(SummaryDescriptionChanged(description)),
         ),
       ],

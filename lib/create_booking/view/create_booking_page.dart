@@ -8,7 +8,7 @@ import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/create_booking/create_booking.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 import 'package:platform_helper/platform_helper.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:widgets/widgets.dart';
@@ -81,8 +81,9 @@ class CreateBookingView extends StatelessWidget {
                           hideBookmark: true,
                           onCardTap: () => context.push(
                             AppRouter.detailPost,
-                            extra: ExtraParams3<PostBloc, Post, BookmarkBloc?>(
-                              param1: context.read<PostBloc>(),
+                            extra:
+                                ExtraParams3<UserPostBloc, Post, BookmarkBloc?>(
+                              param1: context.read<UserPostBloc>(),
                               param2: state.post,
                               param3: context.read<BookmarkBloc>(),
                             ),
