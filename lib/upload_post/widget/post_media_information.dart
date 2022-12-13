@@ -20,7 +20,7 @@ class PostMediaInformation extends StatelessWidget {
           'Hình ảnh trọ',
           style: context.textTheme.titleLarge,
         ),
-        BlocBuilder<UploadPostBloc, UploadPostState>(
+        BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
           buildWhen: (previous, current) => previous.medias != current.medias,
           builder: (context, state) {
             final medias = state.medias;
@@ -58,7 +58,7 @@ class PostMediaInformation extends StatelessWidget {
                                     color: context.colorScheme.onSurface,
                                   ),
                                   onPressed: () => context
-                                      .read<UploadPostBloc>()
+                                      .read<UploadUserPostBloc>()
                                       .add(MediaRemovePressed(imagePath)),
                                 ),
                               ),
@@ -74,7 +74,7 @@ class PostMediaInformation extends StatelessWidget {
           },
         ),
         GestureDetector(
-          onTap: () => context.read<UploadPostBloc>().add(MediaSelected()),
+          onTap: () => context.read<UploadUserPostBloc>().add(MediaSelected()),
           child: DottedBorder(
             borderType: BorderType.RRect,
             radius: const Radius.circular(10),

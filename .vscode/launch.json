@@ -13,7 +13,9 @@
         "--flavor",
         "development",
         "--target",
-        "lib/main_development.dart"
+        "lib/main_development.dart",
+        "--dart-define",
+        "BASE_URL=https://node-2.silk-cat.software"
       ]
     },
     {
@@ -21,7 +23,8 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main_production.dart",
-      "args": ["--flavor", "production", "--target", "lib/main_production.dart"]
+      "args": ["--flavor", "production", "--target", "lib/main_production.dart","--dart-define",
+      "BASE_URL=https://node-2.silk-cat.software"]
     }
   ]
 }

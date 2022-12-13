@@ -1,7 +1,7 @@
 part of 'detail_post_cubit.dart';
 
-class DetailPostState extends Equatable {
-  const DetailPostState({
+class DetailUserPostState extends Equatable {
+  const DetailUserPostState({
     required this.post,
     this.loadingStatus = LoadingStatus.initial,
   });
@@ -12,11 +12,11 @@ class DetailPostState extends Equatable {
   @override
   List<Object?> get props => [post, loadingStatus];
 
-  DetailPostState copyWith({
+  DetailUserPostState copyWith({
     Post? post,
     LoadingStatus? loadingStatus,
   }) {
-    return DetailPostState(
+    return DetailUserPostState(
       post: post ?? this.post,
       loadingStatus: loadingStatus ?? this.loadingStatus,
     );

@@ -15,7 +15,10 @@ abstract class IPostDatasource {
     required List<int> properties,
   });
 
-  Future<List<Post>> getAllPosts();
+  Future<List<Post>> getAllPosts({
+    int pageNumber = 1,
+    int pageSize = 10,
+  });
 
   Future<void> updatePostByPostId(
     int postId, {
@@ -34,7 +37,11 @@ abstract class IPostDatasource {
 
   Future<void> deletePost(int postId);
 
-  Future<List<Post>> getUserPosts();
+  Future<List<Post>> getUserPosts({
+    int pageNumber = 1,
+    int pageSize = 10,
+    String? searchValue,
+  });
 
   Future<List<Post>> filterPosts({
     List<int>? properties,

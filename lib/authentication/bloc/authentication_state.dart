@@ -1,4 +1,4 @@
-part of 'authentication_bloc.dart';
+part of '../../authentication/bloc/authentication_bloc.dart';
 
 abstract class AuthenticationState extends Equatable {
   const AuthenticationState({this.user});

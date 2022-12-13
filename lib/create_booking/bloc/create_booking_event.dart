@@ -17,13 +17,7 @@ class StepPressed extends CreateBookingEvent {
   List<Object?> get props => [index];
 }
 
-class BookingPhoneNumberChanged extends CreateBookingEvent {
-  const BookingPhoneNumberChanged(this.phoneNumber);
-  final String phoneNumber;
 
-  @override
-  List<Object?> get props => [phoneNumber];
-}
 
 class SchedulePressed extends CreateBookingEvent {
   const SchedulePressed(this.time);

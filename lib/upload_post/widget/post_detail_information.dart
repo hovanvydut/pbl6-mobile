@@ -18,7 +18,7 @@ class PostDetailInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
-    final uploadPostBlog = context.read<UploadPostBloc>();
+    final uploadPostBlog = context.read<UploadUserPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -27,7 +27,7 @@ class PostDetailInformation extends StatelessWidget {
           style: context.textTheme.titleLarge,
         ),
         box16,
-        BlocBuilder<UploadPostBloc, UploadPostState>(
+        BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
           builder: (context, state) {
             return AppDropDownField<String>(
               value: state.selectedHouseType == 0

@@ -101,7 +101,7 @@ class _BookmarkListState extends State<BookmarkList> {
     _bookmarkListScrollController = ScrollController()
       ..addListener(() {
         if (_bookmarkListScrollController.position.pixels >=
-            _bookmarkListScrollController.position.maxScrollExtent * 0.9) {
+            _bookmarkListScrollController.position.maxScrollExtent) {
           EasyDebounce.debounce(
             'scroll bookmark',
             const Duration(milliseconds: 300),
@@ -147,6 +147,7 @@ class _BookmarkListState extends State<BookmarkList> {
               }
               final bookmark = searchedBookmarks[index];
               return BookmarklListTileCard(
+                key: ValueKey(bookmark.id),
                 bookmark: bookmark,
               );
             },

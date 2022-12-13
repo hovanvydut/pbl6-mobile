@@ -1,6 +1,6 @@
 name: pbl6_mobile
 description: A PBL6 Mobile App End-user
-version: 1.3.0+1
+version: 2.0.0
 publish_to: none
 
 environment:
@@ -29,7 +29,7 @@ dependencies:
   fluttertoast: ^8.1.1
   formz: ^0.4.1
   get_it: ^7.2.0
-  go_router: ^4.5.0
+  go_router: 5.2.4
   http: ^0.13.5
   http_client_handler: ^0.1.0+1
   intl: ^0.17.0
@@ -66,6 +66,8 @@ dependencies:
     path: packages/uptop
   config:
     path: packages/config
+  notification:
+    path: packages/notification
   statistics:
     path: packages/statistics
   cached_network_image: ^3.2.2
@@ -81,6 +83,9 @@ dependencies:
   flutter_inappwebview: ^5.7.1+2
   fl_chart: ^0.55.2
   syncfusion_flutter_charts: ^20.3.58
+  badges: ^2.0.3
+  sentry_flutter: ^6.18.0
+  lottie: ^2.0.0
 
 dev_dependencies:
   bloc_test: ^9.1.0
@@ -97,6 +102,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/images/
+    - assets/lottie/
 
   fonts:
     - family: Nunito
@@ -123,3 +129,4 @@ flutter_gen:
 
   integrations:
     flutter_svg: true
+    lottie: true

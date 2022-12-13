@@ -132,15 +132,14 @@ class EditUserProfileBloc
   ) async {
     try {
       emit(state.copyWith(formzStatus: FormzStatus.submissionInProgress));
-      var imageUrl = '';
-      if (state.imagePath.isNotNullOrBlank) {
-        imageUrl = await _mediaRepository.uploadImage(state.imagePath);
-      }
+      final imageUrl = state.imagePath.isNotNullOrBlank
+          ? await _mediaRepository.uploadImage(state.imagePath)
+          : null;
       final updatedUser = event.user.copyWith(
         address: state.address.value,
         displayName: state.displayName.value,
         phoneNumber: state.phoneNumber.value,
-        avatar: imageUrl.isNotBlank ? imageUrl : null,
+        avatar: imageUrl,
       );
       await _userRepository.updateUserInformation(updatedUser);
       emit(state.copyWith(formzStatus: FormzStatus.submissionSuccess));

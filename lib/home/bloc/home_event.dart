@@ -8,3 +8,7 @@ abstract class HomeEvent extends Equatable {
 }
 
 class HomePageStarted extends HomeEvent {}
+
+class GetAllPosts extends HomeEvent {}
+
+class LoadMoreAllPosts extends HomeEvent {}

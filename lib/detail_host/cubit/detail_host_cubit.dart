@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:post/post.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'detail_host_state.dart';
 
@@ -25,9 +26,13 @@ class DetailHostCubit extends Cubit<DetailHostState> {
           hostPosts: hostPosts,
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       addError(e);
       emit(state.copyWith(loadingStatus: LoadingStatus.error));
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+      );
       rethrow;
     }
   }
