@@ -21,7 +21,7 @@ class EditingAddressInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
-    final editPostBloc = context.read<EditPostBloc>();
+    final editUserPostBloc = context.read<EditUserPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -30,7 +30,7 @@ class EditingAddressInformation extends StatelessWidget {
           style: context.textTheme.titleLarge,
         ),
         box16,
-        BlocBuilder<EditPostBloc, EditPostState>(
+        BlocBuilder<EditUserPostBloc, EditUserPostState>(
           builder: (context, state) {
             return AppDropDownField<String>(
               labelText: 'Tỉnh/Thành phố',
@@ -45,14 +45,14 @@ class EditingAddressInformation extends StatelessWidget {
                   .toList(),
               onChanged: (province) {
                 if (province != null) {
-                  editPostBloc.add(ProvinceSelected(province));
+                  editUserPostBloc.add(ProvinceSelected(province));
                 }
               },
             );
           },
         ),
         box24,
-        BlocBuilder<EditPostBloc, EditPostState>(
+        BlocBuilder<EditUserPostBloc, EditUserPostState>(
           builder: (context, state) {
             return AppDropDownField<String>(
               labelText: 'Quận/Huyện',
@@ -69,14 +69,14 @@ class EditingAddressInformation extends StatelessWidget {
                   .toList(),
               onChanged: (district) {
                 if (district != null) {
-                  editPostBloc.add(DistrictSelected(district));
+                  editUserPostBloc.add(DistrictSelected(district));
                 }
               },
             );
           },
         ),
         box24,
-        BlocBuilder<EditPostBloc, EditPostState>(
+        BlocBuilder<EditUserPostBloc, EditUserPostState>(
           builder: (context, state) {
             return AppDropDownField<String>(
               labelText: 'Phường/Xã',
@@ -93,7 +93,7 @@ class EditingAddressInformation extends StatelessWidget {
                   .toList(),
               onChanged: (ward) {
                 if (ward != null) {
-                  editPostBloc.add(WardSelected(ward));
+                  editUserPostBloc.add(WardSelected(ward));
                 }
               },
             );
@@ -104,7 +104,7 @@ class EditingAddressInformation extends StatelessWidget {
           initialValue: post.address,
           labelText: 'Địa chỉ cụ thể',
           onChanged: (address) =>
-              editPostBloc.add(DetailAddressChanged(address)),
+              editUserPostBloc.add(DetailAddressChanged(address)),
         ),
       ],
     );

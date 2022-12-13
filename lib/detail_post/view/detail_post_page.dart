@@ -31,7 +31,7 @@ class DetailPostView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
 
-    return BlocListener<DetailPostCubit, DetailPostState>(
+    return BlocListener<DetailPostCubit, DetailUserPostState>(
       listenWhen: (previous, current) =>
           previous.post.authorInfo?.id != current.post.authorInfo?.id,
       listener: (context, state) {
@@ -40,7 +40,7 @@ class DetailPostView extends StatelessWidget {
           context.showSnackBar(message: 'Bạn đang xem bài viết của chính mình');
         }
       },
-      child: BlocBuilder<DetailPostCubit, DetailPostState>(
+      child: BlocBuilder<DetailPostCubit, DetailUserPostState>(
         builder: (context, state) {
           final post = state.post;
           final loadingStatus = state.loadingStatus;
@@ -51,10 +51,7 @@ class DetailPostView extends StatelessWidget {
                   ),
                 )
               : Scaffold(
-                  appBar: PreferredSize(
-                    preferredSize: const Size.fromHeight(56),
-                    child: DetailPostAppBar(post: post),
-                  ),
+                  appBar: DetailPostAppBar(post: post),
                   body: Column(
                     children: [
                       Expanded(
@@ -98,13 +95,10 @@ class DetailPostView extends StatelessWidget {
                                     DetailPostOtherUtilsInfo(post: post),
                                     DetailPostNearbyPlacesInfo(post: post),
                                     ReviewPostSession(post: post),
-                                    Text(
-                                      'Tin nhà trọ khác',
-                                      style: theme.textTheme.titleLarge,
-                                    ),
                                   ],
                                 ),
                               ),
+                              const RelatedPostHorizonalList()
                             ],
                           ),
                         ),

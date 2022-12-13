@@ -23,7 +23,7 @@ class EditingMediaInformation extends StatelessWidget {
           'Hình ảnh trọ',
           style: context.textTheme.titleLarge,
         ),
-        BlocBuilder<EditPostBloc, EditPostState>(
+        BlocBuilder<EditUserPostBloc, EditUserPostState>(
           buildWhen: (previous, current) => previous.medias != current.medias,
           builder: (context, state) {
             final medias = state.medias;
@@ -63,7 +63,7 @@ class EditingMediaInformation extends StatelessWidget {
                                     color: context.colorScheme.onSurface,
                                   ),
                                   onPressed: () => context
-                                      .read<EditPostBloc>()
+                                      .read<EditUserPostBloc>()
                                       .add(MediaRemovePressed(imagePath)),
                                 ),
                               ),
@@ -79,7 +79,7 @@ class EditingMediaInformation extends StatelessWidget {
           },
         ),
         GestureDetector(
-          onTap: () => context.read<EditPostBloc>().add(MediaSelected()),
+          onTap: () => context.read<EditUserPostBloc>().add(MediaSelected()),
           child: DottedBorder(
             borderType: BorderType.RRect,
             radius: const Radius.circular(10),

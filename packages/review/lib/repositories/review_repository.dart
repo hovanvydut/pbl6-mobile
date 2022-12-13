@@ -32,4 +32,7 @@ class ReviewRepository {
         rating: rating,
         medias: medias,
       );
+
+  Future<bool> checkReviewPost({required int postId}) =>
+      _reviewDatasource.checkReviewPost(postId: postId);
 }

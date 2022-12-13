@@ -31,7 +31,7 @@ class RemotePostDatasource implements IPostDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       await _httpHandler.post(
-        ApiPath.postFilter,
+        ApiPath.post,
         body: {
           'title': title,
           'description': description,
@@ -59,10 +59,20 @@ class RemotePostDatasource implements IPostDatasource {
   }
 
   @override
-  Future<List<Post>> getAllPosts() async {
+  Future<List<Post>> getAllPosts({
+    int pageNumber = 1,
+    int pageSize = 10,
+  }) async {
     try {
-      final responseData = await _httpHandler.get(ApiPath.postAll);
-      final postsData = responseData.data as List;
+      final responseData = await _httpHandler.get(
+        ApiPath.post,
+        queryParameter: {
+          'PageNumber': '$pageNumber',
+          'PageSize': '$pageSize',
+        },
+      );
+      final data = responseData.data as Map<String, dynamic>;
+      final postsData = data['records'] as List;
       return postsData
           .map((data) => Post.fromJson(data as Map<String, dynamic>))
           .toList();
@@ -73,7 +83,11 @@ class RemotePostDatasource implements IPostDatasource {
   }
 
   @override
-  Future<List<Post>> getUserPosts() async {
+  Future<List<Post>> getUserPosts({
+    int pageNumber = 1,
+    int pageSize = 10,
+    String? searchValue,
+  }) async {
     try {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
@@ -82,6 +96,14 @@ class RemotePostDatasource implements IPostDatasource {
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },
+        queryParameter: Map.fromEntries(
+          {
+            'PageNumber': '$pageNumber',
+            'PageSize': '$pageSize',
+            'SearchValue': searchValue,
+          }.entries.toList()
+            ..removeWhere((entry) => entry.value == null),
+        ),
       );
       final data = responseData.data as Map<String, dynamic>;
       final postsData = data['records'] as List;
@@ -113,7 +135,7 @@ class RemotePostDatasource implements IPostDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       await _httpHandler.put(
-        '${ApiPath.postFilter}/$postId',
+        '${ApiPath.post}/$postId',
         body: {
           'title': title,
           'description': description,
@@ -145,7 +167,7 @@ class RemotePostDatasource implements IPostDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       await _httpHandler.delete(
-        '${ApiPath.postFilter}/$postId',
+        '${ApiPath.post}/$postId',
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },
@@ -173,7 +195,7 @@ class RemotePostDatasource implements IPostDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       final responseData = await _httpHandler.get(
-        ApiPath.postFilter,
+        ApiPath.post,
         queryParameter: Map.fromEntries(
           {
             'Properties': properties?.join(','),
@@ -207,8 +229,7 @@ class RemotePostDatasource implements IPostDatasource {
   @override
   Future<Post> getDetailPostById(int postId) async {
     try {
-      final responseData =
-          await _httpHandler.get('${ApiPath.postFilter}/$postId');
+      final responseData = await _httpHandler.get('${ApiPath.post}/$postId');
       return Post.fromJson(responseData.data as Map<String, dynamic>);
     } catch (e) {
       log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
@@ -224,6 +245,31 @@ class RemotePostDatasource implements IPostDatasource {
       final data = responseData.data as Map<String, dynamic>;
       final postsData = data['records'] as List;
       return postsData
+          .map((data) => Post.fromJson(data as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Post>> getRelatedPost({
+    required int quantity,
+    required int postId,
+    required int addressWardId,
+  }) async {
+    try {
+      final responseData = await _httpHandler.get(
+        ApiPath.relatedPost,
+        queryParameter: {
+          'Quantity': '$quantity',
+          'CurrentPostId': '$postId',
+          'AddressWardId': '$addressWardId',
+        },
+      );
+      final posts = responseData.data as List;
+      return posts
           .map((data) => Post.fromJson(data as Map<String, dynamic>))
           .toList();
     } catch (e) {

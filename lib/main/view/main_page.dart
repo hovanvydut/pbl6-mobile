@@ -5,7 +5,7 @@ import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/main/view/host_main_view.dart';
 import 'package:pbl6_mobile/main/view/unauth_main_view.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 import 'package:platform_helper/platform_helper.dart';
 import 'package:post/post.dart';
@@ -18,10 +18,11 @@ class MainPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => PostBloc(
+          create: (context) => UserPostBloc(
             postRepository: context.read<PostRepository>(),
             authenticationBloc: context.read<AuthenticationBloc>(),
           ),
+          lazy: false,
         ),
         BlocProvider(
           create: (_) => UserProfileBloc(),

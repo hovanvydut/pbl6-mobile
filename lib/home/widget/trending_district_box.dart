@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 
 class TrendingDistrictBox extends StatelessWidget {
   const TrendingDistrictBox({
@@ -21,10 +20,10 @@ class TrendingDistrictBox extends StatelessWidget {
       imageUrl: district['imageUrl']! as String,
       imageBuilder: (context, imageProvider) {
         return GestureDetector(
-          onTap: () => context.push(
+          onTap: () => context.pushToChild(
             AppRouter.searchFilter,
-            extra: ExtraParams3<PostBloc, BookmarkBloc, int>(
-              param1: context.read<PostBloc>(),
+            extra: ExtraParams3<UserPostBloc, BookmarkBloc, int>(
+              param1: context.read<UserPostBloc>(),
               param2: context.read<BookmarkBloc>(),
               param3: district['id']! as int,
             ),
@@ -65,7 +64,6 @@ class TrendingDistrictBox extends StatelessWidget {
                         color: lightColorScheme.surface,
                         fontWeight: FontWeight.w700,
                       ),
-
                     ),
                   ),
                 ],

@@ -18,7 +18,7 @@ class PostMoreInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
-    final uploadPostBlog = context.read<UploadPostBloc>();
+    final uploadPostBlog = context.read<UploadUserPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -53,7 +53,7 @@ class PostMoreInformation extends StatelessWidget {
           },
         ),
         box24,
-        BlocBuilder<UploadPostBloc, UploadPostState>(
+        BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
           builder: (context, state) {
             return AppDropDownMuliSelectField(
               labelText: 'Tiện ích khác',
@@ -67,7 +67,7 @@ class PostMoreInformation extends StatelessWidget {
           },
         ),
         box24,
-        BlocBuilder<UploadPostBloc, UploadPostState>(
+        BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
           buildWhen: (previous, current) =>
               previous.selectedRentailObjects !=
                   current.selectedRentailObjects ||
@@ -85,7 +85,7 @@ class PostMoreInformation extends StatelessWidget {
           },
         ),
         box24,
-        BlocBuilder<UploadPostBloc, UploadPostState>(
+        BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
           // buildWhen: (previous, current) =>
           //     previous.selectedNearbyPlaces != current.selectedNearbyPlaces,
           builder: (context, state) {

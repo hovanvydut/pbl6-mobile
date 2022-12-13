@@ -98,7 +98,9 @@ class EditUserProfileView extends StatelessWidget {
                         actions: [
                           TextButton(
                             onPressed: () {
-                              context.pop();
+                              context
+                                ..pop()
+                                ..pop();
                             },
                             child: const Text('Đồng ý'),
                           ),

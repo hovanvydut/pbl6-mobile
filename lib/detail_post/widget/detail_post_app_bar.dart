@@ -5,9 +5,9 @@ import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 
-class DetailPostAppBar extends StatelessWidget {
+class DetailPostAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DetailPostAppBar({
     super.key,
     required this.post,
@@ -37,8 +37,8 @@ class DetailPostAppBar extends StatelessWidget {
             onPressed: () {
               context.push(
                 AppRouter.editPost,
-                extra: ExtraParams2<PostBloc, Post>(
-                  param1: context.read<PostBloc>(),
+                extra: ExtraParams2<UserPostBloc, Post>(
+                  param1: context.read<UserPostBloc>(),
                   param2: post,
                 ),
               );
@@ -59,7 +59,9 @@ class DetailPostAppBar extends StatelessWidget {
                     actions: [
                       TextButton(
                         onPressed: () {
-                          context.read<PostBloc>().add(DeleteUserPost(post));
+                          context
+                              .read<UserPostBloc>()
+                              .add(DeleteUserPost(post));
                           context.pop();
                         },
                         child: const Text('Đồng ý'),
@@ -102,4 +104,7 @@ class DetailPostAppBar extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
 }

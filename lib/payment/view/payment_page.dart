@@ -346,7 +346,7 @@ class DebitHistoryListView extends StatelessWidget {
                 title: Text(debitHistory.description),
                 subtitle: Text(debitHistory.createdAt.toLocal().yMdHms),
                 trailing: Text(
-                  (debitHistory.amount / 100).inSimpleCurrency,
+                  debitHistory.amount.inSimpleCurrency,
                   style: context.textTheme.labelLarge!.copyWith(
                     color: Colors.green,
                   ),

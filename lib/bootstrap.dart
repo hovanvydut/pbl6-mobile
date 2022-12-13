@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Very Good Ventures
+// Copyright (c) 2022, Nguyen Minh Dung
 // https://verygood.ventures
 //
 // Use of this source code is governed by an MIT-style
@@ -17,6 +17,7 @@ import 'package:config/config.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media/media.dart';
+import 'package:notification/notification.dart';
 import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/di/di.dart';
 import 'package:post/post.dart';
@@ -124,7 +125,11 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           RepositoryProvider(
             create: (_) =>
                 StatisticsRepository(statisticsDatasource: injector()),
-          )
+          ),
+          RepositoryProvider(
+            create: (_) =>
+                NotificationRepository(notificationDatasource: injector()),
+          ),
         ],
         child: await builder(),
       ),

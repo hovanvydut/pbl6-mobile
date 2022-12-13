@@ -20,13 +20,18 @@ class DateTimeHelper {
   }
 
   static DateTime getDateInWeekByDOW(int dayOfWeek) {
-    var dateInWeek = DateTime.now();
-    for (var i = firstDateOfWeek.day; i <= lastDateOfWeek.day; i++) {
-      dateInWeek = DateTime(firstDateOfWeek.year, firstDateOfWeek.month, i);
-      if (dateInWeek.weekday == dayOfWeek) {
-        break;
-      }
-    }
+    final daysToGenerate = lastDateOfWeek.difference(firstDateOfWeek).inDays;
+    final days = List.generate(
+      daysToGenerate,
+      (i) => DateTime(
+        firstDateOfWeek.year,
+        firstDateOfWeek.month,
+        firstDateOfWeek.day + i,
+      ),
+    );
+    final dateInWeek = days.firstWhere(
+      (date) => date.weekday == dayOfWeek,
+    );
     return dateInWeek;
   }
 
