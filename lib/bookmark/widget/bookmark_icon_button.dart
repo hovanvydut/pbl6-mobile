@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
-import 'package:pbl6_mobile/post/post.dart';
 
 class BookmarkIconButton extends StatelessWidget {
   const BookmarkIconButton({

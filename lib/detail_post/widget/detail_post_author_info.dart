@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 
 class DetailPostAuthorInfo extends StatelessWidget {
   const DetailPostAuthorInfo({
@@ -56,8 +56,8 @@ class DetailPostAuthorInfo extends StatelessWidget {
             title: Text(post.authorInfo!.displayName),
             onTap: () => context.pushToChild(
               AppRouter.detailHost,
-              extra: ExtraParams3<PostBloc, User, BookmarkBloc>(
-                param1: context.read<PostBloc>(),
+              extra: ExtraParams3<UserPostBloc, User, BookmarkBloc>(
+                param1: context.read<UserPostBloc>(),
                 param2: post.authorInfo!,
                 param3: context.read<BookmarkBloc>(),
               ),

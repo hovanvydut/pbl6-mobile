@@ -40,7 +40,7 @@ class CreateReviewBloc extends Bloc<CreateReviewEvent, CreateReviewState> {
     ContentChanged event,
     Emitter<CreateReviewState> emit,
   ) {
-    final content = Description.dirty(event.content);
+    final content = NotEmptyField.dirty(event.content);
     emit(
       state.copyWith(content: content),
     );

@@ -6,7 +6,7 @@ import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/detail_post/detail_post.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 import 'package:platform_helper/platform_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:widgets/widgets.dart';
@@ -59,8 +59,9 @@ class DetailPostConnectionPanel extends StatelessWidget {
                   onPressed: isLogged
                       ? () => context.pushToChild(
                             AppRouter.booking,
-                            extra: ExtraParams3<PostBloc, Post, BookmarkBloc>(
-                              param1: context.read<PostBloc>(),
+                            extra:
+                                ExtraParams3<UserPostBloc, Post, BookmarkBloc>(
+                              param1: context.read<UserPostBloc>(),
                               param2:
                                   context.read<DetailPostCubit>().state.post,
                               param3: context.read<BookmarkBloc>(),
@@ -86,7 +87,8 @@ class DetailPostConnectionPanel extends StatelessWidget {
                           .phoneNumber,
                     ),
                   ),
-                  icon: Assets.icons.callOutline.svg(height: 20),
+                  icon: Assets.icons.callOutline
+                      .svg(height: 20, color: context.colorScheme.primary),
                   label: const Text('Gọi'),
                 )
               ],

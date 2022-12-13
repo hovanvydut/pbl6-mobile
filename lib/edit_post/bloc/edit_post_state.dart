@@ -1,7 +1,7 @@
 part of 'edit_post_bloc.dart';
 
-class EditPostState {
-  const EditPostState({
+class EditUserPostState {
+  const EditUserPostState({
     this.title = '',
     this.description = '',
     this.provincesData = const <Province>[],
@@ -81,7 +81,7 @@ class EditPostState {
   //   ];
   // }
 
-  EditPostState copyWith({
+  EditUserPostState copyWith({
     String? title,
     String? description,
     List<Province>? provincesData,
@@ -107,7 +107,7 @@ class EditPostState {
     LoadingStatus? loadingStatus,
     LoadingStatus? editPostStatus,
   }) {
-    return EditPostState(
+    return EditUserPostState(
       title: title ?? this.title,
       description: description ?? this.description,
       provincesData: provincesData ?? this.provincesData,

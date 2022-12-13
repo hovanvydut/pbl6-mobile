@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 
 class PostGridCard extends StatelessWidget {
   const PostGridCard({
@@ -22,8 +23,8 @@ class PostGridCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.push(
         AppRouter.detailPost,
-        extra: ExtraParams3<PostBloc, Post, BookmarkBloc>(
-          param1: context.read<PostBloc>(),
+        extra: ExtraParams3<UserPostBloc, Post, BookmarkBloc>(
+          param1: context.read<UserPostBloc>(),
           param2: post,
           param3: context.read<BookmarkBloc>(),
         ),
@@ -112,7 +113,7 @@ class PostGridCardImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isUserPost = context
-        .watch<PostBloc>()
+        .watch<UserPostBloc>()
         .state
         .userPostsData
         .any((userPost) => userPost.id == post.id);
@@ -167,14 +168,58 @@ class PostGridCardImage extends StatelessWidget {
                 ),
               ),
             ),
-          if (!isUserPost)
-            BookmarkIconButton(
-              isBookmarked: isBookmarked,
-              onBookmarkedPressed: () =>
-                  context.read<BookmarkBloc>().add(DeleteBookmark(post)),
-              onUnBookmarkedPressed: () =>
-                  context.read<BookmarkBloc>().add(AddBookmark(post)),
-            )
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (post.isPriorityPost ?? false)
+                    Tooltip(
+                      message: 'Đây là bài viết uptop',
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Assets.icons.checkCert.svg(
+                            color: context.colorScheme.primary,
+                            height: 32,
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    const SizedBox(),
+                  if (!isUserPost)
+                    BookmarkIconButton(
+                      isBookmarked: isBookmarked,
+                      onBookmarkedPressed: () => context
+                          .read<BookmarkBloc>()
+                          .add(DeleteBookmark(post)),
+                      onUnBookmarkedPressed: () =>
+                          context.read<BookmarkBloc>().add(AddBookmark(post)),
+                    )
+                  else
+                    const SizedBox(),
+                ],
+              ),
+              const Spacer(),
+              RatingBar(
+                itemSize: 24,
+                itemCount: 4,
+                ratingWidget: RatingWidget(
+                  full: Assets.icons.starBold.svg(color: Colors.yellow),
+                  half: const SizedBox(),
+                  empty: Assets.icons.starOutline
+                      .svg(color: context.colorScheme.outline),
+                ),
+                initialRating: post.averageRating ?? 0.0,
+                ignoreGestures: true,
+                onRatingUpdate: (_) {},
+              ),
+              const SizedBox(height: 8),
+            ],
+          )
         ],
       ),
     );

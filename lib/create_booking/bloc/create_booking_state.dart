@@ -7,7 +7,6 @@ class CreateBookingState extends Equatable {
     this.tempSelectedTime = const [],
     this.freetimes = const [],
     this.selectedTime = const [],
-    this.phoneNumber = const PhoneNumber.pure(),
     this.formzStatus = FormzStatus.pure,
     this.pageLoadingStatus = LoadingStatus.initial,
   });
@@ -15,7 +14,6 @@ class CreateBookingState extends Equatable {
   final int currentStep;
   final Post post;
   final List<AppointmentInfo> freetimes;
-  final PhoneNumber phoneNumber;
   final List<AppointmentInfo> tempSelectedTime;
   final List<AppointmentInfo> selectedTime;
   final FormzStatus formzStatus;
@@ -27,7 +25,6 @@ class CreateBookingState extends Equatable {
       currentStep,
       post,
       freetimes,
-      phoneNumber,
       tempSelectedTime,
       selectedTime,
       formzStatus,
@@ -39,7 +36,6 @@ class CreateBookingState extends Equatable {
     int? currentStep,
     Post? post,
     List<AppointmentInfo>? freetimes,
-    PhoneNumber? phoneNumber,
     List<AppointmentInfo>? tempSelectedTime,
     List<AppointmentInfo>? selectedTime,
     FormzStatus? formzStatus,
@@ -49,7 +45,6 @@ class CreateBookingState extends Equatable {
       currentStep: currentStep ?? this.currentStep,
       post: post ?? this.post,
       freetimes: freetimes ?? this.freetimes,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
       tempSelectedTime: tempSelectedTime ?? this.tempSelectedTime,
       selectedTime: selectedTime ?? this.selectedTime,
       formzStatus: formzStatus ?? this.formzStatus,

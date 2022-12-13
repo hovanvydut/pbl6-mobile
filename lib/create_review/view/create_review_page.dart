@@ -39,7 +39,7 @@ class CreateReviewView extends StatelessWidget {
         if (state.createReviewStatus == LoadingStatus.done) {
           ToastHelper.showToast('Cảm ơn bạn đã đánh giá');
           context.pop();
-          context.read<ReviewPostBloc>().add(DetailPostStarted());
+          context.read<ReviewUserPostBloc>().add(DetailPostStarted());
         }
         if (state.createReviewStatus == LoadingStatus.error) {
           context.showSnackBar(

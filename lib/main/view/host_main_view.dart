@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/home/home.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 import 'package:pbl6_mobile/user_profile/user_profile.dart';
 
 class HostMainView extends StatefulWidget {
@@ -36,6 +36,7 @@ class _HostMainViewState extends State<HostMainView> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: ValueListenableBuilder<int>(
         valueListenable: _currentIndexNotifier,
         builder: (context, currentIndex, child) {
@@ -52,7 +53,7 @@ class _HostMainViewState extends State<HostMainView> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.pushToChild(
           AppRouter.uploadPost,
-          extra: context.read<PostBloc>(),
+          extra: context.read<UserPostBloc>(),
         ),
         child: Assets.icons.add.svg(),
       ),

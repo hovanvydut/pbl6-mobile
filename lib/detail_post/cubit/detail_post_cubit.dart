@@ -6,10 +6,10 @@ import 'package:post/post.dart';
 
 part 'detail_post_state.dart';
 
-class DetailPostCubit extends Cubit<DetailPostState> {
+class DetailPostCubit extends Cubit<DetailUserPostState> {
   DetailPostCubit({required Post post, required PostRepository postRepository})
       : _postRepository = postRepository,
-        super(DetailPostState(post: post)) {
+        super(DetailUserPostState(post: post)) {
     getDetailPost();
   }
 

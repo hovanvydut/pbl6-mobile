@@ -14,6 +14,7 @@ class Review extends Equatable {
     required this.content,
     required this.rating,
     required this.medias,
+    this.sentiment,
     required this.createdAt,
   });
   factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
@@ -24,10 +25,11 @@ class Review extends Equatable {
   final String content;
   final int rating;
   final List<Media> medias;
+  final Sentiment? sentiment;
   @JsonKey(fromJson: _fromJson)
   final DateTime createdAt;
 
-    static DateTime _fromJson(String date) =>
+  static DateTime _fromJson(String date) =>
       DateFormat('yyyy-MM-ddTHH:mm:ss').parse(date, true);
 
   @override
@@ -39,6 +41,7 @@ class Review extends Equatable {
       content,
       rating,
       medias,
+      sentiment,
       createdAt,
     ];
   }
