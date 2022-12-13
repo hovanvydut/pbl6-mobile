@@ -5,8 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:media/media.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/post/bloc/post_bloc.dart';
+import 'package:pbl6_mobile/home/home.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 import 'package:platform_helper/platform_helper.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
@@ -18,7 +19,7 @@ class UploadPostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UploadPostBloc(
+      create: (context) => UploadUserPostBloc(
         addressRepository: context.read<AddressRepository>(),
         categoryRepository: context.read<CategoryRepository>(),
         propertyRepository: context.read<PropertyRepository>(),
@@ -37,7 +38,7 @@ class UploadPostView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     const box24 = SizedBox(height: 24);
-    return BlocListener<UploadPostBloc, UploadPostState>(
+    return BlocListener<UploadUserPostBloc, UploadUserPostState>(
       listenWhen: (previous, current) =>
           previous.loadingStatus != current.loadingStatus ||
           previous.uploadPostStatus != current.uploadPostStatus,
@@ -47,15 +48,15 @@ class UploadPostView extends StatelessWidget {
         }
         if (state.uploadPostStatus == LoadingStatus.done) {
           ToastHelper.showToast('Đăng bài viết thành công');
-          context.read<PostBloc>().add(GetUserPosts());
-          context.read<PostBloc>().add(GetAllPosts());
-
-          context.pop();
+          context
+            ..read<UserPostBloc>().add(GetUserPosts())
+            ..read<HomeBloc>().add(GetAllPosts())
+            ..pop();
         }
         if (state.uploadPostStatus == LoadingStatus.error) {
-          context
-            ..showSnackBar(message: 'Đăng bài viết thất bại, vui lòng thử lại')
-            ..pop();
+          context.showSnackBar(
+            message: 'Đăng bài viết thất bại, vui lòng thử lại',
+          );
         }
       },
       child: DismissFocus(
@@ -75,9 +76,9 @@ class UploadPostView extends StatelessWidget {
           ),
           body: Builder(
             builder: (context) {
-              final loadingStatus = context
-                  .select((UploadPostBloc bloc) => bloc.state.loadingStatus);
-
+              final loadingStatus = context.select(
+                (UploadUserPostBloc bloc) => bloc.state.loadingStatus,
+              );
               return loadingStatus == LoadingStatus.loading
                   ? const Center(
                       child: CircularProgressIndicator(),
@@ -96,7 +97,7 @@ class UploadPostView extends StatelessWidget {
                           box24,
                           const PostMediaInformation(),
                           box24,
-                          BlocBuilder<UploadPostBloc, UploadPostState>(
+                          BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
                             buildWhen: (previous, current) =>
                                 previous.uploadPostStatus !=
                                 current.uploadPostStatus,
@@ -107,7 +108,7 @@ class UploadPostView extends StatelessWidget {
                                   : FilledButton(
                                       child: const Text('Đăng bài viết'),
                                       onPressed: () => context
-                                          .read<UploadPostBloc>()
+                                          .read<UploadUserPostBloc>()
                                           .add(UploadPostSubmiited()),
                                     );
                             },

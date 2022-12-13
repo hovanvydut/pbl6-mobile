@@ -22,7 +22,7 @@ class EditingMoreInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
-    final editPostBloc = context.read<EditPostBloc>();
+    final editUserPostBloc = context.read<EditUserPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -35,7 +35,7 @@ class EditingMoreInformation extends StatelessWidget {
           labelText: 'Số người tối đã',
           initialValue: post.limitTenant.toString(),
           keyboardType: TextInputType.number,
-          onChanged: (limit) => editPostBloc.add(MaxOfPersonChanged(limit)),
+          onChanged: (limit) => editUserPostBloc.add(MaxOfPersonChanged(limit)),
         ),
         box24,
         Builder(
@@ -50,13 +50,13 @@ class EditingMoreInformation extends StatelessWidget {
               labelText: 'Tiền cọc',
               keyboardType: TextInputType.number,
               inputFormatters: [formatter],
-              onChanged: (_) => editPostBloc
+              onChanged: (_) => editUserPostBloc
                   .add(DipositChanged(formatter.getUnformattedValue())),
             );
           },
         ),
         box24,
-        BlocBuilder<EditPostBloc, EditPostState>(
+        BlocBuilder<EditUserPostBloc, EditUserPostState>(
           builder: (context, state) {
             return AppDropDownMuliSelectField(
               labelText: 'Tiện ích khác',
@@ -65,12 +65,12 @@ class EditingMoreInformation extends StatelessWidget {
                   .toList(),
               selectedItems: state.selectedOtherUtils,
               onChanged: (utils) =>
-                  editPostBloc.add(OtherUtilitiesSelected(utils)),
+                  editUserPostBloc.add(OtherUtilitiesSelected(utils)),
             );
           },
         ),
         box24,
-        BlocBuilder<EditPostBloc, EditPostState>(
+        BlocBuilder<EditUserPostBloc, EditUserPostState>(
           buildWhen: (previous, current) =>
               previous.selectedRentailObjects !=
                   current.selectedRentailObjects ||
@@ -83,12 +83,12 @@ class EditingMoreInformation extends StatelessWidget {
                   .toList(),
               selectedItems: state.selectedRentailObjects,
               onChanged: (objects) =>
-                  editPostBloc.add(RentalObjectsSelected(objects)),
+                  editUserPostBloc.add(RentalObjectsSelected(objects)),
             );
           },
         ),
         box24,
-        BlocBuilder<EditPostBloc, EditPostState>(
+        BlocBuilder<EditUserPostBloc, EditUserPostState>(
           // buildWhen: (previous, current) =>
           //     previous.selectedNearbyPlaces != current.selectedNearbyPlaces,
           builder: (context, state) {
@@ -99,7 +99,7 @@ class EditingMoreInformation extends StatelessWidget {
                   .toList(),
               selectedItems: state.selectedNearbyPlaces,
               onChanged: (places) =>
-                  editPostBloc.add(NearbyPlacesSelected(places)),
+                  editUserPostBloc.add(NearbyPlacesSelected(places)),
             );
           },
         ),

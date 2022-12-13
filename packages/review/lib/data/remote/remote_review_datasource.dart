@@ -72,4 +72,20 @@ class RemoteReviewDatasource implements IReviewDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<bool> checkReviewPost({required int postId}) async {
+    try {
+      final jwt =
+          await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
+      final responseData = await _httpHandler.get(
+        ApiPath.checkReviewPost(postId),
+        headers: {HttpHeaders.authorizationHeader: 'Bearer $jwt'},
+      );
+      return responseData.data as bool;
+    } catch (e) {
+      log(e.toString(), name: runtimeType.toString());
+      rethrow;
+    }
+  }
 }

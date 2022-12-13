@@ -57,7 +57,10 @@ class RemoteBookingDatasource implements IBookingDatasource {
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       await _httpHandler.post(
         ApiPath.booking,
-        body: {'postId': postId, 'time': bookingTime.toUtc().toIso8601String()},
+        body: {
+          'postId': postId,
+          'time': bookingTime.toUtc().toIso8601String(),
+        },
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
           HttpHeaders.contentTypeHeader: ContentType.json.value,
@@ -81,7 +84,7 @@ class RemoteBookingDatasource implements IBookingDatasource {
       final jwt =
           await SecureStorageHelper.readValueByKey(SecureStorageKey.jwt);
       final responseData = await _httpHandler.get(
-        ApiPath.booking,
+        ApiPath.bookingPersonal,
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $jwt',
         },

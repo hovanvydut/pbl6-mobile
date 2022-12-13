@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/home/home.dart';
-import 'package:pbl6_mobile/post/post.dart';
 import 'package:platform_helper/platform_helper.dart';
 
 class PriorityPostGridView extends StatelessWidget {
@@ -20,7 +19,7 @@ class PriorityPostGridView extends StatelessWidget {
                 previous.deleteBookmarkStatus != current.deleteBookmarkStatus,
             listener: (context, state) {
               if (state.deleteBookmarkStatus == LoadingStatus.done) {
-                ToastHelper.showToast('Đã xóa bài viết đã lưu');
+                ToastHelper.showToast('Đã xóa bài đăng đã lưu');
               }
               if (state.deleteBookmarkStatus == LoadingStatus.error) {
                 ToastHelper.showToast(
@@ -34,7 +33,7 @@ class PriorityPostGridView extends StatelessWidget {
                 previous.addBookmarkStatus != current.addBookmarkStatus,
             listener: (context, state) {
               if (state.addBookmarkStatus == LoadingStatus.done) {
-                ToastHelper.showToast('Đã thêm bài viết vào danh sách đã lưu');
+                ToastHelper.showToast('Đã thêm bài đăng vào danh sách đã lưu');
               }
 
               if (state.addBookmarkStatus == LoadingStatus.error) {
@@ -45,10 +44,10 @@ class PriorityPostGridView extends StatelessWidget {
             },
           ),
         ],
-        child: BlocBuilder<PostBloc, PostState>(
+        child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
-            final allPosts = state.allPostsData;
-            final allPostsStatus = state.allPostsLoadingStatus;
+            final allPosts = state.allPosts;
+            final allPostsStatus = state.homeLoadingStatus;
             if (allPostsStatus == LoadingStatus.loading) {
               return GridView.builder(
                 padding: const EdgeInsets.only(bottom: 16, top: 8),

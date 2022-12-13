@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 
 class BookmarklListTileCard extends StatelessWidget {
   const BookmarklListTileCard({
@@ -22,8 +22,8 @@ class BookmarklListTileCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () => context.push(
           AppRouter.detailPost,
-          extra: ExtraParams3<PostBloc, Post, BookmarkBloc>(
-            param1: context.read<PostBloc>(),
+          extra: ExtraParams3<UserPostBloc, Post, BookmarkBloc>(
+            param1: context.read<UserPostBloc>(),
             param2: bookmark,
             param3: context.read<BookmarkBloc>(),
           ),

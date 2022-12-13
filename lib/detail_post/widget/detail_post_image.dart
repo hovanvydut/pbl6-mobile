@@ -13,8 +13,7 @@ class DetailPostImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Stack(
       children: [
         if (post.medias.isNotEmpty)
           CachedNetworkImageSlider(
@@ -26,6 +25,16 @@ class DetailPostImage extends StatelessWidget {
           Assets.images.notImage.image(
             fit: BoxFit.cover,
             height: 250,
+            width: context.width,
+          ),
+        if (post.isPriorityPost ?? false)
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Assets.icons.checkCert
+                  .svg(height: 40, color: context.colorScheme.primary),
+            ),
           ),
       ],
     );

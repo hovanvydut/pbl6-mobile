@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:booking/booking.dart';
 import 'package:constant_helper/constant_helper.dart';
+import 'package:dartx/dartx.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'booking_event.dart';
 part 'booking_state.dart';
@@ -36,17 +38,16 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       final bookingDatas = await _bookingRepository.getBookingList();
       final freetimes =
           await _bookingRepository.getFreeTimeByUserId(state.user.id);
-      final appointments = <AppointmentInfo>[];
 
-      for (final bookingData in bookingDatas) {
-        appointments.add(
-          AppointmentInfo(
-            bookingData: bookingData,
-            start: bookingData.time.toLocal(),
-            end: bookingData.time.toLocal().add(const Duration(hours: 1)),
-          ),
-        );
-      }
+      final appointments = bookingDatas
+          .map(
+            (data) => AppointmentInfo(
+              bookingData: data,
+              start: data.time.toLocal(),
+              end: data.time.toLocal().add(const Duration(hours: 1)),
+            ),
+          )
+          .toList();
 
       for (final freetime in freetimes) {
         final dateFromFreetime =
@@ -95,22 +96,28 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       final appoinment = state.appointments.firstWhere(
         (appointment) => appointment.bookingData!.id == event.bookingId,
       );
-      state.appointments.remove(appoinment);
-      state.appointments.add(
-        appoinment.copyWith(
-          bookingData:
-              appoinment.bookingData!.copyWith(approveTime: DateTime.now()),
-        ),
-      );
+      state.appointments
+        ..remove(appoinment)
+        ..add(
+          appoinment.copyWith(
+            bookingData:
+                appoinment.bookingData!.copyWith(approveTime: DateTime.now()),
+          ),
+        );
+
       emit(
         state.copyWith(
           approveStatus: LoadingStatus.done,
           appointments: List.from(state.appointments),
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       addError(e);
       emit(state.copyWith(approveStatus: LoadingStatus.error));
+      await Sentry.captureException(
+        e,
+      stackTrace: stackTrace,
+      );
       rethrow;
     }
   }
@@ -127,21 +134,26 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
             appointment.bookingData != null &&
             appointment.bookingData!.id == event.bookingId,
       );
-      state.appointments.remove(appoinment);
-      state.appointments.add(
-        appoinment.copyWith(
-          bookingData: appoinment.bookingData!.copyWith(isMeet: true),
-        ),
-      );
+      state.appointments
+        ..remove(appoinment)
+        ..add(
+          appoinment.copyWith(
+            bookingData: appoinment.bookingData?.copyWith(isMeet: true),
+          ),
+        );
       emit(
         state.copyWith(
           confirmMeetingStatus: LoadingStatus.done,
           appointments: List.from(state.appointments),
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       addError(e);
       emit(state.copyWith(confirmMeetingStatus: LoadingStatus.error));
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+      );
       rethrow;
     }
   }
@@ -151,20 +163,21 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     Emitter<BookingState> emit,
   ) {
     final currentAppointments = state.appointments
-      ..removeWhere((appointment) => appointment.bookingData == null);
-    for (final freetime in event.freetimes) {
-      final isBooking = currentAppointments.any(
-        (appointment) => appointment.start == freetime.start,
-      );
-      if (!isBooking) {
-        currentAppointments.add(
-          AppointmentInfo(
-            start: freetime.start,
-            end: freetime.end,
+        .where((appointment) => appointment.bookingData != null)
+        .toList();
+
+    currentAppointments.addAll(
+      event.freetimes
+          .filter(
+            (freetime) => currentAppointments.any(
+              (appointment) => appointment.start != freetime.start,
+            ),
+          )
+          .map(
+            (freetime) =>
+                AppointmentInfo(start: freetime.start, end: freetime.end),
           ),
-        );
-      }
-    }
+    );
     emit(
       state.copyWith(
         appointments: List.from(currentAppointments),

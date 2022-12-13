@@ -1,13 +1,14 @@
 part of 'review_post_bloc.dart';
 
-class ReviewPostState extends Equatable {
-  const ReviewPostState({
+class ReviewUserPostState extends Equatable {
+  const ReviewUserPostState({
     required this.post,
     this.postReviews = const [],
     this.currentPage = 1,
     this.reviewLoadingStatus = LoadingStatus.initial,
     this.reviewLoadingMoreStatus = LoadingStatus.initial,
     this.canLoadingMore = true,
+    this.canReview = true,
   });
 
   final Post post;
@@ -16,6 +17,7 @@ class ReviewPostState extends Equatable {
   final LoadingStatus reviewLoadingStatus;
   final LoadingStatus reviewLoadingMoreStatus;
   final bool canLoadingMore;
+  final bool canReview;
 
   @override
   List<Object?> get props => [
@@ -25,17 +27,19 @@ class ReviewPostState extends Equatable {
         currentPage,
         postReviews,
         canLoadingMore,
+        canReview
       ];
 
-  ReviewPostState copyWith({
+  ReviewUserPostState copyWith({
     Post? post,
     List<Review>? postReviews,
     int? currentPage,
     LoadingStatus? reviewLoadingStatus,
     LoadingStatus? reviewLoadingMoreStatus,
+    bool? canReview,
     bool? canLoadingMore,
   }) {
-    return ReviewPostState(
+    return ReviewUserPostState(
       post: post ?? this.post,
       postReviews: postReviews ?? this.postReviews,
       currentPage: currentPage ?? this.currentPage,
@@ -43,6 +47,7 @@ class ReviewPostState extends Equatable {
           reviewLoadingMoreStatus ?? this.reviewLoadingMoreStatus,
       reviewLoadingStatus: reviewLoadingStatus ?? this.reviewLoadingStatus,
       canLoadingMore: canLoadingMore ?? this.canLoadingMore,
+      canReview: canReview ?? this.canReview,
     );
   }
 }

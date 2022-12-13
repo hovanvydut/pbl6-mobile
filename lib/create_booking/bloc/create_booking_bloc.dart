@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'create_booking_event.dart';
 part 'create_booking_state.dart';
@@ -18,7 +19,6 @@ class CreateBookingBloc extends Bloc<CreateBookingEvent, CreateBookingState> {
         super(CreateBookingState(post: post)) {
     on<CreateBookingPageStarted>(_onPageStarted);
     on<StepPressed>(_onStepPressed);
-    on<BookingPhoneNumberChanged>(_onBookingPhoneNumberChanged);
     on<SchedulePressed>(_onSchedulePressed);
     on<RemoveSchedulePressed>(_onRemoveSchedulePressed);
     on<ConfirmSchedulePressed>(_onConfirmSchedulePressed);
@@ -30,21 +30,6 @@ class CreateBookingBloc extends Bloc<CreateBookingEvent, CreateBookingState> {
 
   void _onStepPressed(StepPressed event, Emitter<CreateBookingState> emit) {
     emit(state.copyWith(currentStep: event.index));
-  }
-
-  void _onBookingPhoneNumberChanged(
-    BookingPhoneNumberChanged event,
-    Emitter<CreateBookingState> emit,
-  ) {
-    final phoneNumber = PhoneNumber.dirty(event.phoneNumber);
-    emit(
-      state.copyWith(
-        phoneNumber: phoneNumber,
-        formzStatus: Formz.validate([
-          phoneNumber,
-        ]),
-      ),
-    );
   }
 
   Future<void> _onPageStarted(
@@ -123,9 +108,13 @@ class CreateBookingBloc extends Bloc<CreateBookingEvent, CreateBookingState> {
         bookingTime: state.selectedTime.first.start,
       );
       emit(state.copyWith(formzStatus: FormzStatus.submissionSuccess));
-    } catch (e) {
+    } catch (e, stackTrace) {
       addError(e);
       emit(state.copyWith(formzStatus: FormzStatus.submissionFailure));
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+      );
       rethrow;
     }
   }

@@ -5,4 +5,5 @@ export 'cached_netword_image_slider.dart';
 export 'dismiss_focus.dart';
 export 'filled_button.dart';
 export 'full_image_view.dart';
+export 'search_field.dart';
 export 'sheet_drag_handle.dart';

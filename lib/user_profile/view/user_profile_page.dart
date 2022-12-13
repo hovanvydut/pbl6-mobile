@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
@@ -35,74 +35,7 @@ class UserProfilePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-                BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                  builder: (context, state) {
-                    final user = state.user;
-                    return Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl: user?.avatar ??
-                                  'https://avatars.githubusercontent.com/u/63831488?v=4',
-                              imageBuilder: (context, imageProvider) =>
-                                  GestureDetector(
-                                onTap: () => context.pushToViewImage(
-                                  user?.avatar ??
-                                      'https://avatars.githubusercontent.com/u/63831488?v=4',
-                                ),
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: imageProvider,
-                                ),
-                              ),
-                              placeholder: (context, url) => CircleAvatar(
-                                radius: 40,
-                                backgroundColor: theme.colorScheme.surface,
-                                child: const CircularProgressIndicator(
-                                  strokeWidth: 2.5,
-                                ),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  CircleAvatar(
-                                radius: 40,
-                                backgroundColor: theme.colorScheme.surface,
-                                child: Assets.icons.danger
-                                    .svg(color: theme.colorScheme.onSurface),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    user?.displayName ?? 'Không có thông tin',
-                                    style: theme.textTheme.titleLarge!.copyWith(
-                                      color: theme
-                                          .colorScheme.onSecondaryContainer,
-                                    ),
-                                  ),
-                                  Text(
-                                    user?.userAccountEmail ??
-                                        'Không có thông tin',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: theme.textTheme.bodyMedium,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                const UserProfileAvatar(),
                 const Spacer()
               ],
             ),
@@ -110,6 +43,81 @@ class UserProfilePage extends StatelessWidget {
           const UserTabSession()
         ],
       ),
+    );
+  }
+}
+
+class UserProfileAvatar extends StatelessWidget {
+  const UserProfileAvatar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (context, state) {
+        final user = state.user;
+        return Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: user?.avatar ??
+                      'https://avatars.githubusercontent.com/u/63831488?v=4',
+                  imageBuilder: (context, imageProvider) => GestureDetector(
+                    onTap: () => context.pushToViewImage(
+                      user?.avatar ??
+                          'https://avatars.githubusercontent.com/u/63831488?v=4',
+                    ),
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: imageProvider,
+                    ),
+                  ),
+                  placeholder: (context, url) => CircleAvatar(
+                    radius: 40,
+                    backgroundColor: theme.colorScheme.surface,
+                    child: const CircularProgressIndicator(
+                      strokeWidth: 2.5,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => CircleAvatar(
+                    radius: 40,
+                    backgroundColor: theme.colorScheme.surface,
+                    child: Assets.icons.danger
+                        .svg(color: theme.colorScheme.onSurface),
+                  ),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        user?.displayName ?? 'Không có thông tin',
+                        style: theme.textTheme.titleLarge!.copyWith(
+                          color: theme.colorScheme.onSecondaryContainer,
+                        ),
+                      ),
+                      Text(
+                        user?.userAccountEmail ?? 'Không có thông tin',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -162,7 +170,7 @@ class UserTabSession extends StatelessWidget {
                   onTap: () {
                     context.pushToChild(
                       AppRouter.userPost,
-                      extra: context.read<PostBloc>(),
+                      extra: context.read<UserPostBloc>(),
                     );
                   },
                 ),
@@ -175,11 +183,20 @@ class UserTabSession extends StatelessWidget {
                       .svg(color: context.colorScheme.onSurface),
                   onTap: () => context.pushToChild(
                     AppRouter.bookmark,
-                    extra: ExtraParams2<BookmarkBloc, PostBloc>(
+                    extra: ExtraParams2<BookmarkBloc, UserPostBloc>(
                       param1: context.read<BookmarkBloc>(),
-                      param2: context.read<PostBloc>(),
+                      param2: context.read<UserPostBloc>(),
                     ),
                   ),
+                ),
+                ListTile(
+                  leading: Assets.icons.notificationOutline.svg(
+                    color: context.colorScheme.onSurface,
+                  ),
+                  title: const Text('Thông báo'),
+                  trailing: Assets.icons.chevronRight
+                      .svg(color: context.colorScheme.onSurface),
+                  onTap: () => context.pushToChild(AppRouter.notification),
                 ),
                 ListTile(
                   leading: Assets.icons.calendar.svg(
@@ -204,14 +221,14 @@ class UserTabSession extends StatelessWidget {
                     final user = context.watch<AuthenticationBloc>().state.user;
                     final currentCredit = user?.currentCredit == null
                         ? 0
-                        : user!.currentCredit! / 100;
+                        : user!.currentCredit! / 10;
                     return ListTile(
                       leading: Assets.icons.wallet.svg(
                         color: context.colorScheme.onSurface,
                       ),
                       title: const Text('Số dư hiện tại'),
                       subtitle: Text(
-                        '${currentCredit.toStringAsFixed(0)} đồng',
+                        currentCredit.inSimpleCurrency,
                       ),
                       trailing: Assets.icons.chevronRight
                           .svg(color: context.colorScheme.onSurface),

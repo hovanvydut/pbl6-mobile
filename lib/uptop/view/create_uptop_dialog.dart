@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
-import 'package:pbl6_mobile/post/post.dart';
 import 'package:pbl6_mobile/uptop/uptop.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 import 'package:platform_helper/platform_helper.dart';
 import 'package:uptop/repositories/uptop_repository.dart';
 import 'package:widgets/widgets.dart';
@@ -61,7 +61,7 @@ class _CreateUptopDialogViewState extends State<CreateUptopDialogView> {
       listener: (context, state) {
         if (state.uptopLoadingStatus == LoadingStatus.done) {
           ToastHelper.showToast('Đẩy bài viết ưu tiên thành công');
-          context.read<PostBloc>().add(GetUserPosts());
+          context.read<UserPostBloc>().add(GetUserPosts());
           Navigator.pop(context);
         }
         if (state.uptopLoadingStatus == LoadingStatus.error) {

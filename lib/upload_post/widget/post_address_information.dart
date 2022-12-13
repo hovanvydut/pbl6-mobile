@@ -17,7 +17,7 @@ class PostAddressInformation extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
-    final uploadPostBlog = context.read<UploadPostBloc>();
+    final uploadPostBlog = context.read<UploadUserPostBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -26,7 +26,7 @@ class PostAddressInformation extends StatelessWidget {
           style: context.textTheme.titleLarge,
         ),
         box16,
-        BlocBuilder<UploadPostBloc, UploadPostState>(
+        BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
           builder: (context, state) {
             return AppDropDownField<String>(
               labelText: 'Tỉnh/Thành phố',
@@ -47,7 +47,7 @@ class PostAddressInformation extends StatelessWidget {
           },
         ),
         box24,
-        BlocBuilder<UploadPostBloc, UploadPostState>(
+        BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
           builder: (context, state) {
             return AppDropDownField<String>(
               labelText: 'Quận/Huyện',
@@ -71,7 +71,7 @@ class PostAddressInformation extends StatelessWidget {
           },
         ),
         box24,
-        BlocBuilder<UploadPostBloc, UploadPostState>(
+        BlocBuilder<UploadUserPostBloc, UploadUserPostState>(
           builder: (context, state) {
             return AppDropDownField<String>(
               labelText: 'Phường/Xã',
@@ -88,17 +88,26 @@ class PostAddressInformation extends StatelessWidget {
                   .toList(),
               onChanged: (ward) {
                 if (ward != null) {
-                  context.read<UploadPostBloc>().add(WardSelected(ward));
+                  context.read<UploadUserPostBloc>().add(WardSelected(ward));
                 }
               },
             );
           },
         ),
         box24,
-        AppTextField(
-          labelText: 'Địa chỉ cụ thể',
-          onChanged: (address) =>
-              uploadPostBlog.add(DetailAddressChanged(address)),
+        Builder(
+          builder: (context) {
+            final address = context
+                .select((UploadUserPostBloc bloc) => bloc.state.detailAddress);
+            final errorText =
+                address.invalid ? 'Địa chỉ cụ thể không được để trống' : null;
+            return AppTextField(
+              labelText: 'Địa chỉ cụ thể',
+              onChanged: (address) =>
+                  uploadPostBlog.add(DetailAddressChanged(address)),
+              errorText: errorText,
+            );
+          },
         ),
       ],
     );

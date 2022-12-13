@@ -30,7 +30,7 @@ class PaymentRepository {
       _paymentDatasource.getPersonalDebitHistory(
         fromDate: fromDate,
         pageNumber: pageNumber,
-        pageSize: pageNumber,
+        pageSize: pageSize,
         searchValue: searchValue,
         toDate: toDate,
       );

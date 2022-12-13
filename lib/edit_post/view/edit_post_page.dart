@@ -7,7 +7,7 @@ import 'package:media/media.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
-import 'package:pbl6_mobile/post/post.dart';
+import 'package:pbl6_mobile/user_post/user_post.dart';
 import 'package:platform_helper/platform_helper.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
@@ -21,7 +21,7 @@ class EditPostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => EditPostBloc(
+      create: (context) => EditUserPostBloc(
         addressRepository: context.read<AddressRepository>(),
         categoryRepository: context.read<CategoryRepository>(),
         propertyRepository: context.read<PropertyRepository>(),
@@ -48,7 +48,7 @@ class EditPostView extends StatelessWidget {
     const box24 = SizedBox(
       height: 24,
     );
-    return BlocListener<EditPostBloc, EditPostState>(
+    return BlocListener<EditUserPostBloc, EditUserPostState>(
       listenWhen: (previous, current) =>
           previous.loadingStatus != current.loadingStatus ||
           previous.editPostStatus != current.editPostStatus,
@@ -59,7 +59,7 @@ class EditPostView extends StatelessWidget {
           );
         }
         if (state.editPostStatus == LoadingStatus.done) {
-          context.read<PostBloc>().add(GetUserPosts());
+          context.read<UserPostBloc>().add(GetUserPosts());
           ToastHelper.showToast('Cập nhật bài viết thành công');
           context.go(AppRouter.main);
         }
@@ -87,7 +87,7 @@ class EditPostView extends StatelessWidget {
           body: Builder(
             builder: (context) {
               final loadingStatus = context
-                  .select((EditPostBloc bloc) => bloc.state.loadingStatus);
+                  .select((EditUserPostBloc bloc) => bloc.state.loadingStatus);
 
               return loadingStatus == LoadingStatus.loading
                   ? const Center(
@@ -107,7 +107,7 @@ class EditPostView extends StatelessWidget {
                           box24,
                           EditingMediaInformation(post: post),
                           box24,
-                          BlocBuilder<EditPostBloc, EditPostState>(
+                          BlocBuilder<EditUserPostBloc, EditUserPostState>(
                             buildWhen: (previous, current) =>
                                 previous.editPostStatus !=
                                 current.editPostStatus,
@@ -118,7 +118,7 @@ class EditPostView extends StatelessWidget {
                                   : FilledButton(
                                       child: const Text('Chỉnh sửa bài viêt'),
                                       onPressed: () => context
-                                          .read<EditPostBloc>()
+                                          .read<EditUserPostBloc>()
                                           .add(EditPostSubmitted(post: post)),
                                     );
                             },
