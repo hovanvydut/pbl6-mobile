@@ -48,7 +48,7 @@ class _SearchFieldState extends State<SearchField> {
       padding: const EdgeInsets.only(left: 16, right: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: context.colorScheme.primary.withOpacity(0.08),
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
       ),
       alignment: Alignment.center,
       child: TextFormField(

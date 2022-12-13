@@ -246,6 +246,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2+1"
+  enhanced_multiselect:
+    dependency: "direct main"
+    description:
+      name: enhanced_multiselect
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   equatable:
     dependency: "direct main"
     description:
@@ -475,7 +482,7 @@ packages:
       name: http_client_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0+1"
+    version: "0.1.1"
   http_multi_server:
     dependency: transitive
     description:
@@ -623,13 +630,6 @@ packages:
       relative: true
     source: path
     version: "0.1.0+1"
-  multiselect:
-    dependency: "direct main"
-    description:
-      path: "packages/multiselect"
-      relative: true
-    source: path
-    version: "0.0.7"
   nested:
     dependency: transitive
     description:
@@ -787,10 +787,10 @@ packages:
   platform_helper:
     dependency: "direct main"
     description:
-      path: "packages/platform_helper"
-      relative: true
-    source: path
-    version: "0.1.0+1"
+      name: platform_helper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   plugin_platform_interface:
     dependency: transitive
     description:

@@ -252,4 +252,29 @@ class RemotePostDatasource implements IPostDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<List<Post>> getRelatedPost({
+    required int quantity,
+    required int postId,
+    required int addressWardId,
+  }) async {
+    try {
+      final responseData = await _httpHandler.get(
+        ApiPath.relatedPost,
+        queryParameter: {
+          'Quantity': '$quantity',
+          'CurrentPostId': '$postId',
+          'AddressWardId': '$addressWardId',
+        },
+      );
+      final posts = responseData.data as List;
+      return posts
+          .map((data) => Post.fromJson(data as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
+      rethrow;
+    }
+  }
 }
