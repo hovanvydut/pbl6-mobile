@@ -1,3 +1,7 @@
+# 2.0.0
+
+- feat: add `Notification`.
+- feat: add `Sentiment` in `Review`.
 
 # 1.3.0
 

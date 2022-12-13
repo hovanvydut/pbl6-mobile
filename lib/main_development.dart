@@ -32,7 +32,8 @@ Future<void> main() async {
         ..tracesSampler = (samplingContext) {
           return 0.5;
         };
-      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+      // Set tracesSampleRate to 1.0 to capture 100%
+      // of transactions for performance monitoring.
       // We recommend adjusting this value in production.
     },
     appRunner: () async => bootstrap(App.new),
