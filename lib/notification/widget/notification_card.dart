@@ -238,7 +238,7 @@ class NotificationCard extends StatelessWidget {
 
       case NotificationType.hasReviewOnPost:
         image = Assets.icons.starOutline;
-        color = Colors.yellow.withOpacity(0.7);
+        color = Colors.yellow.shade700.withOpacity(0.7);
         break;
     }
     return CircleAvatar(

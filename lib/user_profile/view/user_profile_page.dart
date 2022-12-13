@@ -221,14 +221,14 @@ class UserTabSession extends StatelessWidget {
                     final user = context.watch<AuthenticationBloc>().state.user;
                     final currentCredit = user?.currentCredit == null
                         ? 0
-                        : user!.currentCredit! / 100;
+                        : user!.currentCredit! / 10;
                     return ListTile(
                       leading: Assets.icons.wallet.svg(
                         color: context.colorScheme.onSurface,
                       ),
                       title: const Text('Số dư hiện tại'),
                       subtitle: Text(
-                        '${currentCredit.toStringAsFixed(0)} đồng',
+                        currentCredit.inSimpleCurrency,
                       ),
                       trailing: Assets.icons.chevronRight
                           .svg(color: context.colorScheme.onSurface),

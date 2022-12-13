@@ -51,11 +51,14 @@ abstract class ApiPath {
   static String hostPostOther(int hostId) => '/api/host/$hostId/post';
 
   /// BOOKING
-
   /// `POST`: create booking
   ///
+  static const booking = '/api/booking';
+
+  /// GET_BOOKING_LIST
+  ///
   /// `GET`: get booking list
-  static const booking = '/api/booking/personal';
+  static const bookingPersonal = '/api/booking/personal';
 
   /// `PUT`: Approve Booking
   static String approveBooking(int bookingId) =>
@@ -149,7 +152,7 @@ abstract class ApiPath {
   /// **Count unread notification**
   ///
   /// `GET` get count unread notification
-  /// 
+  ///
   static const countUnreadNotification = '/api/notification/unread/count';
 
   /// **Read notification by id**

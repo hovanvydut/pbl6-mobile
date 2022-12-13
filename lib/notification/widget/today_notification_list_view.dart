@@ -53,7 +53,7 @@ class _TodayNotificationListViewState extends State<TodayNotificationListView> {
         final loadingStatus =
             context.select((NotificationBloc bloc) => bloc.state.loadingStatus);
         final todayNotifications = context
-            .select((NotificationBloc bloc) => bloc.state.todayNotifications);
+            .watch<NotificationBloc>().state.todayNotifications;
         final isLoadingMore =
             context.select((NotificationBloc bloc) => bloc.state.isLoadingMore);
         if (loadingStatus == LoadingStatus.loading) {

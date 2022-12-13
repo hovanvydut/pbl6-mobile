@@ -171,7 +171,8 @@ class ReviewPostView extends StatelessWidget {
                                       return;
                                     }
                                     ToastHelper.showToast(
-                                      'Bạn chưa đủ điều kiện để đánh giá bài đăng này',
+                                      'Bạn chưa đủ điều kiện để '
+                                      'đánh giá bài đăng này',
                                     );
                                   },
                             child: const Text('Hãy là người đầu tiền đánh giá'),
@@ -185,17 +186,13 @@ class ReviewPostView extends StatelessWidget {
                 ),
               );
             }
-            var avgRating = 0.0;
-            for (final review in reviews) {
-              avgRating += review.rating;
-            }
-            avgRating /= reviews.length;
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 8),
                 Text(
-                  '$avgRating/5',
+                  '${post.averageRating?.toStringAsFixed(1)}/4',
                   style: theme.textTheme.titleLarge!
                       .copyWith(color: theme.colorScheme.primary),
                 ),
@@ -235,53 +232,64 @@ class ReviewPostView extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 16),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  review.userInfo.displayName,
-                                  style: theme.textTheme.bodyLarge?.copyWith(
-                                    color: theme.colorScheme.onSurface,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    review.userInfo.displayName,
+                                    style: theme.textTheme.bodyLarge?.copyWith(
+                                      color: theme.colorScheme.onSurface,
+                                    ),
                                   ),
-                                ),
-                                RatingBar(
-                                  itemCount: 4,
-                                  initialRating: review.rating.toDouble(),
-                                  ratingWidget: RatingWidget(
-                                    empty: Assets.icons.starOutline
-                                        .svg(color: Colors.yellow),
-                                    full: Assets.icons.starBold
-                                        .svg(color: Colors.yellow),
-                                    half: const SizedBox(),
+                                  RatingBar(
+                                    itemCount: 4,
+                                    initialRating: review.rating.toDouble(),
+                                    ratingWidget: RatingWidget(
+                                      empty: Assets.icons.starOutline
+                                          .svg(color: Colors.yellow),
+                                      full: Assets.icons.starBold
+                                          .svg(color: Colors.yellow),
+                                      half: const SizedBox(),
+                                    ),
+                                    itemSize: 20,
+                                    ignoreGestures: true,
+                                    onRatingUpdate: (_) {},
                                   ),
-                                  itemSize: 20,
-                                  ignoreGestures: true,
-                                  onRatingUpdate: (_) {},
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  review.createdAt.toUtc().timeAgo,
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: theme.colorScheme.onSurface,
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    review.createdAt.toUtc().timeAgo,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurface,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 12),
-                                Text(
-                                  review.content,
-                                  style: theme.textTheme.bodyLarge?.copyWith(
-                                    color: theme.colorScheme.onSurface,
+                                  const SizedBox(height: 12),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 200,
+                                        child: Text(
+                                          review.content,
+                                          style: theme.textTheme.bodyLarge
+                                              ?.copyWith(
+                                            color: theme.colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                const SizedBox(height: 8),
-                              ],
+                                  const SizedBox(height: 8),
+                                ],
+                              ),
                             ),
+                            if (review.sentiment != null)
+                              SentimentIllustrator(
+                                sentiment: review.sentiment!,
+                              )
                           ],
                         ),
-                        const SizedBox(
-                          height: 8,
-                        ),
                         SizedBox(
-                          height: 150,
+                          height: review.medias.isEmpty ? 0 : 150,
                           child: ListView.separated(
                             itemCount: review.medias.length,
                             scrollDirection: Axis.horizontal,

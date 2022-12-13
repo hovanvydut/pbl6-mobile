@@ -59,6 +59,11 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     Emitter<NotificationState> emit,
   ) async {
     try {
+      emit(
+        state.copyWith(
+          actionStatus: LoadingStatus.loading,
+        ),
+      );
       await _notificationRepository.readNotification(event.notificiation.id);
       final indexInAll = state.notifications.indexOf(event.notificiation);
       state.notifications[indexInAll] =
@@ -142,6 +147,11 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     Emitter<NotificationState> emit,
   ) async {
     try {
+      emit(
+        state.copyWith(
+          actionStatus: LoadingStatus.loading,
+        ),
+      );
       await _notificationRepository.readAllNotifications();
       emit(
         state.copyWith(

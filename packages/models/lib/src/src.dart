@@ -21,6 +21,7 @@ export 'post/post.dart';
 export 'property/group_property.dart';
 export 'property/property.dart';
 export 'review/review.dart';
+export 'review/sentiment.dart';
 export 'statistics/statistics_data.dart';
 export 'statistics/statistics_value.dart';
 export 'uptop/uptop_data.dart';

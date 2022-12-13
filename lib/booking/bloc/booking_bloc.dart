@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'booking_event.dart';
 part 'booking_state.dart';
@@ -110,9 +111,13 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
           appointments: List.from(state.appointments),
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       addError(e);
       emit(state.copyWith(approveStatus: LoadingStatus.error));
+      await Sentry.captureException(
+        e,
+      stackTrace: stackTrace,
+      );
       rethrow;
     }
   }
@@ -142,9 +147,13 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
           appointments: List.from(state.appointments),
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       addError(e);
       emit(state.copyWith(confirmMeetingStatus: LoadingStatus.error));
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+      );
       rethrow;
     }
   }

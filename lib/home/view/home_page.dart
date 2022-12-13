@@ -121,44 +121,47 @@ class _HomeViewState extends State<HomeView> {
           if (homeLoadingStatus == LoadingStatus.loading) {
             return const Center(child: CircularProgressIndicator());
           }
-          return SingleChildScrollView(
-            controller: _scrollController,
-            padding: const EdgeInsets.only(top: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CachedNetworkImageSlider(
-                  images: images,
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
-                  borderRadius: BorderRadius.circular(20),
-                  height: context.height * 0.28,
-                  imageError: Assets.images.notImage.image().image,
-                  onTapToViewImage: false,
-                ),
-                const SizedBox(height: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        'Xu hướng tìm kiếm',
-                        style: context.textTheme.titleLarge,
+          return RefreshIndicator(
+            onRefresh: () async => context.read<HomeBloc>().add(GetAllPosts()),
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              padding: const EdgeInsets.only(top: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CachedNetworkImageSlider(
+                    images: images,
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    borderRadius: BorderRadius.circular(20),
+                    height: context.height * 0.28,
+                    imageError: Assets.images.notImage.image().image,
+                    onTapToViewImage: false,
+                  ),
+                  const SizedBox(height: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          'Xu hướng tìm kiếm',
+                          style: context.textTheme.titleLarge,
+                        ),
                       ),
-                    ),
-                    const SearchByDistrictView(),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        'Phòng trọ nổi bật',
-                        style: context.textTheme.titleLarge,
+                      const SearchByDistrictView(),
+                      const SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          'Phòng trọ nổi bật',
+                          style: context.textTheme.titleLarge,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const PriorityPostGridView(),
-              ],
+                    ],
+                  ),
+                  const PriorityPostGridView(),
+                ],
+              ),
             ),
           );
         },

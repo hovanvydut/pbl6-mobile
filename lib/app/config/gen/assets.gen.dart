@@ -10,6 +10,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 
 class $AssetsFontsGen {
   const $AssetsFontsGen();
@@ -181,6 +182,9 @@ class $AssetsIconsGen {
   SvgGenImage get homeOutline =>
       const SvgGenImage('assets/icons/home_outline.svg');
 
+  /// File path: assets/icons/laugh.svg
+  SvgGenImage get laugh => const SvgGenImage('assets/icons/laugh.svg');
+
   /// File path: assets/icons/light_bulb.svg
   SvgGenImage get lightBulb => const SvgGenImage('assets/icons/light_bulb.svg');
 
@@ -221,6 +225,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/refresh.svg
   SvgGenImage get refresh => const SvgGenImage('assets/icons/refresh.svg');
 
+  /// File path: assets/icons/sad.svg
+  SvgGenImage get sad => const SvgGenImage('assets/icons/sad.svg');
+
   /// File path: assets/icons/save.svg
   SvgGenImage get save => const SvgGenImage('assets/icons/save.svg');
 
@@ -241,6 +248,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/share.svg
   SvgGenImage get share => const SvgGenImage('assets/icons/share.svg');
+
+  /// File path: assets/icons/smile.svg
+  SvgGenImage get smile => const SvgGenImage('assets/icons/smile.svg');
 
   /// File path: assets/icons/star_bold.svg
   SvgGenImage get starBold => const SvgGenImage('assets/icons/star_bold.svg');
@@ -312,6 +322,7 @@ class $AssetsIconsGen {
         halfStar,
         homeBold,
         homeOutline,
+        laugh,
         lightBulb,
         love,
         messageBold,
@@ -323,12 +334,14 @@ class $AssetsIconsGen {
         profileBold,
         profileOutline,
         refresh,
+        sad,
         save,
         searchBold,
         searchOutline,
         setting,
         settingBold,
         share,
+        smile,
         starBold,
         starOutline,
         stat,
@@ -391,12 +404,30 @@ class $AssetsImagesGen {
       ];
 }
 
+class $AssetsLottieGen {
+  const $AssetsLottieGen();
+
+  /// File path: assets/lottie/happy.json
+  LottieGenImage get happy => const LottieGenImage('assets/lottie/happy.json');
+
+  /// File path: assets/lottie/normal.json
+  LottieGenImage get normal =>
+      const LottieGenImage('assets/lottie/normal.json');
+
+  /// File path: assets/lottie/sad.json
+  LottieGenImage get sad => const LottieGenImage('assets/lottie/sad.json');
+
+  /// List of all assets
+  List<LottieGenImage> get values => [happy, normal, sad];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
 
 class AssetGenImage {
@@ -507,6 +538,63 @@ class SvgGenImage {
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
       theme: theme,
+    );
+  }
+
+  String get path => _assetName;
+}
+
+class LottieGenImage {
+  const LottieGenImage(this._assetName);
+
+  final String _assetName;
+
+  LottieBuilder lottie({
+    Animation<double>? controller,
+    bool? animate,
+    FrameRate? frameRate,
+    bool? repeat,
+    bool? reverse,
+    LottieDelegates? delegates,
+    LottieOptions? options,
+    void Function(LottieComposition)? onLoaded,
+    LottieImageProviderFactory? imageProviderFactory,
+    Key? key,
+    AssetBundle? bundle,
+    Widget Function(BuildContext, Widget, LottieComposition?)? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    double? width,
+    double? height,
+    BoxFit? fit,
+    AlignmentGeometry? alignment,
+    String? package,
+    bool? addRepaintBoundary,
+    FilterQuality? filterQuality,
+    void Function(String)? onWarning,
+  }) {
+    return Lottie.asset(
+      _assetName,
+      controller: controller,
+      animate: animate,
+      frameRate: frameRate,
+      repeat: repeat,
+      reverse: reverse,
+      delegates: delegates,
+      options: options,
+      onLoaded: onLoaded,
+      imageProviderFactory: imageProviderFactory,
+      key: key,
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      package: package,
+      addRepaintBoundary: addRepaintBoundary,
+      filterQuality: filterQuality,
+      onWarning: onWarning,
     );
   }
 

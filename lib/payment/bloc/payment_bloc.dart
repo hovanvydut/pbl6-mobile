@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
@@ -26,8 +28,11 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       emit(state.copyWith(pageLoadingStatus: LoadingStatus.loading));
       final debitHistoryList =
           await _paymentRepository.getPersonalDebitHistory();
+      log(debitHistoryList.toString());
       final creditHistoryList =
           await _paymentRepository.getPersonalCreditHistory();
+      log(creditHistoryList.toString());
+
       emit(
         state.copyWith(
           pageLoadingStatus: LoadingStatus.done,

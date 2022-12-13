@@ -49,7 +49,7 @@ class ReviewUserPostBloc extends Bloc<ReviewPostEvent, ReviewUserPostState> {
         state.copyWith(
           reviewLoadingStatus: LoadingStatus.done,
           postReviews: reviews,
-          canLoadingMore: reviews.length > 1,
+          canLoadingMore: reviews.length >= 5,
           currentPage: state.currentPage + 1,
         ),
       );

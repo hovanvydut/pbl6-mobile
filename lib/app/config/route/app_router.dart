@@ -22,6 +22,7 @@ import 'package:pbl6_mobile/search_filter/search_filter.dart';
 import 'package:pbl6_mobile/statistics/statistics.dart';
 import 'package:pbl6_mobile/upload_post/upload_post.dart';
 import 'package:pbl6_mobile/user_post/user_post.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 abstract class AppRouter {
   static const main = '/';
@@ -265,6 +266,12 @@ abstract class AppRouter {
       ),
     ],
     debugLogDiagnostics: true,
+    observers: [
+      SentryNavigatorObserver(
+        enableAutoTransactions: false,
+        setRouteNameAsTransaction: true,
+      ),
+    ],
   );
 }
 

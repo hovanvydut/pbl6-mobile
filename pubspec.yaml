@@ -84,6 +84,8 @@ dependencies:
   fl_chart: ^0.55.2
   syncfusion_flutter_charts: ^20.3.58
   badges: ^2.0.3
+  sentry_flutter: ^6.18.0
+  lottie: ^2.0.0
 
 dev_dependencies:
   bloc_test: ^9.1.0
@@ -100,6 +102,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/images/
+    - assets/lottie/
 
   fonts:
     - family: Nunito
@@ -126,3 +129,4 @@ flutter_gen:
 
   integrations:
     flutter_svg: true
+    lottie: true

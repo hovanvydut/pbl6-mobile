@@ -15,5 +15,12 @@ Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
       medias: (json['medias'] as List<dynamic>)
           .map((e) => Media.fromJson(e as Map<String, dynamic>))
           .toList(),
+      sentiment: $enumDecodeNullable(_$SentimentEnumMap, json['sentiment']),
       createdAt: Review._fromJson(json['createdAt'] as String),
     );
+
+const _$SentimentEnumMap = {
+  Sentiment.negative: 'NEG',
+  Sentiment.positive: 'POS',
+  Sentiment.neutral: 'NEU',
+};

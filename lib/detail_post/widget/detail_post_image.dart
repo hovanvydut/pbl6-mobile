@@ -25,6 +25,7 @@ class DetailPostImage extends StatelessWidget {
           Assets.images.notImage.image(
             fit: BoxFit.cover,
             height: 250,
+            width: context.width,
           ),
         if (post.isPriorityPost ?? false)
           Align(
