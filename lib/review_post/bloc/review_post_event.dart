@@ -9,4 +9,6 @@ abstract class ReviewPostEvent extends Equatable {
 
 class DetailPostStarted extends ReviewPostEvent {}
 
+class CheckReviewPost extends ReviewPostEvent {}
+
 class LoadingMorePressed extends ReviewPostEvent {}

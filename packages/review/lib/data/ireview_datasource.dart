@@ -14,4 +14,6 @@ abstract class IReviewDatasource {
     required int rating,
     required List<Media> medias,
   });
+
+  Future<bool> checkReviewPost({required int postId});
 }

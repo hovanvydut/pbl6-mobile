@@ -17,7 +17,7 @@ class BookmarkSearchPanel extends StatelessWidget {
       builder: (context, state) {
         if (!state.isSearching) {
           return const Text(
-            'Bài viết đã lưu',
+            'Bài đăng đã lưu',
           );
         }
         return Container(

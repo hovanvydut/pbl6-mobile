@@ -34,7 +34,11 @@ class PostRepository {
         medias: medias,
       );
 
-  Future<List<Post>> getAllPosts() => _postDatasource.getAllPosts();
+  Future<List<Post>> getAllPosts({
+    int pageNumber = 1,
+    int pageSize = 10,
+  }) =>
+      _postDatasource.getAllPosts(pageNumber: pageNumber, pageSize: pageSize);
 
   Future<void> updatePostByPostId(
     int postId, {
@@ -67,7 +71,16 @@ class PostRepository {
 
   Future<void> deletePost(int postId) => _postDatasource.deletePost(postId);
 
-  Future<List<Post>> getUserPosts() => _postDatasource.getUserPosts();
+  Future<List<Post>> getUserPosts({
+    int pageNumber = 1,
+    int pageSize = 10,
+    String? searchValue,
+  }) =>
+      _postDatasource.getUserPosts(
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        searchValue: searchValue,
+      );
 
   Future<List<Post>> filterPosts({
     List<int>? properties,

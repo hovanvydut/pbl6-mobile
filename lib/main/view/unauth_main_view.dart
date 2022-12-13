@@ -8,6 +8,7 @@ import 'package:platform_helper/platform_helper.dart';
 class UnAuthMainView extends StatefulWidget {
   const UnAuthMainView({super.key});
 
+
   @override
   State<UnAuthMainView> createState() => _UnAuthMainViewState();
 }

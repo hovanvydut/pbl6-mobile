@@ -21,7 +21,7 @@ pipeline{
 		stage('Build') {
 			steps {
 				sh '''
-					flutter build apk --flavor production --target lib/main_production.dart --target-platform android-arm64
+					flutter build apk --flavor production --target lib/main_production.dart --target-platform android-arm64 --dart-define BASE_URL=https://node-2.silk-cat.software
 					mkdir -p ${SHARE_FOLDER}
 					cp -ri ./build/app/outputs/flutter-apk/ ${SHARE_FOLDER}
 				'''

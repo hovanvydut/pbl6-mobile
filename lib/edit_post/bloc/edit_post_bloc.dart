@@ -16,8 +16,8 @@ import 'package:property/property.dart';
 part 'edit_post_event.dart';
 part 'edit_post_state.dart';
 
-class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
-  EditPostBloc({
+class EditUserPostBloc extends Bloc<EditPostEvent, EditUserPostState> {
+  EditUserPostBloc({
     required AddressRepository addressRepository,
     required CategoryRepository categoryRepository,
     required PropertyRepository propertyRepository,
@@ -28,7 +28,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
         _propertyRepository = propertyRepository,
         _postRepository = postRepository,
         _mediaRepository = mediaRepository,
-        super(const EditPostState()) {
+        super(const EditUserPostState()) {
     on<EditPageStarted>(_onPageStart);
     on<TitleChanged>(_onTitleChanged);
     on<SummaryDescriptionChanged>(_onDescriptionChanged);
@@ -57,7 +57,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   Future<void> _onPageStart(
     EditPageStarted event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) async {
     try {
       emit(state.copyWith(loadingStatus: LoadingStatus.loading));
@@ -111,21 +111,21 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onTitleChanged(
     TitleChanged event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     emit(state.copyWith(title: event.title));
   }
 
   void _onDescriptionChanged(
     SummaryDescriptionChanged event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     emit(state.copyWith(description: event.description));
   }
 
   Future<void> _onProvinceSelected(
     ProvinceSelected event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) async {
     // try {
     final provinceId = int.parse(event.province);
@@ -149,7 +149,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   Future<void> _onDistrictSelected(
     DistrictSelected event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) async {
     // try {
     final districtId = int.parse(event.district);
@@ -166,7 +166,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onWardSelected(
     WardSelected event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     final wardId = int.parse(event.ward);
     emit(state.copyWith(selectedWard: wardId));
@@ -174,14 +174,14 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onDetailAddressChanged(
     DetailAddressChanged event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     emit(state.copyWith(detailAddress: event.address));
   }
 
   void _onHouseTypeSelected(
     HouseTypeSelected event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     final houseTypeId = int.parse(event.houseType);
     emit(
@@ -193,7 +193,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onRoomPriceChanged(
     RoomPriceChanged event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     final price = event.price.toDouble();
     emit(state.copyWith(price: price));
@@ -201,7 +201,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onRoomAreaChanged(
     RoomAreaChanged event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     final area = double.parse(event.area);
     emit(state.copyWith(area: area));
@@ -209,7 +209,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onMaxOfPersonChanged(
     MaxOfPersonChanged event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     final maxOfPerson = int.parse(event.maxOfPerson);
     emit(state.copyWith(maxOfPerson: maxOfPerson));
@@ -217,7 +217,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onDipositChanged(
     DipositChanged event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     final diposit = event.diposit.toDouble();
     emit(state.copyWith(diposit: diposit));
@@ -225,7 +225,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onOtherUtilitiesSelected(
     OtherUtilitiesSelected event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     emit(
       state.copyWith(
@@ -236,7 +236,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onRentalObjectsSelected(
     RentalObjectsSelected event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     emit(
       state.copyWith(
@@ -247,7 +247,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onNearbyPlacesSelected(
     NearbyPlacesSelected event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     emit(
       state.copyWith(
@@ -258,7 +258,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   Future<void> _onMediaSelected(
     MediaSelected event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) async {
     final imagePath =
         await ImagePickerHelper.pickImageFromSource(ImageSource.gallery);
@@ -269,7 +269,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   Future<void> _onEditPostSubmitted(
     EditPostSubmitted event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) async {
     try {
       emit(state.copyWith(editPostStatus: LoadingStatus.loading));
@@ -333,7 +333,7 @@ class EditPostBloc extends Bloc<EditPostEvent, EditPostState> {
 
   void _onMediaRemovePressed(
     MediaRemovePressed event,
-    Emitter<EditPostState> emit,
+    Emitter<EditUserPostState> emit,
   ) {
     emit(
       state.copyWith(
