@@ -13,52 +13,55 @@ class DetailPostUtilInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Column(
-          children: [
-            Assets.icons.lightBulb.svg(
-              height: 28,
-              color: theme.colorScheme.outline,
-            ),
-            Text(
-              8000.inCompactCurrencyNotSymbol,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onBackground,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            children: [
+              Assets.icons.lightBulb.svg(
+                height: 28,
+                color: theme.colorScheme.outline,
               ),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Assets.icons.waterDrop.svg(
-              height: 28,
-              color: theme.colorScheme.outline,
-            ),
-            Text(
-              40000.inCompactCurrencyNotSymbol,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onBackground,
+              Text(
+                8000.inCompactCurrencyNotSymbol,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onBackground,
+                ),
               ),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Assets.icons.wifi.svg(
-              height: 28,
-              color: theme.colorScheme.outline,
-            ),
-            Text(
-              'Miễn phí',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onBackground,
+            ],
+          ),
+          Column(
+            children: [
+              Assets.icons.waterDrop.svg(
+                height: 28,
+                color: theme.colorScheme.outline,
               ),
-            ),
-          ],
-        )
-      ],
+              Text(
+                40000.inCompactCurrencyNotSymbol,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onBackground,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Assets.icons.wifi.svg(
+                height: 28,
+                color: theme.colorScheme.outline,
+              ),
+              Text(
+                'Miễn phí',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onBackground,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
