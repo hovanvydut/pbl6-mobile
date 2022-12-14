@@ -12,11 +12,10 @@ dependencies:
     path: ../constant_helper
   flutter:
     sdk: flutter
-  http_client_handler: ^0.1.0+1
+  http_client_handler: ^0.1.1
   models:
     path: ../models
-  secure_storage_helper:
-    path: ../secure_storage_helper
+  secure_storage_helper: ^0.1.0
 
 dev_dependencies:
   flutter_test:
