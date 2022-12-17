@@ -51,7 +51,10 @@ class DetailPostView extends StatelessWidget {
                   ),
                 )
               : Scaffold(
-                  appBar: DetailPostAppBar(post: post),
+                  appBar: PreferredSize(
+                    preferredSize: const Size.fromHeight(56),
+                    child: DetailPostAppBar(post: post),
+                  ),
                   body: Column(
                     children: [
                       Expanded(
@@ -95,10 +98,13 @@ class DetailPostView extends StatelessWidget {
                                     DetailPostOtherUtilsInfo(post: post),
                                     DetailPostNearbyPlacesInfo(post: post),
                                     ReviewPostSession(post: post),
+                                    Text(
+                                      'Tin nhà trọ khác',
+                                      style: theme.textTheme.titleLarge,
+                                    ),
                                   ],
                                 ),
                               ),
-                              const RelatedPostHorizonalList()
                             ],
                           ),
                         ),
