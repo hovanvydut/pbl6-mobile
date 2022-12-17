@@ -864,10 +864,10 @@ packages:
   secure_storage_helper:
     dependency: transitive
     description:
-      path: "packages/secure_storage_helper"
-      relative: true
-    source: path
-    version: "0.1.0+1"
+      name: secure_storage_helper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   sentry:
     dependency: transitive
     description:
