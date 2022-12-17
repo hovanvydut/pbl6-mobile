@@ -27,7 +27,6 @@ class PostListTileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 130,
-      
       child: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();

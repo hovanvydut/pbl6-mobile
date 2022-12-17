@@ -16,7 +16,7 @@ dependencies:
   models:
     path: ../models
   secure_storage_helper: ^0.1.0
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

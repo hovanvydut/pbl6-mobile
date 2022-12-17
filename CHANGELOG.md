@@ -2,6 +2,7 @@
 
 - feat: add `RelatedPost` in `DetailPost`.
 - chore: change some packages get from pub.dev
+
 # 2.0.0
 
 - feat: add `Notification`.
