@@ -7,7 +7,7 @@ import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/user_post/user_post.dart';
 
-class DetailPostAppBar extends StatelessWidget {
+class DetailPostAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DetailPostAppBar({
     super.key,
     required this.post,
@@ -104,4 +104,7 @@ class DetailPostAppBar extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
 }

@@ -59,4 +59,10 @@ abstract class IPostDatasource {
   Future<Post> getDetailPostById(int postId);
 
   Future<List<Post>> getPostsByHostId(int hostId);
+
+  Future<List<Post>> getRelatedPost({
+    required int quantity,
+    required int postId,
+    required int addressWardId,
+  });
 }

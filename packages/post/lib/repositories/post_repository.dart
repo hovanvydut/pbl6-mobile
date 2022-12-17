@@ -112,4 +112,15 @@ class PostRepository {
 
   Future<List<Post>> getPostsByHostId(int hostId) =>
       _postDatasource.getPostsByHostId(hostId);
+
+  Future<List<Post>> getRelatedPost({
+    required int quantity,
+    required int postId,
+    required int addressWardId,
+  }) =>
+      _postDatasource.getRelatedPost(
+        addressWardId: addressWardId,
+        postId: postId,
+        quantity: quantity,
+      );
 }
