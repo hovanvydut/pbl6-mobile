@@ -28,10 +28,6 @@ abstract class ApiPath {
   /// Get host personal posts: GET /api/post
   static const hostPostPersonal = '/api/host/personal/post';
 
-  /// Get related post
-  ///
-  static const relatedPost = '/api/post/related';
-
   /// File Media
   static const mediaUpload = '/api/filecontroler/upload';
   // static const addressDistrict = '/api/address/district';
