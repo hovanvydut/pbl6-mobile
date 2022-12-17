@@ -1,6 +1,6 @@
 name: pbl6_mobile
 description: A PBL6 Mobile App End-user
-version: 2.0.0
+version: 2.1.0
 publish_to: none
 
 environment:
