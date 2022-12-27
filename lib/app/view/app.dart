@@ -12,6 +12,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/l10n/l10n.dart';
+import 'package:permissions/permissions.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'package:user/repositories/user_repository.dart';
 
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
       create: (context) => AuthenticationBloc(
         userRepository: context.read<UserRepository>(),
         authRepository: context.read<AuthRepository>(),
+        permissionsRepository: context.read<PermissionsRepository>(),
       ),
       child: const _AppView(),
     );

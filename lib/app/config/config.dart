@@ -8,6 +8,7 @@ export 'extension/string_extension.dart';
 export 'flavor/flavor_config.dart';
 export 'gen/assets.gen.dart';
 export 'gen/fonts.gen.dart';
+export 'role/permission_wrapper.dart';
 export 'route/app_router.dart';
 export 'route/router_refresh_listenable.dart';
 export 'theme/app_color.dart';

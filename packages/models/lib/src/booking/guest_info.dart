@@ -16,9 +16,9 @@ class GuestInfo extends Equatable {
 
   final int id;
   final String displayName;
-  final String avatar;
-  final String phoneNumber;
+  final String? avatar;
+  final String? phoneNumber;
 
   @override
-  List<Object> get props => [id, displayName, avatar, phoneNumber];
+  List<Object?> get props => [id, displayName, avatar, phoneNumber];
 }

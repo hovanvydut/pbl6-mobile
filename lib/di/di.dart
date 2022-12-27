@@ -11,6 +11,7 @@ import 'package:media/media.dart';
 import 'package:notification/notification.dart';
 import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:permissions/permissions.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
 import 'package:review/review.dart';
@@ -78,6 +79,11 @@ void initDependences() {
     )
     ..registerLazySingleton<INotificationDatasource>(
       () => RemoteNotificationDatasource(
+        httpHandler: injector<HttpClientHandler>(),
+      ),
+    )
+    ..registerLazySingleton<IPermissionsDatasource>(
+      () => RemotePermissionsDatasource(
         httpHandler: injector<HttpClientHandler>(),
       ),
     );

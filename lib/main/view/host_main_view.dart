@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/home/home.dart';
 import 'package:pbl6_mobile/user_post/user_post.dart';
@@ -50,12 +51,15 @@ class _HostMainViewState extends State<HostMainView> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.pushToChild(
-          AppRouter.uploadPost,
-          extra: context.read<UserPostBloc>(),
+      floatingActionButton: PermissionWrapper(
+        permission: Permission.postCreate,
+        child: FloatingActionButton(
+          onPressed: () => context.pushToChild(
+            AppRouter.uploadPost,
+            extra: context.read<UserPostBloc>(),
+          ),
+          child: Assets.icons.add.svg(),
         ),
-        child: Assets.icons.add.svg(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: ValueListenableBuilder<int>(

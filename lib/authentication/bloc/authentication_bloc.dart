@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http_client_handler/http_client_handler.dart';
 import 'package:models/models.dart';
+import 'package:permissions/permissions.dart';
 import 'package:user/user.dart';
 
 part 'authentication_event.dart';
@@ -15,8 +16,10 @@ class AuthenticationBloc
   AuthenticationBloc({
     required UserRepository userRepository,
     required AuthRepository authRepository,
+    required PermissionsRepository permissionsRepository,
   })  : _userRepository = userRepository,
         _authRepository = authRepository,
+        _permissionsRepository = permissionsRepository,
         super(const Unknown()) {
     on<GetUserInformation>(_onGetUserInformation);
     on<LogoutRequested>(_onLogoutRequested);
@@ -25,6 +28,7 @@ class AuthenticationBloc
 
   final UserRepository _userRepository;
   final AuthRepository _authRepository;
+  final PermissionsRepository _permissionsRepository;
 
   Future<void> _onGetUserInformation(
     GetUserInformation event,
@@ -36,7 +40,8 @@ class AuthenticationBloc
         emit(const Unknown());
         return;
       }
-      emit(Authenticated(user: user));
+      final permissions = await _permissionsRepository.getUserPermissions();
+      emit(Authenticated(user: user, permissions: permissions));
     } on UnauthorizedException {
       emit(const EndSession());
     }

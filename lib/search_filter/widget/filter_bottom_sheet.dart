@@ -35,7 +35,7 @@ class FilterBottomSheet extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Loại phòng',
-                        style: theme.textTheme.headlineSmall!.copyWith(
+                        style: theme.textTheme.headlineSmall?.copyWith(
                           color: theme.colorScheme.onSurface,
                         ),
                       ),
@@ -93,7 +93,7 @@ class FilterBottomSheet extends StatelessWidget {
                         children: [
                           Text(
                             'Mức giá',
-                            style: theme.textTheme.headlineSmall!.copyWith(
+                            style: theme.textTheme.headlineSmall?.copyWith(
                               color: theme.colorScheme.onSurface,
                             ),
                           ),
@@ -146,7 +146,7 @@ class FilterBottomSheet extends StatelessWidget {
                         children: [
                           Text(
                             'Diện tích phòng',
-                            style: theme.textTheme.headlineSmall!.copyWith(
+                            style: theme.textTheme.headlineSmall?.copyWith(
                               color: theme.colorScheme.onSurface,
                             ),
                           ),
@@ -196,7 +196,7 @@ class FilterBottomSheet extends StatelessWidget {
                         children: [
                           Text(
                             'Khu vực',
-                            style: theme.textTheme.headlineSmall!.copyWith(
+                            style: theme.textTheme.headlineSmall?.copyWith(
                               color: theme.colorScheme.onSurface,
                             ),
                           ),
@@ -284,7 +284,7 @@ class FilterBottomSheet extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Tiện ích khác',
-                        style: theme.textTheme.headlineSmall!.copyWith(
+                        style: theme.textTheme.headlineSmall?.copyWith(
                           color: theme.colorScheme.onSurface,
                         ),
                       ),
@@ -340,7 +340,7 @@ class FilterBottomSheet extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Đối tượng cho thuê',
-                        style: theme.textTheme.headlineSmall!.copyWith(
+                        style: theme.textTheme.headlineSmall?.copyWith(
                           color: theme.colorScheme.onSurface,
                         ),
                       ),
@@ -396,7 +396,7 @@ class FilterBottomSheet extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Địa điểm gần đó',
-                        style: theme.textTheme.headlineSmall!.copyWith(
+                        style: theme.textTheme.headlineSmall?.copyWith(
                           color: theme.colorScheme.onSurface,
                         ),
                       ),
