@@ -24,6 +24,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       _onShowHideConfirmationPasswordPressed,
     );
     on<RegisterSubmitted>(_onRegisterSubmitted);
+    on<RolePressed>(_onRolePressed);
   }
 
   final AuthRepository _authRepository;
@@ -117,14 +118,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       final phoneNumber = Faker().phoneNumber.us();
       final indentityNumber = Faker().phoneNumber.us();
       await _authRepository.register(
-        address: 'Hà Nội',
-        avatar: 'https://avatars.githubusercontent.com/u/63831488?v=4',
+        address: 'Đà Nẵng',
+        avatar:
+            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png',
         displayName: state.displayName.value,
         email: state.email.value,
         identityNumber: indentityNumber,
         phoneNumber: phoneNumber,
-        roleId: 1,
-        wardId: 53,
+        roleId: state.selectedRole?.index ?? 0 + 1,
+        wardId: 6351,
         password: state.password.value,
       );
       emit(state.copyWith(formStatus: FormzStatus.submissionSuccess));
@@ -175,5 +177,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         ),
       ),
     );
+  }
+
+  void _onRolePressed(RolePressed event, Emitter<RegisterState> emit) {
+    emit(state.copyWith(selectedRole: event.role));
   }
 }

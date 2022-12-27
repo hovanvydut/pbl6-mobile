@@ -60,7 +60,7 @@ class TrendingDistrictBox extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: Text(
                       district['name']! as String,
-                      style: context.textTheme.bodyLarge!.copyWith(
+                      style: context.textTheme.bodyLarge?.copyWith(
                         color: lightColorScheme.surface,
                         fontWeight: FontWeight.w700,
                       ),

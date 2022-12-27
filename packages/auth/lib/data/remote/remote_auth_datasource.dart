@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:auth/data/iauth_datasource.dart';
@@ -30,16 +31,24 @@ class RemoteAuthDatasource implements IAuthDatasource {
       final loginData = httpResponse.data as Map<String, dynamic>;
       final jwt = loginData['accessToken'] as String;
       final userId = loginData['id'] as int;
-      await SecureStorageHelper.writeValueToKey(
-        key: SecureStorageKey.jwt,
-        value: jwt,
-      );
-      await SecureStorageHelper.writeValueToKey(
-        key: SecureStorageKey.userId,
-        value: '$userId',
-      );
-    } on ServerErrorException {
-      throw Exception();
+      final role = loginData['roleId'] as int;
+
+      await Future.wait([
+        SecureStorageHelper.writeValueToKey(
+          key: SecureStorageKey.jwt,
+          value: jwt,
+        ),
+        SecureStorageHelper.writeValueToKey(
+          key: SecureStorageKey.userId,
+          value: '$userId',
+        ),
+        SecureStorageHelper.writeValueToKey(
+          key: SecureStorageKey.role,
+          value: '$role',
+        )
+      ]);
+    } catch (e) {
+      rethrow;
     }
   }
 
@@ -56,6 +65,19 @@ class RemoteAuthDatasource implements IAuthDatasource {
     required int roleId,
   }) async {
     try {
+      log(
+        {
+          'email': email,
+          'password': password,
+          'displayName': displayName,
+          'phoneNumber': phoneNumber,
+          'identityNumber': identityNumber,
+          'avatar': avatar,
+          'address': address,
+          'addressWardId': wardId,
+          'roleId': roleId,
+        }.toString(),
+      );
       await _httpHandler.post(
         ApiPath.authRegister,
         body: {

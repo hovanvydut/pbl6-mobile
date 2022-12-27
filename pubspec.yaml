@@ -1,11 +1,11 @@
 name: pbl6_mobile
 description: A PBL6 Mobile App End-user
-version: 2.1.0
+version: 2.2.0
 publish_to: none
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
-  flutter: 3.3.6
+  flutter: 3.3.10
 
 dependencies:
   auth:
@@ -66,12 +66,13 @@ dependencies:
     path: packages/config
   notification:
     path: packages/notification
+  permissions:
+    path: packages/permissions
   statistics:
     path: packages/statistics
   cached_network_image: ^3.2.2
   faker: ^2.0.0
   flutter_cache_manager: ^3.3.0
-  timeago: ^3.3.0
   package_info_plus: ^3.0.2
   easy_debounce: ^2.0.2+1
   flutter_rating_bar: ^4.0.1
@@ -84,6 +85,7 @@ dependencies:
   badges: ^2.0.3
   sentry_flutter: ^6.18.0
   lottie: ^2.0.0
+  timeago_flutter: ^1.2.0
 
 dev_dependencies:
   bloc_test: ^9.1.0

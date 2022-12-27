@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
+import 'package:pbl6_mobile/l10n/l10n.dart';
+import 'package:timeago_flutter/timeago_flutter.dart';
 
 class DetailPostCreatedDateInfo extends StatelessWidget {
   const DetailPostCreatedDateInfo({
@@ -31,7 +33,13 @@ class DetailPostCreatedDateInfo extends StatelessWidget {
               color: theme.colorScheme.onSurfaceVariant,
             ),
             title: Text(post.createdAt!.yMd),
-            subtitle: Text(post.createdAt!.timeAgo),
+            subtitle: Timeago(
+              locale: context.l10n.localeName,
+              date: post.createdAt!,
+              builder: (_, timeago) {
+                return Text(timeago);
+              },
+            ),
           ),
         ),
       ],

@@ -1,12 +1,16 @@
 part of '../../authentication/bloc/authentication_bloc.dart';
 
 abstract class AuthenticationState extends Equatable {
-  const AuthenticationState({this.user});
+  const AuthenticationState({
+    this.user,
+    this.permissions = const <Permission>[],
+  });
 
   final User? user;
+  final List<Permission> permissions;
 
   @override
-  List<Object?> get props => [user];
+  List<Object?> get props => [user, permissions];
 }
 
 class Unknown extends AuthenticationState {
@@ -14,13 +18,14 @@ class Unknown extends AuthenticationState {
 }
 
 class Authenticated extends AuthenticationState {
-  const Authenticated({required User user}) : super(user: user);
+  const Authenticated({super.user, super.permissions});
 }
 
 class Unauthenticated extends AuthenticationState {
-  const Unauthenticated() : super(user: null);
+  const Unauthenticated()
+      : super(user: null, permissions: const <Permission>[]);
 }
 
 class EndSession extends AuthenticationState {
-  const EndSession() : super(user: null);
+  const EndSession() : super(user: null, permissions: const <Permission>[]);
 }

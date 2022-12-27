@@ -9,6 +9,6 @@ part of 'guest_info.dart';
 GuestInfo _$GuestInfoFromJson(Map<String, dynamic> json) => GuestInfo(
       id: json['id'] as int,
       displayName: json['displayName'] as String,
-      avatar: json['avatar'] as String,
-      phoneNumber: json['phoneNumber'] as String,
+      avatar: json['avatar'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
     );

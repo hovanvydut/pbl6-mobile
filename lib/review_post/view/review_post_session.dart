@@ -6,9 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
+import 'package:pbl6_mobile/l10n/l10n.dart';
 import 'package:pbl6_mobile/review_post/review_post.dart';
 import 'package:platform_helper/platform_helper.dart';
 import 'package:review/review.dart';
+import 'package:timeago_flutter/timeago_flutter.dart';
 
 class ReviewPostSession extends StatelessWidget {
   const ReviewPostSession({super.key, required this.post});
@@ -257,11 +259,18 @@ class ReviewPostView extends StatelessWidget {
                                     onRatingUpdate: (_) {},
                                   ),
                                   const SizedBox(height: 8),
-                                  Text(
-                                    review.createdAt.toUtc().timeAgo,
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: theme.colorScheme.onSurface,
-                                    ),
+                                  Timeago(
+                                    locale: context.l10n.localeName,
+                                    date: review.createdAt,
+                                    builder: (_, timeago) {
+                                      return Text(
+                                        timeago,
+                                        style:
+                                            theme.textTheme.bodySmall?.copyWith(
+                                          color: theme.colorScheme.onSurface,
+                                        ),
+                                      );
+                                    },
                                   ),
                                   const SizedBox(height: 12),
                                   Row(

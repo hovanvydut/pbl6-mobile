@@ -1,1 +1,1 @@
-{"bricks":{"presentation_layer":"0.2.3","http_exception":"0.1.1","linter":{"git":{"url":"https://github.com/dungngminh/mason_bricks","path":"own/linter","ref":"17423385a5a7a17ef19bdad7d94009c2233491e9"}},"very_good_flutter_package":"0.1.3"}}
+{"bricks":{"http_exception":"0.1.1","linter":{"git":{"url":"https://github.com/dungngminh/mason_bricks","path":"own/linter","ref":"17423385a5a7a17ef19bdad7d94009c2233491e9"}},"presentation_layer":"0.2.3","very_good_flutter_package":"0.1.4"}}

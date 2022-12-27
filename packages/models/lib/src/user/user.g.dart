@@ -10,6 +10,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       id: json['id'] as int,
       displayName: json['displayName'] as String,
       phoneNumber: json['phoneNumber'] as String?,
+      role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
       identityNumber: json['identityNumber'] as String?,
       currentCredit: json['currentCredit'] as int?,
       avatar: json['avatar'] as String?,
@@ -21,3 +22,10 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       userAccountId: json['userAccountId'] as int?,
       userAccountEmail: json['userAccountEmail'] as String?,
     );
+
+const _$RoleEnumMap = {
+  Role.admin: 1,
+  Role.host: 2,
+  Role.guest: 3,
+  Role.hostAndGuest: 4,
+};

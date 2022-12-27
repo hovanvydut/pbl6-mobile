@@ -45,6 +45,14 @@ class ConfirmationPasswordChanged extends RegisterEvent {
   List<Object?> get props => [confirmationPassword];
 }
 
+class RolePressed extends RegisterEvent {
+  const RolePressed({required this.role});
+  final Role role;
+
+  @override
+  List<Object?> get props => [role];
+}
+
 class ShowHidePasswordPressed extends RegisterEvent {}
 
 class ShowHideConfirmationPasswordPressed extends RegisterEvent {}

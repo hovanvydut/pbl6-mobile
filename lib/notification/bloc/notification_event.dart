@@ -17,7 +17,7 @@ class SearchModeToggled extends NotificationEvent {}
 class GetNotifications extends NotificationEvent {}
 
 class SearchValueChanged extends NotificationEvent {
-   const SearchValueChanged({
+  const SearchValueChanged({
     required this.value,
   });
   final String value;
@@ -29,7 +29,6 @@ class SearchValueChanged extends NotificationEvent {
 class LoadMoreAllNotification extends NotificationEvent {}
 
 class LoadMoreTodayNotification extends NotificationEvent {}
-
 
 class ReadNotification extends NotificationEvent {
   const ReadNotification({
