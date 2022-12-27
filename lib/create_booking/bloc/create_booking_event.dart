@@ -17,8 +17,6 @@ class StepPressed extends CreateBookingEvent {
   List<Object?> get props => [index];
 }
 
-
-
 class SchedulePressed extends CreateBookingEvent {
   const SchedulePressed(this.time);
   final AppointmentInfo time;

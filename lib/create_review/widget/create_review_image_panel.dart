@@ -17,7 +17,7 @@ class CreateReviewImagePanel extends StatelessWidget {
       children: [
         Text(
           'Thêm hình ảnh',
-          style: context.textTheme.titleLarge!.copyWith(
+          style: context.textTheme.titleLarge?.copyWith(
             color: context.colorScheme.onSurface,
           ),
         ),

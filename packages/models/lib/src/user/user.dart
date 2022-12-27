@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:models/src/role/role.dart';
 
 part 'user.g.dart';
 
@@ -9,6 +10,7 @@ class User extends Equatable {
     required this.id,
     required this.displayName,
     this.phoneNumber,
+     this.role,
     this.identityNumber,
     this.currentCredit,
     this.avatar,
@@ -26,6 +28,7 @@ class User extends Equatable {
   final String displayName;
   final String? phoneNumber;
   final String? identityNumber;
+  final Role? role;
   final int? currentCredit;
   final String? avatar;
   final String address;
@@ -52,6 +55,7 @@ class User extends Equatable {
       phoneNumber,
       identityNumber,
       currentCredit,
+      role,
       avatar,
       address,
       addressWardId,
@@ -68,6 +72,7 @@ class User extends Equatable {
     String? displayName,
     String? phoneNumber,
     String? identityNumber,
+    Role? role,
     int? currentCredit,
     String? avatar,
     String? address,
@@ -83,6 +88,7 @@ class User extends Equatable {
       displayName: displayName ?? this.displayName,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       identityNumber: identityNumber ?? this.identityNumber,
+      role: role ?? this.role,
       currentCredit: currentCredit ?? this.currentCredit,
       avatar: avatar ?? this.avatar,
       address: address ?? this.address,

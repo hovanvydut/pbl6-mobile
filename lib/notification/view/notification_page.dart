@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 import 'package:notification/notification.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/notification/notification.dart';
@@ -61,12 +62,15 @@ class _NotificationViewState extends State<NotificationView> {
                   color: context.colorScheme.onSurface,
                   height: 32,
                 ),
-                onPressed: () => context.pop(), 
+                onPressed: () => context.pop(),
               ),
               title: NotificationAppBarTitle(searchFocus: _searchFocus),
               actions: [
                 NotificationSearchButton(searchFocus: _searchFocus),
-                const ReadAllNotificationButton(),
+                const PermissionWrapper(
+                  permission: Permission.notificationUpdate,
+                  child: ReadAllNotificationButton(),
+                ),
               ],
               bottom: TabBar(
                 indicatorColor: context.colorScheme.primary,

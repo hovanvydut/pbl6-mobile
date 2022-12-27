@@ -20,11 +20,12 @@ import 'package:media/media.dart';
 import 'package:notification/notification.dart';
 import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/di/di.dart';
+import 'package:permissions/permissions.dart';
 import 'package:post/post.dart';
 import 'package:property/property.dart';
 import 'package:review/review.dart';
 import 'package:statistics/repositories/statistics_repository.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:timeago_flutter/timeago_flutter.dart';
 import 'package:uptop/uptop.dart';
 import 'package:user/user.dart';
 
@@ -78,7 +79,7 @@ class AppBlocObserver extends BlocObserver {
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = AppBlocObserver();
   initDependences();
-  timeago.setLocaleMessages('vi', timeago.ViMessages());
+  setLocaleMessages('vi', ViMessages());
   await runZonedGuarded(
     () async => runApp(
       MultiRepositoryProvider(
@@ -129,6 +130,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           RepositoryProvider(
             create: (_) =>
                 NotificationRepository(notificationDatasource: injector()),
+          ),
+          RepositoryProvider(
+            create: (_) =>
+                PermissionsRepository(permissionsDatasource: injector()),
           ),
         ],
         child: await builder(),

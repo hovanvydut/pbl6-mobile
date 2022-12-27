@@ -1,3 +1,8 @@
+# 2.2.0
+
+- feature: add permission
+- feature: handle role register
+
 # 2.1.0
 
 - feat: add `RelatedPost` in `DetailPost`.

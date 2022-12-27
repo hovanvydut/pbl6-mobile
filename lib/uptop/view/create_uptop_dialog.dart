@@ -73,7 +73,7 @@ class _CreateUptopDialogViewState extends State<CreateUptopDialogView> {
           backgroundColor: context.colorScheme.surface,
           title: Text(
             'Đẩy bài viết lên tin ưu tiên',
-            style: context.theme.textTheme.titleLarge!.copyWith(
+            style: context.theme.textTheme.titleLarge?.copyWith(
               color: context.colorScheme.onSurface,
             ),
           ),
@@ -128,7 +128,7 @@ class _CreateUptopDialogViewState extends State<CreateUptopDialogView> {
               const SizedBox(height: 24),
               Text(
                 'Số tiền cần thanh toán',
-                style: context.textTheme.titleMedium!.copyWith(
+                style: context.textTheme.titleMedium?.copyWith(
                   color: context.colorScheme.onSurface,
                 ),
               ),
@@ -139,7 +139,7 @@ class _CreateUptopDialogViewState extends State<CreateUptopDialogView> {
                       context.select((UptopBloc bloc) => bloc.state.totalPrice);
                   return Text(
                     totalPrice.inSimpleCurrency,
-                    style: context.textTheme.bodyLarge!.copyWith(
+                    style: context.textTheme.bodyLarge?.copyWith(
                       color: context.colorScheme.primary,
                     ),
                   );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 import 'package:payment/payment.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
@@ -37,12 +38,15 @@ class PaymentView extends StatelessWidget {
         title: const Text('Số dư tài khoản'),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Assets.icons.add.svg(
-              color: context.colorScheme.onSurface,
-              height: 28,
+          PermissionWrapper(
+            permission: Permission.vnpCreatePayment,
+            child: IconButton(
+              icon: Assets.icons.add.svg(
+                color: context.colorScheme.onSurface,
+                height: 28,
+              ),
+              onPressed: () => context.pushToChild(AppRouter.createPayment),
             ),
-            onPressed: () => context.pushToChild(AppRouter.createPayment),
           ),
         ],
       ),
@@ -127,7 +131,7 @@ class _HistoryPanelState extends State<HistoryPanel> {
                   const EdgeInsets.only(top: 8),
               child: Text(
                 'Lịch sử giao dịch',
-                style: context.textTheme.titleLarge!.copyWith(
+                style: context.textTheme.titleLarge?.copyWith(
                   color: context.colorScheme.onSurface,
                 ),
               ),
@@ -293,7 +297,7 @@ class CreditHistoryListView extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: '\n${creditHistory.transactionStatus}',
-                      style: context.textTheme.bodyMedium!.copyWith(
+                      style: context.textTheme.bodyMedium?.copyWith(
                         color: creditHistory.isSuccessful
                             ? Colors.green
                             : context.colorScheme.error,
@@ -304,7 +308,7 @@ class CreditHistoryListView extends StatelessWidget {
               ),
               trailing: Text(
                 (creditHistory.amount / 1000).inSimpleCurrency,
-                style: context.textTheme.labelLarge!.copyWith(
+                style: context.textTheme.labelLarge?.copyWith(
                   color: creditHistory.isSuccessful
                       ? Colors.green
                       : context.colorScheme.error,
@@ -347,7 +351,7 @@ class DebitHistoryListView extends StatelessWidget {
                 subtitle: Text(debitHistory.createdAt.toLocal().yMdHms),
                 trailing: Text(
                   debitHistory.amount.inSimpleCurrency,
-                  style: context.textTheme.labelLarge!.copyWith(
+                  style: context.textTheme.labelLarge?.copyWith(
                     color: Colors.green,
                   ),
                 ),

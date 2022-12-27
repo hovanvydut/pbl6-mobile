@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
@@ -100,7 +101,7 @@ class UserProfileAvatar extends StatelessWidget {
                     children: [
                       Text(
                         user?.displayName ?? 'Không có thông tin',
-                        style: theme.textTheme.titleLarge!.copyWith(
+                        style: theme.textTheme.titleLarge?.copyWith(
                           color: theme.colorScheme.onSecondaryContainer,
                         ),
                       ),
@@ -140,72 +141,88 @@ class UserTabSession extends StatelessWidget {
               color: context.colorScheme.surface,
               borderRadius: BorderRadius.circular(40),
             ),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 16,
+            padding: const EdgeInsets.only(
+              right: 12,
+              left: 12,
+              top: 16,
             ),
             child: Column(
               children: [
-                ListTile(
-                  leading: Assets.icons.user.svg(
-                    color: context.colorScheme.onSurface,
+                PermissionWrapper(
+                  permission: Permission.userViewPersonal,
+                  child: ListTile(
+                    leading: Assets.icons.user.svg(
+                      color: context.colorScheme.onSurface,
+                    ),
+                    title: const Text('Thông tin cá nhân'),
+                    trailing: Assets.icons.chevronRight
+                        .svg(color: context.colorScheme.onSurface),
+                    onTap: () {
+                      context.pushToChild(
+                        AppRouter.editUserProfile,
+                        extra: context.read<AuthenticationBloc>().state.user,
+                      );
+                    },
                   ),
-                  title: const Text('Thông tin cá nhân'),
-                  trailing: Assets.icons.chevronRight
-                      .svg(color: context.colorScheme.onSurface),
-                  onTap: () {
-                    context.pushToChild(
-                      AppRouter.editUserProfile,
-                      extra: context.read<AuthenticationBloc>().state.user,
-                    );
-                  },
                 ),
-                ListTile(
-                  leading: Assets.icons.document.svg(
-                    color: context.colorScheme.onSurface,
+                PermissionWrapper(
+                  permission: Permission.postViewAllPersonal,
+                  child: ListTile(
+                    leading: Assets.icons.document.svg(
+                      color: context.colorScheme.onSurface,
+                    ),
+                    title: const Text('Bài đăng của bạn'),
+                    trailing: Assets.icons.chevronRight
+                        .svg(color: context.colorScheme.onSurface),
+                    onTap: () {
+                      context.pushToChild(
+                        AppRouter.userPost,
+                        extra: context.read<UserPostBloc>(),
+                      );
+                    },
                   ),
-                  title: const Text('Bài đăng của bạn'),
-                  trailing: Assets.icons.chevronRight
-                      .svg(color: context.colorScheme.onSurface),
-                  onTap: () {
-                    context.pushToChild(
-                      AppRouter.userPost,
-                      extra: context.read<UserPostBloc>(),
-                    );
-                  },
                 ),
-                ListTile(
-                  leading: Assets.icons.bookmarkOutline.svg(
-                    color: context.colorScheme.onSurface,
-                  ),
-                  title: const Text('Bài đăng đã lưu'),
-                  trailing: Assets.icons.chevronRight
-                      .svg(color: context.colorScheme.onSurface),
-                  onTap: () => context.pushToChild(
-                    AppRouter.bookmark,
-                    extra: ExtraParams2<BookmarkBloc, UserPostBloc>(
-                      param1: context.read<BookmarkBloc>(),
-                      param2: context.read<UserPostBloc>(),
+                PermissionWrapper(
+                  permission: Permission.bookmarkView,
+                  child: ListTile(
+                    leading: Assets.icons.bookmarkOutline.svg(
+                      color: context.colorScheme.onSurface,
+                    ),
+                    title: const Text('Bài đăng đã lưu'),
+                    trailing: Assets.icons.chevronRight
+                        .svg(color: context.colorScheme.onSurface),
+                    onTap: () => context.pushToChild(
+                      AppRouter.bookmark,
+                      extra: ExtraParams2<BookmarkBloc, UserPostBloc>(
+                        param1: context.read<BookmarkBloc>(),
+                        param2: context.read<UserPostBloc>(),
+                      ),
                     ),
                   ),
                 ),
-                ListTile(
-                  leading: Assets.icons.notificationOutline.svg(
-                    color: context.colorScheme.onSurface,
+                PermissionWrapper(
+                  permission: Permission.notificationViewAll,
+                  child: ListTile(
+                    leading: Assets.icons.notificationOutline.svg(
+                      color: context.colorScheme.onSurface,
+                    ),
+                    title: const Text('Thông báo'),
+                    trailing: Assets.icons.chevronRight
+                        .svg(color: context.colorScheme.onSurface),
+                    onTap: () => context.pushToChild(AppRouter.notification),
                   ),
-                  title: const Text('Thông báo'),
-                  trailing: Assets.icons.chevronRight
-                      .svg(color: context.colorScheme.onSurface),
-                  onTap: () => context.pushToChild(AppRouter.notification),
                 ),
-                ListTile(
-                  leading: Assets.icons.calendar.svg(
-                    color: context.colorScheme.onSurface,
+                PermissionWrapper(
+                  permission: Permission.bookingViewAllPersonal,
+                  child: ListTile(
+                    leading: Assets.icons.calendar.svg(
+                      color: context.colorScheme.onSurface,
+                    ),
+                    title: const Text('Lịch xem trọ'),
+                    trailing: Assets.icons.chevronRight
+                        .svg(color: context.colorScheme.onSurface),
+                    onTap: () => context.pushToChild(AppRouter.bookingList),
                   ),
-                  title: const Text('Lịch xem trọ'),
-                  trailing: Assets.icons.chevronRight
-                      .svg(color: context.colorScheme.onSurface),
-                  onTap: () => context.pushToChild(AppRouter.bookingList),
                 ),
                 ListTile(
                   leading: Assets.icons.stat.svg(
@@ -216,26 +233,43 @@ class UserTabSession extends StatelessWidget {
                       .svg(color: context.colorScheme.onSurface),
                   onTap: () => context.pushToChild(AppRouter.statistics),
                 ),
-                Builder(
-                  builder: (context) {
-                    final user = context.watch<AuthenticationBloc>().state.user;
-                    final currentCredit = user?.currentCredit == null
-                        ? 0
-                        : user!.currentCredit! / 10;
-                    return ListTile(
-                      leading: Assets.icons.wallet.svg(
-                        color: context.colorScheme.onSurface,
-                      ),
-                      title: const Text('Số dư hiện tại'),
-                      subtitle: Text(
-                        currentCredit.inSimpleCurrency,
-                      ),
-                      trailing: Assets.icons.chevronRight
-                          .svg(color: context.colorScheme.onSurface),
-                      onTap: () => context.pushToChild(AppRouter.payment),
-                    );
-                  },
+                PermissionWrapper(
+                  permission: Permission.userViewAccountAccess,
+                  child: Builder(
+                    builder: (context) {
+                      final user =
+                          context.watch<AuthenticationBloc>().state.user;
+                      final currentCredit = user?.currentCredit == null
+                          ? 0
+                          : user!.currentCredit! / 10;
+                      return ListTile(
+                        leading: Assets.icons.wallet.svg(
+                          color: context.colorScheme.onSurface,
+                        ),
+                        title: const Text('Số dư hiện tại'),
+                        subtitle: Text(
+                          currentCredit.inSimpleCurrency,
+                        ),
+                        trailing: Assets.icons.chevronRight
+                            .svg(color: context.colorScheme.onSurface),
+                        onTap: () => context.pushToChild(AppRouter.payment),
+                      );
+                    },
+                  ),
                 ),
+                // ListTile(
+                //   leading: Assets.icons.passwordOutline.svg(
+                //     color: context.colorScheme.onSurface,
+                //   ),
+                //   title: const Text('Đổi mật khẩu'),
+                //   trailing: Assets.icons.chevronRight
+                //       .svg(color: context.colorScheme.onSurface),
+                //   onTap: () {
+                //     showDialog(context: context, builder: (_) {
+
+                //     });
+                //   },
+                // )
               ],
             ),
           ),

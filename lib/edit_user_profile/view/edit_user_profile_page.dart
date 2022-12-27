@@ -123,7 +123,12 @@ class EditUserProfileView extends StatelessWidget {
               'Thông tin cá nhân',
             ),
             centerTitle: true,
-            actions: const [EditSaveActionButton()],
+            actions: const [
+              PermissionWrapper(
+                permission: Permission.userUpdateProfile,
+                child: EditSaveActionButton(),
+              )
+            ],
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 16) +

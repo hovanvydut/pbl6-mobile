@@ -2,7 +2,6 @@ import 'package:auth/auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
@@ -35,13 +34,15 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     return BlocListener<LoginBloc, LoginState>(
+      listenWhen: (previous, current) =>
+          previous.loadingStatus != current.loadingStatus,
       listener: (context, state) {
-        if (state.formStatus == FormzStatus.submissionSuccess) {
+        if (state.loadingStatus == LoadingStatus.done) {
           context.read<AuthenticationBloc>().add(GetUserInformation());
           ToastHelper.showToast('Đăng nhập thành công');
           context.go(AppRouter.main);
         }
-        if (state.formStatus == FormzStatus.submissionFailure) {
+        if (state.loadingStatus == LoadingStatus.error) {
           context.showSnackBar(message: state.errorMessage);
         }
       },
@@ -58,7 +59,7 @@ class LoginView extends StatelessWidget {
               children: [
                 Text(
                   'Đăng nhập',
-                  style: theme.textTheme.displayMedium!.copyWith(
+                  style: theme.textTheme.displayMedium?.copyWith(
                     color: theme.colorScheme.onBackground,
                   ),
                 ),
@@ -72,7 +73,7 @@ class LoginView extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: ' Đăng ký ở đây',
-                        style: theme.textTheme.bodyLarge!.copyWith(
+                        style: theme.textTheme.bodyLarge?.copyWith(
                           color: theme.colorScheme.primary,
                         ),
                         recognizer: TapGestureRecognizer()

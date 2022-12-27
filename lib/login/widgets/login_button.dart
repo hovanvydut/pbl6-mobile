@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/login/login.dart';
 import 'package:widgets/widgets.dart';
 
@@ -13,9 +14,10 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) =>
-          previous.formStatus != current.formStatus,
+          previous.formStatus != current.formStatus ||
+          previous.loadingStatus != current.loadingStatus,
       builder: (context, state) {
-        return state.formStatus.isSubmissionInProgress
+        return state.loadingStatus == LoadingStatus.loading
             ? const SizedBox.square(
                 dimension: 48,
                 child: Padding(

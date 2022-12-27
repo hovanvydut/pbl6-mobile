@@ -48,51 +48,99 @@ class RegisterView extends StatelessWidget {
           body: SingleChildScrollView(
             padding: EdgeInsets.only(
               top: context.padding.top + 40,
-              right: 16,
-              left: 16,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  'Đăng ký',
-                  style: theme.textTheme.displayMedium!.copyWith(
-                    color: theme.colorScheme.onBackground,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 16,
+                    left: 16,
                   ),
-                ),
-                const SizedBox(height: 32),
-                Text.rich(
-                  TextSpan(
-                    text: 'Nếu bạn đã có tài khoản\nHãy',
-                    style: theme.textTheme.bodyLarge,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      TextSpan(
-                        text: ' Đăng nhập ở đây',
-                        style: theme.textTheme.bodyLarge!.copyWith(
-                          color: theme.colorScheme.primary,
+                      Text(
+                        'Đăng ký',
+                        style: theme.textTheme.displayMedium?.copyWith(
+                          color: theme.colorScheme.onBackground,
                         ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => context.pop(),
-                      )
+                      ),
+                      const SizedBox(height: 32),
+                      Text.rich(
+                        TextSpan(
+                          text: 'Nếu bạn đã có tài khoản\nHãy',
+                          style: theme.textTheme.bodyLarge,
+                          children: [
+                            TextSpan(
+                              text: ' Đăng nhập ở đây',
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                color: theme.colorScheme.primary,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => context.pop(),
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 64),
-                const RegisterEmailField(),
-                const SizedBox(height: 24),
-                const RegisterDisplayNameField(),
-                const SizedBox(height: 24),
-                const RegisterPasswordField(),
-                const SizedBox(height: 24),
-                const RegisterConfirmationPasswordField(),
-                const SizedBox(height: 48),
-                const Center(
-                  child: RegisterButton(),
-                ),
+                const RegisterStepFlow()
+                // const RegisterForm(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class RegisterStepFlow extends StatefulWidget {
+  const RegisterStepFlow({
+    super.key,
+  });
+
+  @override
+  State<RegisterStepFlow> createState() => _RegisterStepFlowState();
+}
+
+class _RegisterStepFlowState extends State<RegisterStepFlow> {
+  late final PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: context.height * 0.7,
+      child: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: pageController,
+        children: [
+          RoleSelectionCard(
+            onNextButtonPressed: () => pageController.nextPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.linear,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 16,
+              left: 16,
+            ),
+            child: RegisterForm(
+              onBackPressed: () => pageController.previousPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.linear,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

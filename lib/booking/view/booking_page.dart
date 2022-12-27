@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
@@ -45,14 +46,17 @@ class BookingView extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Assets.icons.setting.svg(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-            tooltip: 'Chỉnh sửa lịch rảnh',
-            onPressed: () => context.pushToChild(
-              AppRouter.configFreetime,
-              extra: context.read<BookingBloc>(),
+          PermissionWrapper(
+            permission: Permission.freeTimeViewAll,
+            child: IconButton(
+              icon: Assets.icons.setting.svg(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+              tooltip: 'Chỉnh sửa lịch rảnh',
+              onPressed: () => context.pushToChild(
+                AppRouter.configFreetime,
+                extra: context.read<BookingBloc>(),
+              ),
             ),
           ),
         ],
@@ -192,7 +196,7 @@ class DetailBookingSheet extends StatelessWidget {
                 children: [
                   Text(
                     'Thông tin đặt lịch',
-                    style: theme.textTheme.titleLarge!.copyWith(
+                    style: theme.textTheme.titleLarge?.copyWith(
                       color: theme.colorScheme.onSurface,
                     ),
                   ),
@@ -228,7 +232,7 @@ class DetailBookingSheet extends StatelessWidget {
                         detail.bookingData!.guestInfo.displayName,
                       ),
                       subtitle: Text(
-                        detail.bookingData!.guestInfo.phoneNumber,
+                        detail.bookingData?.guestInfo.phoneNumber ?? '',
                       ),
                     ),
                   ),

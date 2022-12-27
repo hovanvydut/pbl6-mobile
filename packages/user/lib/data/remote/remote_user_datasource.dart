@@ -42,7 +42,11 @@ class RemoteUserDatasource implements IUserDatasource {
         },
       );
       final userJsonData = httpResponse.data as Map<String, dynamic>;
-      return User.fromJson(userJsonData);
+      final roleId =
+          await SecureStorageHelper.readValueByKey(SecureStorageKey.role);
+      final role = Role.values
+          .firstWhere((role) => role.index == int.parse(roleId ?? '') - 1);
+      return User.fromJson(userJsonData).copyWith(role: role);
     } on UnauthorizedException {
       await SecureStorageHelper.deleteAllKeys();
       rethrow;
@@ -69,5 +73,14 @@ class RemoteUserDatasource implements IUserDatasource {
     } catch (e) {
       log(e.toString());
     }
+  }
+
+  @override
+  Future<Role> getUserRole() async {
+    final roleId =
+        await SecureStorageHelper.readValueByKey(SecureStorageKey.role);
+    final role = Role.values
+        .firstWhere((role) => role.index == int.parse(roleId ?? '') - 1);
+    return role;
   }
 }

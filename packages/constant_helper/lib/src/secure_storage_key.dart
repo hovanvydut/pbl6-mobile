@@ -7,4 +7,7 @@ abstract class SecureStorageKey {
 
   /// It's a static constant that represents the key for the userId
   static const userId = 'userId';
+
+  /// It's a static constant that represents the key for the roleId
+  static const role = 'roleId';
 }
