@@ -55,10 +55,13 @@ class StatisticsView extends StatelessWidget {
           }
           return SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 StatisticsTypeDropDown(),
                 SizedBox(height: 8),
                 DateRangeTextField(),
+                SizedBox(height: 8),
+                CounterDataText(),
                 SizedBox(height: 8),
                 StatisticsChart(),
                 SizedBox(height: 8),
@@ -68,6 +71,35 @@ class StatisticsView extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class CounterDataText extends StatelessWidget {
+  const CounterDataText({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (context) {
+        final values = context.select(
+          (StatisticsBloc bloc) => bloc.state.listStatisticsValue,
+        );
+        final sum = values.fold<int>(
+          0,
+          (previous, value) => previous + value.value,
+        );
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Text(
+            'Tổng: $sum lượt',
+            style: context.textTheme.titleLarge
+                ?.copyWith(color: context.colorScheme.onSurface),
+          ),
+        );
+      },
     );
   }
 }
@@ -106,7 +138,7 @@ class DetailStatisticsPanel extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Hãy chọn vào một giá trị bất kỳ để hiển thị chi tiết',
-                      style: context.textTheme.bodyMedium!.copyWith(
+                      style: context.textTheme.bodyMedium?.copyWith(
                         color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
@@ -127,7 +159,7 @@ class DetailStatisticsPanel extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Đã có lỗi xảy ra, vui lòng thử lại',
-                      style: context.textTheme.bodyMedium!.copyWith(
+                      style: context.textTheme.bodyMedium?.copyWith(
                         color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
@@ -140,7 +172,7 @@ class DetailStatisticsPanel extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Không có dữ liệu chi tiết',
-                      style: context.textTheme.bodyMedium!.copyWith(
+                      style: context.textTheme.bodyMedium?.copyWith(
                         color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
@@ -261,14 +293,17 @@ class _DateRangeTextFieldState extends State<DateRangeTextField> {
           icon: Assets.icons.calendar2.svg(),
           onPressed: () {
             final now = DateTime.now();
+            final fromDate = context.read<StatisticsBloc>().state.fromDate;
+            final toDate = context.read<StatisticsBloc>().state.toDate;
+
             showDateRangePicker(
               context: context,
               firstDate: DateTime(now.year - 1),
               lastDate: DateTime(now.year + 1),
               currentDate: now,
               initialDateRange: DateTimeRange(
-                start: now.subtract(const Duration(days: 10)),
-                end: now,
+                start: fromDate,
+                end: toDate,
               ),
             ).then((range) {
               if (range != null) {

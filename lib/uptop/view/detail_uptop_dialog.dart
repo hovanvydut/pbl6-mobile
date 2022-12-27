@@ -34,7 +34,7 @@ class DetailUptopDialogView extends StatelessWidget {
       backgroundColor: context.colorScheme.surface,
       title: Text(
         'Chi tiêt đẩy tin',
-        style: context.theme.textTheme.titleLarge!.copyWith(
+        style: context.theme.textTheme.titleLarge?.copyWith(
           color: context.colorScheme.onSurface,
         ),
       ),

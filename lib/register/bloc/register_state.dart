@@ -9,6 +9,7 @@ class RegisterState extends Equatable {
     this.isHidePassword = true,
     this.isHideConfirmationPassword = true,
     this.formStatus = FormzStatus.pure,
+    this.selectedRole,
   });
 
   final Email email;
@@ -18,6 +19,7 @@ class RegisterState extends Equatable {
   final bool isHidePassword;
   final bool isHideConfirmationPassword;
   final FormzStatus formStatus;
+  final Role? selectedRole;
 
   @override
   List<Object?> get props => [
@@ -28,6 +30,7 @@ class RegisterState extends Equatable {
         isHidePassword,
         isHideConfirmationPassword,
         formStatus,
+        selectedRole
       ];
 
   RegisterState copyWith({
@@ -38,6 +41,7 @@ class RegisterState extends Equatable {
     bool? isHidePassword,
     bool? isHideConfirmationPassword,
     FormzStatus? formStatus,
+    Role? selectedRole,
   }) {
     return RegisterState(
       email: email ?? this.email,
@@ -48,6 +52,7 @@ class RegisterState extends Equatable {
       isHideConfirmationPassword:
           isHideConfirmationPassword ?? this.isHideConfirmationPassword,
       formStatus: formStatus ?? this.formStatus,
+      selectedRole: selectedRole ?? this.selectedRole,
     );
   }
 }

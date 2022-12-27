@@ -6,4 +6,6 @@ abstract class IUserDatasource {
   Future<void> updateUserInformation(User user);
 
   Future<User> getUserByUserId(int userId);
+
+  Future<Role> getUserRole();
 }

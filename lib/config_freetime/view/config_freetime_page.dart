@@ -3,6 +3,7 @@ import 'package:constant_helper/constant_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/authentication/authentication.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
@@ -72,7 +73,10 @@ class ConfigFreetimeView extends StatelessWidget {
           ),
           centerTitle: true,
           actions: const [
-            ConfigFreetimeActionButton(),
+            PermissionWrapper(
+              permission: Permission.freeTimeCreate,
+              child: ConfigFreetimeActionButton(),
+            ),
           ],
         ),
         body: BlocBuilder<ConfigFreetimeCubit, ConfigFreetimeState>(

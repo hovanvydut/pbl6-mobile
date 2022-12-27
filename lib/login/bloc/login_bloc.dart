@@ -4,7 +4,9 @@ import 'package:auth/auth.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:http_client_handler/http_client_handler.dart';
 import 'package:models/models.dart';
+import 'package:pbl6_mobile/app/app.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -71,22 +73,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     try {
-      emit(state.copyWith(formStatus: FormzStatus.submissionInProgress));
+      emit(state.copyWith(loadingStatus: LoadingStatus.loading));
       await _authRepository.login(
         email: state.email.value,
         password: state.password.value,
       );
-      emit(state.copyWith(formStatus: FormzStatus.submissionSuccess));
-    } catch (e) {
+      emit(state.copyWith(loadingStatus: LoadingStatus.done));
+    } on HttpException catch (e) {
       addError(e);
 
       emit(
         state.copyWith(
-          formStatus: FormzStatus.submissionFailure,
-          errorMessage: e.toString(),
+          loadingStatus: LoadingStatus.error,
+          errorMessage: e.message,
         ),
       );
-      rethrow;
     }
   }
 }

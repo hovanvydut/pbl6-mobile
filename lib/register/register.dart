@@ -4,4 +4,7 @@ export 'widget/register_button.dart';
 export 'widget/register_confirmation_field.dart';
 export 'widget/register_display_name_field.dart';
 export 'widget/register_email_field.dart';
+export 'widget/register_form.dart';
 export 'widget/register_password_field.dart';
+export 'widget/role_card.dart';
+export 'widget/role_selection_panel.dart';

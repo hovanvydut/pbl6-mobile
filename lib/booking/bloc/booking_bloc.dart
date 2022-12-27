@@ -101,7 +101,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
         ..add(
           appoinment.copyWith(
             bookingData:
-                appoinment.bookingData!.copyWith(approveTime: DateTime.now()),
+                appoinment.bookingData?.copyWith(approveTime: DateTime.now()),
           ),
         );
 
@@ -116,7 +116,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       emit(state.copyWith(approveStatus: LoadingStatus.error));
       await Sentry.captureException(
         e,
-      stackTrace: stackTrace,
+        stackTrace: stackTrace,
       );
       rethrow;
     }

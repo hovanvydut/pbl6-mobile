@@ -39,7 +39,7 @@ class DetailPostConnectionPanel extends StatelessWidget {
             ),
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FilledButtonWithIcon(
                   onPressed: isLogged
@@ -55,25 +55,28 @@ class DetailPostConnectionPanel extends StatelessWidget {
                   ),
                   label: const Text('Chat ngay'),
                 ),
-                OutlinedButton(
-                  onPressed: isLogged
-                      ? () => context.pushToChild(
-                            AppRouter.booking,
-                            extra:
-                                ExtraParams3<UserPostBloc, Post, BookmarkBloc>(
-                              param1: context.read<UserPostBloc>(),
-                              param2:
-                                  context.read<DetailPostCubit>().state.post,
-                              param3: context.read<BookmarkBloc>(),
-                            ),
-                          )
-                      : () {
-                          ToastHelper.showToast(
-                            'Bạn phải đăng nhập mới thực hành động này',
-                          );
-                          context.push(AppRouter.login);
-                        },
-                  child: const Text('Đặt lịch xem trọ'),
+                PermissionWrapper(
+                  permission: Permission.bookingCreateMeeting,
+                  child: OutlinedButton(
+                    onPressed: isLogged
+                        ? () => context.pushToChild(
+                              AppRouter.booking,
+                              extra: ExtraParams3<UserPostBloc, Post,
+                                  BookmarkBloc>(
+                                param1: context.read<UserPostBloc>(),
+                                param2:
+                                    context.read<DetailPostCubit>().state.post,
+                                param3: context.read<BookmarkBloc>(),
+                              ),
+                            )
+                        : () {
+                            ToastHelper.showToast(
+                              'Bạn phải đăng nhập mới thực hành động này',
+                            );
+                            context.push(AppRouter.login);
+                          },
+                    child: const Text('Đặt lịch xem trọ'),
+                  ),
                 ),
                 OutlinedButton.icon(
                   onPressed: () => launchUrl(

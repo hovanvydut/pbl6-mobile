@@ -43,8 +43,8 @@ class _NotificationListViewState extends State<NotificationListView> {
       builder: (context) {
         final loadingStatus =
             context.select((NotificationBloc bloc) => bloc.state.loadingStatus);
-       final notifications = context
-            .watch<NotificationBloc>().state.notifications;
+        final notifications =
+            context.watch<NotificationBloc>().state.notifications;
         final isLoadingMore =
             context.select((NotificationBloc bloc) => bloc.state.isLoadingMore);
         if (loadingStatus == LoadingStatus.loading) {
