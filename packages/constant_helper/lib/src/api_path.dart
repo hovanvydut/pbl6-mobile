@@ -170,4 +170,10 @@ abstract class ApiPath {
   /// `PUT` read all notifications
   ///
   static const readAllNotification = '/api/notification/mark-all-read';
+
+  /// **Permission**
+  ///
+  /// `GET` get personal permission
+  ///
+  static const personalPermission = '/api/user/personal/permission';
 }

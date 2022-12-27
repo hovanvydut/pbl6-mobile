@@ -4,6 +4,7 @@ import 'package:models/models.dart';
 import 'package:pbl6_mobile/booking/booking.dart';
 import 'package:pbl6_mobile/bookmark/bookmark.dart';
 import 'package:pbl6_mobile/config_freetime/config_freetime.dart';
+import 'package:pbl6_mobile/confirm_email/confirm_email.dart';
 import 'package:pbl6_mobile/create_booking/create_booking.dart';
 import 'package:pbl6_mobile/create_payment/create_payment.dart';
 import 'package:pbl6_mobile/create_review/create_review.dart';
@@ -11,6 +12,7 @@ import 'package:pbl6_mobile/detail_host/detail_host.dart';
 import 'package:pbl6_mobile/detail_post/detail_post.dart';
 import 'package:pbl6_mobile/edit_post/edit_post.dart';
 import 'package:pbl6_mobile/edit_user_profile/edit_user_profile.dart';
+import 'package:pbl6_mobile/forgot_password/forgot_password.dart';
 import 'package:pbl6_mobile/login/login.dart';
 import 'package:pbl6_mobile/main/main.dart';
 import 'package:pbl6_mobile/main/view/guest_main_view.dart';
@@ -49,6 +51,8 @@ abstract class AppRouter {
   static const guest = '/guest';
   static const login = '/login';
   static const register = '/register';
+  static const forgotPassword = '/forgot-password';
+  static const confirmEmail = '/auth/confirm-email';
 
   static final router = GoRouter(
     routes: [
@@ -264,6 +268,18 @@ abstract class AppRouter {
           return const RegisterPage();
         },
       ),
+      GoRoute(
+        path: forgotPassword,
+        builder: (context, state) {
+          return const ForgotPasswordPage();
+        },
+      ),
+      GoRoute(
+        path: confirmEmail,
+        builder: (context, state) {
+          return const ConfirmEmailPage();
+        },
+      )
     ],
     debugLogDiagnostics: true,
     observers: [
@@ -293,4 +309,8 @@ class ExtraParams3<A, B, C> {
   final A param1;
   final B param2;
   final C param3;
+}
+
+extension ToExtra2<A, B> on A {
+  ExtraParams2<A, B> toExtra2(B b) => ExtraParams2(param1: this, param2: b);
 }

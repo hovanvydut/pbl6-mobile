@@ -9,6 +9,8 @@ class UserRepository {
 
   Future<User?> getUserInformation() => _userDatasource.getUserInformation();
 
+  
+
   Future<User> getUserByUserId(int userId) =>
       _userDatasource.getUserByUserId(userId);
 

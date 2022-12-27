@@ -8,7 +8,7 @@ extension SnackBarExtension on BuildContext {
       SnackBar(
         content: Text(
           message,
-          style: theme.textTheme.bodyMedium!.copyWith(
+          style: theme.textTheme.bodyMedium?.copyWith(
             color: theme.colorScheme.onInverseSurface,
           ),
         ),

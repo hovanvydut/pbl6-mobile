@@ -17,7 +17,7 @@ class WebviewPaymentPage extends StatelessWidget {
       body: InAppWebView(
         initialUrlRequest: URLRequest(url: Uri.parse(url)),
         onLoadStop: (controller, uri) async {
-          if (uri!.host == 'node-1.silk-cat.software') {
+          if (uri!.host == 'node-2.silk-cat.software') {
             await controller
                 .evaluateJavascript(
               source: 'document.documentElement.innerHTML',

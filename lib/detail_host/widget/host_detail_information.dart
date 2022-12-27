@@ -51,7 +51,7 @@ class HostDetailInformation extends StatelessWidget {
                   children: [
                     Text(
                       host.displayName,
-                      style: context.textTheme.titleLarge!.copyWith(
+                      style: context.textTheme.titleLarge?.copyWith(
                         color: context.colorScheme.onSecondaryContainer,
                       ),
                     ),

@@ -60,14 +60,17 @@ class NotificationCard extends StatelessWidget {
               ),
               if (!notification.hasRead) ...[
                 const SizedBox(width: 8),
-                CircleAvatar(
-                  backgroundColor: context.colorScheme.surfaceVariant,
-                  child: IconButton(
-                    icon: Assets.icons.checkCheck
-                        .svg(color: context.colorScheme.onSurfaceVariant),
-                    onPressed: () => context
-                        .read<NotificationBloc>()
-                        .add(ReadNotification(notificiation: notification)),
+                PermissionWrapper(
+                  permission: Permission.notificationUpdate,
+                  child: CircleAvatar(
+                    backgroundColor: context.colorScheme.surfaceVariant,
+                    child: IconButton(
+                      icon: Assets.icons.checkCheck
+                          .svg(color: context.colorScheme.onSurfaceVariant),
+                      onPressed: () => context
+                          .read<NotificationBloc>()
+                          .add(ReadNotification(notificiation: notification)),
+                    ),
                   ),
                 ),
               ]

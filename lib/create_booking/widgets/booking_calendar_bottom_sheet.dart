@@ -31,7 +31,7 @@ class BookingCalendarBottomSheet extends StatelessWidget {
               children: [
                 Text(
                   '*Lưu ý: Lịch rảnh của chủ trọ chỉ mang tính chất tham khảo',
-                  style: theme.textTheme.bodySmall!.copyWith(
+                  style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurface,
                   ),
                 ),
@@ -63,5 +63,4 @@ class BookingCalendarBottomSheet extends StatelessWidget {
       ),
     );
   }
-
 }
