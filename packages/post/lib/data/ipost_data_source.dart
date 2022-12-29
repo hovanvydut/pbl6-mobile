@@ -49,7 +49,7 @@ abstract class IPostDatasource {
     double? maxPrice,
     double? minArea,
     double? maxArea,
-    int? addressWardId,
+    int? addressDistrictId,
     int? categoryId,
     int pageNumber = 1,
     int pageSize = 10,

@@ -109,7 +109,7 @@ class DetailPostView extends StatelessWidget {
                               context.watch<AuthenticationBloc>().state.user;
                           return DetailPostConnectionPanel(
                             isLogged: user != null,
-                            visiable: user?.id != post.authorInfo!.id,
+                            visiable: user?.id != post.authorInfo?.id,
                           );
                         },
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pbl6_mobile/app/app.dart';
 import 'package:pbl6_mobile/forgot_password/forgot_password.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
@@ -20,9 +21,29 @@ class ForgotPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const Center(
-        child: Text('ForgotPasswordView is  working'),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          top: context.padding.top + 40,
+          left: 16,
+          right: 16,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Lấy lại mật khẩu',
+              style: context.textTheme.displayMedium?.copyWith(
+                color: context.colorScheme.onBackground,
+              ),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            const SizedBox(
+              height: 64,
+            ),
+          ],
+        ),
       ),
     );
   }

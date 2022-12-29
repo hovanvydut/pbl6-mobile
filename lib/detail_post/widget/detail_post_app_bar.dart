@@ -29,8 +29,8 @@ class DetailPostAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: const Text('Chi tiết phòng'),
       actions: <Widget>[
         if (context.read<AuthenticationBloc>().state.user != null &&
-            context.read<AuthenticationBloc>().state.user!.id ==
-                post.authorInfo!.id) ...[
+            context.read<AuthenticationBloc>().state.user?.id ==
+                post.authorInfo?.id) ...[
           IconButton(
             icon: Assets.icons.edit
                 .svg(color: theme.colorScheme.onSurfaceVariant),
@@ -79,21 +79,24 @@ class DetailPostAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
         ] else ...[
-          Builder(
-            builder: (context) {
-              final bookmarks = context.watch<BookmarkBloc>().state.bookmarks;
-              final isBookmarked = bookmarks.any(
-                (bookmark) => bookmark.id == post.id,
-              );
-              return BookmarkIconButton(
-                isBookmarked: isBookmarked,
-                onBookmarkedPressed: () =>
-                    context.read<BookmarkBloc>().add(DeleteBookmark(post)),
-                onUnBookmarkedPressed: () =>
-                    context.read<BookmarkBloc>().add(AddBookmark(post)),
-                backgroundTransprent: true,
-              );
-            },
+          PermissionWrapper(
+            permission: Permission.bookmarkCreate,
+            child: Builder(
+              builder: (context) {
+                final bookmarks = context.watch<BookmarkBloc>().state.bookmarks;
+                final isBookmarked = bookmarks.any(
+                  (bookmark) => bookmark.id == post.id,
+                );
+                return BookmarkIconButton(
+                  isBookmarked: isBookmarked,
+                  onBookmarkedPressed: () =>
+                      context.read<BookmarkBloc>().add(DeleteBookmark(post)),
+                  onUnBookmarkedPressed: () =>
+                      context.read<BookmarkBloc>().add(AddBookmark(post)),
+                  backgroundTransprent: true,
+                );
+              },
+            ),
           ),
           IconButton(
             icon: Assets.icons.share
