@@ -1,3 +1,8 @@
+# 2.2.2
+
+- fix: bug when user is not logged in
+- fix: permission
+
 # 2.2.0
 
 - feature: add permission

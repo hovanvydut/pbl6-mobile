@@ -12,4 +12,3 @@ export 'widget/detail_post_more_information.dart';
 export 'widget/detail_post_nearby_places_info.dart';
 export 'widget/detail_post_other_utils_info.dart';
 export 'widget/detail_post_util_information.dart';
-export 'widget/related_post_horizontal_list.dart';

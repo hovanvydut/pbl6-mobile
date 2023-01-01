@@ -191,13 +191,16 @@ class PostGridCardImage extends StatelessWidget {
                   else
                     const SizedBox(),
                   if (!isUserPost)
-                    BookmarkIconButton(
-                      isBookmarked: isBookmarked,
-                      onBookmarkedPressed: () => context
-                          .read<BookmarkBloc>()
-                          .add(DeleteBookmark(post)),
-                      onUnBookmarkedPressed: () =>
-                          context.read<BookmarkBloc>().add(AddBookmark(post)),
+                    PermissionWrapper(
+                      permission: Permission.bookmarkCreate,
+                      child: BookmarkIconButton(
+                        isBookmarked: isBookmarked,
+                        onBookmarkedPressed: () => context
+                            .read<BookmarkBloc>()
+                            .add(DeleteBookmark(post)),
+                        onUnBookmarkedPressed: () =>
+                            context.read<BookmarkBloc>().add(AddBookmark(post)),
+                      ),
                     )
                   else
                     const SizedBox(),

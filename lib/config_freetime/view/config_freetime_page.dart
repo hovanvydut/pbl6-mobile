@@ -27,6 +27,7 @@ class ConfigFreetimePage extends StatelessWidget {
             .where((appointment) => appointment.bookingData == null)
             .toList(),
       ),
+      
       child: const ConfigFreetimeView(),
     );
   }

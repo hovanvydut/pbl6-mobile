@@ -108,6 +108,7 @@ class PostActionBottomSheet extends StatelessWidget {
                                 .read<UserPostBloc>()
                                 .add(DeleteUserPost(post));
                             Navigator.pop(context);
+                            Navigator.pop(context);
                           },
                           child: const Text('Đồng ý'),
                         ),

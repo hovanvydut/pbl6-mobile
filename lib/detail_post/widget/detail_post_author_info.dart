@@ -53,7 +53,7 @@ class DetailPostAuthorInfo extends StatelessWidget {
                 ),
               ),
             ),
-            title: Text(post.authorInfo!.displayName),
+            title: Text(post.authorInfo?.displayName ?? ''),
             onTap: () => context.pushToChild(
               AppRouter.detailHost,
               extra: ExtraParams3<UserPostBloc, User, BookmarkBloc>(

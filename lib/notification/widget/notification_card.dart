@@ -183,11 +183,13 @@ class NotificationCard extends StatelessWidget {
 
   Widget _buildUserAvatar() {
     return CachedNetworkImage(
-      imageUrl: notification.avatarUrl,
+      imageUrl: notification.avatarUrl ?? '',
       imageBuilder: (context, imageProvider) => GestureDetector(
-        onTap: () => context.pushToViewImage(
-          notification.avatarUrl,
-        ),
+        onTap: () => notification.avatarUrl != null
+            ? context.pushToViewImage(
+                notification.avatarUrl!,
+              )
+            : {},
         child: CircleAvatar(
           radius: 24,
           backgroundImage: imageProvider,

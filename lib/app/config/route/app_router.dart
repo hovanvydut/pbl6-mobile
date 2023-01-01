@@ -132,7 +132,7 @@ abstract class AppRouter {
                     value: extras.param2,
                   ),
                 ],
-                child: const SearchFilterPage(),
+                child: SearchFilterPage(districtId: extras.param3),
               );
             },
           ),

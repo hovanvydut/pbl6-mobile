@@ -10,7 +10,9 @@ import 'package:property/property.dart';
 import 'package:widgets/widgets.dart';
 
 class SearchFilterPage extends StatelessWidget {
-  const SearchFilterPage({super.key});
+  const SearchFilterPage({super.key, this.districtId});
+
+  final int? districtId;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class SearchFilterPage extends StatelessWidget {
         addressRepository: context.read<AddressRepository>(),
         categoryRepository: context.read<CategoryRepository>(),
         propertyRepository: context.read<PropertyRepository>(),
+        districtId: districtId,
       ),
       child: const SearchFilterView(),
     );

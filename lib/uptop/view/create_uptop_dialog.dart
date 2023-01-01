@@ -115,6 +115,7 @@ class _CreateUptopDialogViewState extends State<CreateUptopDialogView> {
                         ).then((pickedDate) {
                           if (pickedDate != null) {
                             _dateTextEditingController.text = pickedDate.yMd;
+
                             context
                                 .read<UptopBloc>()
                                 .add(StartDateChanged(pickedDate));

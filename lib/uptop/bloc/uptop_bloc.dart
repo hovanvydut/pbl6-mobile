@@ -76,10 +76,13 @@ class UptopBloc extends Bloc<UptopEvent, UptopState> {
   ) async {
     try {
       emit(state.copyWith(uptopLoadingStatus: LoadingStatus.loading));
+
       await _uptopRepository.createUptopSession(
         days: state.day,
         postId: state.post.id,
-        startTime: state.startDate,
+        startTime: state.startDate.isToday
+            ? DateTime.now().add(const Duration(minutes: 5))
+            : state.startDate,
       );
       emit(state.copyWith(uptopLoadingStatus: LoadingStatus.done));
     } catch (e) {

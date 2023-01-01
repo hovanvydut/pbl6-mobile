@@ -247,7 +247,7 @@ packages:
     source: hosted
     version: "2.0.2+1"
   enhanced_multiselect:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: enhanced_multiselect
       url: "https://pub.dartlang.org"
@@ -630,6 +630,13 @@ packages:
       relative: true
     source: path
     version: "0.1.0+1"
+  multiselect:
+    dependency: "direct main"
+    description:
+      path: "packages/multiselect"
+      relative: true
+    source: path
+    version: "0.0.7"
   nested:
     dependency: transitive
     description:
@@ -794,10 +801,10 @@ packages:
   platform_helper:
     dependency: "direct main"
     description:
-      name: platform_helper
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
+      path: "packages/platform_helper"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   plugin_platform_interface:
     dependency: transitive
     description:
