@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:address/address.dart';
 import 'package:category/category.dart';
@@ -64,10 +65,13 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
           districtsData: fetchedDistricts,
         ),
       );
+      log(state.selectedDistrict.toString());
       final fetchedHouseTypes = await _categoryRepository.getHouseTypes();
       final fetchedProperties = await _propertyRepository.getGroupProperties();
       if (state.selectedDistrict != 0) {
-        final fetchedPosts = await _postRepository.filterPosts();
+        final fetchedPosts = await _postRepository.filterPosts(
+          addressDistrictId: state.selectedDistrict,
+        );
         emit(
           state.copyWith(
             posts: fetchedPosts,
@@ -113,7 +117,8 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
         ...state.selectedOtherUtils
       ];
       final fetchedPosts = await _postRepository.filterPosts(
-        addressWardId: state.selectedWard == 0 ? null : state.selectedWard,
+        addressDistrictId:
+            state.selectedDistrict == 0 ? null : state.selectedDistrict,
         categoryId:
             state.houseTypeSelected == 0 ? null : state.houseTypeSelected,
         maxArea: state.areaRange == const RangeValues(0, 30)
@@ -314,7 +319,8 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
         ...state.selectedOtherUtils
       ];
       final filteredPost = await _postRepository.filterPosts(
-        addressWardId: state.selectedWard == 0 ? null : state.selectedWard,
+        addressDistrictId:
+            state.selectedDistrict == 0 ? null : state.selectedDistrict,
         categoryId:
             state.houseTypeSelected == 0 ? null : state.houseTypeSelected,
         maxArea: state.areaRange == const RangeValues(0, 30)
@@ -363,7 +369,8 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
         ...state.selectedOtherUtils
       ];
       final filteredPost = await _postRepository.filterPosts(
-        addressWardId: state.selectedWard == 0 ? null : state.selectedWard,
+        addressDistrictId:
+            state.selectedDistrict == 0 ? null : state.selectedDistrict,
         categoryId:
             state.houseTypeSelected == 0 ? null : state.houseTypeSelected,
         maxArea: state.areaRange == const RangeValues(0, 30)
@@ -431,7 +438,8 @@ class SearchFilterBloc extends Bloc<SearchFilterEvent, SearchFilterState> {
         ...state.selectedOtherUtils
       ];
       final morePosts = await _postRepository.filterPosts(
-        addressWardId: state.selectedWard == 0 ? null : state.selectedWard,
+        addressDistrictId:
+            state.selectedDistrict == 0 ? null : state.selectedDistrict,
         categoryId:
             state.houseTypeSelected == 0 ? null : state.houseTypeSelected,
         maxArea: state.areaRange == const RangeValues(0, 30)

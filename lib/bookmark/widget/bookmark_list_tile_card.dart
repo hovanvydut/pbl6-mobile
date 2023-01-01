@@ -109,18 +109,21 @@ class BookmarklListTileCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: Assets.icons.close.svg(
-                        color: context.colorScheme.onSurface,
+                PermissionWrapper(
+                  permission: Permission.bookmarkRemove,
+                  child: Column(
+                    children: [
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Assets.icons.close.svg(
+                          color: context.colorScheme.onSurface,
+                        ),
+                        onPressed: () => context
+                            .read<BookmarkBloc>()
+                            .add(DeleteBookmark(bookmark)),
                       ),
-                      onPressed: () => context
-                          .read<BookmarkBloc>()
-                          .add(DeleteBookmark(bookmark)),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

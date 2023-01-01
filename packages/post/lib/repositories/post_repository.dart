@@ -88,7 +88,7 @@ class PostRepository {
     double? maxPrice,
     double? minArea,
     double? maxArea,
-    int? addressWardId,
+    int? addressDistrictId,
     int? categoryId,
     int pageNumber = 1,
     int pageSize = 10,
@@ -100,7 +100,7 @@ class PostRepository {
         maxPrice: maxPrice,
         minArea: minArea,
         maxArea: maxArea,
-        addressWardId: addressWardId,
+        addressDistrictId: addressDistrictId,
         categoryId: categoryId,
         pageNumber: pageNumber,
         pageSize: pageSize,
@@ -112,15 +112,4 @@ class PostRepository {
 
   Future<List<Post>> getPostsByHostId(int hostId) =>
       _postDatasource.getPostsByHostId(hostId);
-
-  Future<List<Post>> getRelatedPost({
-    required int quantity,
-    required int postId,
-    required int addressWardId,
-  }) =>
-      _postDatasource.getRelatedPost(
-        addressWardId: addressWardId,
-        postId: postId,
-        quantity: quantity,
-      );
 }

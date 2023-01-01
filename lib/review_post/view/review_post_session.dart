@@ -59,7 +59,7 @@ class ReviewPostView extends StatelessWidget {
                     .select((ReviewUserPostBloc bloc) => bloc.state.canReview);
                 return Visibility(
                   visible:
-                      reviews.isNotEmpty && post.authorInfo!.id != user?.id,
+                      reviews.isNotEmpty && post.authorInfo?.id != user?.id,
                   child: TextButton(
                     child: const Text('Thêm đánh giá'),
                     onPressed: () {
@@ -75,7 +75,7 @@ class ReviewPostView extends StatelessWidget {
                         return;
                       }
                       ToastHelper.showToast(
-                        'Bạn chưa đủ điều kiện để đánh giá bài đăng này',
+                        'Bạn chưa tới xem trọ này nên không thể đánh giá',
                       );
                     },
                   ),
@@ -146,7 +146,7 @@ class ReviewPostView extends StatelessWidget {
                         final canReview = context.select(
                           (ReviewUserPostBloc bloc) => bloc.state.canReview,
                         );
-                        if (post.authorInfo!.id != user?.id) {
+                        if (post.authorInfo?.id != user?.id) {
                           return TextButton(
                             onPressed: user?.id == null
                                 ? () {
@@ -173,8 +173,8 @@ class ReviewPostView extends StatelessWidget {
                                       return;
                                     }
                                     ToastHelper.showToast(
-                                      'Bạn chưa đủ điều kiện để '
-                                      'đánh giá bài đăng này',
+                                      'Bạn chưa tới xem trọ'
+                                      ' này nên không thể đánh giá',
                                     );
                                   },
                             child: const Text('Hãy là người đầu tiền đánh giá'),

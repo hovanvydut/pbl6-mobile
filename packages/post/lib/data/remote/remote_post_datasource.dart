@@ -185,7 +185,7 @@ class RemotePostDatasource implements IPostDatasource {
     double? maxPrice,
     double? minArea,
     double? maxArea,
-    int? addressWardId,
+    int? addressDistrictId,
     int? categoryId,
     int pageNumber = 1,
     int pageSize = 10,
@@ -203,7 +203,8 @@ class RemotePostDatasource implements IPostDatasource {
             'MaxPrice': maxPrice == null ? null : '$maxPrice',
             'MinArea': minArea == null ? null : '$minArea',
             'MaxArea': maxArea == null ? null : '$maxArea',
-            'AddressWardId': addressWardId == null ? null : '$addressWardId',
+            'AddressDistrictId':
+                addressDistrictId == null ? null : '$addressDistrictId',
             'CategoryId': categoryId == null ? null : '$categoryId',
             'PageNumber': '$pageNumber',
             'PageSize': '$pageSize',
@@ -245,31 +246,6 @@ class RemotePostDatasource implements IPostDatasource {
       final data = responseData.data as Map<String, dynamic>;
       final postsData = data['records'] as List;
       return postsData
-          .map((data) => Post.fromJson(data as Map<String, dynamic>))
-          .toList();
-    } catch (e) {
-      log(e.toString(), name: 'REMOTE_POST_DATASOURCE');
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<Post>> getRelatedPost({
-    required int quantity,
-    required int postId,
-    required int addressWardId,
-  }) async {
-    try {
-      final responseData = await _httpHandler.get(
-        ApiPath.relatedPost,
-        queryParameter: {
-          'Quantity': '$quantity',
-          'CurrentPostId': '$postId',
-          'AddressWardId': '$addressWardId',
-        },
-      );
-      final posts = responseData.data as List;
-      return posts
           .map((data) => Post.fromJson(data as Map<String, dynamic>))
           .toList();
     } catch (e) {
