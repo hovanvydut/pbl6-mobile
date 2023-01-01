@@ -7,12 +7,11 @@ class PermissionWrapper extends StatelessWidget {
   const PermissionWrapper({
     super.key,
     required this.permission,
-    this.permissions = const [],
     required this.child,
   });
 
   final Permission permission;
-  final List<Permission> permissions;
+
   final Widget child;
 
   @override
