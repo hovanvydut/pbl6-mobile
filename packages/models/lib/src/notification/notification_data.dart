@@ -32,7 +32,7 @@ class NotificationData extends Equatable {
   @JsonKey(name: 'originUserName')
   final String username;
   @JsonKey(name: 'originUserAvatar')
-  final String avatarUrl;
+  final String? avatarUrl;
 
   final NotificationType code;
 

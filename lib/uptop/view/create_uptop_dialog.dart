@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -114,7 +116,10 @@ class _CreateUptopDialogViewState extends State<CreateUptopDialogView> {
                           lastDate: DateTime(startDate.year + 1),
                         ).then((pickedDate) {
                           if (pickedDate != null) {
+                            
                             _dateTextEditingController.text = pickedDate.yMd;
+
+                            
                             context
                                 .read<UptopBloc>()
                                 .add(StartDateChanged(pickedDate));

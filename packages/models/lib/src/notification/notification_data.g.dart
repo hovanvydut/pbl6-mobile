@@ -26,7 +26,7 @@ NotificationData _$NotificationDataFromJson(Map<String, dynamic> json) {
     userId: json['originUserId'] as int,
     userEmail: json['originUserEmail'] as String,
     username: json['originUserName'] as String,
-    avatarUrl: json['originUserAvatar'] as String,
+    avatarUrl: json['originUserAvatar'] as String?,
     code: $enumDecode(_$NotificationTypeEnumMap, json['code']),
     hasRead: json['hasRead'] as bool,
     extraData: NotificationData._extraDataFromJson(json['extraData'] as String),

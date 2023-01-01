@@ -53,7 +53,12 @@ class PaymentView extends StatelessWidget {
       body: Column(
         children: const [
           CurrentCreditCard(),
-          Expanded(child: HistoryPanel()),
+          PermissionWrapper(
+            permission: Permission.vnpViewAllHistoryPersonal,
+            child: Expanded(
+              child: HistoryPanel(),
+            ),
+          ),
         ],
       ),
     );
@@ -66,8 +71,7 @@ class CurrentCreditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<AuthenticationBloc>().state.user;
-    final currentCredit =
-        user!.currentCredit != null ? user.currentCredit! / 100 : 0;
+    final currentCredit = user!.currentCredit != null ? user.currentCredit! : 0;
     return Container(
       margin: const EdgeInsets.all(16),
       height: context.height * 0.2,
@@ -78,7 +82,7 @@ class CurrentCreditCard extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         'Số dư trong tài khoản '
-        '${currentCredit.toStringAsFixed(0)} đồng',
+        '${currentCredit.inSimpleCurrency}',
         style: context.textTheme.titleMedium,
       ),
     );

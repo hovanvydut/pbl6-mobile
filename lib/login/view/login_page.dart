@@ -98,7 +98,7 @@ class LoginView extends StatelessWidget {
                       'Quên mật khẩu?',
                       style: theme.textTheme.bodyMedium,
                     ),
-                    onPressed: () {},
+                    onPressed: () => context.push(AppRouter.forgotPassword),
                   ),
                 ),
                 const SizedBox(

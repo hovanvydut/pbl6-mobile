@@ -25,8 +25,14 @@ class UserProfilePage extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    IconButton(
+                      icon: const Icon(Icons.refresh, size: 28),
+                      onPressed: () => context
+                          .read<AuthenticationBloc>()
+                          .add(GetUserInformation()),
+                    ),
                     IconButton(
                       icon: const Icon(Icons.logout),
                       onPressed: () => context
@@ -224,52 +230,57 @@ class UserTabSession extends StatelessWidget {
                     onTap: () => context.pushToChild(AppRouter.bookingList),
                   ),
                 ),
-                ListTile(
-                  leading: Assets.icons.stat.svg(
-                    color: context.colorScheme.onSurface,
-                  ),
-                  title: const Text('Thống kê'),
-                  trailing: Assets.icons.chevronRight
-                      .svg(color: context.colorScheme.onSurface),
-                  onTap: () => context.pushToChild(AppRouter.statistics),
-                ),
                 PermissionWrapper(
-                  permission: Permission.userViewAccountAccess,
-                  child: Builder(
-                    builder: (context) {
-                      final user =
-                          context.watch<AuthenticationBloc>().state.user;
-                      final currentCredit = user?.currentCredit == null
-                          ? 0
-                          : user!.currentCredit! / 10;
-                      return ListTile(
-                        leading: Assets.icons.wallet.svg(
-                          color: context.colorScheme.onSurface,
-                        ),
-                        title: const Text('Số dư hiện tại'),
-                        subtitle: Text(
-                          currentCredit.inSimpleCurrency,
-                        ),
-                        trailing: Assets.icons.chevronRight
-                            .svg(color: context.colorScheme.onSurface),
-                        onTap: () => context.pushToChild(AppRouter.payment),
-                      );
-                    },
+                  permission: Permission.postStatisticViewDetailInDate,
+                  child: ListTile(
+                    leading: Assets.icons.stat.svg(
+                      color: context.colorScheme.onSurface,
+                    ),
+                    title: const Text('Thống kê'),
+                    trailing: Assets.icons.chevronRight
+                        .svg(color: context.colorScheme.onSurface),
+                    onTap: () => context.pushToChild(AppRouter.statistics),
                   ),
                 ),
-                // ListTile(
-                //   leading: Assets.icons.passwordOutline.svg(
-                //     color: context.colorScheme.onSurface,
-                //   ),
-                //   title: const Text('Đổi mật khẩu'),
-                //   trailing: Assets.icons.chevronRight
-                //       .svg(color: context.colorScheme.onSurface),
-                //   onTap: () {
-                //     showDialog(context: context, builder: (_) {
+                Builder(
+                  builder: (context) {
+                    final user = context.watch<AuthenticationBloc>().state.user;
+                    final currentCredit =
+                        user?.currentCredit == null ? 0 : user!.currentCredit!;
+                    return ListTile(
+                      leading: Assets.icons.wallet.svg(
+                        color: context.colorScheme.onSurface,
+                      ),
+                      title: const Text('Số dư hiện tại'),
+                      subtitle: Text(
+                        currentCredit.inSimpleCurrency,
+                      ),
+                      trailing: Assets.icons.chevronRight
+                          .svg(color: context.colorScheme.onSurface),
+                      onTap: () => context.pushToChild(AppRouter.payment),
+                    );
+                  },
+                ),
+                Builder(
+                  builder: (context) {
+                    final isGuest = context.select(
+                      (AuthenticationBloc bloc) =>
+                          bloc.state.user?.role == Role.guest,
+                    );
 
-                //     });
-                //   },
-                // )
+                    return isGuest
+                        ? ListTile(
+                            leading: Assets.icons.arrowUp.svg(
+                              color: context.colorScheme.onSurface,
+                            ),
+                            title: const Text('Đăng ký thành chủ trọ'),
+                            trailing: Assets.icons.chevronRight
+                                .svg(color: context.colorScheme.onSurface),
+                            onTap: () {},
+                          )
+                        : const SizedBox();
+                  },
+                )
               ],
             ),
           ),
