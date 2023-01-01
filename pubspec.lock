@@ -247,7 +247,7 @@ packages:
     source: hosted
     version: "2.0.2+1"
   enhanced_multiselect:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: enhanced_multiselect
       url: "https://pub.dartlang.org"

@@ -1,9 +1,14 @@
+<<<<<<<< HEAD:packages/permissions/README.md
 # Permissions
+========
+# Notification
+>>>>>>>> 9c9e3f3 (feat: validation enhancement (#40)):packages/notification/README.md
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
 
+<<<<<<<< HEAD:packages/permissions/README.md
 A permissions module
 
 ## Installation 💻
@@ -15,6 +20,19 @@ Add `permissions` to your `pubspec.yaml`:
 ```yaml
 dependencies:
   permissions:
+========
+A notification module
+
+## Installation 💻
+
+**❗ In order to start using Notification you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
+
+Add `notification` to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  notification:
+>>>>>>>> 9c9e3f3 (feat: validation enhancement (#40)):packages/notification/README.md
 ```
 
 Install it:
@@ -27,7 +45,11 @@ flutter packages get
 
 ## Continuous Integration 🤖
 
+<<<<<<<< HEAD:packages/permissions/README.md
 Permissions comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+========
+Notification comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+>>>>>>>> 9c9e3f3 (feat: validation enhancement (#40)):packages/notification/README.md
 
 Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
 
